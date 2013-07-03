@@ -1,5 +1,5 @@
 //
-//  main.m
+//  RecordSettings.h
 //  iOS Car Ramp Physics
 //
 //  Created by Virinchi Balabhadrapatruni on 6/27/13.
@@ -9,10 +9,9 @@
 
 #import <UIKit/UIKit.h>
 
-int main(int argc, char *argv[]) {
-    
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, nil);
-    [pool release];
-    return retVal;
+
+@interface RecordSettings : UIViewController {
+
 }
+
+@end
