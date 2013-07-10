@@ -10,14 +10,15 @@
 
 @implementation QueueUploaderView
 
-@synthesize scrollView;
+@synthesize mTableView, currentIndex, dataSaver;
 
+// Initialize the view where the 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:@"queue_layout" bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"queue_layout~iphone" bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
+    
 }
 
 // displays the correct xib based on orientation and device type - called automatically upon view controller entry
@@ -53,6 +54,14 @@
 // Do any additional setup after loading the view.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Get dataSaver from the App Delegate
+    if (dataSaver == nil) {
+        dataSaver = [(Data_CollectorAppDelegate *)[[UIApplication sharedApplication] delegate] dataSaver];
+    }
+        
+    currentIndex = 0;
+
 }
 
 // Dispose of any resources that can be recreated.
@@ -75,5 +84,40 @@
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
+
+// There is a single column in this table
+- (NSInteger *)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+// There are as many rows as there are DataSets
+- (NSInteger *)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return dataSaver.count;
+}
+
+// Initialize a single object in the table
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *cellIndetifier = @"QueueCellIdentifier";
+    QueueCell *cell = (QueueCell *)[tableView dequeueReusableCellWithIdentifier:cellIndetifier];
+    if (cell == nil) {
+        UIViewController *tmp = [[UIViewController alloc] initWithNibName:@"QueueCell" bundle:nil];
+        cell = (QueueCell *) tmp.view;
+        
+        [tmp release];
+    }
+    
+    NSLog(@"First: %@", dataSaver.dataQueue.allKeys[0]);
+    
+    DataSet *tmp = [dataSaver removeDataSet:dataSaver.dataQueue.allKeys[0]]; // getting all the keys to my queue haha.  dis is bad
+    NSLog(@"Name of first dataset is %@.", tmp.description);
+    [cell setupCellName:tmp.name andDataType:@"Data" andDescription:tmp.dataDescription andUploadable:true];
+    [dataSaver addDataSet:tmp];
+    
+    return cell;
+}
+
+
+
 
 @end

@@ -39,7 +39,6 @@
 		39A1CE7616DFEB89008A99A6 /* logo_manual.png in Resources */ = {isa = PBXBuildFile; fileRef = 52572B751691F742009037A7 /* logo_manual.png */; };
 		39A1CE7716DFEB8C008A99A6 /* spinner_orb.png in Resources */ = {isa = PBXBuildFile; fileRef = 52572B761691F742009037A7 /* spinner_orb.png */; };
 		39A1CE7916DFEB91008A99A6 /* green_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 52572B791691F742009037A7 /* green_button.png */; };
-		39A410FA178B0DAB0061FE25 /* QueueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 392CD88817836F5C00C82887 /* QueueCell.m */; };
 		39A529A8177B5CCB007A4052 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A529A7177B5CCB007A4052 /* MainWindow.xib */; };
 		39A529B2177B6226007A4052 /* queue_layout~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A529AE177B6226007A4052 /* queue_layout~iphone.xib */; };
 		39A529B3177B6226007A4052 /* queue_layout-landscape~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A529AF177B6226007A4052 /* queue_layout-landscape~iphone.xib */; };
@@ -533,18 +532,18 @@
 		52572B6E1691F6E2009037A7 /* Automatic */ = {
 			isa = PBXGroup;
 			children = (
-				399BE2F7169F1D1F000F7B2E /* AutomaticViewController.h */,
-				399BE2F8169F1D1F000F7B2E /* AutomaticViewController.mm */,
-				B72302BB1783260600DD8B16 /* SensorCell.h */,
-				B72302BC1783260600DD8B16 /* SensorCell.m */,
-				B72302AA17831A7D00DD8B16 /* SensorSelection.h */,
-				B72302AB17831A7D00DD8B16 /* SensorSelection.m */,
-				B75046C6177484110034B42C /* StepOneSetup.h */,
-				B75046C7177484110034B42C /* StepOneSetup.mm */,
 				392CD88717836F5C00C82887 /* QueueCell.h */,
 				392CD88817836F5C00C82887 /* QueueCell.m */,
 				392CD88917836F5C00C82887 /* QueueUploaderView.h */,
 				392CD88A17836F5C00C82887 /* QueueUploaderView.m */,
+				399BE2F7169F1D1F000F7B2E /* AutomaticViewController.h */,
+				399BE2F8169F1D1F000F7B2E /* AutomaticViewController.mm */,
+				B75046C6177484110034B42C /* StepOneSetup.h */,
+				B75046C7177484110034B42C /* StepOneSetup.mm */,
+				B72302AA17831A7D00DD8B16 /* SensorSelection.h */,
+				B72302AB17831A7D00DD8B16 /* SensorSelection.m */,
+				B72302BB1783260600DD8B16 /* SensorCell.h */,
+				B72302BC1783260600DD8B16 /* SensorCell.m */,
 			);
 			name = Automatic;
 			sourceTree = "<group>";
@@ -751,8 +750,11 @@
 				B72302B217831B3800DD8B16 /* SensorSelection~ipad.xib in Resources */,
 				B72302B417831B5800DD8B16 /* SensorSelection-landscape~ipad.xib in Resources */,
 				B72302BA1783204000DD8B16 /* SensorCell~iphone.xib in Resources */,
+<<<<<<< HEAD
 				B7375CDC1784A40600906119 /* SensorCell~ipad.xib in Resources */,
+=======
 				392CD88C17836F8900C82887 /* QueueCell.xib in Resources */,
+>>>>>>> upstream/master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,7 +765,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39A410FA178B0DAB0061FE25 /* QueueCell.m in Sources */,
 				392CD88D17836FF600C82887 /* QueueUploaderView.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* Data_CollectorAppDelegate.m in Sources */,
