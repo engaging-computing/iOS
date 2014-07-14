@@ -1,7 +1,42 @@
-# Build files
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project
+
+# Android Studio
+.idea/
+.gradle
+/*/local.properties
+/*/out
+/*/*/build
+/*/*/production
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
 
 */build
+*/production
+*/local.properties
+*/out
 
-/project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
-/Data_Collector/Data_Collector.xcodeproj/project.xcworkspace/xcuserdata/jpoulin.xcuserdatad/UserInterfaceState.xcuserstate
-/Data_Collector/Data_Collector.xcodeproj/project.xcworkspace/xcuserdata/csadmin.xcuserdatad/UserInterfaceState.xcuserstate
+# Backup Merge Files
+*.orig
+
+# iOS Build Files
+
+*/build
+*/project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
