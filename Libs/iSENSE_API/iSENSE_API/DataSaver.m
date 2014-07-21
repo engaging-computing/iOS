@@ -122,6 +122,8 @@
 // commit changes to the managedObjectContext
 -(BOOL) commitMOCChanges {
     
+    NSLog(@"Committing MOC Changes");
+    
     NSError *error = nil;
     if (![managedObjectContext save:&error]) {
         NSLog(@"Save failed: %@", error);
@@ -188,7 +190,6 @@
             // upload to iSENSE
             __block int returnID = -1;
             if (((NSArray *)currentDS.data).count) {
-                NSLog(@"Shouldn't be here");
                 NSMutableDictionary *jobj = [[NSMutableDictionary alloc] init];
                 [jobj setObject:currentDS.data forKey:@"data"];
                 jobj = [[api rowsToCols:jobj] mutableCopy];

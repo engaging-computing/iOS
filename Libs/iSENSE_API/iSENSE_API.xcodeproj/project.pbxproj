@@ -11,7 +11,6 @@
 		39216FDF176F5C790070DFCC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39216FDE176F5C790070DFCC /* CoreFoundation.framework */; };
 		39216FE5176F5C790070DFCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39216FE3176F5C790070DFCC /* InfoPlist.strings */; };
 		39217017176F7ACA0070DFCC /* Queue.h in Headers */ = {isa = PBXBuildFile; fileRef = 39217009176F7ACA0070DFCC /* Queue.h */; };
-		3921701D176F8A010070DFCC /* QDataSetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39216FFF176F7ACA0070DFCC /* QDataSetModel.xcdatamodeld */; };
 		3989BECE17C5556C009C5F21 /* API.h in Headers */ = {isa = PBXBuildFile; fileRef = 3989BECC17C5556C009C5F21 /* API.h */; };
 		3989BECF17C5556C009C5F21 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = 3989BECD17C5556C009C5F21 /* API.m */; };
 		39A1CC2916DFB48700B1979F /* ExperimentField.h in Headers */ = {isa = PBXBuildFile; fileRef = 39FF261216DFA86B0062C3DC /* ExperimentField.h */; };
@@ -105,6 +104,7 @@
 		7673AF93193F9B0300DFD52F /* RNGridMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 7673AF91193F9B0300DFD52F /* RNGridMenu.h */; };
 		7673AF94193F9B0300DFD52F /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7673AF92193F9B0300DFD52F /* RNGridMenu.m */; };
 		767E4AEF19019A8700417FEC /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 767E4AEE19019A8700417FEC /* settings.png */; };
+		76C84DE319784C9700C2306C /* QDataSetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39216FFF176F7ACA0070DFCC /* QDataSetModel.xcdatamodeld */; };
 		76EA36A4187F31B1002B95C2 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FF25E016DFA28A0062C3DC /* libiSENSE_API.a */; };
 		76F98B4D194784AB000E3204 /* SlideNavigationContorllerAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 76F98B3D194784AB000E3204 /* SlideNavigationContorllerAnimator.h */; };
 		76F98B4E194784AB000E3204 /* SlideNavigationContorllerAnimatorFade.h in Headers */ = {isa = PBXBuildFile; fileRef = 76F98B3E194784AB000E3204 /* SlideNavigationContorllerAnimatorFade.h */; };
@@ -1079,7 +1079,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3921701D176F8A010070DFCC /* QDataSetModel.xcdatamodeld in Sources */,
+				76C84DE319784C9700C2306C /* QDataSetModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

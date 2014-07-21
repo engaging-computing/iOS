@@ -83,7 +83,7 @@
 }
 
 - (void) setProjID:(NSString *)projID {
-    self.projIDLabel.text = projID;
+    [self.projIDLabel setText:projID];
     [dataSet setProjID:[NSNumber numberWithInt:[projID intValue]]];
 }
 
