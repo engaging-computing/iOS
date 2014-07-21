@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "QDataSet.h"
+#import "Waffle.h"
 
 @interface QueueCell : UITableViewCell
 

@@ -481,6 +481,8 @@
         }
  
     }
+    
+    lastClickedCellIndex = indexPath;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField{
@@ -579,6 +581,7 @@
         [dataSaver editDataSetWithKey:cell.mKey andChangeFieldsTo:fieldMatch];
         
         [self.mTableView reloadData];
+        NSLog(@"Reloaded");
         
     }
     // else user canceled
