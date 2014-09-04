@@ -150,8 +150,8 @@
         // get the next dataset
         currentDS = [dataQueue objectForKey:currentKey];
         
-        NSLog(@"Number of pics: %d", ((NSArray *)currentDS.picturePaths).count);
-        NSLog(@"Number of datas: %d", ((NSArray *)currentDS.data).count);
+        NSLog(@"Number of pics: %lu", (unsigned long)((NSArray *)currentDS.picturePaths).count);
+        NSLog(@"Number of datas: %lu", (unsigned long)((NSArray *)currentDS.data).count);
         
         // prevent uploading datasets from other sources (e.g. manual vs automatic)
         if (![currentDS.parentName isEqualToString:parentName]) continue;
@@ -303,7 +303,7 @@
     [self clearGarbageWithoutParentName:pn];
     
     NSArray *keys = [self.dataQueue allKeys];
-    return keys.count;
+    return (int)keys.count;
 }
 
 // removes malformed or garbage data sets caused by things like deleting data sets, resetting the app, etc.

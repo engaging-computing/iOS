@@ -119,8 +119,6 @@
 		76F98B57194784AB000E3204 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F98B47194784AB000E3204 /* SlideNavigationContorllerAnimatorSlideAndFade.m */; };
 		76F98B58194784AB000E3204 /* SlideNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 76F98B4B194784AB000E3204 /* SlideNavigationController.h */; };
 		76F98B59194784AB000E3204 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F98B4C194784AB000E3204 /* SlideNavigationController.m */; };
-		76F98B5C194784CA000E3204 /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 76F98B5A194784CA000E3204 /* menu-button.png */; };
-		76F98B5D194784CA000E3204 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76F98B5B194784CA000E3204 /* menu-button@2x.png */; };
 		B712DE231796D17000A30CAC /* DataSaver.h in Headers */ = {isa = PBXBuildFile; fileRef = B712DE211796D17000A30CAC /* DataSaver.h */; };
 		B712DE241796D17000A30CAC /* QDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = B712DE221796D17000A30CAC /* QDataSet.h */; };
 		B727479A183682A400893A13 /* FieldMatching~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76026D4183532D8003FAFF9 /* FieldMatching~iphone.xib */; };
@@ -311,8 +309,6 @@
 		76F98B47194784AB000E3204 /* SlideNavigationContorllerAnimatorSlideAndFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorSlideAndFade.m; sourceTree = "<group>"; };
 		76F98B4B194784AB000E3204 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		76F98B4C194784AB000E3204 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
-		76F98B5A194784CA000E3204 /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-button.png"; path = "../../iSENSE_API/menu-button.png"; sourceTree = "<group>"; };
-		76F98B5B194784CA000E3204 /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-button@2x.png"; path = "../../iSENSE_API/menu-button@2x.png"; sourceTree = "<group>"; };
 		B7034E491781F6EA00D6F0BA /* SensorEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorEnums.h; sourceTree = "<group>"; };
 		B712DE211796D17000A30CAC /* DataSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSaver.h; path = headers/DataSaver.h; sourceTree = "<group>"; };
 		B712DE221796D17000A30CAC /* QDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QDataSet.h; path = headers/QDataSet.h; sourceTree = "<group>"; };
@@ -339,6 +335,8 @@
 		B76026DE183536EE003FAFF9 /* FieldMatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldMatchCell.m; sourceTree = "<group>"; };
 		B76026E118353937003FAFF9 /* FieldMatchCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FieldMatchCell~ipad.xib"; sourceTree = "<group>"; };
 		B76026E31835393B003FAFF9 /* FieldMatchCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FieldMatchCell~iphone.xib"; sourceTree = "<group>"; };
+		B77791C219B89BAD006E33EA /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-button.png"; path = "iSENSE_API/menu-button.png"; sourceTree = SOURCE_ROOT; };
+		B77791C319B89BBB006E33EA /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-button@2x.png"; path = "iSENSE_API/menu-button@2x.png"; sourceTree = SOURCE_ROOT; };
 		B78765B2181ECD2B00BBEFC0 /* queue_layout~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "queue_layout~iphone.xib"; path = "../iSENSE_API/queue_layout~iphone.xib"; sourceTree = "<group>"; };
 		B7BEBCC017C4FBBB005C08C0 /* RDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDataSet.h; sourceTree = "<group>"; };
 		B7BEBCC417C4FD2A005C08C0 /* RPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPerson.h; sourceTree = "<group>"; };
@@ -735,8 +733,8 @@
 		76F98B48194784AB000E3204 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				76F98B5A194784CA000E3204 /* menu-button.png */,
-				76F98B5B194784CA000E3204 /* menu-button@2x.png */,
+				B77791C219B89BAD006E33EA /* menu-button.png */,
+				B77791C319B89BBB006E33EA /* menu-button@2x.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1048,7 +1046,6 @@
 				B7F09EFA1794599100725483 /* waffle_x.png in Resources */,
 				762BBED21942124C00352B4C /* unchecked@2x.png in Resources */,
 				767059471889B01100FB98C8 /* launchImage-iPad~retina.png in Resources */,
-				76F98B5D194784CA000E3204 /* menu-button@2x.png in Resources */,
 				762BBED11942124C00352B4C /* unchecked.png in Resources */,
 				762C0FAF18F83741005FC0A0 /* upload2.png in Resources */,
 				762C0FAE18F83741005FC0A0 /* reset.png in Resources */,
@@ -1065,7 +1062,6 @@
 				B76026DA1835332E003FAFF9 /* FieldMatching~ipad.xib in Resources */,
 				762C0FBA18F837C5005FC0A0 /* spacer.png in Resources */,
 				B76026DC18353343003FAFF9 /* FieldMatching-landscape~ipad.xib in Resources */,
-				76F98B5C194784CA000E3204 /* menu-button.png in Resources */,
 				762C0FA818F83741005FC0A0 /* navBar~landscape_iPhone.png in Resources */,
 				B76026E218353937003FAFF9 /* FieldMatchCell~ipad.xib in Resources */,
 				B76026E41835393B003FAFF9 /* FieldMatchCell~iphone.xib in Resources */,
@@ -1087,63 +1083,63 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39FF262316DFA8760062C3DC /* iSENSE.m in Sources */,
-				39FF262416DFA8760062C3DC /* Experiment.m in Sources */,
-				7659934418F6EC990062CC09 /* DLAVAlertViewController.m in Sources */,
-				7659934218F6EC990062CC09 /* DLAVAlertViewButtonTheme.m in Sources */,
-				39FF262516DFA8760062C3DC /* ExperimentField.m in Sources */,
-				39FF262616DFA8760062C3DC /* Image.m in Sources */,
-				76F98B57194784AB000E3204 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
-				765992BD18D37D610062CC09 /* AFURLConnectionOperation.m in Sources */,
-				39FF262716DFA8760062C3DC /* Item.m in Sources */,
-				765992C318D37D610062CC09 /* AFURLSessionManager.m in Sources */,
-				7659934618F6EC990062CC09 /* DLAVAlertViewTextControlTheme.m in Sources */,
-				765992BF18D37D610062CC09 /* AFURLRequestSerialization.m in Sources */,
-				762BBECA19420ED000352B4C /* RadioButton.m in Sources */,
-				39FF262816DFA8760062C3DC /* Person.m in Sources */,
-				39FF262916DFA8760062C3DC /* Session.m in Sources */,
-				39FF262A16DFA8760062C3DC /* SessionData.m in Sources */,
-				765992BB18D37D610062CC09 /* AFSecurityPolicy.m in Sources */,
-				7659934A18F6EC990062CC09 /* DLAVAlertViewTheme.m in Sources */,
-				76F98B55194784AB000E3204 /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
-				7673AF94193F9B0300DFD52F /* RNGridMenu.m in Sources */,
-				39EFB9EC172AD8F800A6BD2A /* Queue.m in Sources */,
-				B7F2D820177B69F400F9A58D /* SensorCompatibility.m in Sources */,
-				765992B918D37D610062CC09 /* AFNetworkReachabilityManager.m in Sources */,
-				765992C118D37D610062CC09 /* AFURLResponseSerialization.m in Sources */,
-				762C0F9818F83425005FC0A0 /* CredentialManager.m in Sources */,
-				B7F09EFE1794599E00725483 /* Waffle.m in Sources */,
-				391DA0D81795B4AA0011B955 /* QDataSet.m in Sources */,
-				765992B618D37D610062CC09 /* AFHTTPSessionManager.m in Sources */,
-				B73CFDB2179D8D1400B891B0 /* DataFieldManager.m in Sources */,
-				76F98B51194784AB000E3204 /* SlideNavigationContorllerAnimatorScale.m in Sources */,
-				7659934018F6EC990062CC09 /* DLAVAlertView.m in Sources */,
-				B73CFDB6179D8D1D00B891B0 /* Fields.m in Sources */,
-				B73CFDBA179D8DA100B891B0 /* FieldGrabber.m in Sources */,
-				762C0F9D18F834BB005FC0A0 /* StringGrabber.m in Sources */,
-				B7EBFDC017A01715006B90A8 /* Reachability.m in Sources */,
-				3989BECF17C5556C009C5F21 /* API.m in Sources */,
-				B7E5674E17C63DCE00C2DF46 /* RDataSet.m in Sources */,
-				B7E5674F17C63DCE00C2DF46 /* RPerson.m in Sources */,
-				B7E5675017C63DCE00C2DF46 /* RProject.m in Sources */,
-				76F98B59194784AB000E3204 /* SlideNavigationController.m in Sources */,
-				76F98B53194784AB000E3204 /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
-				B7E5675117C63DCE00C2DF46 /* RProjectField.m in Sources */,
-				7659934818F6EC990062CC09 /* DLAVAlertViewTextFieldTheme.m in Sources */,
 				765992B218D37D610062CC09 /* AFHTTPRequestOperation.m in Sources */,
-				B7E5675217C63DCE00C2DF46 /* RTutorial.m in Sources */,
-				39A9419717EB28B0009270D3 /* RNews.m in Sources */,
+				765992B418D37D610062CC09 /* AFHTTPRequestOperationManager.m in Sources */,
+				765992B618D37D610062CC09 /* AFHTTPSessionManager.m in Sources */,
+				765992B918D37D610062CC09 /* AFNetworkReachabilityManager.m in Sources */,
+				765992BB18D37D610062CC09 /* AFSecurityPolicy.m in Sources */,
+				765992BD18D37D610062CC09 /* AFURLConnectionOperation.m in Sources */,
+				765992BF18D37D610062CC09 /* AFURLRequestSerialization.m in Sources */,
+				765992C118D37D610062CC09 /* AFURLResponseSerialization.m in Sources */,
+				765992C318D37D610062CC09 /* AFURLSessionManager.m in Sources */,
+				3989BECF17C5556C009C5F21 /* API.m in Sources */,
+				762C0F9818F83425005FC0A0 /* CredentialManager.m in Sources */,
+				B73CFDB2179D8D1400B891B0 /* DataFieldManager.m in Sources */,
+				B73091CB18228FE0009EC24C /* DataSaver.m in Sources */,
+				7659934018F6EC990062CC09 /* DLAVAlertView.m in Sources */,
+				7659934218F6EC990062CC09 /* DLAVAlertViewButtonTheme.m in Sources */,
+				7659934418F6EC990062CC09 /* DLAVAlertViewController.m in Sources */,
+				7659934618F6EC990062CC09 /* DLAVAlertViewTextControlTheme.m in Sources */,
+				7659934818F6EC990062CC09 /* DLAVAlertViewTextFieldTheme.m in Sources */,
+				7659934A18F6EC990062CC09 /* DLAVAlertViewTheme.m in Sources */,
+				39FF262416DFA8760062C3DC /* Experiment.m in Sources */,
+				39FF262516DFA8760062C3DC /* ExperimentField.m in Sources */,
+				B7D0813F183BC88C003A4218 /* FieldEntry.m in Sources */,
+				B73CFDBA179D8DA100B891B0 /* FieldGrabber.m in Sources */,
+				B76026E0183536EE003FAFF9 /* FieldMatchCell.m in Sources */,
+				B76026D6183532D8003FAFF9 /* FieldMatchingViewController.m in Sources */,
+				B73CFDB6179D8D1D00B891B0 /* Fields.m in Sources */,
+				39FF262616DFA8760062C3DC /* Image.m in Sources */,
+				39FF262316DFA8760062C3DC /* iSENSE.m in Sources */,
 				B72AED82181948A1008FE242 /* ISenseSearch.m in Sources */,
-				76F98B4F194784AB000E3204 /* SlideNavigationContorllerAnimatorFade.m in Sources */,
+				39FF262716DFA8760062C3DC /* Item.m in Sources */,
+				39FF262816DFA8760062C3DC /* Person.m in Sources */,
+				762C0F8718F832DE005FC0A0 /* ProjectBrowserViewController.m in Sources */,
+				762C0F8918F832DE005FC0A0 /* ProjectCell.m in Sources */,
+				391DA0D81795B4AA0011B955 /* QDataSet.m in Sources */,
+				39EFB9EC172AD8F800A6BD2A /* Queue.m in Sources */,
 				B7EC669218199A67007B5B48 /* QueueCell.m in Sources */,
 				B7EC669618199A70007B5B48 /* QueueUploaderView.m in Sources */,
-				B73091CB18228FE0009EC24C /* DataSaver.m in Sources */,
-				B76026D6183532D8003FAFF9 /* FieldMatchingViewController.m in Sources */,
-				B76026E0183536EE003FAFF9 /* FieldMatchCell.m in Sources */,
-				762C0F8918F832DE005FC0A0 /* ProjectCell.m in Sources */,
-				765992B418D37D610062CC09 /* AFHTTPRequestOperationManager.m in Sources */,
-				B7D0813F183BC88C003A4218 /* FieldEntry.m in Sources */,
-				762C0F8718F832DE005FC0A0 /* ProjectBrowserViewController.m in Sources */,
+				762BBECA19420ED000352B4C /* RadioButton.m in Sources */,
+				B7EBFDC017A01715006B90A8 /* Reachability.m in Sources */,
+				B7E5674E17C63DCE00C2DF46 /* RDataSet.m in Sources */,
+				39A9419717EB28B0009270D3 /* RNews.m in Sources */,
+				7673AF94193F9B0300DFD52F /* RNGridMenu.m in Sources */,
+				B7E5674F17C63DCE00C2DF46 /* RPerson.m in Sources */,
+				B7E5675017C63DCE00C2DF46 /* RProject.m in Sources */,
+				B7E5675117C63DCE00C2DF46 /* RProjectField.m in Sources */,
+				B7E5675217C63DCE00C2DF46 /* RTutorial.m in Sources */,
+				B7F2D820177B69F400F9A58D /* SensorCompatibility.m in Sources */,
+				39FF262A16DFA8760062C3DC /* SessionData.m in Sources */,
+				39FF262916DFA8760062C3DC /* Session.m in Sources */,
+				76F98B59194784AB000E3204 /* SlideNavigationController.m in Sources */,
+				76F98B4F194784AB000E3204 /* SlideNavigationContorllerAnimatorFade.m in Sources */,
+				76F98B51194784AB000E3204 /* SlideNavigationContorllerAnimatorScale.m in Sources */,
+				76F98B53194784AB000E3204 /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				76F98B55194784AB000E3204 /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				76F98B57194784AB000E3204 /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
+				762C0F9D18F834BB005FC0A0 /* StringGrabber.m in Sources */,
+				B7F09EFE1794599E00725483 /* Waffle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

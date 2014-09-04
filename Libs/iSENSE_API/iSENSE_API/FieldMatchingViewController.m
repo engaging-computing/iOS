@@ -159,7 +159,7 @@
     [NSThread sleepForTimeInterval:0.05];
     [cell setBackgroundColor:[UIColor clearColor]];
     
-    [self selectNewFieldForCellAtIndex:indexPath.row];
+    [self selectNewFieldForCellAtIndex:(int)indexPath.row];
 }
 
 - (void) selectNewFieldForCellAtIndex:(int)i {

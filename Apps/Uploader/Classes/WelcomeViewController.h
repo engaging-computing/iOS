@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <iSENSE_API/ProjectBrowseViewController.h>
+#import <ProjectBrowserViewController.h>
 
 #import "Constants.h"
 #import "SelectModeViewController.h"
 
-@interface WelcomeViewController : UIViewController <UITextFieldDelegate, ProjectBrowseViewControllerDelegate> {
+@interface WelcomeViewController : UIViewController <UITextFieldDelegate, ProjectBrowserDelegate> {
     API *api;
     int projNum;
     

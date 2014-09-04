@@ -49,7 +49,7 @@
         headObject = [self objectForKey:key];
         if (headObject != nil) {
             [self removeObjectForKey:key];
-            NSLog(@"Deleted dataset; new queue count is %d", self.count);
+            NSLog(@"Deleted dataset; new queue count is %lu", (unsigned long)self.count);
             return headObject;
         } else {
             NSLog(@"Cannot remove dataSet: invalid key");

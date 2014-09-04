@@ -114,11 +114,11 @@
 #define DELELGATE_KEY_QUEUE     2
 
 // constants for QueueUploaderView's actionSheet
-#define QUEUE_DELETE        0
-#define QUEUE_RENAME        1
-#define QUEUE_CHANGE_DESC   2
-#define QUEUE_SELECT_PROJ   3
-#define QUEUE_LOGIN         500
+//#define QUEUE_DELETE        0
+//#define QUEUE_RENAME        1
+//#define QUEUE_CHANGE_DESC   2
+//#define QUEUE_SELECT_PROJ   3
+//#define QUEUE_LOGIN         500
 
 // other character restriction text field tags
 #define TAG_QUEUE_RENAME    700

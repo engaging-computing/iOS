@@ -112,13 +112,13 @@
     }
     
     
-    int projID = [prefs integerForKey:kPROJECT_ID_DC];
+    long projID = [prefs integerForKey:kPROJECT_ID_DC];
     if (projID > 0) {
         // use global proj and set it to local
-        NSString *newProjLabel = [NSString stringWithFormat:@" (currently %d)", projID];
+        NSString *newProjLabel = [NSString stringWithFormat:@" (currently %d)", (int)projID];
         [projNumLabel setText:[StringGrabber concatenateHardcodedString:@"current_proj_label" with:newProjLabel]];
         selectLater.on = false;
-        [prefs setValue:[NSString stringWithFormat:@"%d", projID] forKey:[StringGrabber grabString:@"key_proj_automatic"]];
+        [prefs setValue:[NSString stringWithFormat:@"%d", (int)projID] forKey:[StringGrabber grabString:@"key_proj_automatic"]];
     } else if (projID == -1) {
         // global proj was "select a project later" from the Welcome screen
         selectLater.on = true;
@@ -182,7 +182,7 @@
     if ([[sampleInterval text] length] == 0) {
         sInt = S_INTERVAL;
     } else {
-        sInt = [[sampleInterval text] integerValue];
+        sInt = (int)[[sampleInterval text] integerValue];
     }
     
     if (sInt < S_INTERVAL) {
@@ -198,7 +198,7 @@
     if ([[testLength text] length] == 0) {
         tLen = TEST_LENGTH;
     } else {
-        tLen = [[testLength text] integerValue];
+        tLen = (int)[[testLength text] integerValue];
     }
     
     if (tLen * (1000/sInt) > MAX_DATA_POINTS) {
@@ -319,7 +319,7 @@
             
             [self rememberPrefs];
             
-            ProjectBrowseViewController *browseView = [[ProjectBrowseViewController alloc] init];
+            ProjectBrowserViewController *browseView = [[ProjectBrowserViewController alloc] init];
             browseView.title = @"Browse Projects";
             browseView.delegate = self;
             [self.navigationController pushViewController:browseView animated:YES];
@@ -331,7 +331,7 @@
         if (buttonIndex != OPTION_CANCELED) {
             
             NSString *projNum = [[actionSheet textFieldAtIndex:0] text];
-            projNumInteger = [projNum integerValue];
+            projNumInteger = (int)[projNum integerValue];
            
             NSString *newProjLabel = [NSString stringWithFormat:@" (currently %@)", projNum];
             [projNumLabel setText:[StringGrabber concatenateHardcodedString:@"current_proj_label" with:newProjLabel]];
@@ -570,9 +570,8 @@
     [prefs setBool:true forKey:@"return_with_prefs"];
 }
 
--(void)projectViewController:(ProjectBrowseViewController *)controller didFinishChoosingProject:(NSNumber *)project {
-    
-    projNumInteger = project.intValue;
+-(void) didFinishChoosingProject:(ProjectBrowserViewController *)browser withID:(int)project_id {  
+    projNumInteger = project_id;
     
     if (projNumInteger != 0) {
         NSString *newProjLabel = [NSString stringWithFormat:@" (currently %d)", projNumInteger];

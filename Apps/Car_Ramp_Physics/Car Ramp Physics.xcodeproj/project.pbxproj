@@ -370,7 +370,7 @@
 				ORGANIZATIONNAME = ECG;
 				TargetAttributes = {
 					7669F025178B275C00E51AD0 = {
-						DevelopmentTeam = 7EYWDK4LSD;
+						DevelopmentTeam = 9Y27428UZP;
 					};
 				};
 			};

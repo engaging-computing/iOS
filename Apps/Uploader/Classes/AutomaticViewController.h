@@ -13,7 +13,7 @@
 #import <iSENSE_API/headers/DataSaver.h>
 #import <iSENSE_API/QueueUploaderView.h>
 #import "Data_CollectorAppDelegate.h"
-#import <iSENSE_API/ProjectBrowseViewController.h>
+#import <../../Libs/iSENSE_API/iSENSE_API/ProjectBrowserViewController.h>
 #import "Constants.h"
 #import <iSENSE_API/DataFieldManager.h>
 #import "Data_CollectorAppDelegate.h"

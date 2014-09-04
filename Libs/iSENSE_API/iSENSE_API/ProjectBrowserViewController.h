@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ISenseSearch.h>
+#import "ISenseSearch.h"
 #import <RProject.h>
-#import <API.h>
+#import "API.h"
 #import "ProjectCell.h"
 
 @class ProjectBrowserViewController;

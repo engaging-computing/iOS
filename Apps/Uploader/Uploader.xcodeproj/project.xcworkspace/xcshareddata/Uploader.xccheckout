@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C1B4259C-E462-4761-8329-BD7F4D0C8243</string>
+	<string>0AC3023D-709B-4DC0-AA89-CD1B22B13352</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Car Ramp Physics</string>
+	<string>Uploader</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7F80F9A4-83D4-4EC0-9E39-1F414DA1417D</key>
+		<key>50BDFCA2-FD4E-4483-AB14-CBA61CACB66A</key>
 		<string>https://github.com/stowellm/iOS</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Apps/Car_Ramp_Physics/Car Ramp Physics.xcodeproj/project.xcworkspace</string>
+	<string>Apps/Uploader/Uploader.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7F80F9A4-83D4-4EC0-9E39-1F414DA1417D</key>
+		<key>50BDFCA2-FD4E-4483-AB14-CBA61CACB66A</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7F80F9A4-83D4-4EC0-9E39-1F414DA1417D</string>
+	<string>50BDFCA2-FD4E-4483-AB14-CBA61CACB66A</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7F80F9A4-83D4-4EC0-9E39-1F414DA1417D</string>
+			<string>50BDFCA2-FD4E-4483-AB14-CBA61CACB66A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>iOS</string>
 		</dict>

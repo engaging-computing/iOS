@@ -262,7 +262,7 @@
         return cell;
         
     } else {
-        int row = indexPath.row;
+        int row = (int)indexPath.row;
         
         RProject *proj;
         if (![currentQuery isEqualToString:@""]) {
