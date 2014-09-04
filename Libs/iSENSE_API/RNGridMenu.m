@@ -545,7 +545,7 @@ static RNGridMenu *rn_visibleGridMenu;
         NSInteger rowLength = ceilf(itemCount / (CGFloat)rowCount);
         NSInteger rowStartIndex = i * rowLength;
 
-        NSInteger offset = 0;
+        //NSInteger offset = 0;
         if ((i + 1) * rowLength > itemCount) {
             rowLength = itemCount - i * rowLength;
         }

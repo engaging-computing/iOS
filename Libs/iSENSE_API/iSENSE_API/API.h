@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RProject.h>
-#import <RTutorial.h>
-#import <RPerson.h>
-#import <RDataSet.h>
-#import <RNews.h>
-#import <RProjectField.h>
+#import "../iSENSE_API/headers/RProject.h"
+#import "../iSENSE_API/headers/RTutorial.h"
+#import "../iSENSE_API/headers/RPerson.h"
+#import "../iSENSE_API/headers/RDataSet.h"
+#import "../iSENSE_API/headers/RNews.h"
+#import "../iSENSE_API/headers/RProjectField.h"
 #import "Reachability.h"
 #import <MobileCoreServices/UTType.h>
 #import <sys/time.h>
-#import <AFHTTPRequestOperationManager.h>
+#import "AFHTTPRequestOperationManager.h"
 
 // Version number of the API tested and passed on this version
 // number of the production iSENSE website.

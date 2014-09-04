@@ -422,7 +422,7 @@
     NSMutableArray *row     = [[NSMutableArray alloc] init];
     NSMutableArray *outData = [[NSMutableArray alloc] init];
     NSMutableDictionary *outRow;
-    int len = data.count;
+    int len = (int)data.count;
     
     // if the field order is null, set up the fieldOrder/fieldIDs.  otherwise, just get fieldIDs
     if (fieldOrder == nil || fieldOrder.count == 0) {

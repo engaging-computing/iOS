@@ -12,11 +12,9 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		39216FFA176F78FB0070DFCC /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 39216FF9176F78FB0070DFCC /* iSENSE_API_Bundle.bundle */; };
 		399B39D316A089B0000564D9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399B39D216A089B0000564D9 /* CoreMotion.framework */; };
 		399BE2F9169F1D1F000F7B2E /* AutomaticViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 399BE2F8169F1D1F000F7B2E /* AutomaticViewController.mm */; };
 		399BE2FB169F3878000F7B2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399BE2FA169F3878000F7B2E /* QuartzCore.framework */; };
-		39A1CC2516DFB44300B1979F /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3987713A16DFB2F300DBDE56 /* libiSENSE_API.a */; };
 		39A1CE7216DFEB7E008A99A6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3908824F169B325A00BEE04F /* Default-568h@2x.png */; };
 		39A1CE7516DFEB86008A99A6 /* media_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 52572B741691F742009037A7 /* media_icon.png */; };
 		39A529A8177B5CCB007A4052 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A529A7177B5CCB007A4052 /* MainWindow.xib */; };
@@ -49,6 +47,7 @@
 		B75046D81774CD710034B42C /* Automatic-landscape~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B75046D71774CD710034B42C /* Automatic-landscape~iphone.xib */; };
 		B75046DA1774CD9D0034B42C /* Automatic~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B75046D91774CD9D0034B42C /* Automatic~ipad.xib */; };
 		B75046DC1774CDD00034B42C /* Automatic-landscape~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B75046DB1774CDD00034B42C /* Automatic-landscape~ipad.xib */; };
+		B77791C119B89A2C006E33EA /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B746691D19B7956300073D57 /* libiSENSE_API.a */; };
 		B77EEE8F182932ED008DFE7C /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B77EEE8D182932ED008DFE7C /* WelcomeViewController.m */; };
 		B77EEE90182932ED008DFE7C /* Welcome~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B77EEE8E182932ED008DFE7C /* Welcome~iphone.xib */; };
 		B77EEE921829347D008DFE7C /* Welcome-landscape~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B77EEE911829347D008DFE7C /* Welcome-landscape~iphone.xib */; };
@@ -69,32 +68,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		39216FF8176F78FB0070DFCC /* PBXContainerItemProxy */ = {
+		B746691C19B7956300073D57 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3987713516DFB2F300DBDE56 /* iSENSE_API.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 39216FDD176F5C790070DFCC;
-			remoteInfo = iSENSE_API_Bundle;
-		};
-		3987713916DFB2F300DBDE56 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3987713516DFB2F300DBDE56 /* iSENSE_API.xcodeproj */;
+			containerPortal = B746691719B7956300073D57 /* iSENSE_API.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 39FF25E016DFA28A0062C3DC;
 			remoteInfo = iSENSE_API;
 		};
-		B78765B4181ECF9E00BBEFC0 /* PBXContainerItemProxy */ = {
+		B746691E19B7956300073D57 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3987713516DFB2F300DBDE56 /* iSENSE_API.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 39FF25DF16DFA28A0062C3DC;
-			remoteInfo = iSENSE_API;
-		};
-		B78765B6181ECF9E00BBEFC0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3987713516DFB2F300DBDE56 /* iSENSE_API.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 39216FDC176F5C790070DFCC;
+			containerPortal = B746691719B7956300073D57 /* iSENSE_API.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 39216FDD176F5C790070DFCC;
 			remoteInfo = iSENSE_API_Bundle;
 		};
 /* End PBXContainerItemProxy section */
@@ -109,7 +94,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Uploader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Uploader_Prefix.pch; sourceTree = "<group>"; };
 		3908824F169B325A00BEE04F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		3987713516DFB2F300DBDE56 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
 		399B39D216A089B0000564D9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		399BE2F7169F1D1F000F7B2E /* AutomaticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutomaticViewController.h; sourceTree = "<group>"; };
 		399BE2F8169F1D1F000F7B2E /* AutomaticViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AutomaticViewController.mm; sourceTree = "<group>"; };
@@ -132,6 +116,7 @@
 		B7062015181592B1003C158E /* RotationDataSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotationDataSaver.m; sourceTree = "<group>"; };
 		B7115C2116D6ACD80033AAA1 /* Fields.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Fields.strings; sourceTree = "<group>"; };
 		B71349FB16DD3B4600FDC3FF /* ManualView-landscape~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ManualView-landscape~ipad.xib"; sourceTree = "<group>"; };
+		B746691719B7956300073D57 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
 		B74A1F0B16B8641200F0E9EE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B74A1F0D16B8641E00F0E9EE /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		B74A1F0F16B8642200F0E9EE /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -177,7 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39A1CC2516DFB44300B1979F /* libiSENSE_API.a in Frameworks */,
+				B77791C119B89A2C006E33EA /* libiSENSE_API.a in Frameworks */,
 				B74A1F1216B8642C00F0E9EE /* libiconv.2.4.0.dylib in Frameworks */,
 				B7EBFDC417A0193E006B90A8 /* SystemConfiguration.framework in Frameworks */,
 				39A90478179DA53000268F6D /* MobileCoreServices.framework in Frameworks */,
@@ -283,18 +268,9 @@
 		398770F216DFB02100DBDE56 /* iSENSE_API */ = {
 			isa = PBXGroup;
 			children = (
-				3987713516DFB2F300DBDE56 /* iSENSE_API.xcodeproj */,
+				B746691719B7956300073D57 /* iSENSE_API.xcodeproj */,
 			);
 			name = iSENSE_API;
-			sourceTree = "<group>";
-		};
-		3987713616DFB2F300DBDE56 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3987713A16DFB2F300DBDE56 /* libiSENSE_API.a */,
-				39216FF9176F78FB0070DFCC /* iSENSE_API_Bundle.bundle */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		39F8AF971694C1FB00E5E4C2 /* StringGrabber */ = {
@@ -420,6 +396,15 @@
 			name = "Delegate Files";
 			sourceTree = "<group>";
 		};
+		B746691819B7956300073D57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B746691D19B7956300073D57 /* libiSENSE_API.a */,
+				B746691F19B7956300073D57 /* iSENSE_API_Bundle.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B75046D11774ADDF0034B42C /* Layout-Both */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,8 +438,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B78765B5181ECF9E00BBEFC0 /* PBXTargetDependency */,
-				B78765B7181ECF9E00BBEFC0 /* PBXTargetDependency */,
 			);
 			name = Uploader;
 			productName = Data_Collector;
@@ -467,8 +450,13 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = iSENSE;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = 9Y27428UZP;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Uploader" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -479,13 +467,14 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3987713616DFB2F300DBDE56 /* Products */;
-					ProjectRef = 3987713516DFB2F300DBDE56 /* iSENSE_API.xcodeproj */;
+					ProductGroup = B746691819B7956300073D57 /* Products */;
+					ProjectRef = B746691719B7956300073D57 /* iSENSE_API.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -496,18 +485,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		39216FF9176F78FB0070DFCC /* iSENSE_API_Bundle.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = iSENSE_API_Bundle.bundle;
-			remoteRef = 39216FF8176F78FB0070DFCC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3987713A16DFB2F300DBDE56 /* libiSENSE_API.a */ = {
+		B746691D19B7956300073D57 /* libiSENSE_API.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libiSENSE_API.a;
-			remoteRef = 3987713916DFB2F300DBDE56 /* PBXContainerItemProxy */;
+			remoteRef = B746691C19B7956300073D57 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B746691F19B7956300073D57 /* iSENSE_API_Bundle.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = iSENSE_API_Bundle.bundle;
+			remoteRef = B746691E19B7956300073D57 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -517,7 +506,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39216FFA176F78FB0070DFCC /* iSENSE_API_Bundle.bundle in Resources */,
 				52572B871691F74C009037A7 /* button-37.wav in Resources */,
 				52572B9F1691F816009037A7 /* Strings.strings in Resources */,
 				39F8AF931694C1AC00E5E4C2 /* ManualView~ipad.xib in Resources */,
@@ -574,35 +562,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		B78765B5181ECF9E00BBEFC0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = iSENSE_API;
-			targetProxy = B78765B4181ECF9E00BBEFC0 /* PBXContainerItemProxy */;
-		};
-		B78765B7181ECF9E00BBEFC0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = iSENSE_API_Bundle;
-			targetProxy = B78765B6181ECF9E00BBEFC0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Uploader_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/../iSENSE_API/iSENSE_API/headers",
-					"$(PROJECT_DIR)/../iSENSE_API",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API/iSENSE_API/headers",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API/iSENSE_API",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API",
 				);
 				INFOPLIST_FILE = "Uploader-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -610,13 +587,15 @@
 					"\"$(SRCROOT)\"",
 					"$(inherited)",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "iS Uploader";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -624,15 +603,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Uploader_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/../iSENSE_API/iSENSE_API/headers",
-					"$(PROJECT_DIR)/../iSENSE_API",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API/iSENSE_API/headers",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API/iSENSE_API",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API",
 				);
 				INFOPLIST_FILE = "Uploader-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -640,26 +621,29 @@
 					"\"$(SRCROOT)\"",
 					"$(inherited)",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "iS Uploader";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PLIST_FILE_OUTPUT_FORMAT = binary;
 				SDKROOT = iphoneos;
 			};
@@ -668,7 +652,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

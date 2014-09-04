@@ -8,7 +8,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <iSENSE_API/headers/DataSaver.h>
+#import "../../Libs/iSENSE_API/iSENSE_API/headers/DataSaver.h"
 #import "Constants.h"
 
 @interface Data_CollectorAppDelegate : NSObject <UIApplicationDelegate> {
@@ -16,8 +16,8 @@
 	UINavigationController *navControl;
     
     // for QR codes
-//    UIViewController *lastController;
-//    int returnToClass;
+    //    UIViewController *lastController;
+    //    int returnToClass;
 }
 
 //- (void) setLastController:(UIViewController *)uivc;
@@ -29,7 +29,7 @@
 // DataSaver
 @property (nonatomic, strong) IBOutlet DataSaver *dataSaver;
 
-// Core Data Stuffs
+// Core Data
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;

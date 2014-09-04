@@ -29,7 +29,7 @@ static iSENSE *_iSENSE = nil;
     
     NSData *data = [final_target dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPBody:data];
-    NSString *length = [[NSNumber numberWithUnsignedInt:data.length] stringValue];
+    NSString *length = [[NSNumber numberWithUnsignedInt:(int)data.length] stringValue];
     [request setValue:length forHTTPHeaderField:@"Content-Length"];
     
     NSURLResponse *serverResponse;
@@ -224,7 +224,7 @@ static iSENSE *_iSENSE = nil;
         [request setHTTPBody:body];
         
         // set the content-length
-        NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
         [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         
         // set URL
@@ -308,7 +308,7 @@ static iSENSE *_iSENSE = nil;
 			[s setFieldsJSON:[object objectForKey:@"fields"]];
 			[s setFieldData:[NSMutableArray new]];
 			
-			int fieldCount = [[s FieldsJSON] count];
+			int fieldCount = (int)[[s FieldsJSON] count];
 			
 			for (int i = 0; i < fieldCount; i++) {
 				NSMutableArray *temp = [NSMutableArray new];

@@ -7,8 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "StringGrabber.h"
-#import <iSENSE_API/Waffle.h>
-#import <iSENSE_API/API.h>
+#import "../../Libs/iSENSE_API/iSENSE_API/Waffle.h"
+#import "../../Libs/iSENSE_API/iSENSE_API/API.h"
 #import <CoreData/CoreData.h>
 
 #endif

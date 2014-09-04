@@ -12,13 +12,13 @@
 #import <iSENSE_API/SensorEnums.h>
 #import <iSENSE_API/DataFieldManager.h>
 #import <iSENSE_API/FieldMatchingViewController.h>
-#import <iSENSE_API/ProjectBrowseViewController.h>
+#import <ProjectBrowserViewController.h>
 
 #import "Data_CollectorAppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVCaptureDevice.h>
 
-@interface StepOneSetup : UIViewController <UITextFieldDelegate, ProjectBrowseViewControllerDelegate> {
+@interface StepOneSetup : UIViewController <UITextFieldDelegate, ProjectBrowserDelegate> {
     
     API *api;
     int projNumInteger;

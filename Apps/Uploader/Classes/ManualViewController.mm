@@ -53,7 +53,7 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     backFromQueue = [prefs boolForKey:[StringGrabber grabString:@"key_back_from_queue"]];
     if (backFromQueue) {
-        int uploaded = [prefs integerForKey:@"key_data_uploaded"];
+        long uploaded = [prefs integerForKey:@"key_data_uploaded"];
         switch (uploaded) {
             case DATA_NONE_UPLOADED:
                 [self.view makeWaffle:@"No data sets uploaded" duration:WAFFLE_LENGTH_SHORT position:WAFFLE_BOTTOM];
@@ -91,15 +91,15 @@
     [api useDev:[prefs boolForKey:kUSE_DEV]];
     
     if ([api getCurrentUser] != nil)
-        loggedInAsLabel.text = [StringGrabber concatenateHardcodedString:@"logged_in_as" with:[[api getCurrentUser] username]];
+        loggedInAsLabel.text = [StringGrabber concatenateHardcodedString:@"logged_in_as" with:[[api getCurrentUser] name]];
     else {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         NSString *username = [prefs stringForKey:[StringGrabber grabString:@"key_username"]];
         NSString *password = [prefs stringForKey:[StringGrabber grabString:@"key_password"]];
         if ([username length] != 0) {
-            bool success = [api createSessionWithUsername:username andPassword:password];
-            if (success) {
-                loggedInAsLabel.text = [StringGrabber concatenateHardcodedString:@"logged_in_as" with:[[api getCurrentUser] username]];
+            RPerson *user = [api createSessionWithEmail:username andPassword:password];
+            if (user != nil) {
+                loggedInAsLabel.text = [StringGrabber concatenateHardcodedString:@"logged_in_as" with:[[api getCurrentUser] name]];
             } else {
                 loggedInAsLabel.text = [StringGrabber concatenateHardcodedString:@"logged_in_as" with:@"_"]; 
             }
@@ -149,10 +149,10 @@
                 [self fillDataFieldEntryList:projNum withData:nil andResetGlobal:FALSE];
         }
     } else {
-        int proj = [prefs integerForKey:kPROJECT_ID_MANUAL];
+        long proj = [prefs integerForKey:kPROJECT_ID_MANUAL];
         if (proj > 0) {
             // we have a global proj to use
-            projNum = proj;
+            projNum = (int)proj;
             projNumLabel.text = [StringGrabber concatenateHardcodedString:@"proj_num"
                                                                     with:[NSString stringWithFormat:@"%d", projNum]];
             if (rds != nil) rds.doesHaveData = true;
@@ -164,7 +164,7 @@
             
             if (proj > 0) {
                 // reset the global proj since we have a local one to use now
-                projNum = proj;
+                projNum = (int)proj;
                 projNumLabel.text = [StringGrabber concatenateHardcodedString:@"proj_num"
                                                                          with:[NSString stringWithFormat:@"%d", projNum]];
                 if (rds != nil) rds.doesHaveData = true;
@@ -579,7 +579,7 @@
             
             initialProjDialogOpen = false;
             
-            ProjectBrowseViewController *browseView = [[ProjectBrowseViewController alloc] init];
+            ProjectBrowserViewController *browseView = [[ProjectBrowserViewController alloc] init];
             browseView.title = @"Browse Projects";
             browseView.delegate = self;
             browsing = YES;
@@ -724,9 +724,9 @@
         
     dispatch_queue_t queue = dispatch_queue_create("manual_login_from_login_function", NULL);
     dispatch_async(queue, ^{
-        BOOL success = [api createSessionWithUsername:usernameInput andPassword:passwordInput];
+        RPerson *user = [api createSessionWithEmail:usernameInput andPassword:passwordInput];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (success) {
+            if (user != nil) {
                 [self.view makeWaffle:@"Login Successful!"
                             duration:WAFFLE_LENGTH_SHORT
                             position:WAFFLE_BOTTOM
@@ -738,7 +738,7 @@
                 [prefs setObject:passwordInput forKey:[StringGrabber grabString:@"key_password"]];
                 [prefs synchronize];
                 
-                loggedInAsLabel.text = [StringGrabber concatenateHardcodedString:@"logged_in_as" with:[[api getCurrentUser] username]];
+                loggedInAsLabel.text = [StringGrabber concatenateHardcodedString:@"logged_in_as" with:[[api getCurrentUser] name]];
             } else {
                 [self.view makeWaffle:@"Login Failed!"
                             duration:WAFFLE_LENGTH_SHORT
@@ -1168,13 +1168,13 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
--(void)projectViewController:(ProjectBrowseViewController *)controller didFinishChoosingProject:(NSNumber *)project {
-    projNum = [project intValue];
+- (void) didFinishChoosingProject:(ProjectBrowserViewController *)browser withID:(int)project_id {
+    projNum = project_id;
     projNumLabel.text = [StringGrabber concatenateHardcodedString:@"proj_num"
                                                              with:[NSString stringWithFormat:@"%d", projNum]];
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setValue:[NSString stringWithFormat:@"%d", project.intValue] forKey:[StringGrabber grabString:@"key_proj_manual"]];
+    [prefs setValue:[NSString stringWithFormat:@"%d", project_id] forKey:[StringGrabber grabString:@"key_proj_manual"]];
     
     [self fillDataFieldEntryList:projNum withData:nil andResetGlobal:TRUE];
 }

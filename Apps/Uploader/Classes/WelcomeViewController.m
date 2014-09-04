@@ -191,7 +191,7 @@
             
         } else if (buttonIndex == OPTION_BROWSE_PROJECTS) {
             
-            ProjectBrowseViewController *browseView = [[ProjectBrowseViewController alloc] init];
+            ProjectBrowserViewController *browseView = [[ProjectBrowserViewController alloc] init];
             browseView.title = @"Browse Projects";
             browseView.delegate = self;
             
@@ -216,15 +216,14 @@
     }
 }
 
-- (void) projectViewController:(ProjectBrowseViewController *)controller didFinishChoosingProject:(NSNumber *)project {
-    
+- (void) didFinishChoosingProject:(ProjectBrowserViewController *)browser withID:(int)project_id {
     NSLog(@"returning from browse");
     
-    if ([project intValue] <= 0) {
+    if (project_id <= 0) {
         [self.view makeWaffle:@"Invalid project #" duration:WAFFLE_LENGTH_SHORT position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
     } else {
-        [self setGlobalProjAndEnableManual:[project intValue] andEnable:TRUE isFromBrowse:TRUE];
-        projNum = [project intValue];
+        [self setGlobalProjAndEnableManual:project_id andEnable:TRUE isFromBrowse:TRUE];
+        projNum = project_id;
     }
     
 }

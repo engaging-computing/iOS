@@ -14,12 +14,12 @@
 #import <AVFoundation/AVCaptureDevice.h>
 #import <iSENSE_API/QueueUploaderView.h>
 #import <MobileCoreServices/UTCoreTypes.h>
-#import <iSENSE_API/ProjectBrowseViewController.h>
+#import <ProjectBrowserViewController.h>
 #import <iSENSE_API/ISKeys.h>
 
 #import "RotationDataSaver.h"
 
-@interface ManualViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ProjectBrowseViewControllerDelegate> {
+@interface ManualViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ProjectBrowserDelegate> {
 	
 	// Non-UI Elements
 	API   *api;

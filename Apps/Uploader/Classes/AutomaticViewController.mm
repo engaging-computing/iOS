@@ -65,7 +65,7 @@ dataToBeOrdered, backFromQueue, f, fields;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     backFromQueue = [prefs boolForKey:[StringGrabber grabString:@"key_back_from_queue"]];
     if (backFromQueue) {
-        int uploaded = [prefs integerForKey:@"key_data_uploaded"];
+        long uploaded = [prefs integerForKey:@"key_data_uploaded"];
         switch (uploaded) {
             case DATA_NONE_UPLOADED:
                 [self.view makeWaffle:@"No data sets uploaded" duration:WAFFLE_LENGTH_SHORT position:WAFFLE_BOTTOM];
@@ -170,7 +170,7 @@ dataToBeOrdered, backFromQueue, f, fields;
             sampleInterval = [sampleIntervalString floatValue];
             
             NSString *testLengthString = [prefs valueForKey:[StringGrabber grabString:@"key_test_length"]];
-            testLength = [testLengthString integerValue];
+            testLength = (int)[testLengthString integerValue];
             
             dataSetName = [prefs valueForKey:[StringGrabber grabString:@"key_step1_data_set_name"]];
             
@@ -246,9 +246,9 @@ dataToBeOrdered, backFromQueue, f, fields;
     
     dispatch_queue_t queue = dispatch_queue_create("automatic_login_from_login_function", NULL);
     dispatch_async(queue, ^{
-        BOOL success = [api createSessionWithUsername:usernameInput andPassword:passwordInput];
+        RPerson *user = [api createSessionWithEmail:usernameInput andPassword:passwordInput];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (success) {
+            if (user != nil) {
                 [self.view makeWaffle:@"Login Successful!"
                             duration:WAFFLE_LENGTH_SHORT
                             position:WAFFLE_BOTTOM
