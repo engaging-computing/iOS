@@ -23,4 +23,6 @@
 @property (strong) NSNumber *type;
 @property (strong) NSString *unit;
 
+- (id)initWithName:(NSString *)uname Type:(NSNumber *)utype AndUnit:(NSString *)uunit;
+
 @end

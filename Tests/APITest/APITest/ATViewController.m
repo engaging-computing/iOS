@@ -7,12 +7,15 @@
 //
 
 #import "ATViewController.h"
+
+// Global variables and constants
 #define TestStatus BOOL
+int _newProjID = -1;
 
 @interface ATViewController()
-
 @end
 
+// Class implementation
 @implementation ATViewController
 
 - (void)viewDidLoad
@@ -39,14 +42,16 @@
     NSString *email = [_emailInputTxt text];
     NSString *pass = [_passInputTxt text];
     
-    RPerson *user = [api createSessionWithEmail:email andPassword:pass];
-    if (user != nil) {
-        [_loginOutLbl setText:@"pass"];
-    }
-    else {
-        [_loginOutLbl setText:@"fail"];
-    }
-
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        RPerson *user = [api createSessionWithEmail:email andPassword:pass];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (user != nil)
+                [_loginOutLbl setText:@"pass"];
+            else
+                [_loginOutLbl setText:@"fail"];
+        });
+    });
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -62,90 +67,132 @@
 }
 
 - (IBAction)testAllBtnClick:(id)sender {
+    // reset the output
+    [_testAllOutLbl setText:@""];
+    
+    // connectivity
     [self hasConnectivityTest];
+    
+    // create and get a project and its field
+    [self createProjectTest];
     [self getProjectTest];
-    [self getDataSetTest];
     [self getProjectFieldsTest];
+    
+    // create a data set and append. Then get it + the collection of all data sets
+    [self uploadDataTest];
+    [self appendDataTest];
+    [self getDataSetTest];
     [self getDataSetsTest];
+    
+    // generic project and user search
     [self getProjectsAtPageTest];
     [self getCurrentUserTest];
-    [self createProjectTest];
-    [self appendDataTest];
-    [self appendDataWithContribKeyTest];
-    [self uploadDataTest];
-    [self uploadDataWithContribKeyTest];
+    
+    // not implemented
     [self uploadMediaTest];
     [self uploadMediaWithContribKeyTest];
+    [self uploadDataWithContribKeyTest];
+    [self appendDataWithContribKeyTest];
 }
 
-- (TestStatus) hasConnectivityTest {
-    
-    return false;
+- (void)sendResultToOutput:(TestStatus)result ForTestName:(NSString *)test {
+    NSString *output = [NSString stringWithFormat:@"%@%@%@%@%@",
+                        [_testAllOutLbl text],
+                        @"\n",
+                        test,
+                        @" - ",
+                        (result) ? @"pass" : @"fail"];
+    [_testAllOutLbl setText:output];
 }
 
-- (TestStatus) getProjectTest {
+- (void) hasConnectivityTest {
     
-    return false;
+    TestStatus result = [API hasConnectivity];
+    [self sendResultToOutput:result ForTestName:@"Has Connectivity"];
 }
 
-- (TestStatus) getDataSetTest {
-    
-    return false;
+- (void) getProjectTest {
+    if (_newProjID == -1)
+        [self sendResultToOutput:false ForTestName:@"Get Project"];
+    else {
+        RProject *proj = [api getProjectWithId:_newProjID];
+        if (proj != nil)
+            [self sendResultToOutput:true ForTestName:@"Get Project"];
+        else
+            [self sendResultToOutput:false ForTestName:@"Get Project"];
+    }
 }
 
-- (TestStatus) getProjectFieldsTest {
+- (void) getDataSetTest {
     
-    return false;
+
 }
 
-- (TestStatus) getDataSetsTest {
+- (void) getProjectFieldsTest {
     
-    return false;
+
 }
 
-- (TestStatus) getProjectsAtPageTest {
+- (void) getDataSetsTest {
     
-    return false;
+
 }
 
-- (TestStatus) getCurrentUserTest {
+- (void) getProjectsAtPageTest {
     
-    return false;
+
 }
 
-- (TestStatus) createProjectTest {
+- (void) getCurrentUserTest {
     
-    return false;
+
 }
 
-- (TestStatus) appendDataTest {
+- (void) createProjectTest {
+    NSArray *fields = [NSArray arrayWithObjects:
+                       [[RProjectField alloc] initWithName:@"X" Type:[NSNumber numberWithInt:TYPE_NUMBER] AndUnit:@"m/s^2"],
+                       [[RProjectField alloc] initWithName:@"Y" Type:[NSNumber numberWithInt:TYPE_NUMBER] AndUnit:@"m/s^2"],
+                       [[RProjectField alloc] initWithName:@"Z" Type:[NSNumber numberWithInt:TYPE_NUMBER] AndUnit:@"m/s^2"],
+                       nil];
     
-    return false;
+    int newProjID = [api createProjectWithName:@"iOS API Test Project" andFields:fields];
+    
+    if (newProjID == -1)
+        [self sendResultToOutput:false ForTestName:@"Create Project"];
+    else {
+        _newProjID = newProjID;
+        [self sendResultToOutput:true ForTestName:@"Create Project"];
+    }
 }
 
-- (TestStatus) appendDataWithContribKeyTest {
+- (void) appendDataTest {
     
-    return false;
+
 }
 
-- (TestStatus) uploadDataTest {
+- (void) appendDataWithContribKeyTest {
     
-    return false;
+
 }
 
-- (TestStatus) uploadDataWithContribKeyTest {
+- (void) uploadDataTest {
     
-    return false;
+
 }
 
-- (TestStatus) uploadMediaTest {
+- (void) uploadDataWithContribKeyTest {
     
-    return false;
+
 }
 
-- (TestStatus) uploadMediaWithContribKeyTest {
+- (void) uploadMediaTest {
     
-    return false;
+
+}
+
+- (void) uploadMediaWithContribKeyTest {
+
+    
 }
 
 @end
