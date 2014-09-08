@@ -39,8 +39,7 @@ local.properties
 # iOS Build Files
 */build
 */project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcuserstate
 
 # Mac DS_Store files
-*.DS_Store
 .DS_Store
-*DS_Store
