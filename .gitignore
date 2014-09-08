@@ -40,6 +40,7 @@ local.properties
 */build
 */project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
 *.xcuserstate
+*xcshareddata/
 *.xcodeproj/project.xcworkspace/xcshareddata/
 *.xcodeproj/project.xcworkspace/xcshareddata/*.xccheckout
 
