@@ -40,6 +40,8 @@ local.properties
 */build
 */project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
 *.xcuserstate
+*.xcodeproj/project.xcworkspace/xcshareddata/
+*.xcodeproj/project.xcworkspace/xcshareddata/*.xccheckout
 
 # Mac DS_Store files
 .DS_Store
