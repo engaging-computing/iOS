@@ -11,6 +11,8 @@
 // Global variables and constants
 #define TestStatus BOOL
 int _newProjID = -1;
+NSMutableArray *_fieldIDs;
+int _newDataSetID = 0;
 
 @interface ATViewController()
 @end
@@ -94,7 +96,6 @@ int _newProjID = -1;
     [self uploadDataWithContribKeyTest];
     [self appendDataWithContribKeyTest];
 }
-
 - (void)sendResultToOutput:(TestStatus)result ForTestName:(NSString *)test {
     NSString *output = [NSString stringWithFormat:@"%@%@%@%@%@",
                         [_testAllOutLbl text],
@@ -124,28 +125,62 @@ int _newProjID = -1;
 }
 
 - (void) getDataSetTest {
-    
-
+    if (_newProjID == -1 || _newDataSetID == 0)
+        [self sendResultToOutput:false ForTestName:@"Get Data Set"];
+    else {
+        RDataSet *dataSet = [api getDataSetWithId:_newDataSetID];
+        if (dataSet == nil)
+            [self sendResultToOutput:false ForTestName:@"Get Data Set"];
+        else
+            [self sendResultToOutput:true ForTestName:@"Get Data Set"];
+    }
 }
 
 - (void) getProjectFieldsTest {
-    
+    if (_newProjID == -1)
+        [self sendResultToOutput:false ForTestName:@"Get Projects Fields"];
+    else {
+        NSArray *fields = [api getProjectFieldsWithId:_newProjID];
+        if (fields != nil && fields.count == 3) {
+            _fieldIDs = [[NSMutableArray alloc] init];
+            for (int i = 0; i < fields.count; i++) {
+                [_fieldIDs addObject: [(RProjectField *)[fields objectAtIndex:i] field_id]];
+            }
+            [self sendResultToOutput:true ForTestName:@"Get Projects Fields"];
+        } else
+            [self sendResultToOutput:false ForTestName:@"Get Projects Fields"];
+    }
 
 }
 
 - (void) getDataSetsTest {
-    
-
+    if (_newProjID == -1 || _newDataSetID == 0)
+        [self sendResultToOutput:false ForTestName:@"Get Data Sets"];
+    else {
+        NSArray *dataSets = [api getDataSetsWithId:_newProjID];
+        if (dataSets == nil || dataSets.count != 1)
+            [self sendResultToOutput:false ForTestName:@"Get Data Sets"];
+        else
+            [self sendResultToOutput:true ForTestName:@"Get Data Sets"];
+    }
 }
 
 - (void) getProjectsAtPageTest {
     
-
+    NSArray *projects = [api getProjectsAtPage:1 withPageLimit:20 withFilter:CREATED_AT_DESC andQuery:@""];
+    if (projects == nil || projects.count != 20)
+        [self sendResultToOutput:false ForTestName:@"Get Projects"];
+    else
+        [self sendResultToOutput:true ForTestName:@"Get Projects"];
+    
 }
 
 - (void) getCurrentUserTest {
-    
-
+    RPerson *curUser = [api getCurrentUser];
+    if (curUser != nil && [[curUser name] isEqualToString:@"Test T."])
+        [self sendResultToOutput:true ForTestName:@"Get Current User"];
+    else
+        [self sendResultToOutput:false ForTestName:@"Get Current User"];
 }
 
 - (void) createProjectTest {
@@ -166,33 +201,65 @@ int _newProjID = -1;
 }
 
 - (void) appendDataTest {
-    
+    if (_newProjID == -1 || _fieldIDs == nil || _newDataSetID == 0)
+        [self sendResultToOutput:false ForTestName:@"Append Data"];
+    else {
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+        
+        for (int i = 0; i < _fieldIDs.count; i++) {
+            NSMutableArray *dataPoints = [[NSMutableArray alloc] init];
+            [dataPoints addObject:[NSNumber numberWithInt:(i+5)]];
+            
+            [data setObject:dataPoints forKey:[NSString stringWithFormat:@"%@", [_fieldIDs objectAtIndex:i]]];
+        }
+        
+        bool success = [api appendDataSetDataWithId:_newDataSetID andData:data];
+        
+        if (success)
+            [self sendResultToOutput:true ForTestName:@"Append Data"];
+        else
+            [self sendResultToOutput:false ForTestName:@"Append Data"];
+    }
+
 
 }
 
 - (void) appendDataWithContribKeyTest {
-    
-
+    // Not implemented - cannot automate contributor keys in current API
 }
 
 - (void) uploadDataTest {
-    
-
+    if (_newProjID == -1 || _fieldIDs == nil)
+        [self sendResultToOutput:false ForTestName:@"Upload Data"];
+    else {
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+        
+        for (int i = 0; i < _fieldIDs.count; i++) {
+            NSMutableArray *dataPoints = [[NSMutableArray alloc] init];
+            [dataPoints addObject:[NSNumber numberWithInt:i]];
+            
+            [data setObject:dataPoints forKey:[NSString stringWithFormat:@"%@", [_fieldIDs objectAtIndex:i]]];
+        }
+        
+        int dataSetID = [api uploadDataToProject:_newProjID withData:data andName:@"Test Data Set 1"];
+        if (dataSetID != 0) {
+            _newDataSetID = dataSetID;
+            [self sendResultToOutput:true ForTestName:@"Upload Data"];
+        } else
+            [self sendResultToOutput:false ForTestName:@"Upload Data"];
+    }
 }
 
 - (void) uploadDataWithContribKeyTest {
-    
-
+    // Not implemented - cannot automate contributor keys in current API
 }
 
 - (void) uploadMediaTest {
-    
-
+    // Not implemented - postponed until media is used in iOS
 }
 
 - (void) uploadMediaWithContribKeyTest {
-
-    
+    // Not implemented - cannot automate contributor keys in current API
 }
 
 @end

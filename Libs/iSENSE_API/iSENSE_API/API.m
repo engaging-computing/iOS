@@ -231,7 +231,7 @@ static NSString *email, *password;
     
     NSDictionary *results = [self makeRequestWithBaseUrl:baseUrl withPath:[NSString stringWithFormat:@"projects/%d", projectId] withParameters:@"recur=true" withRequestType:GET_REQUEST andPostData:nil];
     NSArray *resultsArray = [results objectForKey:@"dataSets"];
-    for (int i = 0; i < results.count; i++) {
+    for (int i = 0; i < [[results objectForKey:@"dataSetCount"] integerValue]; i++) {
         RDataSet *dataSet = [[RDataSet alloc] init];
         NSDictionary *innermost = [resultsArray objectAtIndex:i];
         
@@ -379,22 +379,33 @@ static NSString *email, *password;
  *
  * @param dataSetId The ID of the data set to append to
  * @param newData The new data to append
+ *
+ * @return true on success, false on failure
  */
--(void)appendDataSetDataWithId:(int)dataSetId andData:(NSDictionary *)data {
-    
-    NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
-    [requestData setObject:data forKey:@"data"];
-    [requestData setObject:[NSString stringWithFormat:@"%d", dataSetId] forKey:@"id"];
-    [requestData setObject:email forKey:@"email"];
-    [requestData setObject:password forKey:@"password"];
-    
-    NSError *error;
-    NSData *postReqData = [NSJSONSerialization dataWithJSONObject:requestData
-                                                          options:0
-                                                            error:&error];
-    
-    [self makeRequestWithBaseUrl:baseUrl withPath:@"data_sets/append" withParameters:NONE withRequestType:POST_REQUEST andPostData:postReqData];
-    
+-(bool)appendDataSetDataWithId:(int)dataSetId andData:(NSDictionary *)data {
+
+    @try {
+        NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
+        [requestData setObject:data forKey:@"data"];
+        [requestData setObject:[NSString stringWithFormat:@"%d", dataSetId] forKey:@"id"];
+        [requestData setObject:email forKey:@"email"];
+        [requestData setObject:password forKey:@"password"];
+        
+        NSError *error;
+        NSData *postReqData = [NSJSONSerialization dataWithJSONObject:requestData
+                                                              options:0
+                                                                error:&error];
+        
+        [self makeRequestWithBaseUrl:baseUrl withPath:@"data_sets/append" withParameters:NONE withRequestType:POST_REQUEST andPostData:postReqData];
+        
+        return true;
+ 
+    }
+    @catch (NSException *e) {
+        NSLog(@"%@", e);
+    }
+
+    return false;
 }
 
 /**
@@ -402,21 +413,32 @@ static NSString *email, *password;
  *
  * @param dataSetId The ID of the data set to append to
  * @param newData The new data to append
+ *
+ * @return true on success, false on failure
  */
--(void)appendDataSetDataWithId:(int)dataSetId andData:(NSDictionary *)data withContributorKey:(NSString *)conKey{
+-(bool)appendDataSetDataWithId:(int)dataSetId andData:(NSDictionary *)data withContributorKey:(NSString *)conKey{
     
-    NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
-    [requestData setObject:data forKey:@"data"];
-    [requestData setObject:[NSString stringWithFormat:@"%d", dataSetId] forKey:@"id"];
-    [requestData setObject:conKey forKey:@"contribution_key"];
+    @try {
+        NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
+        [requestData setObject:data forKey:@"data"];
+        [requestData setObject:[NSString stringWithFormat:@"%d", dataSetId] forKey:@"id"];
+        [requestData setObject:conKey forKey:@"contribution_key"];
+        
+        NSError *error;
+        NSData *postReqData = [NSJSONSerialization dataWithJSONObject:requestData
+                                                              options:0
+                                                                error:&error];
+        
+        [self makeRequestWithBaseUrl:baseUrl withPath:@"data_sets/append" withParameters:NONE withRequestType:POST_REQUEST andPostData:postReqData];
+        
+        return true;
+
+    }
+    @catch (NSException *e) {
+        NSLog(@"%@", e);
+    }
     
-    NSError *error;
-    NSData *postReqData = [NSJSONSerialization dataWithJSONObject:requestData
-                                                          options:0
-                                                            error:&error];
-    
-    [self makeRequestWithBaseUrl:baseUrl withPath:@"data_sets/append" withParameters:NONE withRequestType:POST_REQUEST andPostData:postReqData];
-    
+    return false;
 }
 
 /**
@@ -425,9 +447,9 @@ static NSString *email, *password;
  * @param projectId - The ID of the project to upload data to
  * @param dataToUpload - The data to be uploaded. Must be in column-major format to upload correctly
  * @param name - The name of the dataset
- * @return The integer ID of the newly uploaded dataset, or -1 if upload fails
+ * @return The integer ID of the newly uploaded dataset, or 0 if upload fails
  */
--(int) uploadDataWithId:(int)projectId withData:(NSDictionary *)dataToUpload andName:(NSString *)name {
+-(int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload andName:(NSString *)name {
     
     // append a timestamp to the name of the data set
     name = [NSString stringWithFormat:@"%@ - %@", name, [self appendedTimeStamp]];
@@ -464,9 +486,9 @@ static NSString *email, *password;
  * @param dataToUpload - The data to be uploaded. Must be in column-major format to upload correctly
  * @param conKey - contributor key
  * @param conName - Name of contributor
- * @return The integer ID of the newly uploaded dataset, or -1 if upload fails
+ * @return The integer ID of the newly uploaded dataset, or 0 if upload fails
  */
--(int) uploadDataWithId:(int)projectId withData:(NSDictionary *)dataToUpload withContributorKey:(NSString *) conKey as:(NSString *) conName andName:(NSString *)name{
+-(int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload withContributorKey:(NSString *) conKey as:(NSString *) conName andName:(NSString *)name{
     
     NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
     
@@ -589,7 +611,7 @@ static NSString *email, *password;
  * @param ttype The upload target, PROJECT or DATASET
  * @return The media object ID for the media uploaded or -1 if upload fails
  */
--(int)uploadMediaWithId:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype{
+-(int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype{
     
     NSLog(@"Inside API.m");
     
@@ -643,7 +665,7 @@ static NSString *email, *password;
  * @param conName the name of the contributor
  * @return The media object ID for the media uploaded or -1 if upload fails
  */
--(int)uploadMediaWithId:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype withContributorKey:(NSString *)conKey as:(NSString *)conName{
+-(int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype withContributorKey:(NSString *)conKey as:(NSString *)conName{
     
     NSLog(@"Inside API.m");
     
