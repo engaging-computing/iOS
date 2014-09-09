@@ -20,7 +20,7 @@
     return self;
 }
 
-- (id)initWithName:(NSString *)uname Type:(NSNumber *)utype AndUnit:(NSString *)uunit {
+- (id)initWithName:(NSString *)uname type:(NSNumber *)utype andUnit:(NSString *)uunit {
     self = [super init];
     if (self) {
         self.name = uname;

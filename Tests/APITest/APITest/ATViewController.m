@@ -32,7 +32,7 @@ int _newDataSetID = 0;
     _emailInputTxt.delegate = self;
     _passInputTxt.delegate = self;
     
-    _testAllOutLbl.editable = false;
+    _testOutputLbl.editable = false;
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,7 +70,7 @@ int _newDataSetID = 0;
 
 - (IBAction)testAllBtnClick:(id)sender {
     // reset the output
-    [_testAllOutLbl setText:@""];
+    [_testOutputLbl setText:@""];
     
     // connectivity
     [self hasConnectivityTest];
@@ -98,12 +98,12 @@ int _newDataSetID = 0;
 }
 - (void)sendResultToOutput:(TestStatus)result ForTestName:(NSString *)test {
     NSString *output = [NSString stringWithFormat:@"%@%@%@%@%@",
-                        [_testAllOutLbl text],
+                        [_testOutputLbl text],
                         @"\n",
                         test,
                         @" - ",
                         (result) ? @"pass" : @"fail"];
-    [_testAllOutLbl setText:output];
+    [_testOutputLbl setText:output];
 }
 
 - (void) hasConnectivityTest {
@@ -177,7 +177,7 @@ int _newDataSetID = 0;
 
 - (void) getCurrentUserTest {
     RPerson *curUser = [api getCurrentUser];
-    if (curUser != nil && [[curUser name] isEqualToString:@"Test T."])
+    if (curUser != nil)
         [self sendResultToOutput:true ForTestName:@"Get Current User"];
     else
         [self sendResultToOutput:false ForTestName:@"Get Current User"];
@@ -185,9 +185,9 @@ int _newDataSetID = 0;
 
 - (void) createProjectTest {
     NSArray *fields = [NSArray arrayWithObjects:
-                       [[RProjectField alloc] initWithName:@"X" Type:[NSNumber numberWithInt:TYPE_NUMBER] AndUnit:@"m/s^2"],
-                       [[RProjectField alloc] initWithName:@"Y" Type:[NSNumber numberWithInt:TYPE_NUMBER] AndUnit:@"m/s^2"],
-                       [[RProjectField alloc] initWithName:@"Z" Type:[NSNumber numberWithInt:TYPE_NUMBER] AndUnit:@"m/s^2"],
+                       [[RProjectField alloc] initWithName:@"X" type:[NSNumber numberWithInt:TYPE_NUMBER] andUnit:@"m/s^2"],
+                       [[RProjectField alloc] initWithName:@"Y" type:[NSNumber numberWithInt:TYPE_NUMBER] andUnit:@"m/s^2"],
+                       [[RProjectField alloc] initWithName:@"Z" type:[NSNumber numberWithInt:TYPE_NUMBER] andUnit:@"m/s^2"],
                        nil];
     
     int newProjID = [api createProjectWithName:@"iOS API Test Project" andFields:fields];

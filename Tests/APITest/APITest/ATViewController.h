@@ -22,6 +22,6 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *testAllBtn;
 - (IBAction)testAllBtnClick:(id)sender;
-@property (strong, nonatomic) IBOutlet UITextView *testAllOutLbl;
+@property (strong, nonatomic) IBOutlet UITextView *testOutputLbl;
 
 @end
