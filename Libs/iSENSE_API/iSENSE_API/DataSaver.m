@@ -202,11 +202,11 @@
                     [contribKeyAlert textFieldAtIndex:1].placeholder = @"Contributor Key";
                     [contribKeyAlert showWithCompletion:^(DLAVAlertView *alertView, NSInteger buttonIndex) {
                         if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Upload"]) {
-                            returnID = [api uploadDataWithId:currentDS.projID.intValue withData:jobj withContributorKey:[contribKeyAlert textFieldTextAtIndex:1] as:[contribKeyAlert textFieldTextAtIndex:0] andName:currentDS.name];
+                            returnID = [api uploadDataToProject:currentDS.projID.intValue withData:jobj withContributorKey:[contribKeyAlert textFieldTextAtIndex:1] as:[contribKeyAlert textFieldTextAtIndex:0] andName:currentDS.name];
                         }
                     }];
                 } else {
-                   returnID = [api uploadDataWithId:currentDS.projID.intValue withData:jobj andName:currentDS.name];
+                   returnID = [api uploadDataToProject:currentDS.projID.intValue withData:jobj andName:currentDS.name];
                 }
                 NSLog(@"Data set ID: %d", returnID);
                 
@@ -237,14 +237,14 @@
                         [contribKeyAlert textFieldAtIndex:1].placeholder = @"Contributor Key";
                         [contribKeyAlert showWithCompletion:^(DLAVAlertView *alertView, NSInteger buttonIndex) {
                             if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Upload"]) {
-                                returnID = [api uploadMediaWithId:currentDS.projID.intValue withFile:pictures[i] andName:currentDS.name withTarget:PROJECT withContributorKey:[contribKeyAlert textFieldTextAtIndex:1] as:[contribKeyAlert textFieldTextAtIndex:0]];
+                                returnID = [api uploadMediaToProject:currentDS.projID.intValue withFile:pictures[i] andName:currentDS.name withTarget:PROJECT withContributorKey:[contribKeyAlert textFieldTextAtIndex:1] as:[contribKeyAlert textFieldTextAtIndex:0]];
                                 
                             }
                         }];
 
                     } else {
                         
-                        returnID = [api uploadMediaWithId:currentDS.projID.intValue withFile:pictures[i] andName:currentDS.name withTarget:PROJECT];
+                        returnID = [api uploadMediaToProject:currentDS.projID.intValue withFile:pictures[i] andName:currentDS.name withTarget:PROJECT];
                     
                         
                         

@@ -45,11 +45,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="[output]" translatesAutoresizingMaskIntoConstraints="NO" id="u0V-L9-LFg">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u0V-L9-LFg">
                                 <rect key="frame" x="20" y="175" width="280" height="373"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Leb-17-lXg">
@@ -71,7 +71,7 @@
                         <outlet property="loginOutLbl" destination="Guj-zF-aeU" id="kOe-gD-Wt2"/>
                         <outlet property="passInputTxt" destination="Kb4-4U-Twp" id="vbs-Zw-TkZ"/>
                         <outlet property="testAllBtn" destination="Leb-17-lXg" id="ea7-vE-9HW"/>
-                        <outlet property="testAllOutLbl" destination="u0V-L9-LFg" id="VAU-vd-d9w"/>
+                        <outlet property="testOutputLbl" destination="u0V-L9-LFg" id="Ife-e7-33S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
