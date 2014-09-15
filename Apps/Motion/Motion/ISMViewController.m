@@ -7,6 +7,7 @@
 //
 
 #import "ISMViewController.h"
+#import "QueueUploaderView.h"
 
 @interface ISMViewController ()
 
@@ -18,6 +19,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_AUTOMATIC];
+    queueUploader.title = @"Step 3: Upload";
+    [self.navigationController pushViewController:queueUploader animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

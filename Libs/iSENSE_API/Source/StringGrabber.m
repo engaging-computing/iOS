@@ -9,7 +9,7 @@
 
 
 #import "StringGrabber.h"
-  
+
 @implementation StringGrabber  
 
 + (NSString *) grabString:(NSString *)label {

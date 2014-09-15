@@ -36,7 +36,9 @@
     if (self) {
         api = [API getInstance];
         parent = parentName;
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"];
         isenseBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"]];
+        //isenseBundle = [[NSBundle alloc] initWithPath:@"$(PROJECT_DIR)/../../Libs/iSENSE_API/iSENSE_API_Bundle.bundle"];
     }
     return self;
 }

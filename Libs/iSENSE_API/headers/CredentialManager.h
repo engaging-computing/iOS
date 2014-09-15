@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import <API.h>
-#import <StringGrabber.h>
-#import <Waffle.h>
-#import <DLAVAlertView.h>
-#import <DLAVAlertViewButtonTheme.h>
+#import "API.h"
+#import "StringGrabber.h"
+#import "Waffle.h"
+#import "DLAVAlertView.h"
+#import "DLAVAlertViewButtonTheme.h"
 
 @class CredentialManager;
 @protocol CredentialManagerDelegate <NSObject>

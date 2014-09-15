@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ISenseSearch.h"
-#import <RProject.h>
+#import "RProject.h"
 #import "API.h"
 #import "ProjectCell.h"
 
