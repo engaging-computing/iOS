@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>ECG.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>edu.uml.cs.isense.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -41,6 +41,6 @@
 	<key>CFPlugInUnloadFunction</key>
 	<string></string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2013 Jeremy Poulin. All rights reserved.</string>
+	<string>Copyright © 2014 Jeremy Poulin. All rights reserved.</string>
 </dict>
 </plist>
