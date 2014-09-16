@@ -21,9 +21,7 @@
         [self.editButtonItem setTitle:@"Edit"];
     }
     else {
-        
         // Turn on edit mode
-        
         [self.mTableView setEditing:YES animated:YES];
         [self.editButtonItem setTitle:@"Done"];
     }
@@ -36,7 +34,9 @@
     if (self) {
         api = [API getInstance];
         parent = parentName;
-        isenseBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"]];
+        
+        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"];
+        isenseBundle = [NSBundle bundleWithURL:bundleURL];
     }
     return self;
 }

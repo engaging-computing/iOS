@@ -112,6 +112,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
                                 <state key="normal" title="Hold to Start"/>
+                                <connections>
+                                    <action selector="startStopOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hYx-ef-GSZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -123,6 +126,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="credentialBarBtn" destination="YgZ-s9-4Sq" id="Uyv-Ku-Itv"/>
+                        <outlet property="startStopBtn" destination="K5d-Oc-cS3" id="g6A-L0-XBg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

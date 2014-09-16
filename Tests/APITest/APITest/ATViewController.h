@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "../../../Libs/iSENSE_API/iSENSE_API/API.h"
+#import "../../../Libs/iSENSE_API/headers/API.h"
 
 @interface ATViewController : UIViewController <UITextFieldDelegate> {
     API *api;

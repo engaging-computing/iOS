@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B7186A3B19BF36A400F18847 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7186A3819BF369400F18847 /* libiSENSE_API.a */; };
-		B7186A3D19BF413000F18847 /* launchImage-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B7186A3C19BF413000F18847 /* launchImage-iPad.png */; };
 		B7186A4419BF554E00F18847 /* ISMCredentialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4319BF554E00F18847 /* ISMCredentialManager.m */; };
 		B7186A4719BF55D700F18847 /* ISMSampleRate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4619BF55D700F18847 /* ISMSampleRate.m */; };
 		B7186A4A19BF55FC00F18847 /* ISMRecordingLength.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4919BF55FC00F18847 /* ISMRecordingLength.m */; };
@@ -30,14 +29,15 @@
 		B7186A7619BF60AD00F18847 /* 76@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7186A6919BF60AD00F18847 /* 76@1x.png */; };
 		B7186A7719BF60AD00F18847 /* 76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7186A6A19BF60AD00F18847 /* 76@2x.png */; };
 		B7186A7819BF60AD00F18847 /* 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = B7186A6B19BF60AD00F18847 /* 1024x1024.png */; };
+		B76C43C519C8722800B0A19B /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF219BF34F800BB8994 /* Main_iPhone.storyboard */; };
+		B76C43C619C8723100B0A19B /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF519BF34F800BB8994 /* Main_iPad.storyboard */; };
+		B76C43C719C8764200B0A19B /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7186A3A19BF369400F18847 /* iSENSE_API_Bundle.bundle */; };
 		B7D98CE119BF34F800BB8994 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE019BF34F800BB8994 /* Foundation.framework */; };
 		B7D98CE319BF34F800BB8994 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE219BF34F800BB8994 /* CoreGraphics.framework */; };
 		B7D98CE519BF34F800BB8994 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE419BF34F800BB8994 /* UIKit.framework */; };
 		B7D98CEB19BF34F800BB8994 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CE919BF34F800BB8994 /* InfoPlist.strings */; };
 		B7D98CED19BF34F800BB8994 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D98CEC19BF34F800BB8994 /* main.m */; };
 		B7D98CF119BF34F800BB8994 /* ISMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D98CF019BF34F800BB8994 /* ISMAppDelegate.m */; };
-		B7D98CF419BF34F800BB8994 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF219BF34F800BB8994 /* Main_iPhone.storyboard */; };
-		B7D98CF719BF34F800BB8994 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF519BF34F800BB8994 /* Main_iPad.storyboard */; };
 		B7D98CFA19BF34F800BB8994 /* ISMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D98CF919BF34F800BB8994 /* ISMViewController.m */; };
 		B7D98CFC19BF34F800BB8994 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CFB19BF34F800BB8994 /* Images.xcassets */; };
 		B7D98D0319BF34F800BB8994 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98D0219BF34F800BB8994 /* XCTest.framework */; };
@@ -62,6 +62,13 @@
 			remoteGlobalIDString = 39216FDD176F5C790070DFCC;
 			remoteInfo = iSENSE_API_Bundle;
 		};
+		B76AFED019C74EA20005685B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7186A3219BF369400F18847 /* iSENSE_API.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 39FF25DF16DFA28A0062C3DC;
+			remoteInfo = iSENSE_API;
+		};
 		B7D98D0619BF34F800BB8994 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B7D98CD519BF34F800BB8994 /* Project object */;
@@ -73,7 +80,6 @@
 
 /* Begin PBXFileReference section */
 		B7186A3219BF369400F18847 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
-		B7186A3C19BF413000F18847 /* launchImage-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launchImage-iPad.png"; path = "../../Libs/iSENSE_API/iSENSE_API_Bundle/launchImage-iPad.png"; sourceTree = "<group>"; };
 		B7186A4219BF554E00F18847 /* ISMCredentialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMCredentialManager.h; sourceTree = "<group>"; };
 		B7186A4319BF554E00F18847 /* ISMCredentialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMCredentialManager.m; sourceTree = "<group>"; };
 		B7186A4519BF55D700F18847 /* ISMSampleRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSampleRate.h; sourceTree = "<group>"; };
@@ -170,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				B7186A5C19BF606000F18847 /* Icons */,
-				B7186A3C19BF413000F18847 /* launchImage-iPad.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -275,9 +280,9 @@
 		B7D98CD419BF34F800BB8994 = {
 			isa = PBXGroup;
 			children = (
-				B7186A3E19BF414100F18847 /* Resources */,
 				B7186A3119BF368000F18847 /* API */,
 				B7D98CE619BF34F800BB8994 /* Motion */,
+				B7186A3E19BF414100F18847 /* Resources */,
 				B7D98D0819BF34F800BB8994 /* MotionTests */,
 				B7D98CDF19BF34F800BB8994 /* Frameworks */,
 				B7D98CDE19BF34F800BB8994 /* Products */,
@@ -364,6 +369,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B76AFED119C74EA20005685B /* PBXTargetDependency */,
 			);
 			name = Motion;
 			productName = Motion;
@@ -450,24 +456,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B76C43C719C8764200B0A19B /* iSENSE_API_Bundle.bundle in Resources */,
+				B76C43C519C8722800B0A19B /* Main_iPhone.storyboard in Resources */,
+				B76C43C619C8723100B0A19B /* Main_iPad.storyboard in Resources */,
 				B7186A6E19BF60AD00F18847 /* 40@2x.png in Resources */,
 				B7186A7219BF60AD00F18847 /* 57@2x.png in Resources */,
 				B7186A7419BF60AD00F18847 /* 72@1x.png in Resources */,
 				B7186A7119BF60AD00F18847 /* 57@1x.png in Resources */,
-				B7D98CF719BF34F800BB8994 /* Main_iPad.storyboard in Resources */,
 				B7186A7719BF60AD00F18847 /* 76@2x.png in Resources */,
 				B7186A6D19BF60AD00F18847 /* 40@1x.png in Resources */,
 				B7D98CFC19BF34F800BB8994 /* Images.xcassets in Resources */,
 				B7186A6F19BF60AD00F18847 /* 50@1x.png in Resources */,
 				B7186A7019BF60AD00F18847 /* 50@2x.png in Resources */,
-				B7D98CF419BF34F800BB8994 /* Main_iPhone.storyboard in Resources */,
 				B7D98CEB19BF34F800BB8994 /* InfoPlist.strings in Resources */,
 				B7186A6C19BF60AD00F18847 /* 29@2x.png in Resources */,
 				B7186A7619BF60AD00F18847 /* 76@1x.png in Resources */,
 				B7186A5E19BF607C00F18847 /* 29@1x.png in Resources */,
 				B7186A7319BF60AD00F18847 /* 60@2x.png in Resources */,
 				B7186A7819BF60AD00F18847 /* 1024x1024.png in Resources */,
-				B7186A3D19BF413000F18847 /* launchImage-iPad.png in Resources */,
 				B7186A7519BF60AD00F18847 /* 72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +517,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B76AFED119C74EA20005685B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iSENSE_API;
+			targetProxy = B76AFED019C74EA20005685B /* PBXContainerItemProxy */;
+		};
 		B7D98D0719BF34F800BB8994 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B7D98CDC19BF34F800BB8994 /* Motion */;
@@ -586,6 +597,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -619,6 +634,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -633,9 +652,21 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Motion/Motion-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API/headers",
+				);
 				INFOPLIST_FILE = "Motion/Motion-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API $(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(BUILT_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -647,9 +678,21 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Motion/Motion-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API/headers",
+				);
 				INFOPLIST_FILE = "Motion/Motion-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API $(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(BUILT_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

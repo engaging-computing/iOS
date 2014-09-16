@@ -613,45 +613,43 @@ static NSString *email, *password;
  */
 -(int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype{
     
-    NSLog(@"Inside API.m");
-    
-    AFHTTPRequestSerializer *ser = [AFHTTPRequestSerializer serializer];
-    NSMutableURLRequest *request = [ser multipartFormRequestWithMethod:POST_REQUEST URLString:[baseUrl stringByAppendingString:@"/media_objects"] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:mediaToUpload name:@"upload" fileName:name mimeType:[self getMimeType:name]];
-        [formData appendPartWithFormData:[[email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] name:@"email"];
-        [formData appendPartWithFormData:[[password stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] name:@"password"];
-        [formData appendPartWithFormData:[((ttype == PROJECT) ? @"project" : @"data_set") dataUsingEncoding:NSUTF8StringEncoding] name:@"type"];
-        [formData appendPartWithFormData:[[NSString stringWithFormat:@"%d", projectId] dataUsingEncoding:NSUTF8StringEncoding] name:@"id"];
-    } error:nil];
-    
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [request setHTTPShouldHandleCookies:YES];
-    [request setTimeoutInterval:30];
-    NSLog(@"%@", request);
-    
-    // send the request
-    NSError *requestError;
-    NSHTTPURLResponse *urlResponse;
-    
-    NSData *dataResponse = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (requestError) NSLog(@"Error received from server: %@", requestError);
-    
-    if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300) {
-        id parsedJSONResponse = [NSJSONSerialization JSONObjectWithData:dataResponse options:NSJSONReadingMutableContainers error:&requestError];
-        int mediaObjectID = [parsedJSONResponse objectForKey:@"id"];
-        return mediaObjectID;
-    } else if (urlResponse.statusCode == 401) {
-        NSLog(@"Unauthorized. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
-    } else if (urlResponse.statusCode == 422) {
-        NSLog(@"Unprocessable entity. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
-    } else if (urlResponse.statusCode == 500) {
-        NSLog(@"Internal server error. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
-    } else {
-        NSLog(@"Unrecognized status code = %ld. %@", (long)urlResponse.statusCode, [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
-    }
-    
-    return -1;
+//    AFHTTPRequestSerializer *ser = [AFHTTPRequestSerializer serializer];
+//    NSMutableURLRequest *request = [ser multipartFormRequestWithMethod:POST_REQUEST URLString:[baseUrl stringByAppendingString:@"/media_objects"] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        [formData appendPartWithFileData:mediaToUpload name:@"upload" fileName:name mimeType:[self getMimeType:name]];
+//        [formData appendPartWithFormData:[[email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] name:@"email"];
+//        [formData appendPartWithFormData:[[password stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] name:@"password"];
+//        [formData appendPartWithFormData:[((ttype == PROJECT) ? @"project" : @"data_set") dataUsingEncoding:NSUTF8StringEncoding] name:@"type"];
+//        [formData appendPartWithFormData:[[NSString stringWithFormat:@"%d", projectId] dataUsingEncoding:NSUTF8StringEncoding] name:@"id"];
+//    } error:nil];
+//    
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+//    [request setHTTPShouldHandleCookies:YES];
+//    [request setTimeoutInterval:30];
+//    NSLog(@"%@", request);
+//    
+//    // send the request
+//    NSError *requestError;
+//    NSHTTPURLResponse *urlResponse;
+//    
+//    NSData *dataResponse = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+//    if (requestError) NSLog(@"Error received from server: %@", requestError);
+//    
+//    if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300) {
+//        id parsedJSONResponse = [NSJSONSerialization JSONObjectWithData:dataResponse options:NSJSONReadingMutableContainers error:&requestError];
+//        int mediaObjectID = [parsedJSONResponse objectForKey:@"id"];
+//        return mediaObjectID;
+//    } else if (urlResponse.statusCode == 401) {
+//        NSLog(@"Unauthorized. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
+//    } else if (urlResponse.statusCode == 422) {
+//        NSLog(@"Unprocessable entity. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
+//    } else if (urlResponse.statusCode == 500) {
+//        NSLog(@"Internal server error. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
+//    } else {
+//        NSLog(@"Unrecognized status code = %ld. %@", (long)urlResponse.statusCode, [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
+//    }
+//    
+      return -1;
 }
 
 /**
@@ -667,43 +665,41 @@ static NSString *email, *password;
  */
 -(int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype withContributorKey:(NSString *)conKey as:(NSString *)conName{
     
-    NSLog(@"Inside API.m");
-    
-    AFHTTPRequestSerializer *ser = [AFHTTPRequestSerializer serializer];
-    NSMutableURLRequest *request = [ser multipartFormRequestWithMethod:POST_REQUEST URLString:[baseUrl stringByAppendingString:@"/media_objects"] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:mediaToUpload name:@"upload" fileName:name mimeType:[self getMimeType:name]];
-        [formData appendPartWithFormData:[[conKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] name:@"contribution_key"];
-        [formData appendPartWithFormData:[[conName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] name:@"contributor_name"];
-        [formData appendPartWithFormData:[((ttype == PROJECT) ? @"project" : @"data_set") dataUsingEncoding:NSUTF8StringEncoding] name:@"type"];
-        [formData appendPartWithFormData:[[NSString stringWithFormat:@"%d", projectId] dataUsingEncoding:NSUTF8StringEncoding] name:@"id"];
-    } error:nil];
-    
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [request setHTTPShouldHandleCookies:YES];
-    [request setTimeoutInterval:30];
-    NSLog(@"%@", request);
-    
-    // send the request
-    NSError *requestError;
-    NSHTTPURLResponse *urlResponse;
-    
-    NSData *dataResponse = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (requestError) NSLog(@"Error received from server: %@", requestError);
-    
-    if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300) {
-        id parsedJSONResponse = [NSJSONSerialization JSONObjectWithData:dataResponse options:NSJSONReadingMutableContainers error:&requestError];
-        int mediaObjectID = [parsedJSONResponse objectForKey:@"id"];
-        return mediaObjectID;
-    } else if (urlResponse.statusCode == 401) {
-        NSLog(@"Unauthorized. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
-    } else if (urlResponse.statusCode == 422) {
-        NSLog(@"Unprocessable entity. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
-    } else if (urlResponse.statusCode == 500) {
-        NSLog(@"Internal server error. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
-    } else {
-        NSLog(@"Unrecognized status code = %ld. %@", (long)urlResponse.statusCode, [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
-    }
+//    AFHTTPRequestSerializer *ser = [AFHTTPRequestSerializer serializer];
+//    NSMutableURLRequest *request = [ser multipartFormRequestWithMethod:POST_REQUEST URLString:[baseUrl stringByAppendingString:@"/media_objects"] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        [formData appendPartWithFileData:mediaToUpload name:@"upload" fileName:name mimeType:[self getMimeType:name]];
+//        [formData appendPartWithFormData:[[conKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] name:@"contribution_key"];
+//        [formData appendPartWithFormData:[[conName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding] name:@"contributor_name"];
+//        [formData appendPartWithFormData:[((ttype == PROJECT) ? @"project" : @"data_set") dataUsingEncoding:NSUTF8StringEncoding] name:@"type"];
+//        [formData appendPartWithFormData:[[NSString stringWithFormat:@"%d", projectId] dataUsingEncoding:NSUTF8StringEncoding] name:@"id"];
+//    } error:nil];
+//    
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+//    [request setHTTPShouldHandleCookies:YES];
+//    [request setTimeoutInterval:30];
+//    NSLog(@"%@", request);
+//    
+//    // send the request
+//    NSError *requestError;
+//    NSHTTPURLResponse *urlResponse;
+//    
+//    NSData *dataResponse = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+//    if (requestError) NSLog(@"Error received from server: %@", requestError);
+//    
+//    if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300) {
+//        id parsedJSONResponse = [NSJSONSerialization JSONObjectWithData:dataResponse options:NSJSONReadingMutableContainers error:&requestError];
+//        int mediaObjectID = [parsedJSONResponse objectForKey:@"id"];
+//        return mediaObjectID;
+//    } else if (urlResponse.statusCode == 401) {
+//        NSLog(@"Unauthorized. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
+//    } else if (urlResponse.statusCode == 422) {
+//        NSLog(@"Unprocessable entity. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
+//    } else if (urlResponse.statusCode == 500) {
+//        NSLog(@"Internal server error. %@", [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
+//    } else {
+//        NSLog(@"Unrecognized status code = %ld. %@", (long)urlResponse.statusCode, [[NSString alloc] initWithData:dataResponse encoding:NSUTF8StringEncoding]);
+//    }
     
     return -1;
 }
