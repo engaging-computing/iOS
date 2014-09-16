@@ -72,6 +72,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="sampleRateBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pI6-RM-aBz"/>
                                     <segue destination="Mek-rr-RRH" kind="push" id="wGb-i2-cpU"/>
                                 </connections>
                             </button>
@@ -82,6 +83,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="recordingLengthBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3XF-kk-bAf"/>
                                     <segue destination="0AV-vx-WBf" kind="push" id="2Ts-lw-gsn"/>
                                 </connections>
                             </button>
@@ -93,7 +95,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ZFb-Up-7ph" kind="push" id="DLL-Ut-icb"/>
+                                    <action selector="uploadBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="sQj-7b-JEb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43J-wk-nCk">
@@ -104,6 +106,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="projectBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7Nn-Re-eQz"/>
                                     <segue destination="4Pf-f3-0Pt" kind="push" id="XLt-Rz-UHl"/>
                                 </connections>
                             </button>
@@ -122,56 +125,25 @@
                     <navigationItem key="navigationItem" title="iS Motion" id="d6B-Tu-Otv">
                         <barButtonItem key="rightBarButtonItem" title="Credentials" id="YgZ-s9-4Sq">
                             <connections>
-                                <segue destination="jZS-DW-sIl" kind="push" id="f2p-PA-uEw"/>
+                                <action selector="credentialBarBtnOnClick:" destination="vXZ-lx-hvc" id="NMf-fA-kYZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="credentialBarBtn" destination="YgZ-s9-4Sq" id="Uyv-Ku-Itv"/>
+                        <outlet property="projectBtn" destination="43J-wk-nCk" id="7Ac-Af-eev"/>
+                        <outlet property="recordingLengthBtn" destination="sUa-1z-o5u" id="IWI-bE-3LV"/>
+                        <outlet property="sampleRateBtn" destination="UzR-NK-UhG" id="bFa-BF-JPF"/>
                         <outlet property="startStopBtn" destination="K5d-Oc-cS3" id="g6A-L0-XBg"/>
+                        <outlet property="uploadBtn" destination="faJ-pO-PAf" id="HlS-mM-ldg"/>
+                        <outlet property="xLbl" destination="7XT-IK-16Y" id="jDj-Lf-4rZ"/>
+                        <outlet property="yLbl" destination="IFr-Co-0VW" id="Mrk-CN-t1s"/>
+                        <outlet property="zLbl" destination="gHr-WA-kog" id="BWd-Lz-Ctw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="449" y="38"/>
-        </scene>
-        <!--Credential Manager - Credentials-->
-        <scene sceneID="P0y-nM-YAI">
-            <objects>
-                <viewController id="jZS-DW-sIl" customClass="ISMCredentialManager" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3df-bZ-ps6"/>
-                        <viewControllerLayoutGuide type="bottom" id="3uM-ya-fOe"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="f7l-wF-ANg">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Logged in as: Test T." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKH-pX-fqh">
-                                <rect key="frame" x="40" y="321" width="240" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchImage-iPad.png" translatesAutoresizingMaskIntoConstraints="NO" id="xAF-Ow-NBu">
-                                <rect key="frame" x="40" y="20" width="240" height="240"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odO-Xx-spJ">
-                                <rect key="frame" x="40" y="367" width="240" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log Out">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Credentials" id="cR3-Bo-CKq"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O0O-rA-jTO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="850" y="38"/>
         </scene>
         <!--Sample Rate - Sample Rate-->
         <scene sceneID="gtK-jv-akD">
@@ -276,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5C-3d-C8X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1231" y="38"/>
+            <point key="canvasLocation" x="850" y="38"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mxr-b4-SyY">
@@ -403,46 +375,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6M9-b2-8ny" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="42" y="707"/>
-        </scene>
-        <!--Upload Manager - Upload-->
-        <scene sceneID="Trm-wS-Wgy">
-            <objects>
-                <viewController id="ZFb-Up-7ph" customClass="ISMUploadManager" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PgS-by-nWT"/>
-                        <viewControllerLayoutGuide type="bottom" id="0yn-oC-1Z7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZdQ-cO-EpU">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select data sets you would like to upload. Press and hold data sets to edit them." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="zCe-ex-rOV">
-                                <rect key="frame" x="20" y="20" width="280" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sU7-wI-f8d">
-                                <rect key="frame" x="90" y="367" width="140" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gg1-xx-y3y">
-                                <rect key="frame" x="20" y="96" width="280" height="263"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Upload" id="tCy-Hj-nkp"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B28-cZ-wVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="449" y="709"/>
+            <point key="canvasLocation" x="1231" y="38"/>
         </scene>
         <!--Project Manager - Project-->
         <scene sceneID="0gA-m1-fBR">
@@ -496,7 +429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mg-kJ-6tP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="850" y="709"/>
+            <point key="canvasLocation" x="46" y="657"/>
         </scene>
         <!--Project Browser - Browse-->
         <scene sceneID="E9h-2G-YMq">
@@ -522,7 +455,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvi-HF-T2Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1231" y="709"/>
+            <point key="canvasLocation" x="449" y="657"/>
         </scene>
         <!--Project Creator - Create-->
         <scene sceneID="gEs-NG-phk">
@@ -569,12 +502,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TKG-jU-So8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="42" y="1382"/>
+            <point key="canvasLocation" x="850" y="657"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="launchImage-iPad.png" width="768" height="1024"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B7186A3B19BF36A400F18847 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7186A3819BF369400F18847 /* libiSENSE_API.a */; };
-		B7186A4419BF554E00F18847 /* ISMCredentialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4319BF554E00F18847 /* ISMCredentialManager.m */; };
 		B7186A4719BF55D700F18847 /* ISMSampleRate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4619BF55D700F18847 /* ISMSampleRate.m */; };
 		B7186A4A19BF55FC00F18847 /* ISMRecordingLength.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4919BF55FC00F18847 /* ISMRecordingLength.m */; };
-		B7186A4D19BF560B00F18847 /* ISMUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4C19BF560B00F18847 /* ISMUploadManager.m */; };
 		B7186A5019BF561C00F18847 /* ISMProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4F19BF561C00F18847 /* ISMProjectManager.m */; };
 		B7186A5319BF562E00F18847 /* ISMProjectBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A5219BF562E00F18847 /* ISMProjectBrowser.m */; };
 		B7186A5619BF563F00F18847 /* ISMProjectCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A5519BF563F00F18847 /* ISMProjectCreator.m */; };
@@ -80,14 +78,10 @@
 
 /* Begin PBXFileReference section */
 		B7186A3219BF369400F18847 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
-		B7186A4219BF554E00F18847 /* ISMCredentialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMCredentialManager.h; sourceTree = "<group>"; };
-		B7186A4319BF554E00F18847 /* ISMCredentialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMCredentialManager.m; sourceTree = "<group>"; };
 		B7186A4519BF55D700F18847 /* ISMSampleRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSampleRate.h; sourceTree = "<group>"; };
 		B7186A4619BF55D700F18847 /* ISMSampleRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSampleRate.m; sourceTree = "<group>"; };
 		B7186A4819BF55FC00F18847 /* ISMRecordingLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMRecordingLength.h; sourceTree = "<group>"; };
 		B7186A4919BF55FC00F18847 /* ISMRecordingLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMRecordingLength.m; sourceTree = "<group>"; };
-		B7186A4B19BF560B00F18847 /* ISMUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMUploadManager.h; sourceTree = "<group>"; };
-		B7186A4C19BF560B00F18847 /* ISMUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMUploadManager.m; sourceTree = "<group>"; };
 		B7186A4E19BF561C00F18847 /* ISMProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMProjectManager.h; sourceTree = "<group>"; };
 		B7186A4F19BF561C00F18847 /* ISMProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMProjectManager.m; sourceTree = "<group>"; };
 		B7186A5119BF562E00F18847 /* ISMProjectBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMProjectBrowser.h; sourceTree = "<group>"; };
@@ -207,15 +201,6 @@
 			name = MainView;
 			sourceTree = "<group>";
 		};
-		B7186A5719BF564600F18847 /* Credentials */ = {
-			isa = PBXGroup;
-			children = (
-				B7186A4219BF554E00F18847 /* ISMCredentialManager.h */,
-				B7186A4319BF554E00F18847 /* ISMCredentialManager.m */,
-			);
-			name = Credentials;
-			sourceTree = "<group>";
-		};
 		B7186A5819BF565300F18847 /* SampleRate */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,15 +217,6 @@
 				B7186A4919BF55FC00F18847 /* ISMRecordingLength.m */,
 			);
 			name = RecordingLength;
-			sourceTree = "<group>";
-		};
-		B7186A5A19BF566B00F18847 /* QueueUploader */ = {
-			isa = PBXGroup;
-			children = (
-				B7186A4B19BF560B00F18847 /* ISMUploadManager.h */,
-				B7186A4C19BF560B00F18847 /* ISMUploadManager.m */,
-			);
-			name = QueueUploader;
 			sourceTree = "<group>";
 		};
 		B7186A5B19BF567B00F18847 /* Project */ = {
@@ -312,11 +288,9 @@
 		B7D98CE619BF34F800BB8994 /* Motion */ = {
 			isa = PBXGroup;
 			children = (
-				B7186A5719BF564600F18847 /* Credentials */,
 				B7186A3F19BF4EA500F18847 /* Delegate */,
 				B7186A4119BF4EB000F18847 /* MainView */,
 				B7186A5B19BF567B00F18847 /* Project */,
-				B7186A5A19BF566B00F18847 /* QueueUploader */,
 				B7186A5919BF565C00F18847 /* RecordingLength */,
 				B7186A5819BF565300F18847 /* SampleRate */,
 				B7186A4019BF4EAB00F18847 /* UI */,
@@ -495,10 +469,8 @@
 			files = (
 				B7186A5619BF563F00F18847 /* ISMProjectCreator.m in Sources */,
 				B7186A5319BF562E00F18847 /* ISMProjectBrowser.m in Sources */,
-				B7186A4419BF554E00F18847 /* ISMCredentialManager.m in Sources */,
 				B7186A5019BF561C00F18847 /* ISMProjectManager.m in Sources */,
 				B7186A4A19BF55FC00F18847 /* ISMRecordingLength.m in Sources */,
-				B7186A4D19BF560B00F18847 /* ISMUploadManager.m in Sources */,
 				B7D98CF119BF34F800BB8994 /* ISMAppDelegate.m in Sources */,
 				B7D98CFA19BF34F800BB8994 /* ISMViewController.m in Sources */,
 				B7D98CED19BF34F800BB8994 /* main.m in Sources */,
