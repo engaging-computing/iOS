@@ -32,6 +32,7 @@
 #define PARENT_DATA_WALK    @"DataWalk"
 #define PARENT_CAR_RAMP     @"CarRampPhysics"
 #define PARENT_CANOBIE      @"CanobiePhysics"
+#define PARENT_MOTION       @"ISMotion"
 
 @interface QueueUploaderView : UIViewController <UIGestureRecognizerDelegate, UIActionSheetDelegate, UITextFieldDelegate, ProjectBrowserDelegate> {
     int projID;
