@@ -18,8 +18,6 @@
 #define kLOGIN_DIALOG_TAG 500
 #define kLOGIN_USER_TEXT 501
 #define kLOGIN_PASS_TEXT 502
-#define kPREFS_USERNAME @"prefs_email"
-#define kPREFS_PASSWORD @"prefs_pass"
 
 @interface ISMViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, CredentialManagerDelegate> {
     

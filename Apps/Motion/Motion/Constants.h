@@ -9,6 +9,9 @@
 #ifndef Motion_Constants_h
 #define Motion_Constants_h
 
+// NSUserDefault (preferences) constants
 #define pPROJECT_ID @"curr_project_id_as_nsnumber"
+#define pLOGIN_USERNAME @"prefs_email"
+#define pLOGIN_PASSWORD @"prefs_pass"
 
 #endif

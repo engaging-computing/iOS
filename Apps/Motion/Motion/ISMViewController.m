@@ -138,8 +138,8 @@
                 
                 // save the username and password in prefs
                 NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-                [prefs setObject:email forKey:kPREFS_USERNAME];
-                [prefs setObject:pass forKey:kPREFS_PASSWORD];
+                [prefs setObject:email forKey:pLOGIN_USERNAME];
+                [prefs setObject:pass forKey:pLOGIN_PASSWORD];
                 [prefs synchronize];
             } else {
                 [self.view makeWaffle:@"Login failed"
