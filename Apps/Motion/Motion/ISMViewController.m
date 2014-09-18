@@ -48,6 +48,7 @@
 }
 
 - (void) reInstateCredentialManagerDialog {
+    
     if (credentialMgrAlert != nil && ![credentialMgrAlert isHidden]) {
         [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:YES];
         [self createCredentialManagerDialog];
@@ -55,6 +56,7 @@
 }
 
 - (void) createCredentialManagerDialog {
+    
     credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
     DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
     [parent addChildViewController:credentialMgr];
@@ -65,10 +67,12 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
 }
 
 - (IBAction)startStopOnClick:(id)sender {
+    
     // TODO implement
 }
 
@@ -80,10 +84,12 @@
 }
 
 - (IBAction)credentialBarBtnOnClick:(id)sender {
+    
     [self createCredentialManagerDialog];
 }
 
 - (void) didPressLogin:(CredentialManager *)mngr {
+    
     [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:YES];
     credentialMgrAlert = nil;
     
@@ -103,6 +109,7 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     switch (alertView.tag) {
         case kLOGIN_DIALOG_TAG:
         {
@@ -121,6 +128,7 @@
 }
 
 - (void) login:(NSString *)email withPassword:(NSString *)pass {
+    
     UIAlertView *spinnerDialog = [self getDispatchDialogWithMessage:@"Logging in..."];
     [spinnerDialog show];
     
@@ -154,6 +162,7 @@
 
 // Default dispatch_async dialog with custom spinner
 - (UIAlertView *) getDispatchDialogWithMessage:(NSString *)dString {
+    
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:dString
                                                       message:nil
                                                      delegate:self
@@ -164,6 +173,36 @@
     [message addSubview:spinner];
     [spinner startAnimating];
     return message;
+}
+
+// Called when returning from the sample rate selection screen
+- (void) didChooseSampleRate:(double)sampleRateInSeconds withDelegate:(ISMSampleRate *)delegateObject {
+    
+    // TODO implement sample rate counter variable and change text displayed on button
+    
+    NSLog(@"Sample rate: %lf", sampleRateInSeconds);
+    [sampleRateBtn setTitle:[NSString stringWithFormat:@"%lf", sampleRateInSeconds] forState:UIControlStateNormal];
+}
+
+- (void) didChooseRecordingLength:(int)recordingLengthInSeconds withDelegate:(ISMRecordingLength *)delegateObject {
+    
+    // TODO implement recording length counter variable and change text displayed on button
+    
+    NSLog(@"Recording length: %d", recordingLengthInSeconds);
+    [recordingLengthBtn setTitle:[NSString stringWithFormat:@"%d", recordingLengthInSeconds] forState:UIControlStateNormal];
+}
+
+// Called before performing a transition segue in the storyboard
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"segueSampleRate"]) {
+        ISMSampleRate *destController = (ISMSampleRate *) [segue destinationViewController];
+        [destController setDelegateObject:self];
+    } else if ([[segue identifier] isEqualToString:@"segueRecordingLength"]) {
+        ISMRecordingLength *destController = (ISMRecordingLength *) [segue destinationViewController];
+        [destController setDelegateObject:self];
+    }
+    
 }
 
 @end

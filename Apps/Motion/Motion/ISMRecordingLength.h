@@ -8,20 +8,33 @@
 
 #import <UIKit/UIKit.h>
 
-#define kBTN_ONE_S 100
-#define kBTN_TWO_S 101
-#define kBTN_FIVE_S 102
-#define kBTN_TEN_S 103
-#define kBTN_THIRTY_S 104
-#define kBTN_ONE_M 105
-#define kBTN_TWO_M 106
-#define kBTN_FIVE_M 107
-#define kBTN_TEN_M 108
-#define kBTN_THIRTY_M 109
-#define kBTN_ONE_H 110
-#define kBTN_PUSH_TO_STOP 111
+#define kBTN_ONE_S 1
+#define kBTN_TWO_S 2
+#define kBTN_FIVE_S 5
+#define kBTN_TEN_S 10
+#define kBTN_THIRTY_S 30
+#define kBTN_ONE_M 60
+#define kBTN_TWO_M 120
+#define kBTN_FIVE_M 300
+#define kBTN_TEN_M 600
+#define kBTN_THIRTY_M 1800
+#define kBTN_ONE_H 3600
+#define kBTN_PUSH_TO_STOP -1
 
-@interface ISMRecordingLength : UIViewController
+@class ISMRecordingLength;
+
+@protocol ISMRecordingLengthDelegate <NSObject>
+
+@required
+- (void) didChooseRecordingLength:(int)recordingLengthInSeconds withDelegate:(ISMRecordingLength *)delegateObject;
+
+@end
+
+@interface ISMRecordingLength : UIViewController {
+}
+
+@property (weak, nonatomic) id <ISMRecordingLengthDelegate> delegate;
+- (void) setDelegateObject:(__weak id<ISMRecordingLengthDelegate>) delegateObject;
 
 @property (weak, nonatomic) IBOutlet UIButton *oneSBtn;
 - (IBAction)oneSBtnOnClick:(id)sender;

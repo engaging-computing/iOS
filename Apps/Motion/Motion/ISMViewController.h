@@ -12,6 +12,8 @@
 #import "QueueUploaderView.h"
 #import "CredentialManager.h"
 #import "DLAVAlertViewController.h"
+#import "ISMSampleRate.h"
+#import "ISMRecordingLength.h"
 #import "Waffle.h"
 
 // Login Constants
@@ -19,7 +21,13 @@
 #define kLOGIN_USER_TEXT 501
 #define kLOGIN_PASS_TEXT 502
 
-@interface ISMViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, CredentialManagerDelegate> {
+@interface ISMViewController : UIViewController
+    <UIAlertViewDelegate,
+    UITextFieldDelegate,
+    CredentialManagerDelegate,
+    ISMSampleRateDelegate,
+    ISMRecordingLengthDelegate>
+{
     
     // API
     API *api;

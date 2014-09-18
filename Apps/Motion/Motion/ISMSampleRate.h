@@ -8,20 +8,33 @@
 
 #import <UIKit/UIKit.h>
 
-#define kBTN_TWENTY_MS 100
-#define kBTN_FIFTY_MS 101
-#define kBTN_ONE_HUNDRED_MS 102
-#define kBTN_TWO_HUNDRED_FIFTY_MS 103
-#define kBTN_FIVE_HUNDRED_MS 104
-#define kBTN_ONE_S 105
-#define kBTN_TWO_S 106
-#define kBTN_THREE_S 107
-#define kBTN_FIVE_S 108
-#define kBTN_TEN_S 109
-#define kBTN_FIFTEEN_S 110
-#define kBTN_THIRTY_S 111
+#define kBTN_TWENTY_MS 0.02
+#define kBTN_FIFTY_MS 0.05
+#define kBTN_ONE_HUNDRED_MS 0.1
+#define kBTN_TWO_HUNDRED_FIFTY_MS 0.25
+#define kBTN_FIVE_HUNDRED_MS 0.5
+#define kBTN_ONE_S 1
+#define kBTN_TWO_S 2
+#define kBTN_THREE_S 3
+#define kBTN_FIVE_S 5
+#define kBTN_TEN_S 10
+#define kBTN_FIFTEEN_S 15
+#define kBTN_THIRTY_S 30
 
-@interface ISMSampleRate : UIViewController
+@class ISMSampleRate;
+
+@protocol ISMSampleRateDelegate <NSObject>
+
+@required
+- (void) didChooseSampleRate:(double)sampleRateInSeconds withDelegate:(ISMSampleRate *)delegateObject;
+
+@end
+
+@interface ISMSampleRate : UIViewController {
+}
+
+@property (weak, nonatomic) id <ISMSampleRateDelegate> delegate;
+- (void) setDelegateObject:(__weak id<ISMSampleRateDelegate>) delegateObject;
 
 @property (weak, nonatomic) IBOutlet UIButton *twentyMSBtn;
 - (IBAction)twentyMSBtnOnClick:(id)sender;
