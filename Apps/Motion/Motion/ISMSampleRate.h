@@ -26,7 +26,7 @@
 @protocol ISMSampleRateDelegate <NSObject>
 
 @required
-- (void) didChooseSampleRate:(double)sampleRateInSeconds withDelegate:(ISMSampleRate *)delegateObject;
+- (void) didChooseSampleRate:(double)sampleRateInSeconds withName:(NSString *)sampleRateAsString andDelegate:(ISMSampleRate *)delegateObject;
 
 @end
 

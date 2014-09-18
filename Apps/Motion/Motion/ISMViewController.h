@@ -28,13 +28,16 @@
     ISMSampleRateDelegate,
     ISMRecordingLengthDelegate>
 {
-    
     // API
     API *api;
     
     // Credential Manager
     CredentialManager *credentialMgr;
     DLAVAlertView *credentialMgrAlert;
+    
+    // Sample rate and recording length
+    double sampleRate;
+    int recordingLength;
     
 }
 
@@ -58,6 +61,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
 - (IBAction)uploadBtnOnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIButton *projectBtn;
 
 @end
