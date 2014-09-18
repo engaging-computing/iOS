@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProjectBrowserViewController.h"
+#import "FieldMatchingViewController.h"
 
-@interface ISMProjectManager : UIViewController
+@interface ISMProjectManager : UIViewController <ProjectBrowserDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *projectLbl;
+
+@property (weak, nonatomic) IBOutlet UIButton *enterProjIDBtn;
+- (IBAction)enterProjIDBtnOnClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *browseProjBtn;
+- (IBAction)browseProjBtnOnClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *createProjBtn;
+- (IBAction)createProjBtnOnClick:(id)sender;
+
 
 @end

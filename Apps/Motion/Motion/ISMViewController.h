@@ -7,15 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#import "API.h"
 #import "QueueUploaderView.h"
 #import "CredentialManager.h"
 #import "DLAVAlertViewController.h"
+#import "Waffle.h"
 
-// Constants
-#define kLOGIN_USER_TEXT 500
-#define kLOGIN_PASS_TEXT 501
+// Login Constants
+#define kLOGIN_DIALOG_TAG 500
+#define kLOGIN_USER_TEXT 501
+#define kLOGIN_PASS_TEXT 502
+#define kPREFS_USERNAME @"prefs_email"
+#define kPREFS_PASSWORD @"prefs_pass"
 
 @interface ISMViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, CredentialManagerDelegate> {
+    
+    // API
+    API *api;
     
     // Credential Manager
     CredentialManager *credentialMgr;

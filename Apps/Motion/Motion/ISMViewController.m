@@ -41,25 +41,31 @@
     // DataSaver from Data_CollectorAppDelegate
     if (dataSaver == nil)
         dataSaver = [(ISMAppDelegate *) [[UIApplication sharedApplication] delegate] dataSaver];
+    
+    // Initialize API
+    api = [API getInstance];
+    [api useDev:true];
 }
 
 - (void) reInstateCredentialManagerDialog {
     if (credentialMgrAlert != nil && ![credentialMgrAlert isHidden]) {
         [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:YES];
-        credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
-        DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
-        [parent addChildViewController:credentialMgr];
-        credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Credential Manager" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        [credentialMgrAlert setContentView:credentialMgr.view];
-        [credentialMgrAlert setDismissesOnBackdropTap:YES];
-        [credentialMgrAlert show];
+        [self createCredentialManagerDialog];
     }
 }
 
+- (void) createCredentialManagerDialog {
+    credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
+    DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
+    [parent addChildViewController:credentialMgr];
+    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Credential Manager" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    [credentialMgrAlert setContentView:credentialMgr.view];
+    [credentialMgrAlert setDismissesOnBackdropTap:YES];
+    [credentialMgrAlert show];
+}
+
 - (void)didReceiveMemoryWarning {
-    
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)startStopOnClick:(id)sender {
@@ -74,28 +80,90 @@
 }
 
 - (IBAction)credentialBarBtnOnClick:(id)sender {
-    credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
-    DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
-    [parent addChildViewController:credentialMgr];
-    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Credential Manager" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    [credentialMgrAlert setContentView:credentialMgr.view];
-    [credentialMgrAlert setDismissesOnBackdropTap:YES];
-    [credentialMgrAlert show];
+    [self createCredentialManagerDialog];
 }
 
 - (void) didPressLogin:(CredentialManager *)mngr {
     [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:YES];
     credentialMgrAlert = nil;
     
-    UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login to iSENSE" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-    [loginalert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-    [loginalert textFieldAtIndex:0].delegate = self;
-    [loginalert textFieldAtIndex:0].tag = kLOGIN_USER_TEXT;
-    [[loginalert textFieldAtIndex:0] becomeFirstResponder];
-    [loginalert textFieldAtIndex:1].delegate = self;
-    [loginalert textFieldAtIndex:1].tag = kLOGIN_PASS_TEXT;
-    [loginalert textFieldAtIndex:0].placeholder = @"Email";
-    [loginalert show];
+    UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Login to iSENSE" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    [loginAlert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+    loginAlert.tag = kLOGIN_DIALOG_TAG;
+    
+    [loginAlert textFieldAtIndex:0].delegate = self;
+    [loginAlert textFieldAtIndex:0].tag = kLOGIN_USER_TEXT;
+    [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
+    [loginAlert textFieldAtIndex:0].placeholder = @"Email";
+    
+    [loginAlert textFieldAtIndex:1].delegate = self;
+    [loginAlert textFieldAtIndex:1].tag = kLOGIN_PASS_TEXT;
+    
+    [loginAlert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (alertView.tag) {
+        case kLOGIN_DIALOG_TAG:
+        {
+            NSString *user = [alertView textFieldAtIndex:0].text;
+            NSString *pass = [alertView textFieldAtIndex:1].text;
+            
+            if ([user length] != 0 && [pass length] !=0)
+                [self login:user withPassword:pass];
+            
+            break;
+        }
+        default:
+            NSLog(@"Unrecognized dialog!");
+            break;
+    }
+}
+
+- (void) login:(NSString *)email withPassword:(NSString *)pass {
+    UIAlertView *spinnerDialog = [self getDispatchDialogWithMessage:@"Logging in..."];
+    [spinnerDialog show];
+    
+    dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_t_dialog_login", NULL);
+    dispatch_async(queue, ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            RPerson *currUser = [api createSessionWithEmail:email andPassword:pass];
+            if (currUser != nil) {
+                [self.view makeWaffle:[NSString stringWithFormat:@"Login as %@ successful", email]
+                             duration:WAFFLE_LENGTH_SHORT
+                             position:WAFFLE_BOTTOM
+                                image:WAFFLE_CHECKMARK];
+                
+                // save the username and password in prefs
+                NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+                [prefs setObject:email forKey:kPREFS_USERNAME];
+                [prefs setObject:pass forKey:kPREFS_PASSWORD];
+                [prefs synchronize];
+            } else {
+                [self.view makeWaffle:@"Login failed"
+                             duration:WAFFLE_LENGTH_SHORT
+                             position:WAFFLE_BOTTOM
+                                image:WAFFLE_RED_X];
+            }
+            [spinnerDialog dismissWithClickedButtonIndex:0 animated:YES];
+        });
+    });
+}
+
+// Default dispatch_async dialog with custom spinner
+- (UIAlertView *) getDispatchDialogWithMessage:(NSString *)dString {
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:dString
+                                                      message:nil
+                                                     delegate:self
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center = CGPointMake(139.5, 75.5);
+    [message addSubview:spinner];
+    [spinner startAnimating];
+    return message;
 }
 
 @end

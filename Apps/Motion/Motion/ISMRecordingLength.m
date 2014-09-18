@@ -46,4 +46,83 @@
 }
 */
 
+// TODO - implement
+- (void) recordingLengthSelected:(int)buttonID {
+    switch (buttonID)
+    {
+        case kBTN_ONE_S:
+            break;
+        case kBTN_TWO_S:
+            break;
+        case kBTN_FIVE_S:
+            break;
+        case kBTN_TEN_S:
+            break;
+        case kBTN_THIRTY_S:
+            break;
+        case kBTN_ONE_M:
+            break;
+        case kBTN_TWO_M:
+            break;
+        case kBTN_FIVE_M:
+            break;
+        case kBTN_TEN_M:
+            break;
+        case kBTN_THIRTY_M:
+            break;
+        case kBTN_ONE_H:
+            break;
+        case kBTN_PUSH_TO_STOP:
+            break;
+    }
+}
+
+- (IBAction)oneSBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_ONE_S];
+}
+
+- (IBAction)twoSBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_TWO_S];
+}
+
+- (IBAction)fiveSBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_FIVE_S];
+}
+
+- (IBAction)tenSBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_TEN_S];
+}
+
+- (IBAction)oneMBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_ONE_M];
+}
+
+- (IBAction)thirtySBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_THIRTY_S];
+}
+
+- (IBAction)twoMBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_TWO_M];
+}
+
+- (IBAction)fiveMBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_FIVE_M];
+}
+
+- (IBAction)tenMBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_TEN_M];
+}
+
+- (IBAction)thirtyMBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_THIRTY_M];
+}
+
+- (IBAction)oneHBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_ONE_H];
+}
+
+- (IBAction)pushToStopBtnOnClick:(id)sender {
+    [self recordingLengthSelected:kBTN_PUSH_TO_STOP];
+}
+
 @end

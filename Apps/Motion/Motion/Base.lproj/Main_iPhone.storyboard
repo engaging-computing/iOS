@@ -25,7 +25,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Force Values:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxc-Ya-Sbv">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Force Values" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxc-Ya-Sbv">
                                 <rect key="frame" x="108" y="6" width="104" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -72,7 +72,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="sampleRateBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pI6-RM-aBz"/>
                                     <segue destination="Mek-rr-RRH" kind="push" id="wGb-i2-cpU"/>
                                 </connections>
                             </button>
@@ -83,7 +82,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="recordingLengthBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3XF-kk-bAf"/>
                                     <segue destination="0AV-vx-WBf" kind="push" id="2Ts-lw-gsn"/>
                                 </connections>
                             </button>
@@ -106,7 +104,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="projectBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7Nn-Re-eQz"/>
                                     <segue destination="4Pf-f3-0Pt" kind="push" id="XLt-Rz-UHl"/>
                                 </connections>
                             </button>
@@ -163,6 +160,9 @@
                                 <state key="normal" title="20 ms">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="twentyMSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="DW3-5H-ydS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XL4-GY-a6b">
                                 <rect key="frame" x="20" y="136" width="122" height="30"/>
@@ -170,6 +170,9 @@
                                 <state key="normal" title="50 ms">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fiftyMSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="KBr-7M-C8s"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YA6-8Y-5xY">
                                 <rect key="frame" x="20" y="174" width="122" height="30"/>
@@ -177,6 +180,9 @@
                                 <state key="normal" title="100 ms">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="oneHundredMSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="F8G-Yw-HX6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qtw-j2-7wZ">
                                 <rect key="frame" x="20" y="212" width="122" height="30"/>
@@ -184,6 +190,9 @@
                                 <state key="normal" title="250 ms">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="twoHundredFiftyMSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="7s5-Qr-nBd"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOw-YO-UE8">
                                 <rect key="frame" x="20" y="250" width="122" height="30"/>
@@ -191,6 +200,9 @@
                                 <state key="normal" title="500 ms">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fiveHundredMSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="4QS-vc-4SC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kQ5-N1-gNU">
                                 <rect key="frame" x="20" y="288" width="122" height="30"/>
@@ -198,6 +210,9 @@
                                 <state key="normal" title="1 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="oneSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="bBa-jI-ciE"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVU-zL-qcP">
                                 <rect key="frame" x="178" y="98" width="122" height="30"/>
@@ -205,6 +220,9 @@
                                 <state key="normal" title="2 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="twoSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="LX6-cB-54K"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAr-2l-VfJ">
                                 <rect key="frame" x="178" y="136" width="122" height="30"/>
@@ -212,6 +230,9 @@
                                 <state key="normal" title="3 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="threeSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="mgs-xl-8zw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gti-yr-bg0">
                                 <rect key="frame" x="178" y="174" width="122" height="30"/>
@@ -219,6 +240,9 @@
                                 <state key="normal" title="5 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fiveSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="X2b-Cr-w7e"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3f-k3-pbD">
                                 <rect key="frame" x="178" y="212" width="122" height="30"/>
@@ -226,6 +250,9 @@
                                 <state key="normal" title="10 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tenSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="jO8-87-FgD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkf-x8-3FN">
                                 <rect key="frame" x="178" y="250" width="122" height="30"/>
@@ -233,6 +260,9 @@
                                 <state key="normal" title="15 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fifteenSBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="R1f-sW-BJ8"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xfi-Br-f3h">
                                 <rect key="frame" x="178" y="288" width="122" height="30"/>
@@ -240,15 +270,32 @@
                                 <state key="normal" title="30 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="thirtySBtnOnClick:" destination="Mek-rr-RRH" eventType="touchUpInside" id="gV3-Es-ILK"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sample Rate" id="Wqj-xc-4em"/>
+                    <connections>
+                        <outlet property="fifteenSBtn" destination="vkf-x8-3FN" id="ESN-Ng-qT8"/>
+                        <outlet property="fiftyMSBtn" destination="XL4-GY-a6b" id="Lz8-OX-Oxz"/>
+                        <outlet property="fiveHundredMSBtn" destination="AOw-YO-UE8" id="KjJ-YY-lP0"/>
+                        <outlet property="fiveSBtn" destination="gti-yr-bg0" id="r4L-fB-Nck"/>
+                        <outlet property="oneHundredMSBtn" destination="YA6-8Y-5xY" id="4RK-J4-Znn"/>
+                        <outlet property="oneSBtn" destination="kQ5-N1-gNU" id="3j1-5a-dQY"/>
+                        <outlet property="tenSBtn" destination="L3f-k3-pbD" id="1dq-Fy-QKc"/>
+                        <outlet property="thirtySBtn" destination="Xfi-Br-f3h" id="vDR-iZ-vQf"/>
+                        <outlet property="threeSBtn" destination="AAr-2l-VfJ" id="K8k-MD-kCY"/>
+                        <outlet property="twentyMSBtn" destination="SCJ-1O-LaX" id="LJT-cc-Dnf"/>
+                        <outlet property="twoHundredFiftyMSBtn" destination="qtw-j2-7wZ" id="o1j-5b-g8y"/>
+                        <outlet property="twoSBtn" destination="kVU-zL-qcP" id="6Qg-yx-cne"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5C-3d-C8X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="850" y="38"/>
+            <point key="canvasLocation" x="46" y="654"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mxr-b4-SyY">
@@ -290,6 +337,9 @@
                                 <state key="normal" title="1 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="oneSBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="YQl-Ep-bgd"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJB-Ob-ns2">
                                 <rect key="frame" x="20" y="136" width="122" height="30"/>
@@ -297,6 +347,9 @@
                                 <state key="normal" title="2 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="twoSBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="krZ-FA-dYM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RzW-H5-IZd">
                                 <rect key="frame" x="20" y="174" width="122" height="30"/>
@@ -304,6 +357,9 @@
                                 <state key="normal" title="5 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fiveSBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="sJ9-61-Xtr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7y-5C-wMX">
                                 <rect key="frame" x="20" y="212" width="122" height="30"/>
@@ -311,6 +367,9 @@
                                 <state key="normal" title="10 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tenSBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="zHz-zX-EXU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrH-7R-CUP">
                                 <rect key="frame" x="20" y="250" width="122" height="30"/>
@@ -318,6 +377,9 @@
                                 <state key="normal" title="30 s">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="thirtySBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="8N3-eh-dLk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yvY-uC-06Q">
                                 <rect key="frame" x="20" y="288" width="122" height="30"/>
@@ -325,6 +387,9 @@
                                 <state key="normal" title="1 m">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="oneMBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="Tip-cV-fip"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cB-zr-dy2">
                                 <rect key="frame" x="178" y="98" width="122" height="30"/>
@@ -332,6 +397,9 @@
                                 <state key="normal" title="2 m">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="twoMBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="J2d-G8-rLS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRj-qC-dJ4">
                                 <rect key="frame" x="178" y="136" width="122" height="30"/>
@@ -339,6 +407,9 @@
                                 <state key="normal" title="5 m">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="fiveMBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="Re6-N2-ffQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qhf-Ib-jTv">
                                 <rect key="frame" x="178" y="174" width="122" height="30"/>
@@ -346,6 +417,9 @@
                                 <state key="normal" title="10 m">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tenMBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="wmK-Yx-a9s"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGm-hf-fVO">
                                 <rect key="frame" x="178" y="212" width="122" height="30"/>
@@ -353,6 +427,9 @@
                                 <state key="normal" title="30 m">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="thirtyMBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="mG8-N5-cMk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UE-YT-5lV">
                                 <rect key="frame" x="178" y="250" width="122" height="30"/>
@@ -360,6 +437,9 @@
                                 <state key="normal" title="1 hr">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="oneHBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="GmO-2j-Rgg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xv-zJ-q0U">
                                 <rect key="frame" x="178" y="288" width="122" height="30"/>
@@ -367,15 +447,32 @@
                                 <state key="normal" title="Push to Stop">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pushToStopBtnOnClick:" destination="0AV-vx-WBf" eventType="touchUpInside" id="Dgm-4l-eeZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Recording Length" id="Hka-hN-YoO"/>
+                    <connections>
+                        <outlet property="fiveMBtn" destination="GRj-qC-dJ4" id="vEZ-PN-9Pg"/>
+                        <outlet property="fiveSBtn" destination="RzW-H5-IZd" id="Nxo-IY-Wev"/>
+                        <outlet property="oneHBtn" destination="7UE-YT-5lV" id="4JI-Gk-QNC"/>
+                        <outlet property="oneMBtn" destination="yvY-uC-06Q" id="nsb-tA-x6w"/>
+                        <outlet property="oneSBtn" destination="DZX-hV-JfR" id="kIh-88-nxm"/>
+                        <outlet property="pushToStopBtn" destination="3xv-zJ-q0U" id="CFV-VE-Uox"/>
+                        <outlet property="tenMBtn" destination="Qhf-Ib-jTv" id="gju-Ub-PBH"/>
+                        <outlet property="tenSBtn" destination="g7y-5C-wMX" id="dQh-0U-q0u"/>
+                        <outlet property="thirtyMBtn" destination="AGm-hf-fVO" id="kBt-Oa-Njz"/>
+                        <outlet property="thirtySBtn" destination="CrH-7R-CUP" id="lKf-bO-Syd"/>
+                        <outlet property="twoMBtn" destination="0cB-zr-dy2" id="aje-xn-ORW"/>
+                        <outlet property="twoSBtn" destination="gJB-Ob-ns2" id="p3k-Ta-tc9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6M9-b2-8ny" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1231" y="38"/>
+            <point key="canvasLocation" x="449" y="654"/>
         </scene>
         <!--Project Manager - Project-->
         <scene sceneID="0gA-m1-fBR">
@@ -401,6 +498,9 @@
                                 <state key="normal" title="Enter Project ID">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="enterProjIDBtnOnClick:" destination="4Pf-f3-0Pt" eventType="touchUpInside" id="hAs-Zq-LR2"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fio-tk-lJn">
                                 <rect key="frame" x="78" y="247" width="164" height="30"/>
@@ -409,7 +509,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="rId-QI-dLR" kind="push" id="xed-LN-VSs"/>
+                                    <action selector="browseProjBtnOnClick:" destination="4Pf-f3-0Pt" eventType="touchUpInside" id="SXG-9a-yry"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sz9-Aq-MHq">
@@ -419,90 +519,23 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="oGx-0y-EEG" kind="push" id="iL5-MF-mWy"/>
+                                    <action selector="createProjBtnOnClick:" destination="4Pf-f3-0Pt" eventType="touchUpInside" id="JSv-OJ-HN7"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Project" id="qCL-cY-dLu"/>
+                    <connections>
+                        <outlet property="browseProjBtn" destination="fio-tk-lJn" id="ufn-oI-khS"/>
+                        <outlet property="createProjBtn" destination="Sz9-Aq-MHq" id="6YR-tq-wmW"/>
+                        <outlet property="enterProjIDBtn" destination="tua-Dd-95j" id="oHr-bE-kLB"/>
+                        <outlet property="projectLbl" destination="k5M-gC-JHY" id="AE9-lh-H6v"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mg-kJ-6tP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="46" y="657"/>
-        </scene>
-        <!--Project Browser - Browse-->
-        <scene sceneID="E9h-2G-YMq">
-            <objects>
-                <viewController id="rId-QI-dLR" customClass="ISMProjectBrowser" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="h5H-UD-56B"/>
-                        <viewControllerLayoutGuide type="bottom" id="jh6-He-aLc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5Kj-aG-WgJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="veD-M4-Ybt">
-                                <rect key="frame" x="20" y="20" width="280" height="376"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Browse" id="vkv-4a-zQJ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dvi-HF-T2Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="449" y="657"/>
-        </scene>
-        <!--Project Creator - Create-->
-        <scene sceneID="gEs-NG-phk">
-            <objects>
-                <viewController id="oGx-0y-EEG" customClass="ISMProjectCreator" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ah0-A6-hqS"/>
-                        <viewControllerLayoutGuide type="bottom" id="iAW-7j-Zm6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ul6-bL-IeZ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zti-ua-FRK">
-                                <rect key="frame" x="20" y="24" width="51" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6qg-vf-fFv">
-                                <rect key="frame" x="79" y="20" width="221" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8I-KV-vy2">
-                                <rect key="frame" x="82" y="367" width="156" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create Project">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="One day you will see a list of fields here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="120" translatesAutoresizingMaskIntoConstraints="NO" id="21y-Jg-JAE">
-                                <rect key="frame" x="100" y="147" width="120" height="122"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Create" id="BS1-7T-olc"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TKG-jU-So8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="850" y="657"/>
+            <point key="canvasLocation" x="842" y="38"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

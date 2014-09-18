@@ -21,8 +21,8 @@
 
 - (void) loadView {
     self.view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 276, 102)];
-    gravatarView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 0, 102, 102)];
-    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(112, 20, 148, 21)];
+    gravatarView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 102, 102)];
+    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 20, 148, 21)];
     [nameLabel setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1.0]];
     
     self.view.autoresizesSubviews = NO;
@@ -36,13 +36,13 @@
     
     
     loginoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [loginoutButton setFrame:CGRectMake(181, 54, 75, 44)];
+    [loginoutButton setFrame:CGRectMake(150, 54, 75, 44)];
     [loginoutButton addTarget:self action:@selector(loginLogout) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginoutButton];
     
     [self.view setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1.0]];
     
-    DLAVAlertViewButtonTheme *theme = [[DLAVAlertViewButtonTheme alloc] initWithTextShadowColor:[UIColor blackColor] andTextShadowOpacity:0.5f andTextShadowRadius:0.0 andTextShadowOffset:CGSizeMake(1.0f, 1.0f)];
+    DLAVAlertViewButtonTheme *theme = [[DLAVAlertViewButtonTheme alloc] initWithTextShadowColor:[UIColor blackColor] andTextShadowOpacity:0.0f andTextShadowRadius:0.0 andTextShadowOffset:CGSizeMake(1.0f, 1.0f)];
     [theme setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1.0]];
     
     
@@ -85,8 +85,8 @@
         [nameLabel setText:@"Not Logged In"];
     } else {
         [gravatarView setImage:[[api getCurrentUser] gravatarImage]];
+        [nameLabel setText:[[api getCurrentUser] name]];
         [loginoutButton setTitle:@"Logout" forState:UIControlStateNormal];
-        [nameLabel setText:[[[api getCurrentUser] name] stringByAppendingString:@"."]];
     }
 
 }
