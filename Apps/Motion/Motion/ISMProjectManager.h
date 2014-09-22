@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ProjectBrowserViewController.h"
 #import "FieldMatchingViewController.h"
+#import "DataManager.h"
 
-@interface ISMProjectManager : UIViewController <ProjectBrowserDelegate>
+#define kPROJ_MANUAL_ENTRY_DIALOG 100
+
+@interface ISMProjectManager : UIViewController <ProjectBrowserDelegate, UIAlertViewDelegate> {
+    DataManager *dm;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *projectLbl;
 

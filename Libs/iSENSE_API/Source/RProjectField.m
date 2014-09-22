@@ -10,11 +10,12 @@
 
 @implementation RProjectField
 
-@synthesize field_id, name, type, unit;
+@synthesize field_id, name, recognized_name, type, unit;
 
 - (id) init {
     if (self = [super init]) {
         name = @"";
+        recognized_name = @"";
         unit = @"";
     }
     return self;
@@ -26,13 +27,137 @@
         self.name = uname;
         self.type = utype;
         self.unit = uunit;
+        
+        [self getRecognizedNameFromUserDefinedName];
     }
     return self;
 }
 
+- (void) setName:(NSString *)uname {
+    self.name = uname;
+    [self getRecognizedNameFromUserDefinedName];
+}
+
 -(NSString *)description {
-    NSString *objString = [NSString stringWithFormat:@"RProjectField: {\n\tfield_id: %@\n\tname: %@\n\ttype: %@\n\tunit: %@\n}", field_id, name, type, unit];
+    NSString *objString = [NSString stringWithFormat:@"RProjectField: {\n\tfield_id: %@\n\tname: %@\n\trecognized_name: %@\n\ttype: %@\n\tunit: %@\n}", field_id, name, recognized_name, type, unit];
     return objString;
+}
+
+- (void) getRecognizedNameFromUserDefinedName {
+    
+    // parse the field and try to match the name with recognized field names
+    switch (self.type.intValue) {
+            
+        case TYPE_NUMBER:
+            // Temperature
+            if ([self.name.lowercaseString rangeOfString:@"temp"].location != NSNotFound) {
+                if ([self.unit.lowercaseString rangeOfString:@"c"].location != NSNotFound) {
+                    self.recognized_name = sTEMPERATURE_C;
+                } else if ([self.unit.lowercaseString rangeOfString:@"k"].location != NSNotFound) {
+                    self.recognized_name = sTEMPERATURE_K;
+                } else {
+                    self.recognized_name = sTEMPERATURE_F;
+                }
+                break;
+            }
+            
+            // Altitude
+            else if ([self.name.lowercaseString rangeOfString:@"altitude"].location != NSNotFound) {
+                self.recognized_name = sALTITUDE;
+                break;
+            }
+            
+            // Light
+            else if ([self.name.lowercaseString rangeOfString:@"light"].location != NSNotFound) {
+                self.recognized_name = sLUX;
+                break;
+            }
+            
+            // Heading
+            else if ([self.name.lowercaseString rangeOfString:@"heading"].location != NSNotFound ||
+                     [self.name.lowercaseString rangeOfString:@"angle"].location != NSNotFound) {
+                if ([self.unit.lowercaseString rangeOfString:@"rad"].location != NSNotFound) {
+                    self.recognized_name = sANGLE_RAD;
+                } else {
+                    self.recognized_name = sANGLE_DEG;
+                }
+                break;
+            }
+            
+            // Magnetic
+            else if ([self.name.lowercaseString rangeOfString:@"magnetic"].location != NSNotFound) {
+                if ([self.name.lowercaseString rangeOfString:@"x"].location != NSNotFound) {
+                    self.recognized_name = sMAG_X;
+                } else if ([self.name.lowercaseString rangeOfString:@"y"].location != NSNotFound) {
+                    self.recognized_name = sMAG_Y;
+                } else if ([self.name.lowercaseString rangeOfString:@"z"].location != NSNotFound) {
+                    self.recognized_name = sMAG_Z;
+                } else {
+                    self.recognized_name = sMAG_TOTAL;
+                }
+                break;
+            }
+            
+            // Acceleration
+            else if ([self.name.lowercaseString rangeOfString:@"accel"].location != NSNotFound) {
+                if ([self.name.lowercaseString rangeOfString:@"x"].location != NSNotFound) {
+                    self.recognized_name = sACCEL_X;
+                } else if ([self.name.lowercaseString rangeOfString:@"y"].location != NSNotFound) {
+                    self.recognized_name = sACCEL_Y;
+                } else if ([self.name.lowercaseString rangeOfString:@"z"].location != NSNotFound) {
+                    self.recognized_name = sACCEL_Z;
+                } else {
+                    self.recognized_name = sACCEL_TOTAL;
+                }
+                break;
+            }
+            
+            // Pressure
+            else if ([self.name.lowercaseString rangeOfString:@"pressure"].location != NSNotFound) {
+                self.recognized_name = sPRESSURE;
+                break;
+            }
+            
+            // Gyroscope
+            else if ([self.name.lowercaseString rangeOfString:@"gyro"].location != NSNotFound) {
+                if ([self.name.lowercaseString rangeOfString:@"x"].location != NSNotFound) {
+                    self.recognized_name = sGYRO_X;
+                } else if ([self.name.lowercaseString rangeOfString:@"y"].location != NSNotFound) {
+                    self.recognized_name = sGYRO_Y;
+                } else {
+                    self.recognized_name = sGYRO_Z;
+                }
+                break;
+            }
+            
+            // No match found
+            else {
+                self.recognized_name = sNULL_STRING;
+                break;
+            }
+            
+            break;
+            
+        case TYPE_TIMESTAMP:
+            // Timestamp
+            self.recognized_name = sTIME_MILLIS;
+            break;
+            
+        case TYPE_LAT:
+            // Latitude
+            self.recognized_name = sLATITUDE;
+            break;
+            
+        case TYPE_LON:
+            // Longitude
+            self.recognized_name = sLONGITUDE;
+            break;
+            
+        default:
+            // No match found
+            self.recognized_name = sNULL_STRING;
+            break;
+    }
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Fields.h"
 
 #define TYPE_TIMESTAMP 1
 #define TYPE_NUMBER 2
@@ -18,10 +19,11 @@
     
 }
 
-@property (strong) NSNumber *field_id;
-@property (strong) NSString *name;
-@property (strong) NSNumber *type;
-@property (strong) NSString *unit;
+@property (nonatomic, strong) NSNumber *field_id;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *recognized_name;
+@property (nonatomic, strong) NSNumber *type;
+@property (nonatomic, strong) NSString *unit;
 
 - (id)initWithName:(NSString *)uname type:(NSNumber *)utype andUnit:(NSString *)uunit;
 

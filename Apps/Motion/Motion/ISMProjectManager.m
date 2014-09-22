@@ -15,97 +15,130 @@
 
 @synthesize projectLbl, enterProjIDBtn, browseProjBtn, createProjBtn;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        dm = [DataManager getInstance];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)enterProjIDBtnOnClick:(id)sender {
+    
+    UIAlertView *enterProjAlert = [[UIAlertView alloc] initWithTitle:@"Enter Project ID #" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    
+    enterProjAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    enterProjAlert.tag = kPROJ_MANUAL_ENTRY_DIALOG;
+    [enterProjAlert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (alertView.tag) {
+        case kPROJ_MANUAL_ENTRY_DIALOG:
+        {
+            NSString *projAsString = [[alertView textFieldAtIndex:0] text];
+            [self saveProjectIDToPrefs:[projAsString intValue]];
+            break;
+        }
+        default:
+            NSLog(@"Unrecognized dialog!");
+            break;
+    }
 }
 
 - (IBAction)browseProjBtnOnClick:(id)sender {
+    
     ProjectBrowserViewController *browser = [[ProjectBrowserViewController alloc] initWithDelegate:self];
     [self.navigationController pushViewController:browser animated:YES];
 }
 
 - (IBAction)createProjBtnOnClick:(id)sender {
+    
     [self.view makeWaffle:@"Feature coming... eventually"];
 }
 
 - (void) didFinishChoosingProject:(ProjectBrowserViewController *) browser withID: (int) project_id {
+    
     NSLog(@"ID = %d", project_id);
     //dfm = [[DataFieldManager alloc] initWithProjID:projNum API:api andFields:nil];
+    [dm setProjectID:project_id];
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:[NSNumber numberWithInt:project_id] forKey:pPROJECT_ID];
-    [prefs synchronize];
-    
+    [self saveProjectIDToPrefs:project_id];
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %d", project_id]];
     
-    [self launchFieldMatchingViewControllerFromBrowse:TRUE];
+    // TODO - uncomment this once implemented
+    //[self launchFieldMatchingViewControllerFromBrowse:TRUE];
+}
+
+- (void) saveProjectIDToPrefs:(int)projectID {
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:[NSNumber numberWithInt:projectID] forKey:pPROJECT_ID];
+    
+    [prefs synchronize];
 }
 
 - (void) launchFieldMatchingViewControllerFromBrowse:(bool)fromBrowse {
-//    // get the fields to field match
-//    UIAlertView *message = [self getDispatchDialogWithMessage:@"Loading fields..."];
-//    [message show];
-//    
-//    dispatch_queue_t queue = dispatch_queue_create("loading_project_fields", NULL);
-//    dispatch_async(queue, ^{
-//        [dfm getOrder];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            // set an observer for the field matched array caught from FieldMatching
-//            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
-//            
-//            // launch the field matching dialog
-//            FieldMatchingViewController *fmvc = [[FieldMatchingViewController alloc] initWithMatchedFields:[dfm getOrderList] andProjectFields:[dfm getRealOrder]];
-//            fmvc.title = @"Field Matching";
-//            
-//            if (fromBrowse) {
-//                double delayInSeconds = 0.1;
-//                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//                    [self.navigationController pushViewController:fmvc animated:YES];
-//                });
-//            } else
-//                [self.navigationController pushViewController:fmvc animated:YES];
-//            
-//            if (fromBrowse) [NSThread sleepForTimeInterval:1.0];
-//            [message dismissWithClickedButtonIndex:nil animated:YES];
-//            
-//        });
-//    });
+    // get the fields to field match
+    UIAlertView *message = [self getDispatchDialogWithMessage:@"Loading fields..."];
+    [message show];
+    
+    dispatch_queue_t queue = dispatch_queue_create("loading_project_fields", NULL);
+    dispatch_async(queue, ^{
+        //[dfm getOrder];
+        [dm retrieveProjectFields];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // set an observer for the field matched array caught from FieldMatching
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
+            
+            // launch the field matching dialog
+            FieldMatchingViewController *fmvc = [[FieldMatchingViewController alloc] initWithMatchedFields:[dm getRecognizedFields] andProjectFields:[dm getUserDefinedFields]];
+            fmvc.title = @"Field Matching";
+            
+            if (fromBrowse) {
+                double delayInSeconds = 0.1;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [self.navigationController pushViewController:fmvc animated:YES];
+                });
+            } else
+                [self.navigationController pushViewController:fmvc animated:YES];
+            
+            if (fromBrowse)
+                [NSThread sleepForTimeInterval:1.0];
+            [message dismissWithClickedButtonIndex:0 animated:YES];
+            
+        });
+    });
+}
+
+- (void) retrieveFieldMatchedArray:(NSNotification *)obj {
+    NSMutableArray *fieldMatch =  (NSMutableArray *)[obj object];
+    if (fieldMatch != nil) {
+        // user pressed okay button
+        
+        //returnFields = [[NSMutableArray alloc] init];
+        //[returnFields addObjectsFromArray:fieldMatch];
+    }
+    // else user canceled
 }
 
 // Default dispatch_async dialog with custom spinner
 - (UIAlertView *) getDispatchDialogWithMessage:(NSString *)dString {
+    
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:dString
                                                       message:nil
                                                      delegate:self

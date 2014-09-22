@@ -127,6 +127,8 @@
 		B71AD70A19C7119B006820A1 /* waffle_warn.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6DE19C7119B006820A1 /* waffle_warn.png */; };
 		B71AD70B19C7119B006820A1 /* waffle_x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6DF19C7119B006820A1 /* waffle_x.png */; };
 		B76C43C019C8706A00B0A19B /* QDataSetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B76C43BE19C8706A00B0A19B /* QDataSetModel.xcdatamodeld */; };
+		B7D848C919CC8453006BE163 /* DataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D848C819CC8453006BE163 /* DataManager.h */; };
+		B7D848CB19CC8463006BE163 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D848CA19CC8463006BE163 /* DataManager.m */; };
 		B7EBFDC217A0186A006B90A8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7EBFDC117A0186A006B90A8 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -278,6 +280,8 @@
 		B71AD6DE19C7119B006820A1 /* waffle_warn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waffle_warn.png; sourceTree = "<group>"; };
 		B71AD6DF19C7119B006820A1 /* waffle_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waffle_x.png; sourceTree = "<group>"; };
 		B76C43BF19C8706A00B0A19B /* QDataSetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QDataSetModel.xcdatamodel; sourceTree = "<group>"; };
+		B7D848C819CC8453006BE163 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = headers/DataManager.h; sourceTree = "<group>"; };
+		B7D848CA19CC8463006BE163 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = source/DataManager.m; sourceTree = "<group>"; };
 		B7EBFDC117A0186A006B90A8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -413,6 +417,7 @@
 		B70E7D2B19C0BCA300C2B042 /* DFM */ = {
 			isa = PBXGroup;
 			children = (
+				B7D848C819CC8453006BE163 /* DataManager.h */,
 				B70E7C2019C0BB8300C2B042 /* DataFieldManager.h */,
 			);
 			name = DFM;
@@ -434,11 +439,11 @@
 		B70E7D2E19C0BCE900C2B042 /* Fields */ = {
 			isa = PBXGroup;
 			children = (
+				B70E7C2E19C0BB8300C2B042 /* Fields.h */,
 				B70E7C2A19C0BB8300C2B042 /* FieldEntry.h */,
 				B70E7C2B19C0BB8300C2B042 /* FieldGrabber.h */,
 				B70E7C2C19C0BB8300C2B042 /* FieldMatchCell.h */,
 				B70E7C2D19C0BB8300C2B042 /* FieldMatchingViewController.h */,
-				B70E7C2E19C0BB8300C2B042 /* Fields.h */,
 			);
 			name = Fields;
 			sourceTree = "<group>";
@@ -545,6 +550,7 @@
 		B70E7D4119C0BF1900C2B042 /* DFM */ = {
 			isa = PBXGroup;
 			children = (
+				B7D848CA19CC8463006BE163 /* DataManager.m */,
 				B70E7CA419C0BBA700C2B042 /* DataFieldManager.m */,
 			);
 			name = DFM;
@@ -683,6 +689,7 @@
 				B70E7C6619C0BB8300C2B042 /* DLAVAlertViewButtonTheme.h in Headers */,
 				B70E7C6919C0BB8300C2B042 /* DLAVAlertViewTextFieldTheme.h in Headers */,
 				B70E7C8A19C0BB8300C2B042 /* RTutorial.h in Headers */,
+				B7D848C919CC8453006BE163 /* DataManager.h in Headers */,
 				B70E7C8519C0BB8300C2B042 /* RNews.h in Headers */,
 				B70E7C7C19C0BB8300C2B042 /* QDataSet.h in Headers */,
 				B70E7C8919C0BB8300C2B042 /* RProjectField.h in Headers */,
@@ -864,6 +871,7 @@
 				B70E7CE019C0BBA700C2B042 /* DLAVAlertViewButtonTheme.m in Sources */,
 				B70E7CE919C0BBA700C2B042 /* FieldMatchCell.m in Sources */,
 				B70E7CF919C0BBA700C2B042 /* Reachability.m in Sources */,
+				B7D848CB19CC8463006BE163 /* DataManager.m in Sources */,
 				B70E7D0919C0BBA700C2B042 /* StringGrabber.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
