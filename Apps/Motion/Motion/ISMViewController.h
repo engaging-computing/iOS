@@ -15,6 +15,7 @@
 #import "ISMSampleRate.h"
 #import "ISMRecordingLength.h"
 #import "Waffle.h"
+#import "DataManager.h"
 
 // Login Constants
 #define kLOGIN_DIALOG_TAG 500

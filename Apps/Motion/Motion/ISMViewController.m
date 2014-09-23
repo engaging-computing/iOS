@@ -69,7 +69,12 @@
 #pragma mark - Upload
 
 - (IBAction)uploadBtnOnClick:(id)sender {
-    
+    // TODO tests
+//    DataManager *dm = [[DataManager alloc] init];
+//    RProjectField *field = [[RProjectField alloc] initWithName:@"accel x" type:[NSNumber numberWithInt:TYPE_NUMBER] andUnit:@"m/s^2"];
+//    
+//    int x = 0;
+
     QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION];
     queueUploader.title = @"Upload";
     [self.navigationController pushViewController:queueUploader animated:YES];

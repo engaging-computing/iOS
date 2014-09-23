@@ -10,13 +10,13 @@
 
 @implementation RProjectField
 
-@synthesize field_id, name, recognized_name, type, unit;
+@synthesize field_id = _field_id, name = _name, recognized_name = _recognized_name, type = _type, unit = _unit;
 
 - (id) init {
     if (self = [super init]) {
-        name = @"";
-        recognized_name = @"";
-        unit = @"";
+        self.type = [NSNumber numberWithInt:TYPE_TEXT];
+        self.unit = @"";
+        self.name = @"";
     }
     return self;
 }
@@ -24,25 +24,25 @@
 - (id)initWithName:(NSString *)uname type:(NSNumber *)utype andUnit:(NSString *)uunit {
     self = [super init];
     if (self) {
-        self.name = uname;
         self.type = utype;
         self.unit = uunit;
-        
-        [self getRecognizedNameFromUserDefinedName];
+        self.name = uname;
     }
     return self;
 }
 
-- (void) setName:(NSString *)uname {
-    self.name = uname;
+// Overridden setter for the name variable, which will call the getRecognizedNameFromUserDefinedName function
+- (void) setName:(NSString *)name {
+    _name = name;
     [self getRecognizedNameFromUserDefinedName];
 }
 
 -(NSString *)description {
-    NSString *objString = [NSString stringWithFormat:@"RProjectField: {\n\tfield_id: %@\n\tname: %@\n\trecognized_name: %@\n\ttype: %@\n\tunit: %@\n}", field_id, name, recognized_name, type, unit];
+    NSString *objString = [NSString stringWithFormat:@"RProjectField: {\n\tfield_id: %@\n\tname: %@\n\trecognized_name: %@\n\ttype: %@\n\tunit: %@\n}", _field_id, _name, _recognized_name, _type, _unit];
     return objString;
 }
 
+// Parses the name field to attempt to obtain a recognized name for the field
 - (void) getRecognizedNameFromUserDefinedName {
     
     // parse the field and try to match the name with recognized field names
