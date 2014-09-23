@@ -69,12 +69,19 @@
 #pragma mark - Upload
 
 - (IBAction)uploadBtnOnClick:(id)sender {
-    // TODO tests
+      // TODO tests - keep these around for now, delete when the library functions are done being tested
 //    DataManager *dm = [[DataManager alloc] init];
 //    RProjectField *field = [[RProjectField alloc] initWithName:@"accel x" type:[NSNumber numberWithInt:TYPE_NUMBER] andUnit:@"m/s^2"];
 //    
+//    // Test section 2
+//    DataManager *dm = [[DataManager alloc] init];
+//    [dm setProjectID:715];
+//    [dm retrieveProjectFields];
+//    NSMutableArray *fields = [dm getUserDefinedFields];
+//    
 //    int x = 0;
-
+//    NSMutableArray *recFields = [dm getRecognizedFields];
+    
     QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION];
     queueUploader.title = @"Upload";
     [self.navigationController pushViewController:queueUploader animated:YES];

@@ -101,14 +101,14 @@
 }
 
 // Retrieve the array of fields for the current project, as displayed on the website
+// valueForKey:@"name" is analagous to mapping over the RProjectField.name property
 - (NSMutableArray *) getUserDefinedFields {
-    // TODO test. really we want to map over RProjectField.name, and I'm unsure if I have to override the valueForKey method in the class
     return [projectFields valueForKey:@"name"];
 }
 
 // Retrieve the array of fields for the current project, as rearranged by the FieldMatching class
+// valueForKey:@"recognized_name" is analagous to mapping over the RProjectField.recognized_name property
 - (NSMutableArray *) getRecognizedFields {
-    // TODO test. really we want to map over RProjectField.recognized_name, and I'm unsure if I have to override the valueForKey method in the class
     return [projectFields valueForKey:@"recognized_name"];
 }
 
