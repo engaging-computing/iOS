@@ -109,12 +109,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction) backOnClick:(id)sender {
-    // send back nil to show that the user cancelled
-    [[NSNotificationCenter defaultCenter] postNotificationName:kFIELD_MATCHED_ARRAY object:nil];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (IBAction) okOnClick:(id)sender {
     // send back the field matched array
     NSMutableArray *fieldMatch = [[NSMutableArray alloc] init];

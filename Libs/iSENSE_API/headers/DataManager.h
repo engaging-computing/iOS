@@ -34,6 +34,9 @@
 - (int) getProjectID;
 - (void) setProjectID:(int)projID;
 
+- (NSMutableArray *) getProjectFields;
+- (void) setProjectFields:(NSMutableArray *)projFields;
+
 - (NSMutableArray *) getUserDefinedFields;
 - (NSMutableArray *) getRecognizedFields;
 

@@ -24,6 +24,12 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    dm = [DataManager getInstance];
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -49,7 +55,11 @@
         case kPROJ_MANUAL_ENTRY_DIALOG:
         {
             NSString *projAsString = [[alertView textFieldAtIndex:0] text];
-            [self saveProjectIDToPrefs:[projAsString intValue]];
+            [dm setProjectID:[projAsString intValue]];
+            
+            [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
+            
+            [self launchFieldMatchingViewControllerFromBrowse:FALSE];
             break;
         }
         default:
@@ -72,35 +82,26 @@
 - (void) didFinishChoosingProject:(ProjectBrowserViewController *) browser withID: (int) project_id {
     
     NSLog(@"ID = %d", project_id);
-    //dfm = [[DataFieldManager alloc] initWithProjID:projNum API:api andFields:nil];
     [dm setProjectID:project_id];
     
-    [self saveProjectIDToPrefs:project_id];
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %d", project_id]];
     
-    // TODO - uncomment this once implemented
-    //[self launchFieldMatchingViewControllerFromBrowse:TRUE];
+    [self launchFieldMatchingViewControllerFromBrowse:TRUE];
 }
 
-- (void) saveProjectIDToPrefs:(int)projectID {
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:[NSNumber numberWithInt:projectID] forKey:pPROJECT_ID];
-    
-    [prefs synchronize];
-}
-
+// Each call to set a new project ID requires the user to explicitly field match
 - (void) launchFieldMatchingViewControllerFromBrowse:(bool)fromBrowse {
-    // get the fields to field match
+
     UIAlertView *message = [self getDispatchDialogWithMessage:@"Loading fields..."];
     [message show];
     
     dispatch_queue_t queue = dispatch_queue_create("loading_project_fields", NULL);
     dispatch_async(queue, ^{
-        //[dfm getOrder];
+        
         [dm retrieveProjectFields];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             // set an observer for the field matched array caught from FieldMatching
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
             
@@ -108,30 +109,37 @@
             FieldMatchingViewController *fmvc = [[FieldMatchingViewController alloc] initWithMatchedFields:[dm getRecognizedFields] andProjectFields:[dm getUserDefinedFields]];
             fmvc.title = @"Field Matching";
             
+            [message dismissWithClickedButtonIndex:0 animated:NO];
+            
             if (fromBrowse) {
-                double delayInSeconds = 0.1;
+                double delayInSeconds = 0.5;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [self.navigationController pushViewController:fmvc animated:YES];
                 });
             } else
-                [self.navigationController pushViewController:fmvc animated:YES];
-            
-            if (fromBrowse)
-                [NSThread sleepForTimeInterval:1.0];
-            [message dismissWithClickedButtonIndex:0 animated:YES];
-            
+                [self.navigationController pushViewController:fmvc animated:YES];            
         });
     });
 }
 
+// Retrieve the field-matched array and update DM
 - (void) retrieveFieldMatchedArray:(NSNotification *)obj {
+    
     NSMutableArray *fieldMatch =  (NSMutableArray *)[obj object];
+    
     if (fieldMatch != nil) {
-        // user pressed okay button
+        // user pressed okay button, so update the DM's fields with field-matched equivalents
+        NSMutableArray *updatedProjectFields = [[NSMutableArray alloc] init];
         
-        //returnFields = [[NSMutableArray alloc] init];
-        //[returnFields addObjectsFromArray:fieldMatch];
+        int index = 0;
+        for (RProjectField *field in [dm getProjectFields]) {
+            field.recognized_name = [fieldMatch objectAtIndex:index++];
+            [updatedProjectFields addObject:field];
+        }
+        
+        [dm setProjectFields:updatedProjectFields];
+        
     }
     // else user canceled
 }

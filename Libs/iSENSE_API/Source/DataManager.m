@@ -100,6 +100,16 @@
     projectID = projID;
 }
 
+// Get the array of RProjectFields associated with this project
+- (NSMutableArray *) getProjectFields {
+    return projectFields;
+}
+
+// Explicitly set the array of RProjectFields for this project
+- (void) setProjectFields:(NSMutableArray *)projFields {
+    projectFields = projFields;
+}
+
 // Retrieve the array of fields for the current project, as displayed on the website
 // valueForKey:@"name" is analagous to mapping over the RProjectField.name property
 - (NSMutableArray *) getUserDefinedFields {

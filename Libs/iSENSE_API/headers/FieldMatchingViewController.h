@@ -33,7 +33,6 @@
 
 - (id) initWithMatchedFields:(NSMutableArray *)mf andProjectFields:(NSMutableArray *)pf;
 
-- (IBAction) backOnClick:(id)sender;
 - (IBAction) okOnClick:(id)sender;
 
 @property (nonatomic, assign) IBOutlet UITableView *mTableView;
