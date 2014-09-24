@@ -13,7 +13,6 @@
 		765992C518D37FF00062CC09 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765992C418D37FF00062CC09 /* Security.framework */; };
 		B70E7C6119C0BB8300C2B042 /* API.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C1E19C0BB8300C2B042 /* API.h */; };
 		B70E7C6219C0BB8300C2B042 /* CredentialManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C1F19C0BB8300C2B042 /* CredentialManager.h */; };
-		B70E7C6319C0BB8300C2B042 /* DataFieldManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2019C0BB8300C2B042 /* DataFieldManager.h */; };
 		B70E7C6419C0BB8300C2B042 /* DataSaver.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2119C0BB8300C2B042 /* DataSaver.h */; };
 		B70E7C6519C0BB8300C2B042 /* DLAVAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2219C0BB8300C2B042 /* DLAVAlertView.h */; };
 		B70E7C6619C0BB8300C2B042 /* DLAVAlertViewButtonTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2319C0BB8300C2B042 /* DLAVAlertViewButtonTheme.h */; };
@@ -50,7 +49,6 @@
 		B70E7C9819C0BB8300C2B042 /* WaffleConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C5619C0BB8300C2B042 /* WaffleConstants.h */; };
 		B70E7CDB19C0BBA700C2B042 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CA219C0BBA700C2B042 /* API.m */; };
 		B70E7CDC19C0BBA700C2B042 /* CredentialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CA319C0BBA700C2B042 /* CredentialManager.m */; };
-		B70E7CDD19C0BBA700C2B042 /* DataFieldManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CA419C0BBA700C2B042 /* DataFieldManager.m */; };
 		B70E7CDE19C0BBA700C2B042 /* DataSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CA519C0BBA700C2B042 /* DataSaver.m */; };
 		B70E7CDF19C0BBA700C2B042 /* DLAVAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CA619C0BBA700C2B042 /* DLAVAlertView.m */; };
 		B70E7CE019C0BBA700C2B042 /* DLAVAlertViewButtonTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CA719C0BBA700C2B042 /* DLAVAlertViewButtonTheme.m */; };
@@ -164,7 +162,6 @@
 		765992C418D37FF00062CC09 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B70E7C1E19C0BB8300C2B042 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = API.h; path = headers/API.h; sourceTree = "<group>"; };
 		B70E7C1F19C0BB8300C2B042 /* CredentialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CredentialManager.h; path = headers/CredentialManager.h; sourceTree = "<group>"; };
-		B70E7C2019C0BB8300C2B042 /* DataFieldManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataFieldManager.h; path = headers/DataFieldManager.h; sourceTree = "<group>"; };
 		B70E7C2119C0BB8300C2B042 /* DataSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSaver.h; path = headers/DataSaver.h; sourceTree = "<group>"; };
 		B70E7C2219C0BB8300C2B042 /* DLAVAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLAVAlertView.h; path = headers/DLAVAlertView.h; sourceTree = "<group>"; };
 		B70E7C2319C0BB8300C2B042 /* DLAVAlertViewButtonTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLAVAlertViewButtonTheme.h; path = headers/DLAVAlertViewButtonTheme.h; sourceTree = "<group>"; };
@@ -201,7 +198,6 @@
 		B70E7C5619C0BB8300C2B042 /* WaffleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaffleConstants.h; path = headers/WaffleConstants.h; sourceTree = "<group>"; };
 		B70E7CA219C0BBA700C2B042 /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = API.m; path = source/API.m; sourceTree = "<group>"; };
 		B70E7CA319C0BBA700C2B042 /* CredentialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CredentialManager.m; path = source/CredentialManager.m; sourceTree = "<group>"; };
-		B70E7CA419C0BBA700C2B042 /* DataFieldManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataFieldManager.m; path = source/DataFieldManager.m; sourceTree = "<group>"; };
 		B70E7CA519C0BBA700C2B042 /* DataSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataSaver.m; path = source/DataSaver.m; sourceTree = "<group>"; };
 		B70E7CA619C0BBA700C2B042 /* DLAVAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLAVAlertView.m; path = source/DLAVAlertView.m; sourceTree = "<group>"; };
 		B70E7CA719C0BBA700C2B042 /* DLAVAlertViewButtonTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLAVAlertViewButtonTheme.m; path = source/DLAVAlertViewButtonTheme.m; sourceTree = "<group>"; };
@@ -419,7 +415,6 @@
 			children = (
 				B70E7C2E19C0BB8300C2B042 /* DataContainer.h */,
 				B7D848C819CC8453006BE163 /* DataManager.h */,
-				B70E7C2019C0BB8300C2B042 /* DataFieldManager.h */,
 			);
 			name = DataManager;
 			sourceTree = "<group>";
@@ -551,7 +546,6 @@
 			children = (
 				B70E7CB219C0BBA700C2B042 /* DataContainer.m */,
 				B7D848CA19CC8463006BE163 /* DataManager.m */,
-				B70E7CA419C0BBA700C2B042 /* DataFieldManager.m */,
 			);
 			name = DataManager;
 			sourceTree = "<group>";
@@ -677,7 +671,6 @@
 				B70E7C6119C0BB8300C2B042 /* API.h in Headers */,
 				B70E7C7619C0BB8300C2B042 /* ISenseSearch.h in Headers */,
 				B70E7C8319C0BB8300C2B042 /* RDataSet.h in Headers */,
-				B70E7C6319C0BB8300C2B042 /* DataFieldManager.h in Headers */,
 				B70E7C8719C0BB8300C2B042 /* RPerson.h in Headers */,
 				B70E7C7719C0BB8300C2B042 /* ISKeys.h in Headers */,
 				B70E7C8819C0BB8300C2B042 /* RProject.h in Headers */,
@@ -853,7 +846,6 @@
 				B70E7CEA19C0BBA700C2B042 /* FieldMatchingViewController.m in Sources */,
 				B70E7CF819C0BBA700C2B042 /* RDataSet.m in Sources */,
 				B70E7CDE19C0BBA700C2B042 /* DataSaver.m in Sources */,
-				B70E7CDD19C0BBA700C2B042 /* DataFieldManager.m in Sources */,
 				B70E7CEB19C0BBA700C2B042 /* DataContainer.m in Sources */,
 				B70E7D0019C0BBA700C2B042 /* SensorCompatibility.m in Sources */,
 				B70E7CFE19C0BBA700C2B042 /* RProjectField.m in Sources */,
