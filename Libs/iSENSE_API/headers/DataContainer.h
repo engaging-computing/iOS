@@ -11,6 +11,12 @@
 
 @interface DataContainer : NSObject {}
 
+// TODO - change these from a whole set of properties to an NSDictionary of data
+//        This data will be keyed by the strings defined in this class
+//        We will also declare a setData:(NSNumber *data) forKey:(NSString *)key
+//        kind of method to insert data into this dictionary
+//        Implementation should be done alongside the removal of old DFM.
+
 @property (retain) NSNumber *accel_x;
 @property (retain) NSNumber *accel_y;
 @property (retain) NSNumber *accel_z;
