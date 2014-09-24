@@ -503,11 +503,11 @@
 		B70E7D3B19C0BEEE00C2B042 /* Queue */ = {
 			isa = PBXGroup;
 			children = (
+				B70E7CA519C0BBA700C2B042 /* DataSaver.m */,
 				B70E7CBA19C0BBA700C2B042 /* QDataSet.m */,
 				B70E7CBB19C0BBA700C2B042 /* Queue.m */,
 				B70E7CBC19C0BBA700C2B042 /* QueueCell.m */,
 				B70E7CBD19C0BBA700C2B042 /* QueueUploaderView.m */,
-				B70E7CA519C0BBA700C2B042 /* DataSaver.m */,
 			);
 			name = Queue;
 			sourceTree = "<group>";

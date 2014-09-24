@@ -535,33 +535,40 @@
 
 - (void) launchFieldMatchingViewControllerFromBrowse:(bool)fromBrowse {
     // get the fields to field match
-    DataFieldManager *dfm = [[DataFieldManager alloc] initWithProjID:projID API:api andFields:nil];
+    // an explicit new instance of the DataManager is used to avoid interfering with the singleton instance
+    // maintained by other apps
+    DataManager *dm = [[DataManager alloc] init];
+    [dm setProjectID:projID];
+    
     UIAlertView *message = [self getDispatchDialogWithMessage:@"Loading fields..."];
     [message show];
     
-    dispatch_queue_t queue = dispatch_queue_create("step_1_setup_loading_project_fields", NULL);
+    dispatch_queue_t queue = dispatch_queue_create("loading_project_fields", NULL);
     dispatch_async(queue, ^{
-        [dfm getOrder];
+
+        [dm retrieveProjectFields];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             // set an observer for the field matched array caught from FieldMatching
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
             
             // launch the field matching dialog
-            FieldMatchingViewController *fmvc = [[FieldMatchingViewController alloc] initWithMatchedFields:[dfm getOrderList] andProjectFields:[dfm getRealOrder]];
+            FieldMatchingViewController *fmvc = [[FieldMatchingViewController alloc]
+                                                 initWithMatchedFields:[dm getRecognizedFields]
+                                                 andProjectFields:[dm getUserDefinedFields]];
             fmvc.title = @"Field Matching";
+
+            [message dismissWithClickedButtonIndex:0 animated:NO];
             
             if (fromBrowse) {
-                double delayInSeconds = 0.1;
+                double delayInSeconds = 0.5;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [self.navigationController pushViewController:fmvc animated:YES];
                 });
             } else
                 [self.navigationController pushViewController:fmvc animated:YES];
-            
-            if (fromBrowse) [NSThread sleepForTimeInterval:1.0];
-            [message dismissWithClickedButtonIndex:nil animated:YES];
-            
+
         });
     });
 }
@@ -582,7 +589,6 @@
         
         [self.mTableView reloadData];
         NSLog(@"Reloaded");
-        
     }
     // else user canceled
 }

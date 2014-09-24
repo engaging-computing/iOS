@@ -8,7 +8,7 @@
 //
 
 #import "DataSaver.h"
-#import "DataFieldManager.h"
+#import "DataManager.h"
 
 @implementation DataSaver
 
@@ -172,18 +172,16 @@
                 if (currentDS.fields == nil) {
                     continue;
                 } else {
-                    currentDS.data = [DataFieldManager reOrderData:currentDS.data
-                                                      forProjectID:currentDS.projID.intValue
-                                                    withFieldOrder:currentDS.fields
-                                                       andFieldIDs:nil];
+                    currentDS.data = [DataManager convertDataToColumnMajor:currentDS.data
+                                                              forProjectID:currentDS.projID.intValue
+                                                       andRecognizedFields:currentDS.fields];
                 }
             } else {
                 // see if the elements are NSMutableArrays or NSMutableObjects: if arrays, reorder data
                 if ([[currentDS.data objectAtIndex:0] isKindOfClass:[NSMutableArray class]]) {
-                    currentDS.data = [DataFieldManager reOrderData:currentDS.data
-                                                      forProjectID:currentDS.projID.intValue
-                                                    withFieldOrder:currentDS.fields
-                                                       andFieldIDs:nil];
+                    currentDS.data = [DataManager convertDataToColumnMajor:currentDS.data
+                                                              forProjectID:currentDS.projID.intValue
+                                                       andRecognizedFields:currentDS.fields];
                 }
             }
             

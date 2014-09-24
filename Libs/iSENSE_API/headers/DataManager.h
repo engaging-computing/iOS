@@ -23,9 +23,6 @@
     
     // a list of the fields as they appear on iSENSE
     NSMutableArray *projectFields;
-
-//    // a hashset of the fields that are enabled, available for the implementor to query to determine if a particular sensor should be active
-//    NSMutableSet *enabledFieldsHash;
 }
 
 + (DataManager *)getInstance;
@@ -39,11 +36,14 @@
 
 - (NSMutableArray *) getUserDefinedFields;
 - (NSMutableArray *) getRecognizedFields;
+- (NSMutableArray *) getProjectFieldIDs;
 
 - (DataContainer *) getDataContainerObject;
 - (void) setDataContainerObject:(DataContainer *)dataContainer;
 
 - (NSMutableDictionary *) writeDataFieldsToJSONObject;
-- (NSMutableArray *) convertDataToColumnFormat:(NSMutableArray *)data;
+
+// a staticly available row-to-column major formatting of data
++ (NSMutableArray *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recFields;
 
 @end
