@@ -11,8 +11,21 @@
 
 @implementation DataContainer
 
-@synthesize accel_x, accel_y, accel_z, accel_total, temperature_c, temperature_f,
-    temperature_k, time_millis, lux, angle_deg, angle_rad, latitude, longitude,
-    mag_x, mag_y, mag_z, mag_total, altitude, pressure, gyro_x, gyro_y, gyro_z;
+//@synthesize accel_x, accel_y, accel_z, accel_total, temperature_c, temperature_f,
+//    temperature_k, time_millis, lux, angle_deg, angle_rad, latitude, longitude,
+//    mag_x, mag_y, mag_z, mag_total, altitude, pressure, gyro_x, gyro_y, gyro_z;
+
+@synthesize data;
+
+-(id) init {
+    if (self = [super init]) {
+        data = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+}
+
+-(void) addData:(NSNumber *)dataValue forKey:(NSString *)dataKey {
+    [data setValue:dataValue forKey:dataKey];
+}
 
 @end

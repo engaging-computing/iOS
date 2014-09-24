@@ -11,34 +11,31 @@
 
 @interface DataContainer : NSObject {}
 
-// TODO - change these from a whole set of properties to an NSDictionary of data
-//        This data will be keyed by the strings defined in this class
-//        We will also declare a setData:(NSNumber *data) forKey:(NSString *)key
-//        kind of method to insert data into this dictionary
-//        Implementation should be done alongside the removal of old DFM.
+@property (retain) NSMutableDictionary* data;
+-(void) addData:(NSNumber *)dataValue forKey:(NSString *)dataKey;
 
-@property (retain) NSNumber *accel_x;
-@property (retain) NSNumber *accel_y;
-@property (retain) NSNumber *accel_z;
-@property (retain) NSNumber *accel_total;
-@property (retain) NSNumber *temperature_c;
-@property (retain) NSNumber *temperature_f;
-@property (retain) NSNumber *temperature_k;
-@property (retain) NSNumber *time_millis;
-@property (retain) NSNumber *lux;
-@property (retain) NSNumber *angle_deg; // TODO doesn't recognize field if it's called "angle-degrees"
-@property (retain) NSNumber *angle_rad; // TODO see above
-@property (retain) NSNumber *latitude;
-@property (retain) NSNumber *longitude;
-@property (retain) NSNumber *mag_x;
-@property (retain) NSNumber *mag_y;
-@property (retain) NSNumber *mag_z;
-@property (retain) NSNumber *mag_total;
-@property (retain) NSNumber *altitude;
-@property (retain) NSNumber *pressure;  // TODO doesn't recognize "pressure"
-@property (retain) NSNumber *gyro_x;
-@property (retain) NSNumber *gyro_y;
-@property (retain) NSNumber *gyro_z;
+//@property (retain) NSNumber *accel_x;
+//@property (retain) NSNumber *accel_y;
+//@property (retain) NSNumber *accel_z;
+//@property (retain) NSNumber *accel_total;
+//@property (retain) NSNumber *temperature_c;
+//@property (retain) NSNumber *temperature_f;
+//@property (retain) NSNumber *temperature_k;
+//@property (retain) NSNumber *time_millis;
+//@property (retain) NSNumber *lux;
+//@property (retain) NSNumber *angle_deg; // TODO doesn't recognize field if it's called "angle-degrees"
+//@property (retain) NSNumber *angle_rad; // TODO see above
+//@property (retain) NSNumber *latitude;
+//@property (retain) NSNumber *longitude;
+//@property (retain) NSNumber *mag_x;
+//@property (retain) NSNumber *mag_y;
+//@property (retain) NSNumber *mag_z;
+//@property (retain) NSNumber *mag_total;
+//@property (retain) NSNumber *altitude;
+//@property (retain) NSNumber *pressure;  // TODO doesn't recognize "pressure"
+//@property (retain) NSNumber *gyro_x;
+//@property (retain) NSNumber *gyro_y;
+//@property (retain) NSNumber *gyro_z;
 
 // Fields constants
 #define fACCEL_X        0
