@@ -29,8 +29,9 @@
     ISMSampleRateDelegate,
     ISMRecordingLengthDelegate>
 {
-    // API
+    // API and DataManager
     API *api;
+    DataManager *dm;
     
     // Credential Manager
     CredentialManager *credentialMgr;

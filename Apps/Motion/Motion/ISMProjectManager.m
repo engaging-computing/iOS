@@ -27,7 +27,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+
     dm = [DataManager getInstance];
+    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %d", [dm getProjectID]]];
 }
 
 - (void)viewDidLoad {

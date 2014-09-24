@@ -48,6 +48,23 @@
     // Initialize API
     api = [API getInstance];
     [api useDev:true];
+
+    // Friendly reminder the app is on dev - app should never be released in dev mode
+    if ([api isUsingDev]) {
+        UILabel *devLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
+        devLabel.font = [UIFont fontWithName:@"Helvetica" size:8];
+        devLabel.text = @"USING DEV";
+        devLabel.textColor = [UIColor redColor];
+        [self.view addSubview:devLabel];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+
+    dm = [DataManager getInstance];
+    [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %d", [dm getProjectID]] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

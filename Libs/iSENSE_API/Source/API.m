@@ -76,6 +76,13 @@ static NSString *email, *password;
 }
 
 /**
+ * Returns whether the API is currently set to dev mode
+ */
+- (BOOL)isUsingDev {
+    return ([baseUrl isEqualToString:DEV_URL]);
+}
+
+/**
  * Checks for connectivity using Apple's reachability class.
  *
  * @return YES if you have connectivity, NO if it does not
