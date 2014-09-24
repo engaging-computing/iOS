@@ -110,7 +110,7 @@
 
 - (void) reInstateCredentialManagerDialog {
     
-    if (credentialMgrAlert != nil && ![credentialMgrAlert isHidden]) {
+    if (credentialMgrAlert && ![credentialMgrAlert isHidden]) {
         [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:YES];
         [self createCredentialManagerDialog];
     }

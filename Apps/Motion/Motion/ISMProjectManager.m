@@ -130,7 +130,7 @@
     
     NSMutableArray *fieldMatch =  (NSMutableArray *)[obj object];
     
-    if (fieldMatch != nil) {
+    if (fieldMatch) {
         // user pressed okay button, so update the DM's fields with field-matched equivalents
         NSMutableArray *updatedProjectFields = [[NSMutableArray alloc] init];
         
