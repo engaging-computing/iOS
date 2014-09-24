@@ -41,20 +41,21 @@
 - (void) retrieveProjectFields {
     
     // have fields already been pulled?
-    if (projectFields != nil && projectFields.count > 0) {
+    if (projectFields && projectFields.count > 0) {
         NSLog(@"Fields already retrieved for this project.");
     }
     
     // if using a project ID of 0, this indicates a project will be selected later.
-    // otherwise, we will retrieve the fields from iSENSE
     if (projectID == 0) {
         [self setProjectFieldsToAllFields];
-    } else {
-        projectFields = [[api getProjectFieldsWithId:projectID] mutableCopy];
-        
-        if (projectFields == nil || projectFields.count == 0) {
-            NSLog(@"No fields available for project %d", projectID);
-        }
+        return;
+    }
+
+    // otherwise, we will retrieve the fields from iSENSE
+    projectFields = [[api getProjectFieldsWithId:projectID] mutableCopy];
+
+    if (projectFields && projectFields.count == 0) {
+        NSLog(@"No fields available for project %d", projectID);
     }
 }
 
