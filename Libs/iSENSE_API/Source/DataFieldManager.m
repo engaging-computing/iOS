@@ -15,7 +15,7 @@
 
 @synthesize order, realOrder, fieldIDs;
 
-- (id) initWithProjID:(int)projectID API:(API *)isenseAPI andFields:(Fields *)fields {
+- (id) initWithProjID:(int)projectID API:(API *)isenseAPI andFields:(DataContainer *)fields {
  
     self = [super init];
     if (!self) return nil;
@@ -242,11 +242,11 @@
     return realOrder;
 }
 
-- (Fields *) getFields {
+- (DataContainer *) getFields {
     return f;
 }
 
-- (void) setFields:(Fields *)fields {
+- (void) setFields:(DataContainer *)fields {
     f = fields;
 }
 

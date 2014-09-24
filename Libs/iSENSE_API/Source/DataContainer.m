@@ -7,9 +7,9 @@
 //  Engaging Computing Lab, Advisor: Fred Martin
 //
 
-#import "Fields.h"
+#import "DataContainer.h"
 
-@implementation Fields
+@implementation DataContainer
 
 @synthesize accel_x, accel_y, accel_z, accel_total, temperature_c, temperature_f,
     temperature_k, time_millis, lux, angle_deg, angle_rad, latitude, longitude,

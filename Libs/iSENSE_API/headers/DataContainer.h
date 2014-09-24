@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Fields : NSObject {}
+@interface DataContainer : NSObject {}
 
 @property (retain) NSNumber *accel_x;
 @property (retain) NSNumber *accel_y;

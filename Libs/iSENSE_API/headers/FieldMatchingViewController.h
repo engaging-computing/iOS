@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FieldMatchCell.h"
 #import "FieldEntry.h"
-#import "Fields.h"
+#import "DataContainer.h"
 
 #define kFIELD_MATCHED_ARRAY @"field_matched_array"
 

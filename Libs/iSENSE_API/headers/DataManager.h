@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RProjectField.h"
-#import "Fields.h"
+#import "DataContainer.h"
 #import "API.h"
 
 @interface DataManager : NSObject {
@@ -16,7 +16,7 @@
     API *api;
     
     // the data container object used to record a point of data
-    Fields *f;
+    DataContainer *dc;
     
     // the current project ID
     int projectID;
@@ -40,8 +40,8 @@
 - (NSMutableArray *) getUserDefinedFields;
 - (NSMutableArray *) getRecognizedFields;
 
-- (Fields *) getDataFieldsObject;
-- (void) setDataFieldsObject:(Fields *)fields;
+- (DataContainer *) getDataContainerObject;
+- (void) setDataContainerObject:(DataContainer *)dataContainer;
 
 - (NSMutableDictionary *) writeDataFieldsToJSONObject;
 - (NSMutableArray *) convertDataToColumnFormat:(NSMutableArray *)data;

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Fields.h"
+#import "DataContainer.h"
 
 #define TYPE_TIMESTAMP 1
 #define TYPE_NUMBER 2

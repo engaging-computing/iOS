@@ -25,7 +25,7 @@
 		B70E7C6E19C0BB8300C2B042 /* FieldGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2B19C0BB8300C2B042 /* FieldGrabber.h */; };
 		B70E7C6F19C0BB8300C2B042 /* FieldMatchCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2C19C0BB8300C2B042 /* FieldMatchCell.h */; };
 		B70E7C7019C0BB8300C2B042 /* FieldMatchingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2D19C0BB8300C2B042 /* FieldMatchingViewController.h */; };
-		B70E7C7119C0BB8300C2B042 /* Fields.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2E19C0BB8300C2B042 /* Fields.h */; };
+		B70E7C7119C0BB8300C2B042 /* DataContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2E19C0BB8300C2B042 /* DataContainer.h */; };
 		B70E7C7419C0BB8300C2B042 /* iSENSE_API-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C3119C0BB8300C2B042 /* iSENSE_API-Prefix.pch */; };
 		B70E7C7619C0BB8300C2B042 /* ISenseSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C3319C0BB8300C2B042 /* ISenseSearch.h */; };
 		B70E7C7719C0BB8300C2B042 /* ISKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C3419C0BB8300C2B042 /* ISKeys.h */; };
@@ -62,7 +62,7 @@
 		B70E7CE819C0BBA700C2B042 /* FieldGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CAF19C0BBA700C2B042 /* FieldGrabber.m */; };
 		B70E7CE919C0BBA700C2B042 /* FieldMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CB019C0BBA700C2B042 /* FieldMatchCell.m */; };
 		B70E7CEA19C0BBA700C2B042 /* FieldMatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CB119C0BBA700C2B042 /* FieldMatchingViewController.m */; };
-		B70E7CEB19C0BBA700C2B042 /* Fields.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CB219C0BBA700C2B042 /* Fields.m */; };
+		B70E7CEB19C0BBA700C2B042 /* DataContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CB219C0BBA700C2B042 /* DataContainer.m */; };
 		B70E7CEE19C0BBA700C2B042 /* ISenseSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CB519C0BBA700C2B042 /* ISenseSearch.m */; };
 		B70E7CF119C0BBA700C2B042 /* ProjectBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CB819C0BBA700C2B042 /* ProjectBrowserViewController.m */; };
 		B70E7CF219C0BBA700C2B042 /* ProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CB919C0BBA700C2B042 /* ProjectCell.m */; };
@@ -176,7 +176,7 @@
 		B70E7C2B19C0BB8300C2B042 /* FieldGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldGrabber.h; path = headers/FieldGrabber.h; sourceTree = "<group>"; };
 		B70E7C2C19C0BB8300C2B042 /* FieldMatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldMatchCell.h; path = headers/FieldMatchCell.h; sourceTree = "<group>"; };
 		B70E7C2D19C0BB8300C2B042 /* FieldMatchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldMatchingViewController.h; path = headers/FieldMatchingViewController.h; sourceTree = "<group>"; };
-		B70E7C2E19C0BB8300C2B042 /* Fields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fields.h; path = headers/Fields.h; sourceTree = "<group>"; };
+		B70E7C2E19C0BB8300C2B042 /* DataContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataContainer.h; path = headers/DataContainer.h; sourceTree = "<group>"; };
 		B70E7C3119C0BB8300C2B042 /* iSENSE_API-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iSENSE_API-Prefix.pch"; path = "headers/iSENSE_API-Prefix.pch"; sourceTree = "<group>"; };
 		B70E7C3319C0BB8300C2B042 /* ISenseSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISenseSearch.h; path = headers/ISenseSearch.h; sourceTree = "<group>"; };
 		B70E7C3419C0BB8300C2B042 /* ISKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISKeys.h; path = headers/ISKeys.h; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 		B70E7CAF19C0BBA700C2B042 /* FieldGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FieldGrabber.m; path = source/FieldGrabber.m; sourceTree = "<group>"; };
 		B70E7CB019C0BBA700C2B042 /* FieldMatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FieldMatchCell.m; path = source/FieldMatchCell.m; sourceTree = "<group>"; };
 		B70E7CB119C0BBA700C2B042 /* FieldMatchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FieldMatchingViewController.m; path = source/FieldMatchingViewController.m; sourceTree = "<group>"; };
-		B70E7CB219C0BBA700C2B042 /* Fields.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fields.m; path = source/Fields.m; sourceTree = "<group>"; };
+		B70E7CB219C0BBA700C2B042 /* DataContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataContainer.m; path = source/DataContainer.m; sourceTree = "<group>"; };
 		B70E7CB519C0BBA700C2B042 /* ISenseSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ISenseSearch.m; path = source/ISenseSearch.m; sourceTree = "<group>"; };
 		B70E7CB819C0BBA700C2B042 /* ProjectBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProjectBrowserViewController.m; path = source/ProjectBrowserViewController.m; sourceTree = "<group>"; };
 		B70E7CB919C0BBA700C2B042 /* ProjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProjectCell.m; path = source/ProjectCell.m; sourceTree = "<group>"; };
@@ -347,7 +347,7 @@
 			children = (
 				B70E7D4319C0BF2200C2B042 /* API */,
 				B70E7D4219C0BF1D00C2B042 /* Credentials */,
-				B70E7D4119C0BF1900C2B042 /* DFM */,
+				B70E7D4119C0BF1900C2B042 /* DataManager */,
 				B70E7D4019C0BF1200C2B042 /* DLAVAlertView */,
 				B70E7D3F19C0BF0C00C2B042 /* Fields */,
 				B70E7D3C19C0BEF800C2B042 /* ProjectBrowse */,
@@ -365,7 +365,7 @@
 				B70E7C3119C0BB8300C2B042 /* iSENSE_API-Prefix.pch */,
 				B70E7D2819C0BC7000C2B042 /* API */,
 				B70E7D2919C0BC9100C2B042 /* Credentials */,
-				B70E7D2B19C0BCA300C2B042 /* DFM */,
+				B70E7D2B19C0BCA300C2B042 /* DataManager */,
 				B70E7D2C19C0BCC700C2B042 /* DLAVAlertView */,
 				B70E7D2E19C0BCE900C2B042 /* Fields */,
 				B70E7D3019C0BD9F00C2B042 /* Global */,
@@ -414,13 +414,14 @@
 			name = Queue;
 			sourceTree = "<group>";
 		};
-		B70E7D2B19C0BCA300C2B042 /* DFM */ = {
+		B70E7D2B19C0BCA300C2B042 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				B70E7C2E19C0BB8300C2B042 /* DataContainer.h */,
 				B7D848C819CC8453006BE163 /* DataManager.h */,
 				B70E7C2019C0BB8300C2B042 /* DataFieldManager.h */,
 			);
-			name = DFM;
+			name = DataManager;
 			sourceTree = "<group>";
 		};
 		B70E7D2C19C0BCC700C2B042 /* DLAVAlertView */ = {
@@ -439,7 +440,6 @@
 		B70E7D2E19C0BCE900C2B042 /* Fields */ = {
 			isa = PBXGroup;
 			children = (
-				B70E7C2E19C0BB8300C2B042 /* Fields.h */,
 				B70E7C2A19C0BB8300C2B042 /* FieldEntry.h */,
 				B70E7C2B19C0BB8300C2B042 /* FieldGrabber.h */,
 				B70E7C2C19C0BB8300C2B042 /* FieldMatchCell.h */,
@@ -529,7 +529,6 @@
 				B70E7CAF19C0BBA700C2B042 /* FieldGrabber.m */,
 				B70E7CB019C0BBA700C2B042 /* FieldMatchCell.m */,
 				B70E7CB119C0BBA700C2B042 /* FieldMatchingViewController.m */,
-				B70E7CB219C0BBA700C2B042 /* Fields.m */,
 			);
 			name = Fields;
 			sourceTree = "<group>";
@@ -547,13 +546,14 @@
 			name = DLAVAlertView;
 			sourceTree = "<group>";
 		};
-		B70E7D4119C0BF1900C2B042 /* DFM */ = {
+		B70E7D4119C0BF1900C2B042 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				B70E7CB219C0BBA700C2B042 /* DataContainer.m */,
 				B7D848CA19CC8463006BE163 /* DataManager.m */,
 				B70E7CA419C0BBA700C2B042 /* DataFieldManager.m */,
 			);
-			name = DFM;
+			name = DataManager;
 			sourceTree = "<group>";
 		};
 		B70E7D4219C0BF1D00C2B042 /* Credentials */ = {
@@ -708,7 +708,7 @@
 				B70E7C6419C0BB8300C2B042 /* DataSaver.h in Headers */,
 				B70E7C6819C0BB8300C2B042 /* DLAVAlertViewTextControlTheme.h in Headers */,
 				B70E7C7A19C0BB8300C2B042 /* ProjectBrowserViewController.h in Headers */,
-				B70E7C7119C0BB8300C2B042 /* Fields.h in Headers */,
+				B70E7C7119C0BB8300C2B042 /* DataContainer.h in Headers */,
 				B70E7C6219C0BB8300C2B042 /* CredentialManager.h in Headers */,
 				B70E7C7019C0BB8300C2B042 /* FieldMatchingViewController.h in Headers */,
 			);
@@ -854,7 +854,7 @@
 				B70E7CF819C0BBA700C2B042 /* RDataSet.m in Sources */,
 				B70E7CDE19C0BBA700C2B042 /* DataSaver.m in Sources */,
 				B70E7CDD19C0BBA700C2B042 /* DataFieldManager.m in Sources */,
-				B70E7CEB19C0BBA700C2B042 /* Fields.m in Sources */,
+				B70E7CEB19C0BBA700C2B042 /* DataContainer.m in Sources */,
 				B70E7D0019C0BBA700C2B042 /* SensorCompatibility.m in Sources */,
 				B70E7CFE19C0BBA700C2B042 /* RProjectField.m in Sources */,
 				B70E7CE119C0BBA700C2B042 /* DLAVAlertViewController.m in Sources */,

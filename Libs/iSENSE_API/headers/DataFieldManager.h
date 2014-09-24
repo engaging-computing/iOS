@@ -8,7 +8,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Fields.h"
+#import "DataContainer.h"
 #import "API.h"
 
 @interface DataFieldManager : NSObject {
@@ -16,13 +16,13 @@
     
     int projID;
     API *api;
-    Fields *f;
+    DataContainer *f;
     
     NSMutableArray *projFields;
 }
 
 /* old methods */
-- (id) initWithProjID:(int)projectID API:(API *)isenseAPI andFields:(Fields *)fields;
+- (id) initWithProjID:(int)projectID API:(API *)isenseAPI andFields:(DataContainer *)fields;
 - (void) getOrder;
 - (void) getProjectFieldOrder;
 - (int) getProjID;
@@ -30,8 +30,8 @@
 - (NSMutableArray *) getProjectFields;
 - (NSMutableArray *) getOrderList;
 - (NSMutableArray *) getRealOrder;
-- (Fields *) getFields;
-- (void) setFields:(Fields *)fields;
+- (DataContainer *) getFields;
+- (void) setFields:(DataContainer *)dataContainer;
 - (void) enableAllFields;
 - (void) setEnabledFields:(NSMutableArray *)acceptedFields;
 - (void) setOrder:(NSMutableArray *)newOrderFields;
