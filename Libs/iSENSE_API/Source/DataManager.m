@@ -168,140 +168,51 @@
 // Change the data array from row-major to column-major
 // It should take as an input a JSONArray of the JSONObjects created by the
 // writeDataFieldsToJSONObject method
-+ (NSMutableArray *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recFields {
-    
-    // TODO refactor once we confirm the rest of the DataManager works with the application
-    // for now, we will use old DFM's version of this implementation
++ (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recFields {
 
-    NSMutableArray *row     = [[NSMutableArray alloc] init];
-    NSMutableArray *outData = [[NSMutableArray alloc] init];
-    NSMutableArray *ids     = [[NSMutableArray alloc] init];
-    NSMutableDictionary *outRow;
-    int len = (int)data.count;
+    NSMutableDictionary *outData = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *row     = [[NSMutableDictionary alloc] init];
+    NSMutableArray *ids          = [[NSMutableArray alloc] init];
+    NSMutableArray *outRow;
 
-    // if the recognized fields are null, set up the recognized fields and fieldIDs.  otherwise, just get fieldIDs
-    if (recFields == nil || recFields.count == 0) {
-
-        DataManager *dm = [[DataManager alloc] init];
-        [dm setProjectID:projID];
-        [dm retrieveProjectFields];
-        recFields = [dm getRecognizedFields];
-        ids = [dm getProjectFieldIDs];
-
-    } else if (ids == nil || ids.count == 0) {
+    // If the recognized fields are null, set up the recognized fields and fieldIDs.
+    // Otherwise, if recognized fields are not null but the field IDs are, pull the project's field IDs, retaining
+    // the user's passed in field-matched recognized fields array for that project.
+    if (!recFields || recFields.count == 0 || !ids || ids.count == 0) {
 
         DataManager *dm = [[DataManager alloc] init];
         [dm setProjectID:projID];
         [dm retrieveProjectFields];
         ids = [dm getProjectFieldIDs];
+
+        if (!recFields || recFields.count == 0) {
+            recFields = [dm getRecognizedFields];
+        }
     }
 
-    // reorder the data
-    for (int i = 0; i < len; i++) {
+    // ensure recFields and ids arrays are of equal length
+    if (recFields.count != ids.count) {
+        NSLog(@"Unequal arrays of field IDs and recognized fields.  Cannot change data to column major");
+        return nil;
+    }
 
-        row = [data objectAtIndex:i];
-        outRow = [[NSMutableDictionary alloc] init];
+    // reorder the data from row major to column major format
+    for (int i = 0; i < recFields.count; i++) {
 
-        for (int j = 0; j < recFields.count; j++) {
+        NSNumber *fieldID = [ids objectAtIndex:i];
+        outRow = [[NSMutableArray alloc] init];
 
-            NSString *s = [recFields objectAtIndex:j];
-            NSNumber *idField = [ids objectAtIndex:j];
+        for (int j = 0; j < (int)data.count; j++) {
 
-            if ([s isEqualToString:sACCEL_X]) {
-                [outRow setObject:[row objectAtIndex:fACCEL_X] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sACCEL_Y]) {
-                [outRow setObject:[row objectAtIndex:fACCEL_Y] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sACCEL_Z]) {
-                [outRow setObject:[row objectAtIndex:fACCEL_Z] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sACCEL_TOTAL]) {
-                [outRow setObject:[row objectAtIndex:fACCEL_TOTAL] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sTEMPERATURE_C]) {
-                [outRow setObject:[row objectAtIndex:fTEMPERATURE_C] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sTEMPERATURE_F]) {
-                [outRow setObject:[row objectAtIndex:fTEMPERATURE_F] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sTEMPERATURE_K]) {
-                [outRow setObject:[row objectAtIndex:fTEMPERATURE_K] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sTIME_MILLIS]) {
-                [outRow setObject:[NSString stringWithFormat:@"u %@",[row objectAtIndex:fTIME_MILLIS]] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sLUX]) {
-                [outRow setObject:[row objectAtIndex:fLUX] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sANGLE_DEG]) {
-                [outRow setObject:[row objectAtIndex:fANGLE_DEG] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sANGLE_RAD]) {
-                [outRow setObject:[row objectAtIndex:fANGLE_RAD] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sLATITUDE]) {
-                [outRow setObject:[row objectAtIndex:fLATITUDE] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sLONGITUDE]) {
-                [outRow setObject:[row objectAtIndex:fLONGITUDE] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sMAG_X]) {
-                [outRow setObject:[row objectAtIndex:fMAG_X] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sMAG_Y]) {
-                [outRow setObject:[row objectAtIndex:fMAG_Y] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sMAG_Z]) {
-                [outRow setObject:[row objectAtIndex:fMAG_Z] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sMAG_TOTAL]) {
-                [outRow setObject:[row objectAtIndex:fMAG_TOTAL] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sALTITUDE]) {
-                [outRow setObject:[row objectAtIndex:fALTITUDE] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sPRESSURE]) {
-                [outRow setObject:[row objectAtIndex:fPRESSURE] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sGYRO_X]) {
-                [outRow setObject:[row objectAtIndex:fGYRO_X] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sGYRO_Y]) {
-                [outRow setObject:[row objectAtIndex:fGYRO_Y] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
-            if ([s isEqualToString:sGYRO_Z]) {
-                [outRow setObject:[row objectAtIndex:fGYRO_Z] forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-                continue;
-            }
+            row = [data objectAtIndex:j];
 
-            [outRow setObject:@"" forKey:[NSString stringWithFormat:@"%ld", idField.longValue]];
-
+            if ([row objectForKey:fieldID])
+                [outRow addObject:[NSString stringWithFormat:@"%@", [row objectForKey:fieldID]]];
+            else
+                [outRow addObject:@""];
         }
 
-        [outData addObject:outRow];
-
+        [outData setObject:outRow forKey:[NSString stringWithFormat:@"%@", fieldID]];
     }
 
     return outData;

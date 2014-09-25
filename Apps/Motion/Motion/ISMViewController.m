@@ -86,19 +86,37 @@
 #pragma mark - Upload
 
 - (IBAction)uploadBtnOnClick:(id)sender {
-      // TODO tests - keep these around for now, delete when the library functions are done being tested
-//    DataManager *dm = [[DataManager alloc] init];
-//    RProjectField *field = [[RProjectField alloc] initWithName:@"accel x" type:[NSNumber numberWithInt:TYPE_NUMBER] andUnit:@"m/s^2"];
-//    
-//    // Test section 2
-//    DataManager *dm = [[DataManager alloc] init];
-//    [dm setProjectID:715];
-//    [dm retrieveProjectFields];
-//    NSMutableArray *fields = [dm getUserDefinedFields];
-//    
-//    int x = 0;
-//    NSMutableArray *recFields = [dm getRecognizedFields];
-    
+
+    // TODO test - remove once you are comfortable with uploading data with this app
+
+    int p = 828;
+
+    [dm setProjectID:p];
+    [dm retrieveProjectFields];
+
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+
+    DataContainer *dc = [[DataContainer alloc] init];
+    [dc addData:[NSNumber numberWithInt:100] forKey:sACCEL_X];
+    [dc addData:[NSNumber numberWithInt:200] forKey:sACCEL_Y];
+    [dc addData:[NSNumber numberWithInt:300] forKey:sACCEL_Z];
+    [dm setDataContainerObject:dc];
+    [data addObject:[dm writeDataFieldsToJSONObject]];
+
+    dc = [[DataContainer alloc] init];
+    [dc addData:[NSNumber numberWithInt:400] forKey:sACCEL_X];
+    [dc addData:[NSNumber numberWithInt:500] forKey:sACCEL_Y];
+    [dc addData:[NSNumber numberWithInt:600] forKey:sACCEL_Z];
+    [dm setDataContainerObject:dc];
+    [data addObject:[dm writeDataFieldsToJSONObject]];
+
+    [api createSessionWithEmail:@"t@t.t" andPassword:@"t"];
+
+    NSMutableDictionary *colData = [DataManager convertDataToColumnMajor:data forProjectID:p andRecognizedFields:nil];
+    [api uploadDataToProject:p withData:colData andName:@"Data set"];
+
+    // END test
+
     QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION];
     queueUploader.title = @"Upload";
     [self.navigationController pushViewController:queueUploader animated:YES];

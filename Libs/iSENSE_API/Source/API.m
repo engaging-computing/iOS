@@ -213,12 +213,12 @@ static NSString *email, *password;
     
     for (int i = 0; i < innerFields.count; i++) {
         NSDictionary *innermostField = [innerFields objectAtIndex:i];
-        RProjectField *newProjField = [[RProjectField alloc] init];
+        RProjectField *newProjField = [[RProjectField alloc]
+                                       initWithName:[innermostField objectForKey:@"name"]
+                                       type:[innermostField objectForKey:@"type"]
+                                       andUnit:[innermostField objectForKey:@"unit"]];
         
         newProjField.field_id = [innermostField objectForKey:@"id"];
-        newProjField.name = [innermostField objectForKey:@"name"];
-        newProjField.type = [innermostField objectForKey:@"type"];
-        newProjField.unit = [innermostField objectForKey:@"unit"];
 
         [fields addObject:newProjField];
     }
