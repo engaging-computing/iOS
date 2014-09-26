@@ -14,10 +14,7 @@
 @interface DataManager : NSObject {
     
     API *api;
-    
-    // the data container object used to record a point of data
-    DataContainer *dc;
-    
+
     // the current project ID
     int projectID;
     
@@ -38,10 +35,7 @@
 - (NSMutableArray *) getRecognizedFields;
 - (NSMutableArray *) getProjectFieldIDs;
 
-- (DataContainer *) getDataContainerObject;
-- (void) setDataContainerObject:(DataContainer *)dataContainer;
-
-- (NSMutableDictionary *) writeDataFieldsToJSONObject;
+- (NSMutableDictionary *) writeDataToJSONObject:(DataContainer *)dc;
 
 // a staticly available row-to-column major formatting of data
 + (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recFields;

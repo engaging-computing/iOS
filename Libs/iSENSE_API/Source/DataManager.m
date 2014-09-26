@@ -29,9 +29,7 @@
         
         // initialize default vars
         api = [API getInstance];
-        
-        dc = [[DataContainer alloc] init];
-        
+
         projectID = 0;
         projectFields = nil;
     }
@@ -130,20 +128,10 @@
     return [projectFields valueForKey:@"field_id"];
 }
 
-// Get the current data fields object
-- (DataContainer *) getDataContainerObject {
-    return dc;
-}
-
-// Set the current data fields object that data will be pulled from
-- (void) setDataContainerObject:(DataContainer *)dataContainer {
-    dc = dataContainer;
-}
-
 // Write the data in the data fields object to a JSON object for this current project
 // The format will resemble {"field_id_0":"data_0", "field_id_1":"data_1", ... }
 // The implementor should keep a JSON array of these returned JSON objects for each point of data
-- (NSMutableDictionary *) writeDataFieldsToJSONObject {
+- (NSMutableDictionary *) writeDataToJSONObject:(DataContainer *)dc {
 
     NSMutableDictionary *dataJSON = [[NSMutableDictionary alloc] init];
     

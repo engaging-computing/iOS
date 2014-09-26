@@ -100,15 +100,13 @@
     [dc addData:[NSNumber numberWithInt:100] forKey:sACCEL_X];
     [dc addData:[NSNumber numberWithInt:200] forKey:sACCEL_Y];
     [dc addData:[NSNumber numberWithInt:300] forKey:sACCEL_Z];
-    [dm setDataContainerObject:dc];
-    [data addObject:[dm writeDataFieldsToJSONObject]];
+    [data addObject:[dm writeDataToJSONObject:dc]];
 
     dc = [[DataContainer alloc] init];
     [dc addData:[NSNumber numberWithInt:400] forKey:sACCEL_X];
     [dc addData:[NSNumber numberWithInt:500] forKey:sACCEL_Y];
     [dc addData:[NSNumber numberWithInt:600] forKey:sACCEL_Z];
-    [dm setDataContainerObject:dc];
-    [data addObject:[dm writeDataFieldsToJSONObject]];
+    [data addObject:[dm writeDataToJSONObject:dc]];
 
     [api createSessionWithEmail:@"t@t.t" andPassword:@"t"];
 
