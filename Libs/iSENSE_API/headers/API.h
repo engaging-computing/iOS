@@ -43,8 +43,8 @@ typedef enum {
 /* Checks for Connectivity */
 +(BOOL)hasConnectivity;
 
-/* Change the baseUrl Value */
 -(void)useDev:(BOOL)useDev;
+- (BOOL)isUsingDev;
 -(void)setBaseUrl:(NSURL *)newUrl;
 
 -(RPerson *)createSessionWithEmail:(NSString *)p_email andPassword:(NSString *)p_password;

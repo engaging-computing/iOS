@@ -15,6 +15,7 @@
 #import "ISMSampleRate.h"
 #import "ISMRecordingLength.h"
 #import "Waffle.h"
+#import "DataManager.h"
 
 // Login Constants
 #define kLOGIN_DIALOG_TAG 500
@@ -28,13 +29,17 @@
     ISMSampleRateDelegate,
     ISMRecordingLengthDelegate>
 {
-    
-    // API
+    // API and DataManager
     API *api;
+    DataManager *dm;
     
     // Credential Manager
     CredentialManager *credentialMgr;
     DLAVAlertView *credentialMgrAlert;
+    
+    // Sample rate and recording length
+    double sampleRate;
+    int recordingLength;
     
 }
 
@@ -58,6 +63,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
 - (IBAction)uploadBtnOnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIButton *projectBtn;
 
 @end

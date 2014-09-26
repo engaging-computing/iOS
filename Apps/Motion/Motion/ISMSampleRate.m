@@ -39,57 +39,57 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) sampleRateSelected:(double)sampleRate {
-    [self.delegate didChooseSampleRate:sampleRate withDelegate:self];
+- (void) sampleRateSelected:(double)sampleRate withName:(NSString *)sampleRateAsString {
+    [self.delegate didChooseSampleRate:sampleRate withName:sampleRateAsString andDelegate:self];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)twentyMSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_TWENTY_MS];
+    [self sampleRateSelected:kBTN_TWENTY_MS withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)fiftyMSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_FIFTY_MS];
+    [self sampleRateSelected:kBTN_FIFTY_MS withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)oneHundredMSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_ONE_HUNDRED_MS];
+    [self sampleRateSelected:kBTN_ONE_HUNDRED_MS withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)twoHundredFiftyMSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_TWO_HUNDRED_FIFTY_MS];
+    [self sampleRateSelected:kBTN_TWO_HUNDRED_FIFTY_MS withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)fiveHundredMSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_FIVE_HUNDRED_MS];
+    [self sampleRateSelected:kBTN_FIVE_HUNDRED_MS withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)oneSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_ONE_S];
+    [self sampleRateSelected:kBTN_ONE_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)twoSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_TWO_S];
+    [self sampleRateSelected:kBTN_TWO_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)threeSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_THREE_S];
+    [self sampleRateSelected:kBTN_THREE_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)fiveSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_FIVE_S];
+    [self sampleRateSelected:kBTN_FIVE_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)tenSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_TEN_S];
+    [self sampleRateSelected:kBTN_TEN_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)fifteenSBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_FIFTEEN_S];
+    [self sampleRateSelected:kBTN_FIFTEEN_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)thirtySBtnOnClick:(id)sender {
-    [self sampleRateSelected:kBTN_THIRTY_S];
+    [self sampleRateSelected:kBTN_THIRTY_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 @end

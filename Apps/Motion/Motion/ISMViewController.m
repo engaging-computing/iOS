@@ -26,6 +26,9 @@
 // UI
 @synthesize credentialBarBtn, xLbl, yLbl, zLbl, sampleRateBtn, recordingLengthBtn, startStopBtn, uploadBtn, projectBtn;
 
+
+#pragma mark - View and overriden methods
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -45,11 +48,85 @@
     // Initialize API
     api = [API getInstance];
     [api useDev:true];
+
+    // Friendly reminder the app is on dev - app should never be released in dev mode
+    if ([api isUsingDev]) {
+        UILabel *devLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
+        devLabel.font = [UIFont fontWithName:@"Helvetica" size:8];
+        devLabel.text = @"USING DEV";
+        devLabel.textColor = [UIColor redColor];
+        [self.view addSubview:devLabel];
+    }
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+
+    dm = [DataManager getInstance];
+    [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %d", [dm getProjectID]] forState:UIControlStateNormal];
+}
+
+- (void)didReceiveMemoryWarning {
+    
+    [super didReceiveMemoryWarning];
+}
+
+#pragma end - View and overriden methods
+
+#pragma mark - Recording data
+
+- (IBAction)startStopOnClick:(id)sender {
+    
+    // TODO implement
+}
+
+#pragma end - Recording data
+
+#pragma mark - Upload
+
+- (IBAction)uploadBtnOnClick:(id)sender {
+
+    // TODO test - remove once you are comfortable with uploading data with this app
+
+    int p = 828;
+
+    [dm setProjectID:p];
+    [dm retrieveProjectFields];
+
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+
+    DataContainer *dc = [[DataContainer alloc] init];
+    [dc addData:[NSNumber numberWithInt:100] forKey:sACCEL_X];
+    [dc addData:[NSNumber numberWithInt:200] forKey:sACCEL_Y];
+    [dc addData:[NSNumber numberWithInt:300] forKey:sACCEL_Z];
+    [data addObject:[dm writeDataToJSONObject:dc]];
+
+    dc = [[DataContainer alloc] init];
+    [dc addData:[NSNumber numberWithInt:400] forKey:sACCEL_X];
+    [dc addData:[NSNumber numberWithInt:500] forKey:sACCEL_Y];
+    [dc addData:[NSNumber numberWithInt:600] forKey:sACCEL_Z];
+    [data addObject:[dm writeDataToJSONObject:dc]];
+
+    [api createSessionWithEmail:@"t@t.t" andPassword:@"t"];
+
+    NSMutableDictionary *colData = [DataManager convertDataToColumnMajor:data forProjectID:p andRecognizedFields:nil];
+    [api uploadDataToProject:p withData:colData andName:@"Data set"];
+
+    // END test
+
+    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION];
+    queueUploader.title = @"Upload";
+    [self.navigationController pushViewController:queueUploader animated:YES];
+}
+
+#pragma end - Upload
+
+#pragma mark - Credentials
 
 - (void) reInstateCredentialManagerDialog {
     
-    if (credentialMgrAlert != nil && ![credentialMgrAlert isHidden]) {
+    if (credentialMgrAlert && ![credentialMgrAlert isHidden]) {
         [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:YES];
         [self createCredentialManagerDialog];
     }
@@ -64,23 +141,6 @@
     [credentialMgrAlert setContentView:credentialMgr.view];
     [credentialMgrAlert setDismissesOnBackdropTap:YES];
     [credentialMgrAlert show];
-}
-
-- (void)didReceiveMemoryWarning {
-    
-    [super didReceiveMemoryWarning];
-}
-
-- (IBAction)startStopOnClick:(id)sender {
-    
-    // TODO implement
-}
-
-- (IBAction)uploadBtnOnClick:(id)sender {
-    
-    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION];
-    queueUploader.title = @"Upload";
-    [self.navigationController pushViewController:queueUploader animated:YES];
 }
 
 - (IBAction)credentialBarBtnOnClick:(id)sender {
@@ -127,6 +187,7 @@
     }
 }
 
+// Login to iSENSE
 - (void) login:(NSString *)email withPassword:(NSString *)pass {
     
     UIAlertView *spinnerDialog = [self getDispatchDialogWithMessage:@"Logging in..."];
@@ -175,22 +236,9 @@
     return message;
 }
 
-// Called when returning from the sample rate selection screen
-- (void) didChooseSampleRate:(double)sampleRateInSeconds withDelegate:(ISMSampleRate *)delegateObject {
-    
-    // TODO implement sample rate counter variable and change text displayed on button
-    
-    NSLog(@"Sample rate: %lf", sampleRateInSeconds);
-    [sampleRateBtn setTitle:[NSString stringWithFormat:@"%lf", sampleRateInSeconds] forState:UIControlStateNormal];
-}
+#pragma end - Credentials
 
-- (void) didChooseRecordingLength:(int)recordingLengthInSeconds withDelegate:(ISMRecordingLength *)delegateObject {
-    
-    // TODO implement recording length counter variable and change text displayed on button
-    
-    NSLog(@"Recording length: %d", recordingLengthInSeconds);
-    [recordingLengthBtn setTitle:[NSString stringWithFormat:@"%d", recordingLengthInSeconds] forState:UIControlStateNormal];
-}
+#pragma mark - Sample rate and recording length
 
 // Called before performing a transition segue in the storyboard
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -204,5 +252,25 @@
     }
     
 }
+
+// Called when returning from the sample rate selection screen
+- (void) didChooseSampleRate:(double)sampleRateInSeconds withName:(NSString *)sampleRateAsString andDelegate:(ISMSampleRate *)delegateObject {
+    
+    NSLog(@"Sample rate: %lf", sampleRateInSeconds);
+    
+    sampleRate = sampleRateInSeconds;
+    [sampleRateBtn setTitle:sampleRateAsString forState:UIControlStateNormal];
+}
+
+// Called when returning from the recording length selection screen
+- (void) didChooseRecordingLength:(int)recordingLengthInSeconds withName:(NSString *)recordingLengthAsString andDelegate:(ISMRecordingLength *)delegateObject {
+    
+    NSLog(@"Recording length: %d", recordingLengthInSeconds);
+
+    recordingLength = recordingLengthInSeconds;
+    [recordingLengthBtn setTitle:recordingLengthAsString forState:UIControlStateNormal];
+}
+
+#pragma end - Sample rate and recording length
 
 @end

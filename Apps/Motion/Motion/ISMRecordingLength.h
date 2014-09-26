@@ -26,7 +26,7 @@
 @protocol ISMRecordingLengthDelegate <NSObject>
 
 @required
-- (void) didChooseRecordingLength:(int)recordingLengthInSeconds withDelegate:(ISMRecordingLength *)delegateObject;
+- (void) didChooseRecordingLength:(int)recordingLengthInSeconds withName:(NSString *)recordingLengthAsString andDelegate:(ISMRecordingLength *)delegateObject;
 
 @end
 

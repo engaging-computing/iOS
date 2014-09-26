@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FieldMatchCell.h"
 #import "FieldEntry.h"
-#import "Fields.h"
+#import "DataContainer.h"
 
 #define kFIELD_MATCHED_ARRAY @"field_matched_array"
 
@@ -33,7 +33,6 @@
 
 - (id) initWithMatchedFields:(NSMutableArray *)mf andProjectFields:(NSMutableArray *)pf;
 
-- (IBAction) backOnClick:(id)sender;
 - (IBAction) okOnClick:(id)sender;
 
 @property (nonatomic, assign) IBOutlet UITableView *mTableView;
