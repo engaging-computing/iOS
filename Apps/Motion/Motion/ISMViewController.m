@@ -66,6 +66,13 @@
     // Initialize the location manager (TODO - may be best to eventually move this so it's only called when needed)
     [self initLocations];
 
+    // Initialize the motion manager
+    motionManager = [[CMMotionManager alloc] init];
+
+    // Default sample rate and recording length
+    sampleRate = kDEFAULT_SAMPLE_RATE;
+    recordingLength = kDEFAULT_RECORDING_LENGTH;
+
     // Ensure isRecording is set to false on loading the view
     isRecording = false;
 }
@@ -92,11 +99,19 @@
     if (gesture.state == UIGestureRecognizerStateBegan) {
 
         if (isRecording) {
-            // TODO implement stop recording
 
+            // stop recording data
+            isRecording = false;
+
+            [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
+            [self stopRecordingData];
         } else {
-            // TODO implement start recording
 
+            // start recording data
+            isRecording = true;
+
+            [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
+            [self beginRecordingData];
         }
 
         // Emit a beep
@@ -107,6 +122,68 @@
         AudioServicesPlaySystemSound(soundID);
     }
 
+}
+
+- (void)beginRecordingData {
+
+    // TODO - may it be better to set the update interval slightly faster than the sampleRate?
+
+    if (motionManager.accelerometerAvailable) {
+        motionManager.accelerometerUpdateInterval = sampleRate;
+        [motionManager startAccelerometerUpdates];
+    }
+    if (motionManager.magnetometerActive) {
+        motionManager.magnetometerUpdateInterval = sampleRate;
+        [motionManager startMagnetometerUpdates];
+    }
+    if (motionManager.gyroAvailable) {
+        motionManager.gyroUpdateInterval = sampleRate;
+        [motionManager startGyroUpdates];
+    }
+
+    dataRecordingTimer = [NSTimer scheduledTimerWithTimeInterval:sampleRate
+                                                          target:self
+                                                        selector:@selector(recordDataPoint)
+                                                        userInfo:nil
+                                                         repeats:YES];
+}
+
+- (void)recordDataPoint {
+
+    if (!isRecording && dataRecordingTimer) {
+
+        [dataRecordingTimer invalidate];
+        dataRecordingTimer = nil;
+    } else {
+
+        dispatch_queue_t queue = dispatch_queue_create("motion_recording_data", NULL);
+        dispatch_async(queue, ^{
+
+            // TODO - get data and save it
+            NSLog(@"DATAAAAAAAAAAAAAAAAA!!!!!1!!");
+        });
+    }
+
+}
+
+- (void)stopRecordingData {
+
+    if (dataRecordingTimer)
+        [dataRecordingTimer invalidate];
+
+    dataRecordingTimer = nil;
+
+    if (motionManager.accelerometerActive)
+        [motionManager stopAccelerometerUpdates];
+
+    if (motionManager.magnetometerActive)
+        [motionManager stopMagnetometerUpdates];
+
+    if (motionManager.gyroActive)
+        [motionManager stopGyroUpdates];
+
+    // TODO - any further stop-recording code needed (e.g. saving a dataset)
+    NSLog(@"Done recording data");
 }
 
 #pragma end - Recording data
@@ -146,6 +223,12 @@
 }
 
 #pragma end - Location
+
+#pragma mark - Motion
+
+
+
+#pragma end - Motion
 
 #pragma mark - Upload
 

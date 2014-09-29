@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreMotion/CoreMotion.h>
 
 #import "API.h"
 #import "QueueUploaderView.h"
@@ -17,11 +18,6 @@
 #import "ISMRecordingLength.h"
 #import "Waffle.h"
 #import "DataManager.h"
-
-// Login Constants
-#define kLOGIN_DIALOG_TAG 500
-#define kLOGIN_USER_TEXT 501
-#define kLOGIN_PASS_TEXT 502
 
 @interface ISMViewController : UIViewController
     <UIAlertViewDelegate,
@@ -43,9 +39,11 @@
     double sampleRate;
     int recordingLength;
 
-    // Recording state and sensor objects
+    // Recording state, timer, and sensor objects
     bool isRecording;
+    NSTimer *dataRecordingTimer;
     CLLocationManager *locationManager;
+    CMMotionManager *motionManager;
 }
 
 // Queue Saver Properties
