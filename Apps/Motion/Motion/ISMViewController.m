@@ -62,6 +62,12 @@
         devLabel.textColor = [UIColor redColor];
         [self.view addSubview:devLabel];
     }
+
+    // Initialize the location manager (TODO - may be best to eventually move this so it's only called when needed)
+    [self initLocations];
+
+    // Ensure isRecording is set to false on loading the view
+    isRecording = false;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -85,8 +91,13 @@
 
     if (gesture.state == UIGestureRecognizerStateBegan) {
 
-        // TODO implement recording/non-recording state
+        if (isRecording) {
+            // TODO implement stop recording
 
+        } else {
+            // TODO implement start recording
+
+        }
 
         // Emit a beep
         NSString *beepPath = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/button-37.wav"];
@@ -100,35 +111,71 @@
 
 #pragma end - Recording data
 
+#pragma mark - Location
+
+// Initializes the location manager to begin receiving location updates
+- (void) initLocations {
+    if (!locationManager) {
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+
+        locationManager.distanceFilter = kCLDistanceFilterNone;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+
+        [locationManager startUpdatingLocation];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+
+    NSLog(@"didFailWithError: %@", error);
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+
+    double newLatitude = newLocation.coordinate.latitude, newLongitude = newLocation.coordinate.longitude;
+    double oldLatitude = oldLocation.coordinate.latitude, oldLongitude = oldLocation.coordinate.longitude;
+
+    // only update GPS coordinates when a new point is received
+    if (newLatitude != oldLatitude && newLongitude != oldLongitude) {
+
+        NSLog(@"didUpdateToLocation: %@", newLocation);
+    }
+
+}
+
+#pragma end - Location
+
 #pragma mark - Upload
 
 - (IBAction)uploadBtnOnClick:(id)sender {
 
     // TODO test - remove once you are comfortable with uploading data with this app
 
-    int p = 828;
-
-    [dm setProjectID:p];
-    [dm retrieveProjectFields];
-
-    NSMutableArray *data = [[NSMutableArray alloc] init];
-
-    DataContainer *dc = [[DataContainer alloc] init];
-    [dc addData:[NSNumber numberWithInt:100] forKey:sACCEL_X];
-    [dc addData:[NSNumber numberWithInt:200] forKey:sACCEL_Y];
-    [dc addData:[NSNumber numberWithInt:300] forKey:sACCEL_Z];
-    [data addObject:[dm writeDataToJSONObject:dc]];
-
-    dc = [[DataContainer alloc] init];
-    [dc addData:[NSNumber numberWithInt:400] forKey:sACCEL_X];
-    [dc addData:[NSNumber numberWithInt:500] forKey:sACCEL_Y];
-    [dc addData:[NSNumber numberWithInt:600] forKey:sACCEL_Z];
-    [data addObject:[dm writeDataToJSONObject:dc]];
-
-    [api createSessionWithEmail:@"t@t.t" andPassword:@"t"];
-
-    NSMutableDictionary *colData = [DataManager convertDataToColumnMajor:data forProjectID:p andRecognizedFields:nil];
-    [api uploadDataToProject:p withData:colData andName:@"Data set"];
+//    int p = 828;
+//
+//    [dm setProjectID:p];
+//    [dm retrieveProjectFields];
+//
+//    NSMutableArray *data = [[NSMutableArray alloc] init];
+//
+//    DataContainer *dc = [[DataContainer alloc] init];
+//    [dc addData:[NSNumber numberWithInt:100] forKey:sACCEL_X];
+//    [dc addData:[NSNumber numberWithInt:200] forKey:sACCEL_Y];
+//    [dc addData:[NSNumber numberWithInt:300] forKey:sACCEL_Z];
+//    [data addObject:[dm writeDataToJSONObject:dc]];
+//
+//    dc = [[DataContainer alloc] init];
+//    [dc addData:[NSNumber numberWithInt:400] forKey:sACCEL_X];
+//    [dc addData:[NSNumber numberWithInt:500] forKey:sACCEL_Y];
+//    [dc addData:[NSNumber numberWithInt:600] forKey:sACCEL_Z];
+//    [data addObject:[dm writeDataToJSONObject:dc]];
+//
+//    [api createSessionWithEmail:@"t@t.t" andPassword:@"t"];
+//
+//    NSMutableDictionary *colData = [DataManager convertDataToColumnMajor:data forProjectID:p andRecognizedFields:nil];
+//    [api uploadDataToProject:p withData:colData andName:@"Data set"];
 
     // END test
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "API.h"
 #import "QueueUploaderView.h"
@@ -27,7 +28,8 @@
     UITextFieldDelegate,
     CredentialManagerDelegate,
     ISMSampleRateDelegate,
-    ISMRecordingLengthDelegate>
+    ISMRecordingLengthDelegate,
+    CLLocationManagerDelegate>
 {
     // API and DataManager
     API *api;
@@ -40,7 +42,10 @@
     // Sample rate and recording length
     double sampleRate;
     int recordingLength;
-    
+
+    // Recording state and sensor objects
+    bool isRecording;
+    CLLocationManager *locationManager;
 }
 
 // Queue Saver Properties

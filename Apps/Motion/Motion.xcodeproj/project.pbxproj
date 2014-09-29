@@ -29,6 +29,7 @@
 		B76C43C519C8722800B0A19B /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF219BF34F800BB8994 /* Main_iPhone.storyboard */; };
 		B76C43C619C8723100B0A19B /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF519BF34F800BB8994 /* Main_iPad.storyboard */; };
 		B76C43C719C8764200B0A19B /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7186A3A19BF369400F18847 /* iSENSE_API_Bundle.bundle */; };
+		B7C9BBFA19D9B0A90001A833 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C9BBF919D9B0A90001A833 /* CoreLocation.framework */; };
 		B7D98CE119BF34F800BB8994 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE019BF34F800BB8994 /* Foundation.framework */; };
 		B7D98CE319BF34F800BB8994 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE219BF34F800BB8994 /* CoreGraphics.framework */; };
 		B7D98CE519BF34F800BB8994 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE419BF34F800BB8994 /* UIKit.framework */; };
@@ -99,6 +100,7 @@
 		B7477A5619D9886C001C561F /* 76@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "76@1x.png"; path = "Resources/Icons/76@1x.png"; sourceTree = "<group>"; };
 		B7477A5719D9886C001C561F /* 76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "76@2x.png"; path = "Resources/Icons/76@2x.png"; sourceTree = "<group>"; };
 		B7477A5819D9886C001C561F /* 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1024x1024.png; path = Resources/Icons/1024x1024.png; sourceTree = "<group>"; };
+		B7C9BBF919D9B0A90001A833 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B7D98CDD19BF34F800BB8994 /* Motion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7D98CE019BF34F800BB8994 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7D98CE219BF34F800BB8994 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7C9BBFA19D9B0A90001A833 /* CoreLocation.framework in Frameworks */,
 				B7186A3B19BF36A400F18847 /* libiSENSE_API.a in Frameworks */,
 				B7D98CE319BF34F800BB8994 /* CoreGraphics.framework in Frameworks */,
 				B7D98CE519BF34F800BB8994 /* UIKit.framework in Frameworks */,
@@ -279,6 +282,7 @@
 		B7D98CDF19BF34F800BB8994 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B7C9BBF919D9B0A90001A833 /* CoreLocation.framework */,
 				B7D98CE019BF34F800BB8994 /* Foundation.framework */,
 				B7D98CE219BF34F800BB8994 /* CoreGraphics.framework */,
 				B7D98CE419BF34F800BB8994 /* UIKit.framework */,
