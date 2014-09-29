@@ -59,7 +59,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *recordingLengthBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *startStopBtn;
-- (IBAction)startStopOnClick:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
 - (IBAction)uploadBtnOnClick:(id)sender;

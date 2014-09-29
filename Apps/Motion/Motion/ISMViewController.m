@@ -49,6 +49,11 @@
     api = [API getInstance];
     [api useDev:true];
 
+    // Add long press gesture recognizer to the start-stop button
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
+                                               initWithTarget:self action:@selector(startStopOnLongClick:)];
+    [startStopBtn addGestureRecognizer:longPress];
+
     // Friendly reminder the app is on dev - app should never be released in dev mode
     if ([api isUsingDev]) {
         UILabel *devLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
@@ -76,9 +81,21 @@
 
 #pragma mark - Recording data
 
-- (IBAction)startStopOnClick:(id)sender {
-    
-    // TODO implement
+- (void)startStopOnLongClick:(UILongPressGestureRecognizer *)gesture {
+
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+
+        // TODO implement recording/non-recording state
+
+
+        // Emit a beep
+        NSString *beepPath = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/button-37.wav"];
+        SystemSoundID soundID;
+        NSURL *filePath = [NSURL fileURLWithPath:beepPath isDirectory:NO];
+        AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(filePath), &soundID);
+        AudioServicesPlaySystemSound(soundID);
+    }
+
 }
 
 #pragma end - Recording data
