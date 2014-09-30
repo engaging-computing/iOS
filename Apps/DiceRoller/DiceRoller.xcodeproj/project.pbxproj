@@ -21,6 +21,7 @@
 		31739DF619DB3A7C00CF2DFB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739DD819DB3A7C00CF2DFB /* UIKit.framework */; };
 		31739DFE19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 31739DFC19DB3A7C00CF2DFB /* InfoPlist.strings */; };
 		31739E0019DB3A7C00CF2DFB /* DiceRollerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31739DFF19DB3A7C00CF2DFB /* DiceRollerTests.m */; };
+		31739E0B19DB3BC400CF2DFB /* DieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31739E0A19DB3BC400CF2DFB /* DieView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		31739DFB19DB3A7C00CF2DFB /* DiceRollerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DiceRollerTests-Info.plist"; sourceTree = "<group>"; };
 		31739DFD19DB3A7C00CF2DFB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		31739DFF19DB3A7C00CF2DFB /* DiceRollerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiceRollerTests.m; sourceTree = "<group>"; };
+		31739E0919DB3BC400CF2DFB /* DieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DieView.h; sourceTree = "<group>"; };
+		31739E0A19DB3BC400CF2DFB /* DieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DieView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				31739DEA19DB3A7C00CF2DFB /* ViewController.m */,
 				31739DEC19DB3A7C00CF2DFB /* Images.xcassets */,
 				31739DDB19DB3A7C00CF2DFB /* Supporting Files */,
+				31739E0919DB3BC400CF2DFB /* DieView.h */,
+				31739E0A19DB3BC400CF2DFB /* DieView.m */,
 			);
 			path = DiceRoller;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31739DEB19DB3A7C00CF2DFB /* ViewController.m in Sources */,
+				31739E0B19DB3BC400CF2DFB /* DieView.m in Sources */,
 				31739DE519DB3A7C00CF2DFB /* AppDelegate.m in Sources */,
 				31739DE119DB3A7C00CF2DFB /* main.m in Sources */,
 			);
