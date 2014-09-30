@@ -248,7 +248,7 @@
     // barometric pressure.  Like temperature, this may have to be done based on
     // location and a weather API
 
-    // Gyrometer, radians/s
+    // Gyroscope, radians/s
     if (motionManager.gyroActive) {
         double gyroX = [motionManager.gyroData rotationRate].x;
         [dc addData:[NSNumber numberWithDouble:gyroX] forKey:sGYRO_X];
