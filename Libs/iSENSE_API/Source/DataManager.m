@@ -147,7 +147,7 @@
         NSString *name = field.recognized_name;
         NSNumber *dataPoint = [dc.data objectForKey:name];
 
-        [dataJSON setObject:((dataPoint) ? dataPoint : @"") forKey:field.field_id];
+        [dataJSON setObject:((dataPoint) ? dataPoint : @"") forKey:[NSString stringWithFormat:@"%@", field.field_id]];
     }
 
     return dataJSON;

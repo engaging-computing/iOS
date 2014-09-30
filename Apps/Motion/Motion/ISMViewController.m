@@ -63,7 +63,7 @@
         [self.view addSubview:devLabel];
     }
 
-    // Initialize the location manager (TODO - may be best to eventually move this so it's only called when needed)
+    // Initialize the location manager (TODO - may be best to eventually move this call so it's only called when needed)
     [self initLocations];
 
     // Initialize the motion manager
@@ -107,6 +107,8 @@
             [self stopRecordingData];
         } else {
 
+            // TODO - may want to do some error checking, such as if a project is selected yet
+
             // start recording data
             isRecording = true;
 
@@ -128,6 +130,7 @@
 
     // TODO - may it be better to set the update interval slightly faster than the sampleRate?
 
+    // initialize the motion manager sensors, if available
     if (motionManager.accelerometerAvailable) {
         motionManager.accelerometerUpdateInterval = sampleRate;
         [motionManager startAccelerometerUpdates];
@@ -140,7 +143,15 @@
         motionManager.gyroUpdateInterval = sampleRate;
         [motionManager startGyroUpdates];
     }
+    if (motionManager.deviceMotionAvailable) {
+        motionManager.deviceMotionUpdateInterval = sampleRate;
+        [motionManager startDeviceMotionUpdates];
+    }
 
+    // initialize the array of data points
+    dataPoints = [[NSMutableArray alloc] init];
+
+    // begin the data recording timer with the recordDataPoint selector
     dataRecordingTimer = [NSTimer scheduledTimerWithTimeInterval:sampleRate
                                                           target:self
                                                         selector:@selector(recordDataPoint)
@@ -159,11 +170,98 @@
         dispatch_queue_t queue = dispatch_queue_create("motion_recording_data", NULL);
         dispatch_async(queue, ^{
 
-            // TODO - get data and save it
-            NSLog(@"DATAAAAAAAAAAAAAAAAA!!!!!1!!");
+            NSLog(@"Data point captured");
+
+            // add a new NSDictionary of this current data point to the dataPoints array
+            [dataPoints addObject:[dm writeDataToJSONObject:[self populateDataContainer]]];
         });
     }
 
+}
+
+// populate the data container with sensor values
+- (DataContainer *)populateDataContainer {
+
+    DataContainer *dc = [[DataContainer alloc] init];
+
+    // Acceleration, m/s^2
+    if (motionManager.accelerometerActive) {
+        double accelX = [motionManager.accelerometerData acceleration].x * kGRAVITY;
+        [dc addData:[NSNumber numberWithDouble:accelX] forKey:sACCEL_X];
+
+        double accelY = [motionManager.accelerometerData acceleration].y * kGRAVITY;
+        [dc addData:[NSNumber numberWithDouble:accelY] forKey:sACCEL_Y];
+
+        double accelZ = [motionManager.accelerometerData acceleration].z * kGRAVITY;
+        [dc addData:[NSNumber numberWithDouble:accelZ] forKey:sACCEL_Z];
+
+        double accelTotal = sqrt(pow(accelX, 2) + pow(accelY, 2) + pow(accelZ, 2));
+        [dc addData:[NSNumber numberWithDouble:accelTotal] forKey:sACCEL_TOTAL];
+    }
+
+    // Temperature C, F, K - currently there is no open iOS API to the internal
+    // temperature sensors of some iOS devices.  We would have to resort to using location
+    // data and an external API to obtain the current ambient temperature.
+
+    // Time
+    double timeMillis = [[NSDate date] timeIntervalSince1970];
+    [dc addData:[NSNumber numberWithDouble:timeMillis] forKey:sTIME_MILLIS];
+
+    // Ambient light - there are ways to read light data in iOS, but they require private
+    // headers that Apple will likely deny when attempting to upload this app to the
+    // Apple app store
+
+    // Angle, radians and degrees
+    // TODO - test to see these generate real angular measurements based on device rotation
+    if (motionManager.deviceMotionActive) {
+        double motionRad = [motionManager.deviceMotion attitude].pitch;
+        [dc addData:[NSNumber numberWithDouble:motionRad] forKey:sANGLE_RAD];
+
+        double motionDeg = motionRad * 180 / M_PI;
+        [dc addData:[NSNumber numberWithDouble:motionDeg] forKey:sANGLE_DEG];
+    }
+
+    // Geospacial
+    CLLocationCoordinate2D lc2d = [[locationManager location] coordinate];
+    [dc addData:[NSNumber numberWithDouble:lc2d.latitude] forKey:sLATITUDE];
+    [dc addData:[NSNumber numberWithDouble:lc2d.longitude] forKey:sLONGITUDE];
+
+    // Magnetometer, micro-teslas
+    if (motionManager.magnetometerActive) {
+        double magX = [motionManager.magnetometerData magneticField].x;
+        [dc addData:[NSNumber numberWithDouble:magX] forKey:sMAG_X];
+
+        double magY = [motionManager.magnetometerData magneticField].y;
+        [dc addData:[NSNumber numberWithDouble:magY] forKey:sMAG_Y];
+
+        double magZ = [motionManager.magnetometerData magneticField].z;
+        [dc addData:[NSNumber numberWithDouble:magZ] forKey:sMAG_Z];
+
+        double magTotal = sqrt(pow(magX, 2) + pow(magY, 2) + pow(magZ, 2));
+        [dc addData:[NSNumber numberWithDouble:magTotal] forKey:sMAG_TOTAL];
+    }
+
+    // Altitude, meters
+    CLLocationDistance altitude = [[locationManager location] altitude];
+    [dc addData:[NSNumber numberWithDouble:altitude] forKey:sALTITUDE];
+
+    // Pressure - this seems to be a new feature with no APIs yet to retrieve
+    // barometric pressure.  Like temperature, this may have to be done based on
+    // location and a weather API
+
+    // Gyrometer, radians/s
+    if (motionManager.gyroActive) {
+        double gyroX = [motionManager.gyroData rotationRate].x;
+        [dc addData:[NSNumber numberWithDouble:gyroX] forKey:sGYRO_X];
+
+        double gyroY = [motionManager.gyroData rotationRate].y;
+        [dc addData:[NSNumber numberWithDouble:gyroY] forKey:sGYRO_Y];
+
+        double gyroZ = [motionManager.gyroData rotationRate].z;
+        [dc addData:[NSNumber numberWithDouble:gyroZ] forKey:sGYRO_Z];
+    }
+
+    return dc;
 }
 
 - (void)stopRecordingData {
@@ -182,8 +280,7 @@
     if (motionManager.gyroActive)
         [motionManager stopGyroUpdates];
 
-    // TODO - any further stop-recording code needed (e.g. saving a dataset)
-    NSLog(@"Done recording data");
+    [self saveData];
 }
 
 #pragma end - Recording data
@@ -224,13 +321,32 @@
 
 #pragma end - Location
 
-#pragma mark - Motion
-
-
-
-#pragma end - Motion
-
 #pragma mark - Upload
+
+// saves the data to the queue
+- (void) saveData {
+
+    // TODO - wrapper class for the queue
+
+    QDataSet *ds =[[QDataSet alloc]
+                   initWithEntity:[NSEntityDescription entityForName:@"QDataSet"
+                                              inManagedObjectContext:managedObjectContext]
+                   insertIntoManagedObjectContext:managedObjectContext];
+
+    [ds setName:@"TODO Name"];
+    [ds setParentName:PARENT_MOTION];
+    [ds setDataDescription:@"Uploaded from iOS Motion"];
+    [ds setProjID:[NSNumber numberWithInt:[dm getProjectID]]];
+    [ds setData:dataPoints];
+    [ds setPicturePaths:nil];
+    [ds setUploadable:[NSNumber numberWithBool:([dm getProjectID] >= 1)]];
+    [ds setHasInitialProj:[ds uploadable]];
+    [ds setFields:[dm getRecognizedFields]];
+
+    [dataSaver addDataSet:ds];
+
+    [self.view makeWaffle:@"Data set saved"];
+}
 
 - (IBAction)uploadBtnOnClick:(id)sender {
 
@@ -315,6 +431,7 @@
     [loginAlert show];
 }
 
+// Overridden delegate method to capture the user's login credentials and attempt a login
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     switch (alertView.tag) {

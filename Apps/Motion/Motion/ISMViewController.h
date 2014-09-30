@@ -44,6 +44,9 @@
     NSTimer *dataRecordingTimer;
     CLLocationManager *locationManager;
     CMMotionManager *motionManager;
+
+    // Data for a single run session
+    NSMutableArray *dataPoints;
 }
 
 // Queue Saver Properties
