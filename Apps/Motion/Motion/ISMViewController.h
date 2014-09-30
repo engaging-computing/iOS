@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <CoreMotion/CoreMotion.h>
 
 #import "API.h"
 #import "QueueUploaderView.h"
@@ -17,17 +19,13 @@
 #import "Waffle.h"
 #import "DataManager.h"
 
-// Login Constants
-#define kLOGIN_DIALOG_TAG 500
-#define kLOGIN_USER_TEXT 501
-#define kLOGIN_PASS_TEXT 502
-
 @interface ISMViewController : UIViewController
     <UIAlertViewDelegate,
     UITextFieldDelegate,
     CredentialManagerDelegate,
     ISMSampleRateDelegate,
-    ISMRecordingLengthDelegate>
+    ISMRecordingLengthDelegate,
+    CLLocationManagerDelegate>
 {
     // API and DataManager
     API *api;
@@ -40,7 +38,15 @@
     // Sample rate and recording length
     double sampleRate;
     int recordingLength;
-    
+
+    // Recording state, timer, and sensor objects
+    bool isRecording;
+    NSTimer *dataRecordingTimer;
+    CLLocationManager *locationManager;
+    CMMotionManager *motionManager;
+
+    // Data for a single run session
+    NSMutableArray *dataPoints;
 }
 
 // Queue Saver Properties
@@ -59,7 +65,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *recordingLengthBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *startStopBtn;
-- (IBAction)startStopOnClick:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
 - (IBAction)uploadBtnOnClick:(id)sender;
