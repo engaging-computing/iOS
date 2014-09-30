@@ -18,6 +18,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    //This is comparable to Android's OnStart
+    api = [API getInstance];
 }
 
 - (void)didReceiveMemoryWarning

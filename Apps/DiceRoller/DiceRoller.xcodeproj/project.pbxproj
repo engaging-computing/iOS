@@ -22,6 +22,11 @@
 		31739DFE19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 31739DFC19DB3A7C00CF2DFB /* InfoPlist.strings */; };
 		31739E0019DB3A7C00CF2DFB /* DiceRollerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31739DFF19DB3A7C00CF2DFB /* DiceRollerTests.m */; };
 		31739E0B19DB3BC400CF2DFB /* DieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31739E0A19DB3BC400CF2DFB /* DieView.m */; };
+		31739E1B19DB449500CF2DFB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1A19DB449500CF2DFB /* SystemConfiguration.framework */; };
+		31739E1D19DB44A000CF2DFB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1C19DB44A000CF2DFB /* MobileCoreServices.framework */; };
+		31739E1F19DB44B600CF2DFB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1E19DB44B600CF2DFB /* CoreData.framework */; };
+		31739E2E19DB4B6500CF2DFB /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E2919DB4AA400CF2DFB /* libiSENSE_API.a */; };
+		31739E2F19DB4BB900CF2DFB /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31739E2B19DB4AA400CF2DFB /* iSENSE_API_Bundle.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +36,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 31739DD019DB3A7C00CF2DFB;
 			remoteInfo = DiceRoller;
+		};
+		31739E2819DB4AA400CF2DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 39FF25E016DFA28A0062C3DC;
+			remoteInfo = iSENSE_API;
+		};
+		31739E2A19DB4AA400CF2DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B71AD6A519C710AE006820A1;
+			remoteInfo = iSENSE_API_Bundle;
+		};
+		31739E2C19DB4B5800CF2DFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 39FF25DF16DFA28A0062C3DC;
+			remoteInfo = iSENSE_API;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -56,6 +82,10 @@
 		31739DFF19DB3A7C00CF2DFB /* DiceRollerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiceRollerTests.m; sourceTree = "<group>"; };
 		31739E0919DB3BC400CF2DFB /* DieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DieView.h; sourceTree = "<group>"; };
 		31739E0A19DB3BC400CF2DFB /* DieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DieView.m; sourceTree = "<group>"; };
+		31739E1A19DB449500CF2DFB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		31739E1C19DB44A000CF2DFB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		31739E1E19DB44B600CF2DFB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = "../../../../Downloads/iOS-master/Libs/iSENSE_API/iSENSE_API.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +93,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31739E2E19DB4B6500CF2DFB /* libiSENSE_API.a in Frameworks */,
+				31739E1F19DB44B600CF2DFB /* CoreData.framework in Frameworks */,
+				31739E1D19DB44A000CF2DFB /* MobileCoreServices.framework in Frameworks */,
+				31739E1B19DB449500CF2DFB /* SystemConfiguration.framework in Frameworks */,
 				31739DD719DB3A7C00CF2DFB /* CoreGraphics.framework in Frameworks */,
 				31739DD919DB3A7C00CF2DFB /* UIKit.framework in Frameworks */,
 				31739DD519DB3A7C00CF2DFB /* Foundation.framework in Frameworks */,
@@ -85,6 +119,7 @@
 		31739DC819DB3A7C00CF2DFB = {
 			isa = PBXGroup;
 			children = (
+				31739E1619DB428E00CF2DFB /* iSENSE API */,
 				31739DDA19DB3A7C00CF2DFB /* DiceRoller */,
 				31739DF919DB3A7C00CF2DFB /* DiceRollerTests */,
 				31739DD319DB3A7C00CF2DFB /* Frameworks */,
@@ -104,6 +139,9 @@
 		31739DD319DB3A7C00CF2DFB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				31739E1E19DB44B600CF2DFB /* CoreData.framework */,
+				31739E1C19DB44A000CF2DFB /* MobileCoreServices.framework */,
+				31739E1A19DB449500CF2DFB /* SystemConfiguration.framework */,
 				31739DD419DB3A7C00CF2DFB /* Foundation.framework */,
 				31739DD619DB3A7C00CF2DFB /* CoreGraphics.framework */,
 				31739DD819DB3A7C00CF2DFB /* UIKit.framework */,
@@ -157,6 +195,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		31739E1619DB428E00CF2DFB /* iSENSE API */ = {
+			isa = PBXGroup;
+			children = (
+				31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */,
+			);
+			name = "iSENSE API";
+			sourceTree = "<group>";
+		};
+		31739E2419DB4AA400CF2DFB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31739E2919DB4AA400CF2DFB /* libiSENSE_API.a */,
+				31739E2B19DB4AA400CF2DFB /* iSENSE_API_Bundle.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -171,6 +226,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				31739E2D19DB4B5800CF2DFB /* PBXTargetDependency */,
 			);
 			name = DiceRoller;
 			productName = DiceRoller;
@@ -220,6 +276,12 @@
 			mainGroup = 31739DC819DB3A7C00CF2DFB;
 			productRefGroup = 31739DD219DB3A7C00CF2DFB /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 31739E2419DB4AA400CF2DFB /* Products */;
+					ProjectRef = 31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				31739DD019DB3A7C00CF2DFB /* DiceRoller */,
@@ -228,6 +290,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		31739E2919DB4AA400CF2DFB /* libiSENSE_API.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiSENSE_API.a;
+			remoteRef = 31739E2819DB4AA400CF2DFB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		31739E2B19DB4AA400CF2DFB /* iSENSE_API_Bundle.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = iSENSE_API_Bundle.bundle;
+			remoteRef = 31739E2A19DB4AA400CF2DFB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		31739DCF19DB3A7C00CF2DFB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -235,6 +314,7 @@
 			files = (
 				31739DED19DB3A7C00CF2DFB /* Images.xcassets in Resources */,
 				31739DDF19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */,
+				31739E2F19DB4BB900CF2DFB /* iSENSE_API_Bundle.bundle in Resources */,
 				31739DE819DB3A7C00CF2DFB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +356,11 @@
 			isa = PBXTargetDependency;
 			target = 31739DD019DB3A7C00CF2DFB /* DiceRoller */;
 			targetProxy = 31739DF719DB3A7C00CF2DFB /* PBXContainerItemProxy */;
+		};
+		31739E2D19DB4B5800CF2DFB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iSENSE_API;
+			targetProxy = 31739E2C19DB4B5800CF2DFB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -384,8 +469,19 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DiceRoller/DiceRoller-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API/headers",
+				);
 				INFOPLIST_FILE = "DiceRoller/DiceRoller-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(PROJECT_DIR)/../../Libs/iSENSE_API $(BUILD_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -397,8 +493,19 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DiceRoller/DiceRoller-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API",
+					"$(PROJECT_DIR)/../../Libs/iSENSE_API/headers",
+				);
 				INFOPLIST_FILE = "DiceRoller/DiceRoller-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(PROJECT_DIR)/../../Libs/iSENSE_API $(BUILD_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -462,6 +569,7 @@
 				31739E0519DB3A7C00CF2DFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		31739E0619DB3A7C00CF2DFB /* Build configuration list for PBXNativeTarget "DiceRollerTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +578,7 @@
 				31739E0819DB3A7C00CF2DFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
