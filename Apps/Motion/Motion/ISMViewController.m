@@ -212,7 +212,6 @@
     // Apple app store
 
     // Angle, radians and degrees
-    // TODO - test to see these generate real angular measurements based on device rotation
     if (motionManager.deviceMotionActive) {
         double motionRad = [motionManager.deviceMotion attitude].pitch;
         [dc addData:[NSNumber numberWithDouble:motionRad] forKey:sANGLE_RAD];
@@ -308,6 +307,10 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 
+    // TODO - this code can be left for debugging purposes, but really this method is not utilized
+    // for the app.  It can be left as a blank stub (we're required to override it as part of the
+    // location delegate)
+
     double newLatitude = newLocation.coordinate.latitude, newLongitude = newLocation.coordinate.longitude;
     double oldLatitude = oldLocation.coordinate.latitude, oldLongitude = oldLocation.coordinate.longitude;
 
@@ -349,34 +352,6 @@
 }
 
 - (IBAction)uploadBtnOnClick:(id)sender {
-
-    // TODO test - remove once you are comfortable with uploading data with this app
-
-//    int p = 828;
-//
-//    [dm setProjectID:p];
-//    [dm retrieveProjectFields];
-//
-//    NSMutableArray *data = [[NSMutableArray alloc] init];
-//
-//    DataContainer *dc = [[DataContainer alloc] init];
-//    [dc addData:[NSNumber numberWithInt:100] forKey:sACCEL_X];
-//    [dc addData:[NSNumber numberWithInt:200] forKey:sACCEL_Y];
-//    [dc addData:[NSNumber numberWithInt:300] forKey:sACCEL_Z];
-//    [data addObject:[dm writeDataToJSONObject:dc]];
-//
-//    dc = [[DataContainer alloc] init];
-//    [dc addData:[NSNumber numberWithInt:400] forKey:sACCEL_X];
-//    [dc addData:[NSNumber numberWithInt:500] forKey:sACCEL_Y];
-//    [dc addData:[NSNumber numberWithInt:600] forKey:sACCEL_Z];
-//    [data addObject:[dm writeDataToJSONObject:dc]];
-//
-//    [api createSessionWithEmail:@"t@t.t" andPassword:@"t"];
-//
-//    NSMutableDictionary *colData = [DataManager convertDataToColumnMajor:data forProjectID:p andRecognizedFields:nil];
-//    [api uploadDataToProject:p withData:colData andName:@"Data set"];
-
-    // END test
 
     QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION];
     queueUploader.title = @"Upload";
