@@ -121,9 +121,7 @@
 
 // commit changes to the managedObjectContext
 -(BOOL) commitMOCChanges {
-    
-    NSLog(@"Committing MOC Changes");
-    
+
     NSError *error = nil;
     if (![managedObjectContext save:&error]) {
         NSLog(@"Save failed: %@", error);
@@ -134,10 +132,9 @@
 }
 
 -(bool)upload:(NSString *)parentName {
+
     API *api = [API getInstance];
-    
-    NSLog(@"Insisde DataSaver.m");
-    
+
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     int dataSetsToUpload = 0;
     int dataSetsFailed = 0;
@@ -149,10 +146,7 @@
         
         // get the next dataset
         currentDS = [dataQueue objectForKey:currentKey];
-        
-        NSLog(@"Number of pics: %lu", (unsigned long)((NSArray *)currentDS.picturePaths).count);
-        NSLog(@"Number of datas: %lu", (unsigned long)((NSArray *)currentDS.data).count);
-        
+
         // prevent uploading datasets from other sources (e.g. manual vs automatic)
         if (![currentDS.parentName isEqualToString:parentName]) continue;
         
@@ -161,14 +155,12 @@
         
         // check if the session is uploadable
         if (currentDS.uploadable.boolValue) {
-            
-            NSLog(@"Inside uploading area");
-            
+
             dataSetsToUpload++;
             
             // organize data if no initial project was found
             if (currentDS.hasInitialProj.boolValue == FALSE) {
-                NSLog(@"HelloWorld");
+
                 if (currentDS.fields == nil) {
                     continue;
                 } else {
@@ -188,12 +180,13 @@
             // upload to iSENSE
             __block int returnID = -1;
             if (((NSArray *)currentDS.data).count) {
+                
                 NSMutableDictionary *jobj = [[NSMutableDictionary alloc] init];
                 [jobj setObject:currentDS.data forKey:@"data"];
                 jobj = [[api rowsToCols:jobj] mutableCopy];
                 
                 if ([api getCurrentUser] == nil) {
-                    NSLog(@"Not logged in");
+
                     DLAVAlertView *contribKeyAlert = [[DLAVAlertView alloc] initWithTitle:@"Enter Contributor Key" message:[NSString stringWithFormat:@"%@%@", @"Data Set: ", currentDS.name] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
                     [contribKeyAlert setAlertViewStyle:DLAVAlertViewStyleLoginAndPasswordInput];
                     [contribKeyAlert textFieldAtIndex:0].placeholder = @"Contributor Name";
@@ -206,6 +199,7 @@
                 } else {
                    returnID = [api uploadDataToProject:currentDS.projID.intValue withData:jobj andName:currentDS.name];
                 }
+
                 NSLog(@"Data set ID: %d", returnID);
                 
                 if (returnID == 0 || returnID == -1) {
@@ -216,8 +210,7 @@
             
             // upload pictures to iSENSE
             if (((NSArray *)currentDS.picturePaths).count) {
-                
-                NSLog(@"Inside pictures area");
+
                 NSArray *pictures = (NSArray *) currentDS.picturePaths;
                 NSMutableArray *newPicturePaths = [NSMutableArray alloc];
                 bool failedAtLeastOnce = false;
@@ -228,7 +221,7 @@
                     // track the images that fail to upload
                     
                     if ([api getCurrentUser] == nil) {
-                        NSLog(@"Not logged in");
+
                         DLAVAlertView *contribKeyAlert = [[DLAVAlertView alloc] initWithTitle:@"Enter Contributor Key" message:[NSString stringWithFormat:@"%@%@", @"Data Set: ", currentDS.name] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
                         [contribKeyAlert setAlertViewStyle:DLAVAlertViewStyleLoginAndPasswordInput];
                         [contribKeyAlert textFieldAtIndex:0].placeholder = @"Contributor Name";
@@ -244,8 +237,6 @@
                         
                         returnID = [api uploadMediaToProject:currentDS.projID.intValue withFile:pictures[i] andName:currentDS.name withTarget:PROJECT];
                     
-                        
-                        
                     }
                     
                     if (returnID == -1) {
