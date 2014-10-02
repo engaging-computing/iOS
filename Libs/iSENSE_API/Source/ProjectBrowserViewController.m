@@ -95,8 +95,7 @@
     
     spinnerDialog = [self getDispatchDialogWithMessage:@"Loading..."];
     [spinnerDialog show];
-    
-    NSLog(@"Boo");
+
     [self updateProjects:search];
 }
 
@@ -194,7 +193,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             if (projects == nil) {
-                NSLog(@"World");
+
                 projects = [[NSMutableArray alloc] init];
                 projectsFiltered = [[NSMutableArray alloc] init];
                 self.tableView.dataSource = self;
@@ -207,14 +206,8 @@
                [projects addObjectsFromArray:[isenseAPI getProjectsAtPage:iSS.page withPageLimit:iSS.perPage withFilter:CREATED_AT_DESC andQuery:iSS.query]];
             }
             
-            
-            
-            NSLog(@"Hello");
-            
             currentPage = iSS.page;
             currentQuery = iSS.query;
-            
-            
         });
         
     });
