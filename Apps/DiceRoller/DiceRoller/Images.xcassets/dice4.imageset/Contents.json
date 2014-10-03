@@ -3,7 +3,11 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "dice-312625_640.png"
+      "filename" : "four.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
     }
   ],
   "info" : {

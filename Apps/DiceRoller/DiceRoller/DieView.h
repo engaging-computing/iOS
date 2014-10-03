@@ -10,4 +10,14 @@
 
 @interface DieView : UIView
 
+#pragma mark - Properties
+
+@property (strong, nonatomic)UIImageView *dieImageView;
+
+//Create a method to change the image in the dieView Property
+
+#pragma mark - Methods
+
+- (void) showDieNumber:(int)num;
+
 @end

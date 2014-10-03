@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "DiceDataController.h"
 @interface ViewController ()
 
 @end
@@ -28,4 +28,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)rollClicked:(id)sender {
+    DiceDataController *diceController = [[DiceDataController alloc] init];
+    int firstNum = [diceController getDieNumber];
+    int secondNum = [diceController getDieNumber];
+    
+    [self.firstDieView showDieNumber:firstNum];
+    [self.secondDieView showDieNumber:secondNum];
+}
 @end

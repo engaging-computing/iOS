@@ -27,6 +27,7 @@
 		31739E1F19DB44B600CF2DFB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1E19DB44B600CF2DFB /* CoreData.framework */; };
 		31739E2E19DB4B6500CF2DFB /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E2919DB4AA400CF2DFB /* libiSENSE_API.a */; };
 		31739E2F19DB4BB900CF2DFB /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31739E2B19DB4AA400CF2DFB /* iSENSE_API_Bundle.bundle */; };
+		31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9C919DF11A200A5E448 /* DiceDataController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,8 @@
 		31739E1C19DB44A000CF2DFB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		31739E1E19DB44B600CF2DFB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = "../../../../Downloads/iOS-master/Libs/iSENSE_API/iSENSE_API.xcodeproj"; sourceTree = "<group>"; };
+		31E5C9C819DF11A200A5E448 /* DiceDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceDataController.h; sourceTree = "<group>"; };
+		31E5C9C919DF11A200A5E448 /* DiceDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceDataController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +165,8 @@
 				31739DDB19DB3A7C00CF2DFB /* Supporting Files */,
 				31739E0919DB3BC400CF2DFB /* DieView.h */,
 				31739E0A19DB3BC400CF2DFB /* DieView.m */,
+				31E5C9C819DF11A200A5E448 /* DiceDataController.h */,
+				31E5C9C919DF11A200A5E448 /* DiceDataController.m */,
 			);
 			path = DiceRoller;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				31739DEB19DB3A7C00CF2DFB /* ViewController.m in Sources */,
 				31739E0B19DB3BC400CF2DFB /* DieView.m in Sources */,
 				31739DE519DB3A7C00CF2DFB /* AppDelegate.m in Sources */,
+				31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */,
 				31739DE119DB3A7C00CF2DFB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
