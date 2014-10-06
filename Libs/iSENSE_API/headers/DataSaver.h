@@ -24,16 +24,24 @@
 @interface DataSaver : NSObject {}
 
 -(id)   initWithContext:(NSManagedObjectContext *)context;
+
 -(void) addDataSetFromCoreData:(QDataSet *)dataSet;
 -(BOOL) addDataSet:(QDataSet *)dataSet;
+-(void) addDataSetWithContext:(NSManagedObjectContext *) manObjCntxt name:(NSString *)name parentName:(NSString *)prntName description:(NSString *)dscrptn projectID:(int)projID data:(id)data mediaPaths:(id)media uploadable:(BOOL)upldbl hasInitialProject:(BOOL)hasInitialProj andFields:(id)fields;
+
 -(id)   removeDataSet:(NSNumber *)key;
+
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeProjIDTo:(NSNumber *)newProjID;
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeDescription:(NSString *)newDescription;
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeFieldsTo:(NSMutableArray *)newFields;
+
 -(bool) upload:(NSString *)parentName;
+
 -(void) removeAllDataSets;
+
 -(id)   getDataSet;
 -(id)   getDataSetWithKey:(NSNumber *)key;
+
 -(int)  dataSetCountWithParentName:(NSString *)pn;
 
 @property (nonatomic, retain) NSMutableDictionary *dataQueue;

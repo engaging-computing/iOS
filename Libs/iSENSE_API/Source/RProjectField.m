@@ -68,7 +68,8 @@
             }
             
             // Light
-            else if ([self.name.lowercaseString rangeOfString:@"light"].location != NSNotFound) {
+            else if ([self.name.lowercaseString rangeOfString:@"light"].location != NSNotFound ||
+                     [self.name.lowercaseString rangeOfString:@"lumin"].location != NSNotFound) {
                 self.recognized_name = sLUX;
                 break;
             }

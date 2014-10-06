@@ -67,8 +67,6 @@ typedef enum {
 -(int) uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *) name withTarget: (TargetType) ttype;
 -(int) uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *) name withTarget: (TargetType) ttype withContributorKey:(NSString *) conKey as:(NSString *) conName;
 
-/* Other methods */
--(NSDictionary *)rowsToCols:(NSDictionary *)original;
 -(NSString *) getVersion;
 
 @end

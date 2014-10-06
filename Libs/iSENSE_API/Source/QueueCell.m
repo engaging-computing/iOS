@@ -85,6 +85,8 @@
 - (void) setProjID:(NSString *)projID {
     [self.projIDLabel setText:projID];
     [dataSet setProjID:[NSNumber numberWithInt:[projID intValue]]];
+
+    [dataSet setUploadable:[NSNumber numberWithBool:(projID > 0)]];
 }
 
 - (void) setDesc:(NSString *)desc {

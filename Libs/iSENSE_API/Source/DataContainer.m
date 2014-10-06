@@ -20,7 +20,7 @@
     return self;
 }
 
--(void) addData:(NSNumber *)dataValue forKey:(NSString *)dataKey {
+-(void) addData:(NSString *)dataValue forKey:(NSString *)dataKey {
     [data setValue:dataValue forKey:dataKey];
 }
 

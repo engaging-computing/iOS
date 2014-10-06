@@ -48,20 +48,24 @@
     
     enterProjAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     enterProjAlert.tag = kPROJ_MANUAL_ENTRY_DIALOG;
+
+    [enterProjAlert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
     [enterProjAlert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
+
     switch (alertView.tag) {
         case kPROJ_MANUAL_ENTRY_DIALOG:
         {
-            NSString *projAsString = [[alertView textFieldAtIndex:0] text];
-            [dm setProjectID:[projAsString intValue]];
+            if (buttonIndex != 0) {
+                NSString *projAsString = [[alertView textFieldAtIndex:0] text];
+                [dm setProjectID:[projAsString intValue]];
             
-            [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
+                [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
             
-            [self launchFieldMatchingViewControllerFromBrowse:FALSE];
+                [self launchFieldMatchingViewControllerFromBrowse:FALSE];
+            }
             break;
         }
         default:

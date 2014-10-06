@@ -107,7 +107,14 @@
             [self stopRecordingData];
         } else {
 
-            // TODO - may want to do some error checking, such as if a project is selected yet
+            // check if a project is selected yet
+            if ([dm getProjectID] <= 0) {
+                [self.view makeWaffle:@"Please select a project first"
+                             duration:WAFFLE_LENGTH_SHORT
+                             position:WAFFLE_BOTTOM
+                                image:WAFFLE_RED_X];
+                return;
+            }
 
             // start recording data
             isRecording = true;
@@ -187,16 +194,16 @@
     // Acceleration, m/s^2
     if (motionManager.accelerometerActive) {
         double accelX = [motionManager.accelerometerData acceleration].x * kGRAVITY;
-        [dc addData:[NSNumber numberWithDouble:accelX] forKey:sACCEL_X];
+        [dc addData:[NSString stringWithFormat:@"%f", accelX] forKey:sACCEL_X];
 
         double accelY = [motionManager.accelerometerData acceleration].y * kGRAVITY;
-        [dc addData:[NSNumber numberWithDouble:accelY] forKey:sACCEL_Y];
+        [dc addData:[NSString stringWithFormat:@"%f", accelY] forKey:sACCEL_Y];
 
         double accelZ = [motionManager.accelerometerData acceleration].z * kGRAVITY;
-        [dc addData:[NSNumber numberWithDouble:accelZ] forKey:sACCEL_Z];
+        [dc addData:[NSString stringWithFormat:@"%f", accelZ] forKey:sACCEL_Z];
 
         double accelTotal = sqrt(pow(accelX, 2) + pow(accelY, 2) + pow(accelZ, 2));
-        [dc addData:[NSNumber numberWithDouble:accelTotal] forKey:sACCEL_TOTAL];
+        [dc addData:[NSString stringWithFormat:@"%f", accelTotal] forKey:sACCEL_TOTAL];
     }
 
     // Temperature C, F, K - currently there is no open iOS API to the internal
@@ -204,8 +211,8 @@
     // data and an external API to obtain the current ambient temperature.
 
     // Time
-    double timeMillis = [[NSDate date] timeIntervalSince1970];
-    [dc addData:[NSNumber numberWithDouble:timeMillis] forKey:sTIME_MILLIS];
+    long long timeMillis = (long long) ([[NSDate date] timeIntervalSince1970] * 1000);
+    [dc addData:[NSString stringWithFormat:@"u %lld", timeMillis] forKey:sTIME_MILLIS];
 
     // Ambient light - there are ways to read light data in iOS, but they require private
     // headers that Apple will likely deny when attempting to upload this app to the
@@ -214,35 +221,35 @@
     // Angle, radians and degrees
     if (motionManager.deviceMotionActive) {
         double motionRad = [motionManager.deviceMotion attitude].pitch;
-        [dc addData:[NSNumber numberWithDouble:motionRad] forKey:sANGLE_RAD];
+        [dc addData:[NSString stringWithFormat:@"%f", motionRad] forKey:sANGLE_RAD];
 
         double motionDeg = motionRad * 180 / M_PI;
-        [dc addData:[NSNumber numberWithDouble:motionDeg] forKey:sANGLE_DEG];
+        [dc addData:[NSString stringWithFormat:@"%f", motionDeg] forKey:sANGLE_DEG];
     }
 
     // Geospacial
     CLLocationCoordinate2D lc2d = [[locationManager location] coordinate];
-    [dc addData:[NSNumber numberWithDouble:lc2d.latitude] forKey:sLATITUDE];
-    [dc addData:[NSNumber numberWithDouble:lc2d.longitude] forKey:sLONGITUDE];
+    [dc addData:[NSString stringWithFormat:@"%f", lc2d.latitude] forKey:sLATITUDE];
+    [dc addData:[NSString stringWithFormat:@"%f", lc2d.longitude] forKey:sLONGITUDE];
 
     // Magnetometer, micro-teslas
     if (motionManager.magnetometerActive) {
         double magX = [motionManager.magnetometerData magneticField].x;
-        [dc addData:[NSNumber numberWithDouble:magX] forKey:sMAG_X];
+        [dc addData:[NSString stringWithFormat:@"%f", magX] forKey:sMAG_X];
 
         double magY = [motionManager.magnetometerData magneticField].y;
-        [dc addData:[NSNumber numberWithDouble:magY] forKey:sMAG_Y];
+        [dc addData:[NSString stringWithFormat:@"%f", magY] forKey:sMAG_Y];
 
         double magZ = [motionManager.magnetometerData magneticField].z;
-        [dc addData:[NSNumber numberWithDouble:magZ] forKey:sMAG_Z];
+        [dc addData:[NSString stringWithFormat:@"%f", magZ] forKey:sMAG_Z];
 
         double magTotal = sqrt(pow(magX, 2) + pow(magY, 2) + pow(magZ, 2));
-        [dc addData:[NSNumber numberWithDouble:magTotal] forKey:sMAG_TOTAL];
+        [dc addData:[NSString stringWithFormat:@"%f", magTotal] forKey:sMAG_TOTAL];
     }
 
     // Altitude, meters
     CLLocationDistance altitude = [[locationManager location] altitude];
-    [dc addData:[NSNumber numberWithDouble:altitude] forKey:sALTITUDE];
+    [dc addData:[NSString stringWithFormat:@"%f", altitude] forKey:sALTITUDE];
 
     // Pressure - this seems to be a new feature with no APIs yet to retrieve
     // barometric pressure.  Like temperature, this may have to be done based on
@@ -251,13 +258,13 @@
     // Gyroscope, radians/s
     if (motionManager.gyroActive) {
         double gyroX = [motionManager.gyroData rotationRate].x;
-        [dc addData:[NSNumber numberWithDouble:gyroX] forKey:sGYRO_X];
+        [dc addData:[NSString stringWithFormat:@"%f", gyroX] forKey:sGYRO_X];
 
         double gyroY = [motionManager.gyroData rotationRate].y;
-        [dc addData:[NSNumber numberWithDouble:gyroY] forKey:sGYRO_Y];
+        [dc addData:[NSString stringWithFormat:@"%f", gyroY] forKey:sGYRO_Y];
 
         double gyroZ = [motionManager.gyroData rotationRate].z;
-        [dc addData:[NSNumber numberWithDouble:gyroZ] forKey:sGYRO_Z];
+        [dc addData:[NSString stringWithFormat:@"%f", gyroZ] forKey:sGYRO_Z];
     }
 
     return dc;
@@ -329,24 +336,16 @@
 // saves the data to the queue
 - (void) saveData {
 
-    // TODO - wrapper class for the queue
-
-    QDataSet *ds =[[QDataSet alloc]
-                   initWithEntity:[NSEntityDescription entityForName:@"QDataSet"
-                                              inManagedObjectContext:managedObjectContext]
-                   insertIntoManagedObjectContext:managedObjectContext];
-
-    [ds setName:@"TODO Name"];
-    [ds setParentName:PARENT_MOTION];
-    [ds setDataDescription:@"Uploaded from iOS Motion"];
-    [ds setProjID:[NSNumber numberWithInt:[dm getProjectID]]];
-    [ds setData:dataPoints];
-    [ds setPicturePaths:nil];
-    [ds setUploadable:[NSNumber numberWithBool:([dm getProjectID] >= 1)]];
-    [ds setHasInitialProj:[ds uploadable]];
-    [ds setFields:[dm getRecognizedFields]];
-
-    [dataSaver addDataSet:ds];
+    [dataSaver addDataSetWithContext:managedObjectContext
+                                name:@"TODO Name"
+                          parentName:PARENT_MOTION
+                         description:@"Uploaded from iOS Motion"
+                           projectID:[dm getProjectID]
+                                data:dataPoints
+                          mediaPaths:nil
+                          uploadable:([dm getProjectID] >= 1)
+                   hasInitialProject:([dm getProjectID] >= 1)
+                           andFields:[dm getRecognizedFields]];
 
     [self.view makeWaffle:@"Data set saved"];
 }

@@ -31,7 +31,7 @@
         api = [API getInstance];
 
         projectID = 0;
-        projectFields = nil;
+        [self setProjectFieldsToAllFields];
     }
     return self;
 }
@@ -160,7 +160,7 @@
 
     NSMutableDictionary *outData = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *row     = [[NSMutableDictionary alloc] init];
-    NSMutableArray *ids          = [[NSMutableArray alloc] init];
+    NSMutableArray *ids          = [[NSMutableArray alloc] init]; // TODO pass in ids as a param that is optional
     NSMutableArray *outRow;
 
     // If the recognized fields are null, set up the recognized fields and fieldIDs.
@@ -194,8 +194,9 @@
 
             row = [data objectAtIndex:j];
 
-            if ([row objectForKey:fieldID])
-                [outRow addObject:[NSString stringWithFormat:@"%@", [row objectForKey:fieldID]]];
+            if ([row objectForKey:[NSString stringWithFormat:@"%d", fieldID.intValue]])
+                [outRow addObject:[NSString stringWithFormat:@"%@",
+                                   [row objectForKey:[NSString stringWithFormat:@"%d",fieldID.intValue]]]];
             else
                 [outRow addObject:@""];
         }
