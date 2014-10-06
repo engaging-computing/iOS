@@ -160,7 +160,7 @@
 
     NSMutableDictionary *outData = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *row     = [[NSMutableDictionary alloc] init];
-    NSMutableArray *ids          = [[NSMutableArray alloc] init]; // TODO pass in ids as a param that is optional
+    NSMutableArray *ids          = [[NSMutableArray alloc] init];
     NSMutableArray *outRow;
 
     // If the recognized fields are null, set up the recognized fields and fieldIDs.
