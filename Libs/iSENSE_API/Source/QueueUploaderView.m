@@ -417,12 +417,8 @@
                 [message dismissWithClickedButtonIndex:0 animated:YES];
                 return;
             }
-            
-            
-            NSLog(@"User: %@", [api getCurrentUser]);
-            
+
             if ([api getCurrentUser] != nil) {
-                NSLog(@"Uploading...");
                 [dataSaver upload:parent];
             }
             
@@ -588,7 +584,6 @@
         [dataSaver editDataSetWithKey:cell.mKey andChangeFieldsTo:fieldMatch];
         
         [self.mTableView reloadData];
-        NSLog(@"Reloaded");
     }
     // else user canceled
 }

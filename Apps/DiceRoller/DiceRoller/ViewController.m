@@ -35,5 +35,7 @@
     
     [self.firstDieView showDieNumber:firstNum];
     [self.secondDieView showDieNumber:secondNum];
+    
+    self.sumLabel.text = [NSString stringWithFormat:@"The sum is %d", firstNum + secondNum];
 }
 @end
