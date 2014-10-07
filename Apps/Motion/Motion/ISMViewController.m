@@ -363,12 +363,23 @@
 
 - (void) didFinishUploadingDataWithStatus:(int)status {
 
-    if (status == DATA_NONE_UPLOADED)
-        [self.view makeWaffle:@"No data uploaded"];
-    else if (status == DATA_UPLOAD_FAILED)
-        [self.view makeWaffle:@"One or more data sets failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-    else if (status == DATA_UPLOAD_SUCCESS)
-        [self.view makeWaffle:@"Data set(s) uploaded successfully" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
+    switch (status) {
+        case DATA_NONE_UPLOADED:
+            [self.view makeWaffle:@"No data uploaded"];
+            break;
+
+        case DATA_UPLOAD_FAILED:
+            [self.view makeWaffle:@"One or more data sets failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+            break;
+
+        case DATA_UPLOAD_SUCCESS:
+            [self.view makeWaffle:@"Data set(s) uploaded successfully" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
+            break;
+
+        default:
+            NSLog(@"Unrecognized upload status received from QueueUploadViewController in ISMViewController");
+            break;
+    }
 }
 
 #pragma end - Upload
