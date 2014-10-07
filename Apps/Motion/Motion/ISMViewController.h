@@ -25,7 +25,8 @@
     CredentialManagerDelegate,
     ISMSampleRateDelegate,
     ISMRecordingLengthDelegate,
-    CLLocationManagerDelegate>
+    CLLocationManagerDelegate,
+    QueueUploaderDelegate>
 {
     // API and DataManager
     API *api;

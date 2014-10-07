@@ -21,6 +21,9 @@
 
 #define BOUNDARY @"*****"
 
+#define PREFS_EMAIL @"api_prefs_key_email"
+#define PREFS_PASSWORD @"api_prefs_key_password"
+
 static NSString *baseUrl, *authenticityToken;
 static RPerson *currentUser;
 static NSString *email, *password;
@@ -111,7 +114,7 @@ static NSString *email, *password;
     password = p_password;
     
     if ([result objectForKey:@"name"] != nil) {
-        NSLog(@"Loglog");
+
         email = p_email;
         password = p_password;
         RPerson *you = [[RPerson alloc] init];
@@ -119,10 +122,10 @@ static NSString *email, *password;
         you.gravatar = [result objectForKey:@"gravatar"];
         
         NSURL *imageURL = [NSURL URLWithString:[you gravatar]];
-        
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        
         you.gravatarImage = [UIImage imageWithData:imageData];
+
+        [self saveCurrentUserToPrefs];
 
         currentUser = you;
         return you;
@@ -832,6 +835,35 @@ static NSString *email, *password;
  */
 -(NSString *) getVersion {
     return [NSString stringWithFormat:@"%@.%@", VERSION_MAJOR, VERSION_MINOR];
+}
+
+/**
+ * Saves the current user, if one is logged in, to the NSUserDefaults
+ * preferences of the hosting application.
+ */
+-(void)saveCurrentUserToPrefs {
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:email forKey:PREFS_EMAIL];
+    [prefs setObject:password forKey:PREFS_PASSWORD];
+    [prefs synchronize];
+}
+
+/**
+ * Retrieves the user saved in the NSUserDefaults preferences, and if such a user
+ * exists, attempts to login that user.
+ *
+ * @return true if a user was saved and logged in successfully, false otherwise
+ */
+-(bool)loadCurrentUserFromPrefs {
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    if ([prefs objectForKey:PREFS_EMAIL] && [prefs objectForKey:PREFS_PASSWORD])
+        if ([self createSessionWithEmail:[prefs objectForKey:PREFS_EMAIL]
+                             andPassword:[prefs objectForKey:PREFS_PASSWORD]])
+            return true;
+
+    return false;
 }
 
 @end

@@ -31,7 +31,7 @@
         api = [API getInstance];
 
         projectID = 0;
-        projectFields = nil;
+        [self setProjectFieldsToAllFields];
     }
     return self;
 }
@@ -194,10 +194,11 @@
 
             row = [data objectAtIndex:j];
 
-            if ([row objectForKey:fieldID])
-                [outRow addObject:[NSString stringWithFormat:@"%@", [row objectForKey:fieldID]]];
-            else
+            if ([row objectForKey:[NSString stringWithFormat:@"%d", fieldID.intValue]]) {
+                [outRow addObject:[NSString stringWithFormat:@"%@", [row objectForKey:[NSString stringWithFormat:@"%d",fieldID.intValue]]]];
+            } else {
                 [outRow addObject:@""];
+            }
         }
 
         [outData setObject:outRow forKey:[NSString stringWithFormat:@"%@", fieldID]];
