@@ -24,7 +24,7 @@
 // Queue Saver Properties
 @synthesize dataSaver, managedObjectContext;
 // UI
-@synthesize credentialBarBtn, xLbl, yLbl, zLbl, sampleRateBtn, recordingLengthBtn, startStopBtn, uploadBtn, projectBtn;
+@synthesize credentialBarBtn, xLbl, yLbl, zLbl, sampleRateBtn, recordingLengthBtn, startStopBtn, nameBtn, uploadBtn, projectBtn;
 
 
 #pragma mark - View and overriden methods
@@ -73,9 +73,10 @@
     // Initialize the motion manager
     motionManager = [[CMMotionManager alloc] init];
 
-    // Default sample rate and recording length
+    // Default sample rate, recording length, and data set name
     sampleRate = kDEFAULT_SAMPLE_RATE;
     recordingLength = kDEFAULT_RECORDING_LENGTH;
+    dataSetName = kDEFAULT_DATA_SET_NAME;
 
     // Ensure isRecording is set to false on loading the view
     isRecording = false;
@@ -92,6 +93,36 @@
 - (void)didReceiveMemoryWarning {
     
     [super didReceiveMemoryWarning];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+    switch (alertView.tag) {
+        case kLOGIN_DIALOG_TAG:
+        {
+            NSString *user = [alertView textFieldAtIndex:0].text;
+            NSString *pass = [alertView textFieldAtIndex:1].text;
+
+            if ([user length] != 0 && [pass length] !=0)
+                [self login:user withPassword:pass];
+
+            break;
+        }
+        case kNAME_DIALOG_TAG:
+        {
+            NSString *name = [alertView textFieldAtIndex:0].text;
+
+            if (name && [name length] > 0) {
+                dataSetName = name;
+                [nameBtn setTitle:dataSetName forState:UIControlStateNormal];
+            }
+
+            break;
+        }
+        default:
+            NSLog(@"Unrecognized dialog!");
+            break;
+    }
 }
 
 #pragma end - View and overriden methods
@@ -330,26 +361,9 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-
-    NSLog(@"didFailWithError: %@", error);
-
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-
-    // TODO - this code can be left for debugging purposes, but really this method is not utilized
-    // for the app.  It can be left as a blank stub (we're required to override it as part of the
-    // location delegate)
-
-    double newLatitude = newLocation.coordinate.latitude, newLongitude = newLocation.coordinate.longitude;
-    double oldLatitude = oldLocation.coordinate.latitude, oldLongitude = oldLocation.coordinate.longitude;
-
-    // only update GPS coordinates when a new point is received
-    if (newLatitude != oldLatitude && newLongitude != oldLongitude) {
-
-        NSLog(@"didUpdateToLocation: %@", newLocation);
-    }
-
 }
 
 #pragma end - Location
@@ -360,7 +374,7 @@
 - (void) saveData {
 
     [dataSaver addDataSetWithContext:managedObjectContext
-                                name:@"TODO Name"
+                                name:dataSetName
                           parentName:PARENT_MOTION
                          description:@"Uploaded from iOS Motion"
                            projectID:[dm getProjectID]
@@ -402,6 +416,23 @@
 }
 
 #pragma end - Upload
+
+#pragma mark - Name
+
+- (IBAction)nameBtnOnClick:(id)sender {
+
+    UIAlertView *enterNameAlart = [[UIAlertView alloc] initWithTitle:@"Enter a Data Set Name" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    [enterNameAlart setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    enterNameAlart.tag = kNAME_DIALOG_TAG;
+
+    [enterNameAlart textFieldAtIndex:0].delegate = self;
+    [[enterNameAlart textFieldAtIndex:0] becomeFirstResponder];
+    [enterNameAlart textFieldAtIndex:0].placeholder = @"your name or a data set name";
+
+    [enterNameAlart show];
+}
+
+#pragma end - Name
 
 #pragma mark - Credentials
 
@@ -447,26 +478,6 @@
     [loginAlert textFieldAtIndex:1].tag = kLOGIN_PASS_TEXT;
     
     [loginAlert show];
-}
-
-// Overridden delegate method to capture the user's login credentials and attempt a login
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    switch (alertView.tag) {
-        case kLOGIN_DIALOG_TAG:
-        {
-            NSString *user = [alertView textFieldAtIndex:0].text;
-            NSString *pass = [alertView textFieldAtIndex:1].text;
-            
-            if ([user length] != 0 && [pass length] !=0)
-                [self login:user withPassword:pass];
-            
-            break;
-        }
-        default:
-            NSLog(@"Unrecognized dialog!");
-            break;
-    }
 }
 
 // Login to iSENSE
