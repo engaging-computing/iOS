@@ -199,7 +199,7 @@
                 }
             }
 
-            // error checking - data should be a dictionary now
+            // TODO error checking - data should be a dictionary now
             if (![currentDS.data isKindOfClass:[NSMutableDictionary class]]) {
                 NSLog(@"Data is not a dictionary in the Data Saver");
                 continue;
