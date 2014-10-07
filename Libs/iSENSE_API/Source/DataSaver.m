@@ -152,11 +152,10 @@
     return TRUE;
 }
 
--(bool)upload:(NSString *)parentName {
+-(int)upload:(NSString *)parentName {
 
     API *api = [API getInstance];
 
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     int dataSetsToUpload = 0;
     int dataSetsFailed = 0;
     
@@ -292,17 +291,16 @@
     
     [self removeDataSets:dataSetsToBeRemoved];
     
-    bool status = FALSE;
-    if (dataSetsToUpload > 0)
-        if (dataSetsFailed > 0)
-            [prefs setInteger:DATA_UPLOAD_FAILED forKey:KEY_DATA_UPLOADED];
-        else {
-            [prefs setInteger:DATA_UPLOAD_SUCCESS forKey:KEY_DATA_UPLOADED];
-            status = TRUE;
+    int status = DATA_NONE_UPLOADED;
+
+    if (dataSetsToUpload > 0) {
+        if (dataSetsFailed > 0) {
+            status = DATA_UPLOAD_FAILED;
+        } else {
+            status = DATA_UPLOAD_SUCCESS;
         }
-        else
-            [prefs setInteger:DATA_NONE_UPLOADED forKey:KEY_DATA_UPLOADED];
-    
+    }
+
     return status;
 }
 

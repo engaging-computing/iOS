@@ -356,9 +356,19 @@
 
 - (IBAction)uploadBtnOnClick:(id)sender {
 
-    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION];
+    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION andDelegate:self];
     queueUploader.title = @"Upload";
     [self.navigationController pushViewController:queueUploader animated:YES];
+}
+
+- (void) didFinishUploadingDataWithStatus:(int)status {
+
+    if (status == DATA_NONE_UPLOADED)
+        [self.view makeWaffle:@"No data uploaded"];
+    else if (status == DATA_UPLOAD_FAILED)
+        [self.view makeWaffle:@"One or more data sets failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+    else if (status == DATA_UPLOAD_SUCCESS)
+        [self.view makeWaffle:@"Data set(s) uploaded successfully" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
 }
 
 #pragma end - Upload

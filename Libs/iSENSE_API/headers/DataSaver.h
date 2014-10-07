@@ -19,7 +19,6 @@
 #define DATA_NONE_UPLOADED  1500
 #define DATA_UPLOAD_SUCCESS 1501
 #define DATA_UPLOAD_FAILED  1502
-#define KEY_DATA_UPLOADED   @"key_data_uploaded"
 
 @interface DataSaver : NSObject {}
 
@@ -35,7 +34,7 @@
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeDescription:(NSString *)newDescription;
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeFieldsTo:(NSMutableArray *)newFields;
 
--(bool) upload:(NSString *)parentName;
+-(int) upload:(NSString *)parentName;
 
 -(void) removeAllDataSets;
 

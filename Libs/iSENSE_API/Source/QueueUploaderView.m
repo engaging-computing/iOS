@@ -11,7 +11,7 @@
 
 @implementation QueueUploaderView
 
-@synthesize api, mTableView, currentIndex, dataSaver, managedObjectContext, lastClickedCellIndex, parent, limitedTempQueue;
+@synthesize delegate, api, mTableView, currentIndex, dataSaver, managedObjectContext, lastClickedCellIndex, parent, limitedTempQueue;
 
 - (IBAction)enterEditMode:(id)sender {
     
@@ -29,18 +29,20 @@
 
 
 
--(id)initWithParentName:(NSString *)parentName {
+- (id) initWithParentName:(NSString *)parentName andDelegate:(id <QueueUploaderDelegate>)delegateObj {
 
     self = [super init];
 
     if (self) {
+        delegate = delegateObj;
+
         api = [API getInstance];
         parent = parentName;
         
         NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"];
         isenseBundle = [NSBundle bundleWithURL:bundleURL];
     }
-    
+
     return self;
 }
 
@@ -52,9 +54,9 @@
     
     if ([api getCurrentUser] != nil) {
         
-        bool uploadSuccessful = [dataSaver upload:parent];
-        if (!uploadSuccessful) NSLog(@"Upload Not Successful");
-        
+        int uploadStatus = [dataSaver upload:parent];
+        [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
+
         [self.navigationController popViewControllerAnimated:YES];
         
     } else {
@@ -425,7 +427,8 @@
             }
 
             if ([api getCurrentUser] != nil) {
-                [dataSaver upload:parent];
+                int uploadStatus = [dataSaver upload:parent];
+                [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
             }
             
             [message dismissWithClickedButtonIndex:0 animated:YES];
