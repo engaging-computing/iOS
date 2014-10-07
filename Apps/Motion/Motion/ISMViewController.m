@@ -104,10 +104,6 @@
 
         if (isRecording) {
 
-            // stop recording data
-            isRecording = false;
-
-            [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
             [self stopRecordingData];
         } else {
 
@@ -120,10 +116,6 @@
                 return;
             }
 
-            // start recording data
-            isRecording = true;
-
-            [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
             [self beginRecordingData];
         }
 
@@ -139,7 +131,10 @@
 
 - (void)beginRecordingData {
 
-    // TODO - may it be better to set the update interval slightly faster than the sampleRate?
+    // start recording data
+    isRecording = true;
+    [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
+
 
     // initialize the motion manager sensors, if available
     if (motionManager.accelerometerAvailable) {
@@ -168,6 +163,16 @@
                                                         selector:@selector(recordDataPoint)
                                                         userInfo:nil
                                                          repeats:YES];
+
+    // if the recording length is not -1 (AKA Push to Stop), then set a timer that stops recording
+    // data after the recording length interval
+    if (recordingLength != -1) {
+        [NSTimer scheduledTimerWithTimeInterval:recordingLength
+                                         target:self
+                                       selector:@selector(stopRecordingData)
+                                       userInfo:nil
+                                        repeats:NO];
+    }
 }
 
 - (void)recordDataPoint {
@@ -275,6 +280,10 @@
 }
 
 - (void)stopRecordingData {
+
+    // stop recording data
+    isRecording = false;
+    [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
 
     if (dataRecordingTimer)
         [dataRecordingTimer invalidate];
