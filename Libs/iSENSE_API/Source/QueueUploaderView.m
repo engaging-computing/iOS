@@ -30,7 +30,9 @@
 
 
 -(id)initWithParentName:(NSString *)parentName {
+
     self = [super init];
+
     if (self) {
         api = [API getInstance];
         parent = parentName;
@@ -38,6 +40,7 @@
         NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"];
         isenseBundle = [NSBundle bundleWithURL:bundleURL];
     }
+    
     return self;
 }
 
@@ -81,7 +84,6 @@
             
         }
     }
-    
 }
 
 // displays the correct xib based on orientation and device type - called automatically upon view controller entry
@@ -92,38 +94,35 @@
             [isenseBundle loadNibNamed:@"queue_layout-landscape~ipad"
                                           owner:self
                                         options:nil];
-            //[self viewDidLoad];
         } else {
             [isenseBundle loadNibNamed:@"queue_layout~ipad"
                                           owner:self
                                         options:nil];
-            //[self viewDidLoad];
         }
     } else {
         if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
             [isenseBundle loadNibNamed:@"queue_layout-landscape~iphone"
                                           owner:self
                                         options:nil];
-            //[self viewDidLoad];
         } else {
             [isenseBundle loadNibNamed:@"queue_layout~iphone"
                                           owner:self
                                         options:nil];
-            //[self viewDidLoad];
         }
     }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+
     [super viewDidAppear:YES];
     
     // Autorotate
     [self willRotateToInterfaceOrientation:(self.interfaceOrientation) duration:0];
-    
 }
 
 // Do any additional setup after loading the view.
 - (void)viewDidLoad {
+
     [super viewDidLoad];
     
     // Note: if an app crashes while loading the QueueUploaderView, please check to ensure
@@ -151,7 +150,9 @@
     
     NSArray *keys = [dataSaver.dataQueue allKeys];
     for (int i = 0; i < keys.count; i++) {
+
         QDataSet *tmp = [dataSaver.dataQueue objectForKey:keys[i]];
+
         if ([tmp.parentName isEqualToString:parent]) {
             [limitedTempQueue setObject:tmp forKey:keys[i]];
         } else {
@@ -170,13 +171,14 @@
     self.editButtonItem.target = self;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationItem.rightBarButtonItem.action = @selector(enterEditMode:);
-    
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+
     QueueCell *cell;
+
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+
         // Delete the row from the data source
         cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:indexPath];
         [limitedTempQueue removeObjectForKey:[cell getKey]];
@@ -184,8 +186,6 @@
         [self.mTableView reloadData];
         [mTableView reloadData];
     }
-    
-    
 }
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -196,6 +196,7 @@
 	switch (buttonIndex) {
             
         case QUEUE_RENAME:
+
             message = [[UIAlertView alloc] initWithTitle:@"Enter new data set name:"
                                                  message:nil
                                                 delegate:self
@@ -212,6 +213,7 @@
             break;
             
         case QUEUE_CHANGE_DESC:
+
             message = [[UIAlertView alloc] initWithTitle:@"Enter new data set description:"
                                                  message:nil
                                                 delegate:self
@@ -246,10 +248,10 @@
 		default:
 			break;
 	}
-	
 }
 
 - (void) alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+
     if (actionSheet.tag == QUEUE_LOGIN) {
         
         if (buttonIndex != OPTION_CANCELED) {
@@ -265,8 +267,6 @@
             NSString *newDataSetName = [[actionSheet textFieldAtIndex:0] text];
             QueueCell *cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:lastClickedCellIndex];
             [cell setDataSetName:newDataSetName];
-            
-            
         }
         
     } else if (actionSheet.tag == QUEUE_SELECT_PROJ) {
@@ -291,7 +291,6 @@
             ProjectBrowserViewController *browseView = [[ProjectBrowserViewController alloc] initWithDelegate:self];
             browseView.title = @"Browse Projects";
             [self.navigationController pushViewController:browseView animated:YES];
-            
         }
         
     } else if (actionSheet.tag == PROJECT_MANUAL_ENTRY) {
@@ -314,12 +313,12 @@
     } else if (actionSheet.tag == QUEUE_CHANGE_DESC) {
         
         if (buttonIndex != OPTION_CANCELED) {
+
             NSString *newDescription = [[actionSheet textFieldAtIndex:0] text];
             QueueCell *cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:lastClickedCellIndex];
             [cell setDesc:newDescription];
             [dataSaver editDataSetWithKey:cell.mKey andChangeDescription:newDescription];
         }
-        
     }
     
     [self.mTableView reloadData];
@@ -345,37 +344,44 @@
 
 // Dispose of any resources that can be recreated.
 - (void)didReceiveMemoryWarning {
+
     [super didReceiveMemoryWarning];
 }
 
 // Allows the device to rotate as necessary.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+
     // Overriden to allow any orientation.
     return YES;
 }
 
 // iOS6 enable rotation
 - (BOOL)shouldAutorotate {
+
     return YES;
 }
 
 // iOS6 enable rotation
 - (NSUInteger)supportedInterfaceOrientations {
+
     return UIInterfaceOrientationMaskAll;
 }
 
 // There is a single column in this table
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
     return 1;
 }
 
 // There are as many rows as there are DataSets
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
     return limitedTempQueue.count;
 }
 
 // Initialize a single object in the table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     static NSString *cellIndetifier = @"QueueCellIdentifier";
     QueueCell *cell = (QueueCell *)[tableView dequeueReusableCellWithIdentifier:cellIndetifier];
     if (cell == nil) {
@@ -432,6 +438,7 @@
 
 // This is for the loading spinner when the app starts automatic mode
 - (UIAlertView *) getDispatchDialogWithMessage:(NSString *)dString {
+
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:dString
                                                       message:nil
                                                      delegate:self
@@ -446,6 +453,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
     [tableView reloadData];
     
     QueueCell *cell = (QueueCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -481,12 +489,14 @@
     lastClickedCellIndex = indexPath;
 }
 
-- (BOOL) textFieldShouldReturn:(UITextField *)textField{
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+
     [textField resignFirstResponder];
     return YES;
 }
 
 - (BOOL) containsAcceptedCharacters:(NSString *)mString {
+
     NSCharacterSet *unwantedCharacters =
     [[NSCharacterSet characterSetWithCharactersInString:kACCEPTED_CHARS] invertedSet];
     
@@ -494,6 +504,7 @@
 }
 
 - (BOOL) containsAcceptedDigits:(NSString *)mString {
+
     NSCharacterSet *unwantedCharacters =
     [[NSCharacterSet characterSetWithCharactersInString:kACCEPTED_DIGITS] invertedSet];
     
@@ -509,20 +520,23 @@
         case TAG_QUEUE_RENAME:
             if (![self containsAcceptedCharacters:string])
                 return NO;
-            
-            return (newLength > 30) ? NO : YES;
+
+            // 127 character limit - 27 characters for the timestamp of the data set
+            return (newLength > 100) ? NO : YES;
             
         case TAG_QUEUE_DESC:
             if (![self containsAcceptedCharacters:string])
                 return NO;
-            
+
+            // 255 character limit
             return (newLength > 255) ? NO : YES;
             
         case TAG_QUEUE_PROJ:
             if (![self containsAcceptedDigits:string])
                 return NO;
-            
-            return (newLength > 6) ? NO : YES;
+
+            // doubtedly any project # will surpass 63 digits long; nevertheless, some limit is imposed
+            return (newLength > 63) ? NO : YES;
             
         default:
             return YES;
@@ -530,6 +544,7 @@
 }
 
 - (void) launchFieldMatchingViewControllerFromBrowse:(bool)fromBrowse {
+
     // get the fields to field match
     // an explicit new instance of the DataManager is used to avoid interfering with the singleton instance
     // maintained by other apps
@@ -570,7 +585,9 @@
 }
 
 - (void) retrieveFieldMatchedArray:(NSNotification *)obj {
+
     NSMutableArray *fieldMatch =  (NSMutableArray *)[obj object];
+
     if (fieldMatch != nil) {
         // user pressed okay button - set the cell's project and fields
         QueueCell *cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:lastClickedCellIndex];
