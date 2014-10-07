@@ -49,6 +49,7 @@ typedef enum {
 
 -(RPerson *)createSessionWithEmail:(NSString *)p_email andPassword:(NSString *)p_password;
 -(void)deleteSession;
+-(bool)loadCurrentUserFromPrefs;
 
 -(RProject *)   getProjectWithId:       (int)projectId;
 -(RDataSet *)   getDataSetWithId:       (int)dataSetId;
