@@ -213,6 +213,12 @@
 
         double accelTotal = sqrt(pow(accelX, 2) + pow(accelY, 2) + pow(accelZ, 2));
         [dc addData:[NSString stringWithFormat:@"%f", accelTotal] forKey:sACCEL_TOTAL];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [xLbl setText:[[NSString stringWithFormat:@"X: %f", accelX] substringToIndex:9]];
+            [yLbl setText:[[NSString stringWithFormat:@"Y: %f", accelY] substringToIndex:9]];
+            [zLbl setText:[[NSString stringWithFormat:@"Z: %f", accelZ] substringToIndex:9]];
+        });
     }
 
     // Temperature C, F, K - currently there is no open iOS API to the internal
@@ -284,6 +290,10 @@
     // stop recording data
     isRecording = false;
     [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
+
+    [xLbl setText:@"X:"];
+    [yLbl setText:@"Y:"];
+    [zLbl setText:@"Z:"];
 
     if (dataRecordingTimer)
         [dataRecordingTimer invalidate];
