@@ -294,11 +294,7 @@
     int status = DATA_NONE_UPLOADED;
 
     if (dataSetsToUpload > 0) {
-        if (dataSetsFailed > 0) {
-            status = DATA_UPLOAD_FAILED;
-        } else {
-            status = DATA_UPLOAD_SUCCESS;
-        }
+        status = (dataSetsFailed > 0) ? DATA_UPLOAD_FAILED : DATA_UPLOAD_SUCCESS;
     }
 
     return status;
