@@ -31,14 +31,18 @@
     // API and DataManager
     API *api;
     DataManager *dm;
+
+    // Label for when in dev mode
+    UILabel *devLbl;
     
     // Credential Manager
     CredentialManager *credentialMgr;
     DLAVAlertView *credentialMgrAlert;
     
-    // Sample rate and recording length
+    // Sample rate, recording length, and data set name
     double sampleRate;
     int recordingLength;
+    NSString *dataSetName;
 
     // Recording state, timer, and sensor objects
     bool isRecording;
@@ -66,6 +70,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *recordingLengthBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *startStopBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *nameBtn;
+- (IBAction)nameBtnOnClick:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
 - (IBAction)uploadBtnOnClick:(id)sender;

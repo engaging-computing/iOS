@@ -24,7 +24,7 @@
 // Queue Saver Properties
 @synthesize dataSaver, managedObjectContext;
 // UI
-@synthesize credentialBarBtn, xLbl, yLbl, zLbl, sampleRateBtn, recordingLengthBtn, startStopBtn, uploadBtn, projectBtn;
+@synthesize credentialBarBtn, xLbl, yLbl, zLbl, sampleRateBtn, recordingLengthBtn, startStopBtn, nameBtn, uploadBtn, projectBtn;
 
 
 #pragma mark - View and overriden methods
@@ -53,19 +53,19 @@
         [api loadCurrentUserFromPrefs];
     });
 
+    // Set the Z: label to be our secret dev/non-dev switch
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleDev)];
+    tapGestureRecognizer.numberOfTapsRequired = 7;
+    [zLbl addGestureRecognizer:tapGestureRecognizer];
+    zLbl.userInteractionEnabled = YES;
+
+    // Creates a label that states "USING DEV" if the API is in dev mode
+    [self checkAPIOnDev];
+
     // Add long press gesture recognizer to the start-stop button
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
                                                initWithTarget:self action:@selector(startStopOnLongClick:)];
     [startStopBtn addGestureRecognizer:longPress];
-
-    // Friendly reminder the app is on dev - app should never be released in dev mode
-    if ([api isUsingDev]) {
-        UILabel *devLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
-        devLabel.font = [UIFont fontWithName:@"Helvetica" size:8];
-        devLabel.text = @"USING DEV";
-        devLabel.textColor = [UIColor redColor];
-        [self.view addSubview:devLabel];
-    }
 
     // Initialize the location manager (TODO - may be best to eventually move this call so it's only called when needed)
     [self initLocations];
@@ -73,12 +73,34 @@
     // Initialize the motion manager
     motionManager = [[CMMotionManager alloc] init];
 
-    // Default sample rate and recording length
+    // Default sample rate, recording length, and data set name
     sampleRate = kDEFAULT_SAMPLE_RATE;
     recordingLength = kDEFAULT_RECORDING_LENGTH;
+    dataSetName = kDEFAULT_DATA_SET_NAME;
 
     // Ensure isRecording is set to false on loading the view
     isRecording = false;
+}
+
+- (void)toggleDev {
+
+    [api useDev:![api isUsingDev]];
+    [self.view makeWaffle:([api isUsingDev] ? @"Using dev" : @"Using production")];
+    [self checkAPIOnDev];
+}
+
+- (void)checkAPIOnDev {
+
+    if ([api isUsingDev]) {
+        devLbl = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
+        devLbl.font = [UIFont fontWithName:@"Helvetica" size:8];
+        devLbl.backgroundColor = [UIColor clearColor];
+        devLbl.text = @"USING DEV";
+        devLbl.textColor = [UIColor redColor];
+        [self.view addSubview:devLbl];
+    } else if (devLbl) {
+        [devLbl removeFromSuperview];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,6 +116,36 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+    switch (alertView.tag) {
+        case kLOGIN_DIALOG_TAG:
+        {
+            NSString *user = [alertView textFieldAtIndex:0].text;
+            NSString *pass = [alertView textFieldAtIndex:1].text;
+
+            if ([user length] != 0 && [pass length] !=0)
+                [self login:user withPassword:pass];
+
+            break;
+        }
+        case kNAME_DIALOG_TAG:
+        {
+            NSString *name = [alertView textFieldAtIndex:0].text;
+
+            if (name && [name length] > 0) {
+                dataSetName = name;
+                [nameBtn setTitle:dataSetName forState:UIControlStateNormal];
+            }
+
+            break;
+        }
+        default:
+            NSLog(@"Unrecognized dialog!");
+            break;
+    }
+}
+
 #pragma end - View and overriden methods
 
 #pragma mark - Recording data
@@ -104,10 +156,6 @@
 
         if (isRecording) {
 
-            // stop recording data
-            isRecording = false;
-
-            [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
             [self stopRecordingData];
         } else {
 
@@ -120,10 +168,6 @@
                 return;
             }
 
-            // start recording data
-            isRecording = true;
-
-            [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
             [self beginRecordingData];
         }
 
@@ -139,7 +183,10 @@
 
 - (void)beginRecordingData {
 
-    // TODO - may it be better to set the update interval slightly faster than the sampleRate?
+    // start recording data
+    isRecording = true;
+    [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
+
 
     // initialize the motion manager sensors, if available
     if (motionManager.accelerometerAvailable) {
@@ -168,6 +215,16 @@
                                                         selector:@selector(recordDataPoint)
                                                         userInfo:nil
                                                          repeats:YES];
+
+    // if the recording length is not -1 (AKA Push to Stop), then set a timer that stops recording
+    // data after the recording length interval
+    if (recordingLength != -1) {
+        [NSTimer scheduledTimerWithTimeInterval:recordingLength
+                                         target:self
+                                       selector:@selector(stopRecordingData)
+                                       userInfo:nil
+                                        repeats:NO];
+    }
 }
 
 - (void)recordDataPoint {
@@ -208,6 +265,12 @@
 
         double accelTotal = sqrt(pow(accelX, 2) + pow(accelY, 2) + pow(accelZ, 2));
         [dc addData:[NSString stringWithFormat:@"%f", accelTotal] forKey:sACCEL_TOTAL];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [xLbl setText:[[NSString stringWithFormat:@"X: %f", accelX] substringToIndex:9]];
+            [yLbl setText:[[NSString stringWithFormat:@"Y: %f", accelY] substringToIndex:9]];
+            [zLbl setText:[[NSString stringWithFormat:@"Z: %f", accelZ] substringToIndex:9]];
+        });
     }
 
     // Temperature C, F, K - currently there is no open iOS API to the internal
@@ -276,6 +339,14 @@
 
 - (void)stopRecordingData {
 
+    // stop recording data
+    isRecording = false;
+    [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
+
+    [xLbl setText:@"X:"];
+    [yLbl setText:@"Y:"];
+    [zLbl setText:@"Z:"];
+
     if (dataRecordingTimer)
         [dataRecordingTimer invalidate];
 
@@ -311,26 +382,9 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-
-    NSLog(@"didFailWithError: %@", error);
-
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-
-    // TODO - this code can be left for debugging purposes, but really this method is not utilized
-    // for the app.  It can be left as a blank stub (we're required to override it as part of the
-    // location delegate)
-
-    double newLatitude = newLocation.coordinate.latitude, newLongitude = newLocation.coordinate.longitude;
-    double oldLatitude = oldLocation.coordinate.latitude, oldLongitude = oldLocation.coordinate.longitude;
-
-    // only update GPS coordinates when a new point is received
-    if (newLatitude != oldLatitude && newLongitude != oldLongitude) {
-
-        NSLog(@"didUpdateToLocation: %@", newLocation);
-    }
-
 }
 
 #pragma end - Location
@@ -341,7 +395,7 @@
 - (void) saveData {
 
     [dataSaver addDataSetWithContext:managedObjectContext
-                                name:@"TODO Name"
+                                name:dataSetName
                           parentName:PARENT_MOTION
                          description:@"Uploaded from iOS Motion"
                            projectID:[dm getProjectID]
@@ -383,6 +437,23 @@
 }
 
 #pragma end - Upload
+
+#pragma mark - Name
+
+- (IBAction)nameBtnOnClick:(id)sender {
+
+    UIAlertView *enterNameAlart = [[UIAlertView alloc] initWithTitle:@"Enter a Data Set Name" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    [enterNameAlart setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    enterNameAlart.tag = kNAME_DIALOG_TAG;
+
+    [enterNameAlart textFieldAtIndex:0].delegate = self;
+    [[enterNameAlart textFieldAtIndex:0] becomeFirstResponder];
+    [enterNameAlart textFieldAtIndex:0].placeholder = @"your name or a data set name";
+
+    [enterNameAlart show];
+}
+
+#pragma end - Name
 
 #pragma mark - Credentials
 
@@ -428,26 +499,6 @@
     [loginAlert textFieldAtIndex:1].tag = kLOGIN_PASS_TEXT;
     
     [loginAlert show];
-}
-
-// Overridden delegate method to capture the user's login credentials and attempt a login
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    switch (alertView.tag) {
-        case kLOGIN_DIALOG_TAG:
-        {
-            NSString *user = [alertView textFieldAtIndex:0].text;
-            NSString *pass = [alertView textFieldAtIndex:1].text;
-            
-            if ([user length] != 0 && [pass length] !=0)
-                [self login:user withPassword:pass];
-            
-            break;
-        }
-        default:
-            NSLog(@"Unrecognized dialog!");
-            break;
-    }
 }
 
 // Login to iSENSE
