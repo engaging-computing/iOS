@@ -53,19 +53,19 @@
         [api loadCurrentUserFromPrefs];
     });
 
+    // Set the Z: label to be our secret dev/non-dev switch
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleDev)];
+    tapGestureRecognizer.numberOfTapsRequired = 7;
+    [zLbl addGestureRecognizer:tapGestureRecognizer];
+    zLbl.userInteractionEnabled = YES;
+
+    // Creates a label that states "USING DEV" if the API is in dev mode
+    [self checkAPIOnDev];
+
     // Add long press gesture recognizer to the start-stop button
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
                                                initWithTarget:self action:@selector(startStopOnLongClick:)];
     [startStopBtn addGestureRecognizer:longPress];
-
-    // Friendly reminder the app is on dev - app should never be released in dev mode
-    if ([api isUsingDev]) {
-        UILabel *devLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
-        devLabel.font = [UIFont fontWithName:@"Helvetica" size:8];
-        devLabel.text = @"USING DEV";
-        devLabel.textColor = [UIColor redColor];
-        [self.view addSubview:devLabel];
-    }
 
     // Initialize the location manager (TODO - may be best to eventually move this call so it's only called when needed)
     [self initLocations];
@@ -80,6 +80,27 @@
 
     // Ensure isRecording is set to false on loading the view
     isRecording = false;
+}
+
+- (void)toggleDev {
+
+    [api useDev:![api isUsingDev]];
+    [self.view makeWaffle:([api isUsingDev] ? @"Using dev" : @"Using production")];
+    [self checkAPIOnDev];
+}
+
+- (void)checkAPIOnDev {
+
+    if ([api isUsingDev]) {
+        devLbl = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
+        devLbl.font = [UIFont fontWithName:@"Helvetica" size:8];
+        devLbl.backgroundColor = [UIColor clearColor];
+        devLbl.text = @"USING DEV";
+        devLbl.textColor = [UIColor redColor];
+        [self.view addSubview:devLbl];
+    } else if (devLbl) {
+        [devLbl removeFromSuperview];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

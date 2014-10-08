@@ -31,6 +31,9 @@
     // API and DataManager
     API *api;
     DataManager *dm;
+
+    // Label for when in dev mode
+    UILabel *devLbl;
     
     // Credential Manager
     CredentialManager *credentialMgr;

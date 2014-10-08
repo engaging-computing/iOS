@@ -254,7 +254,7 @@
 - (void) alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     // update the arrays of data and re-draw the scrollview, then field matching is done
     FieldEntry *fe = [entries objectAtIndex:fieldTag];
-    fe->matchedField = fieldName;
+    fe->matchedField = (fieldName) ? fieldName : @"";
     [entries setObject:fe atIndexedSubscript:fieldTag];
     
     // re-draw the field cell
