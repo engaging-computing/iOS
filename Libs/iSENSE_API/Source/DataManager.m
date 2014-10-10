@@ -156,7 +156,7 @@
 // Change the data array from row-major to column-major
 // It should take as an input a JSONArray of the JSONObjects created by the
 // writeDataFieldsToJSONObject method
-+ (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recFields {
++ (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID {
 
     NSMutableDictionary *outData = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *row     = [[NSMutableDictionary alloc] init];
@@ -166,26 +166,16 @@
     // If the recognized fields are null, set up the recognized fields and fieldIDs.
     // Otherwise, if recognized fields are not null but the field IDs are, pull the project's field IDs, retaining
     // the user's passed in field-matched recognized fields array for that project.
-    if (!recFields || recFields.count == 0 || !ids || ids.count == 0) {
+    if (!ids || ids.count == 0) {
 
         DataManager *dm = [[DataManager alloc] init];
         [dm setProjectID:projID];
         [dm retrieveProjectFields];
         ids = [dm getProjectFieldIDs];
-
-        if (!recFields || recFields.count == 0) {
-            recFields = [dm getRecognizedFields];
-        }
-    }
-
-    // ensure recFields and ids arrays are of equal length
-    if (recFields.count != ids.count) {
-        NSLog(@"Unequal arrays of field IDs and recognized fields.  Cannot change data to column major");
-        return nil;
     }
 
     // reorder the data from row major to column major format
-    for (int i = 0; i < recFields.count; i++) {
+    for (int i = 0; i < ids.count; i++) {
 
         NSNumber *fieldID = [ids objectAtIndex:i];
         outRow = [[NSMutableArray alloc] init];

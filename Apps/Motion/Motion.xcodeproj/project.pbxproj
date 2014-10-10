@@ -29,6 +29,17 @@
 		B76C43C519C8722800B0A19B /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF219BF34F800BB8994 /* Main_iPhone.storyboard */; };
 		B76C43C619C8723100B0A19B /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF519BF34F800BB8994 /* Main_iPad.storyboard */; };
 		B76C43C719C8764200B0A19B /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7186A3A19BF369400F18847 /* iSENSE_API_Bundle.bundle */; };
+		B792914A19E834260064E793 /* li320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914119E834260064E793 /* li320x480.png */; };
+		B792914B19E834260064E793 /* li640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914219E834260064E793 /* li640x960.png */; };
+		B792914C19E834260064E793 /* li640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914319E834260064E793 /* li640x1136.png */; };
+		B792914D19E834260064E793 /* li768x1004.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914419E834260064E793 /* li768x1004.png */; };
+		B792914E19E834260064E793 /* li768x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914519E834260064E793 /* li768x1024.png */; };
+		B792915019E834260064E793 /* li1024x768.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914719E834260064E793 /* li1024x768.png */; };
+		B792915119E834260064E793 /* li1536x2048.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914819E834260064E793 /* li1536x2048.png */; };
+		B792915219E834260064E793 /* li2048x1536.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914919E834260064E793 /* li2048x1536.png */; };
+		B792915419E834A00064E793 /* li1536x2008.png in Resources */ = {isa = PBXBuildFile; fileRef = B792915319E834A00064E793 /* li1536x2008.png */; };
+		B792915619E835F80064E793 /* li2048x1496.png in Resources */ = {isa = PBXBuildFile; fileRef = B792915519E835F80064E793 /* li2048x1496.png */; };
+		B792915819E836840064E793 /* li1024x748.png in Resources */ = {isa = PBXBuildFile; fileRef = B792915719E836840064E793 /* li1024x748.png */; };
 		B7C9BBFA19D9B0A90001A833 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C9BBF919D9B0A90001A833 /* CoreLocation.framework */; };
 		B7C9BBFD19D9BAC80001A833 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C9BBFC19D9BAC80001A833 /* CoreMotion.framework */; };
 		B7D98CE119BF34F800BB8994 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE019BF34F800BB8994 /* Foundation.framework */; };
@@ -101,6 +112,17 @@
 		B7477A5619D9886C001C561F /* 76@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "76@1x.png"; path = "Resources/Icons/76@1x.png"; sourceTree = "<group>"; };
 		B7477A5719D9886C001C561F /* 76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "76@2x.png"; path = "Resources/Icons/76@2x.png"; sourceTree = "<group>"; };
 		B7477A5819D9886C001C561F /* 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1024x1024.png; path = Resources/Icons/1024x1024.png; sourceTree = "<group>"; };
+		B792914119E834260064E793 /* li320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li320x480.png; path = Resources/LaunchImages/li320x480.png; sourceTree = "<group>"; };
+		B792914219E834260064E793 /* li640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li640x960.png; path = Resources/LaunchImages/li640x960.png; sourceTree = "<group>"; };
+		B792914319E834260064E793 /* li640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li640x1136.png; path = Resources/LaunchImages/li640x1136.png; sourceTree = "<group>"; };
+		B792914419E834260064E793 /* li768x1004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li768x1004.png; path = Resources/LaunchImages/li768x1004.png; sourceTree = "<group>"; };
+		B792914519E834260064E793 /* li768x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li768x1024.png; path = Resources/LaunchImages/li768x1024.png; sourceTree = "<group>"; };
+		B792914719E834260064E793 /* li1024x768.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li1024x768.png; path = Resources/LaunchImages/li1024x768.png; sourceTree = "<group>"; };
+		B792914819E834260064E793 /* li1536x2048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li1536x2048.png; path = Resources/LaunchImages/li1536x2048.png; sourceTree = "<group>"; };
+		B792914919E834260064E793 /* li2048x1536.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li2048x1536.png; path = Resources/LaunchImages/li2048x1536.png; sourceTree = "<group>"; };
+		B792915319E834A00064E793 /* li1536x2008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li1536x2008.png; path = Resources/LaunchImages/li1536x2008.png; sourceTree = "<group>"; };
+		B792915519E835F80064E793 /* li2048x1496.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li2048x1496.png; path = Resources/LaunchImages/li2048x1496.png; sourceTree = "<group>"; };
+		B792915719E836840064E793 /* li1024x748.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li1024x748.png; path = Resources/LaunchImages/li1024x748.png; sourceTree = "<group>"; };
 		B7C9BBF919D9B0A90001A833 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B7C9BBFC19D9BAC80001A833 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		B7D98CDD19BF34F800BB8994 /* Motion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motion.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +196,7 @@
 			children = (
 				B7477A4919D98858001C561F /* button-37.wav */,
 				B7186A5C19BF606000F18847 /* Icons */,
+				B792913319E82CE40064E793 /* LaunchIcons */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -259,6 +282,24 @@
 				B72B23EE19C9EFF60000EE66 /* Constants.h */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		B792913319E82CE40064E793 /* LaunchIcons */ = {
+			isa = PBXGroup;
+			children = (
+				B792914119E834260064E793 /* li320x480.png */,
+				B792914219E834260064E793 /* li640x960.png */,
+				B792914319E834260064E793 /* li640x1136.png */,
+				B792914419E834260064E793 /* li768x1004.png */,
+				B792914519E834260064E793 /* li768x1024.png */,
+				B792915719E836840064E793 /* li1024x748.png */,
+				B792914719E834260064E793 /* li1024x768.png */,
+				B792915319E834A00064E793 /* li1536x2008.png */,
+				B792914819E834260064E793 /* li1536x2048.png */,
+				B792915519E835F80064E793 /* li2048x1496.png */,
+				B792914919E834260064E793 /* li2048x1536.png */,
+			);
+			name = LaunchIcons;
 			sourceTree = "<group>";
 		};
 		B7D98CD419BF34F800BB8994 = {
@@ -442,21 +483,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7477A5D19D9886C001C561F /* 50@1x.png in Resources */,
+				B792915219E834260064E793 /* li2048x1536.png in Resources */,
+				B792915819E836840064E793 /* li1024x748.png in Resources */,
+				B792915419E834A00064E793 /* li1536x2008.png in Resources */,
 				B7477A5B19D9886C001C561F /* 40@1x.png in Resources */,
+				B792914B19E834260064E793 /* li640x960.png in Resources */,
+				B792915619E835F80064E793 /* li2048x1496.png in Resources */,
 				B7477A6619D9886C001C561F /* 1024x1024.png in Resources */,
+				B792915119E834260064E793 /* li1536x2048.png in Resources */,
 				B76C43C719C8764200B0A19B /* iSENSE_API_Bundle.bundle in Resources */,
+				B792914E19E834260064E793 /* li768x1024.png in Resources */,
 				B7477A5C19D9886C001C561F /* 40@2x.png in Resources */,
 				B7477A5A19D9886C001C561F /* 29@2x.png in Resources */,
 				B7477A6319D9886C001C561F /* 72@2x.png in Resources */,
+				B792914D19E834260064E793 /* li768x1004.png in Resources */,
 				B76C43C519C8722800B0A19B /* Main_iPhone.storyboard in Resources */,
 				B76C43C619C8723100B0A19B /* Main_iPad.storyboard in Resources */,
 				B7477A6519D9886C001C561F /* 76@2x.png in Resources */,
 				B7477A5E19D9886C001C561F /* 50@2x.png in Resources */,
 				B7477A6019D9886C001C561F /* 57@2x.png in Resources */,
 				B7477A5919D9886C001C561F /* 29@1x.png in Resources */,
+				B792915019E834260064E793 /* li1024x768.png in Resources */,
 				B7D98CFC19BF34F800BB8994 /* Images.xcassets in Resources */,
 				B7477A6119D9886C001C561F /* 60@2x.png in Resources */,
 				B7477A5F19D9886C001C561F /* 57@1x.png in Resources */,
+				B792914A19E834260064E793 /* li320x480.png in Resources */,
+				B792914C19E834260064E793 /* li640x1136.png in Resources */,
 				B7477A6419D9886C001C561F /* 76@1x.png in Resources */,
 				B7477A4A19D98858001C561F /* button-37.wav in Resources */,
 				B7477A6219D9886C001C561F /* 72@1x.png in Resources */,

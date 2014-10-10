@@ -185,16 +185,14 @@
                     continue;
                 } else {
                     currentDS.data = [DataManager convertDataToColumnMajor:currentDS.data
-                                                              forProjectID:currentDS.projID.intValue
-                                                       andRecognizedFields:currentDS.fields];
+                                                              forProjectID:currentDS.projID.intValue];
                 }
             } else {
                 // see if the data is an array (row-major) instead of a dictionary (column-major).
                 // iSENSE expects column-major data, so row-major data will be converted here
                 if ([currentDS.data isKindOfClass:[NSMutableArray class]]) {
                     currentDS.data = [DataManager convertDataToColumnMajor:currentDS.data
-                                                              forProjectID:currentDS.projID.intValue
-                                                       andRecognizedFields:currentDS.fields];
+                                                              forProjectID:currentDS.projID.intValue];
                 }
             }
 
