@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DieView.h"
 #import "API.h"
+#import "DiceDataController.h"
 
 @interface ViewController : UIViewController{
     //Inside here we can declare api objects
     API *api;
+    DiceDataController *diceController;
 }
 @property (weak, nonatomic) IBOutlet UIButton *rollButton;
 @property (weak, nonatomic) IBOutlet UILabel *sumLabel;
