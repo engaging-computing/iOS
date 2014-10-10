@@ -43,6 +43,27 @@
     
 }
 
+// wrapper to add a data set - creates the QDataSet object internally
+-(void) addDataSetWithContext:(NSManagedObjectContext *) manObjCntxt name:(NSString *)name parentName:(NSString *)prntName description:(NSString *)dscrptn projectID:(int)projID data:(id)data mediaPaths:(id)media uploadable:(BOOL)upldbl hasInitialProject:(BOOL)hasInitialProj andFields:(id)fields {
+
+    QDataSet *ds = [[QDataSet alloc]
+                    initWithEntity:[NSEntityDescription entityForName:@"QDataSet"
+                                               inManagedObjectContext:manObjCntxt]
+                    insertIntoManagedObjectContext:manObjCntxt];
+
+    [ds setName:name];
+    [ds setParentName:prntName];
+    [ds setDataDescription:dscrptn];
+    [ds setProjID:[NSNumber numberWithInt:projID]];
+    [ds setData:data];
+    [ds setPicturePaths:media];
+    [ds setUploadable:[NSNumber numberWithBool:upldbl]];
+    [ds setHasInitialProj:[NSNumber numberWithBool:hasInitialProj]];
+    [ds setFields:fields];
+
+    [self addDataSet:ds];
+}
+
 -(void)addDataSetFromCoreData:(QDataSet *)dataSet {
     
     int newKey = arc4random();
@@ -131,11 +152,10 @@
     return TRUE;
 }
 
--(bool)upload:(NSString *)parentName {
+-(int)upload:(NSString *)parentName {
 
     API *api = [API getInstance];
 
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     int dataSetsToUpload = 0;
     int dataSetsFailed = 0;
     
@@ -169,22 +189,27 @@
                                                        andRecognizedFields:currentDS.fields];
                 }
             } else {
-                // see if the elements are NSMutableArrays or NSMutableObjects: if arrays, reorder data
-                if ([[currentDS.data objectAtIndex:0] isKindOfClass:[NSMutableArray class]]) {
+                // see if the data is an array (row-major) instead of a dictionary (column-major).
+                // iSENSE expects column-major data, so row-major data will be converted here
+                if ([currentDS.data isKindOfClass:[NSMutableArray class]]) {
                     currentDS.data = [DataManager convertDataToColumnMajor:currentDS.data
                                                               forProjectID:currentDS.projID.intValue
                                                        andRecognizedFields:currentDS.fields];
                 }
             }
-            
+
+            // TODO error checking - data should be a dictionary now
+            if (![currentDS.data isKindOfClass:[NSMutableDictionary class]]) {
+                NSLog(@"Data is not a dictionary in the Data Saver");
+                continue;
+            }
+
             // upload to iSENSE
             __block int returnID = -1;
             if (((NSArray *)currentDS.data).count) {
-                
-                NSMutableDictionary *jobj = [[NSMutableDictionary alloc] init];
-                [jobj setObject:currentDS.data forKey:@"data"];
-                jobj = [[api rowsToCols:jobj] mutableCopy];
-                
+
+                NSMutableDictionary *jobj = (NSMutableDictionary *) currentDS.data;
+
                 if ([api getCurrentUser] == nil) {
 
                     DLAVAlertView *contribKeyAlert = [[DLAVAlertView alloc] initWithTitle:@"Enter Contributor Key" message:[NSString stringWithFormat:@"%@%@", @"Data Set: ", currentDS.name] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
@@ -266,17 +291,12 @@
     
     [self removeDataSets:dataSetsToBeRemoved];
     
-    bool status = FALSE;
-    if (dataSetsToUpload > 0)
-        if (dataSetsFailed > 0)
-            [prefs setInteger:DATA_UPLOAD_FAILED forKey:KEY_DATA_UPLOADED];
-        else {
-            [prefs setInteger:DATA_UPLOAD_SUCCESS forKey:KEY_DATA_UPLOADED];
-            status = TRUE;
-        }
-        else
-            [prefs setInteger:DATA_NONE_UPLOADED forKey:KEY_DATA_UPLOADED];
-    
+    int status = DATA_NONE_UPLOADED;
+
+    if (dataSetsToUpload > 0) {
+        status = (dataSetsFailed > 0) ? DATA_UPLOAD_FAILED : DATA_UPLOAD_SUCCESS;
+    }
+
     return status;
 }
 

@@ -19,21 +19,28 @@
 #define DATA_NONE_UPLOADED  1500
 #define DATA_UPLOAD_SUCCESS 1501
 #define DATA_UPLOAD_FAILED  1502
-#define KEY_DATA_UPLOADED   @"key_data_uploaded"
 
 @interface DataSaver : NSObject {}
 
 -(id)   initWithContext:(NSManagedObjectContext *)context;
+
 -(void) addDataSetFromCoreData:(QDataSet *)dataSet;
 -(BOOL) addDataSet:(QDataSet *)dataSet;
+-(void) addDataSetWithContext:(NSManagedObjectContext *) manObjCntxt name:(NSString *)name parentName:(NSString *)prntName description:(NSString *)dscrptn projectID:(int)projID data:(id)data mediaPaths:(id)media uploadable:(BOOL)upldbl hasInitialProject:(BOOL)hasInitialProj andFields:(id)fields;
+
 -(id)   removeDataSet:(NSNumber *)key;
+
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeProjIDTo:(NSNumber *)newProjID;
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeDescription:(NSString *)newDescription;
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeFieldsTo:(NSMutableArray *)newFields;
--(bool) upload:(NSString *)parentName;
+
+-(int) upload:(NSString *)parentName;
+
 -(void) removeAllDataSets;
+
 -(id)   getDataSet;
 -(id)   getDataSetWithKey:(NSNumber *)key;
+
 -(int)  dataSetCountWithParentName:(NSString *)pn;
 
 @property (nonatomic, retain) NSMutableDictionary *dataQueue;

@@ -20,6 +20,7 @@
 @synthesize loginoutButton, nameLabel, gravatarView,  api, loginalert, delegate;
 
 - (void) loadView {
+
     self.view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 276, 102)];
     gravatarView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 102, 102)];
     nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 20, 148, 21)];
@@ -52,13 +53,14 @@
 }
 
 - (CredentialManager *) initWithDelegate:(__weak id<CredentialManagerDelegate>) delegateObject {
+
     self = [self init];
     self.delegate = delegateObject;
     return self;
-    
 }
 
 - (CGRect)frameForOrientation:(UIInterfaceOrientation)orientation {
+
 	CGRect frame;
 	
 	if ((orientation == UIInterfaceOrientationLandscapeLeft) || (orientation == UIInterfaceOrientationLandscapeRight)) {
@@ -77,32 +79,28 @@
     NSBundle *isenseBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"]];
     
     if ([api getCurrentUser] == nil) {
+
         NSString *path = [isenseBundle pathForResource:@"default_user" ofType:@"png"];
-        //NSLog([@"Path: " stringByAppendingString:path]);
         UIImage *img = [UIImage imageWithContentsOfFile:path];
         [gravatarView setImage:img];
         [loginoutButton setTitle:@"Login" forState:UIControlStateNormal];
         [nameLabel setText:@"Not Logged In"];
     } else {
+        
         [gravatarView setImage:[[api getCurrentUser] gravatarImage]];
         [nameLabel setText:[[api getCurrentUser] name]];
         [loginoutButton setTitle:@"Logout" forState:UIControlStateNormal];
     }
-
 }
 
 - (void)loginLogout {
-    NSLog(@"Got button press");
+    
     if ([api getCurrentUser] == nil) {
-        NSLog(@"Login dialog");
         [self.delegate didPressLogin:self];
-
     } else {
         [api deleteSession];
-        NSLog(@"Deleted session");
         [self loadUserInfo];
     }
-    
 }
 
 

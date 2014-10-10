@@ -34,6 +34,14 @@
 #define PARENT_CANOBIE      @"CanobiePhysics"
 #define PARENT_MOTION       @"ISMotion"
 
+@class QueueUploaderView;
+@protocol QueueUploaderDelegate <NSObject>
+
+@required
+- (void) didFinishUploadingDataWithStatus:(int)status;
+
+@end
+
 @interface QueueUploaderView : UIViewController <UIGestureRecognizerDelegate, UIActionSheetDelegate, UITextFieldDelegate, ProjectBrowserDelegate> {
     int projID;
     
@@ -43,7 +51,9 @@
 
 - (IBAction) upload:(id)sender;
 
-- (id) initWithParentName:(NSString *)parentName;
+- (id) initWithParentName:(NSString *)parentName andDelegate:(id <QueueUploaderDelegate>)delegateObj;
+
+@property (nonatomic, weak) id <QueueUploaderDelegate> delegate;
 
 @property (nonatomic, assign) API *api;
 @property (nonatomic, copy)   NSString *parent;

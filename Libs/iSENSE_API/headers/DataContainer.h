@@ -12,7 +12,7 @@
 @interface DataContainer : NSObject {}
 
 @property (retain) NSMutableDictionary* data;
--(void) addData:(NSNumber *)dataValue forKey:(NSString *)dataKey;
+-(void) addData:(NSString *)dataValue forKey:(NSString *)dataKey;
 
 // Fields string constants
 #define sNULL_STRING    @"nil"
