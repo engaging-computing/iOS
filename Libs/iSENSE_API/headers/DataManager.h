@@ -38,6 +38,6 @@
 - (NSMutableDictionary *) writeDataToJSONObject:(DataContainer *)dc;
 
 // a staticly available row-to-column major formatting of data
-+ (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recFields;
++ (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID;
 
 @end

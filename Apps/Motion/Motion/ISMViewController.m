@@ -509,10 +509,11 @@
     
     dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_t_dialog_login", NULL);
     dispatch_async(queue, ^{
-        
+
+        RPerson *currUser = [api createSessionWithEmail:email andPassword:pass];
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            RPerson *currUser = [api createSessionWithEmail:email andPassword:pass];
+
             if (currUser != nil) {
                 [self.view makeWaffle:[NSString stringWithFormat:@"Login as %@ successful", email]
                              duration:WAFFLE_LENGTH_SHORT
