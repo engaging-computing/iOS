@@ -49,16 +49,26 @@
 // Upload button control
 -(IBAction)upload:(id)sender {
 
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setBool:TRUE forKey:KEY_ATTEMPTED_UPLOAD];
-    
     if ([api getCurrentUser] != nil) {
-        
-        int uploadStatus = [dataSaver upload:parent];
-        [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
 
-        [self.navigationController popViewControllerAnimated:YES];
-        
+        UIAlertView *message = [self getDispatchDialogWithMessage:@"Uploading data sets..."];
+        [message show];
+
+        dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_queue_uploader_upload", NULL);
+        dispatch_async(queue, ^{
+
+            int uploadStatus = [dataSaver upload:parent];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
+                
+                [message dismissWithClickedButtonIndex:0 animated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+
+        });
+
     } else {
         NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
         NSString *user = [prefs objectForKey:KEY_USERNAME];
@@ -165,11 +175,7 @@
             // changing a data set's project kills it completely.  And that's bad.
         }
     }
-    
-    // set that we haven't tried uploading anything yet
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setBool:FALSE forKey:KEY_ATTEMPTED_UPLOAD];
-    
+        
     self.editButtonItem.target = self;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationItem.rightBarButtonItem.action = @selector(enterEditMode:);
@@ -403,20 +409,33 @@
     
     UIAlertView *message = [self getDispatchDialogWithMessage:@"Logging in..."];
     [message show];
-    
-    dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_in_queue_uploader_view", NULL);
+
+    dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_queue_uploader_log_in", NULL);
     dispatch_async(queue, ^{
+
+        RPerson *user = [api createSessionWithEmail:usernameInput andPassword:passwordInput];
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([api createSessionWithEmail:usernameInput andPassword:passwordInput] != nil) {
+
+            if (user != nil) {
                 
-                // save the username and password in prefs
-                NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-                [prefs setObject:usernameInput forKey:KEY_USERNAME];
-                [prefs setObject:passwordInput forKey:KEY_PASSWORD];
-                [prefs synchronize];
-                
+                // upload data
                 [message setTitle:@"Uploading data sets..."];
-                
+
+                dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_queue_uploader_upload_data", NULL);
+                dispatch_async(queue, ^{
+
+                    int uploadStatus = [dataSaver upload:parent];
+
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
+
+                        [message dismissWithClickedButtonIndex:0 animated:YES];
+                        [self.navigationController popViewControllerAnimated:YES];
+                    });
+
+                });
+
             } else {
                 [self.view makeWaffle:@"Login Failed"
                              duration:WAFFLE_LENGTH_SHORT
@@ -425,18 +444,8 @@
                 [message dismissWithClickedButtonIndex:0 animated:YES];
                 return;
             }
-
-            if ([api getCurrentUser] != nil) {
-                int uploadStatus = [dataSaver upload:parent];
-                [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
-            }
-            
-            [message dismissWithClickedButtonIndex:0 animated:YES];
-            [self.navigationController popViewControllerAnimated:YES];
-            
         });
     });
-    
 }
 
 // This is for the loading spinner when the app starts automatic mode

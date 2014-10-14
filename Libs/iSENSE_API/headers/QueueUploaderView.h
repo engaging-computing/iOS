@@ -24,8 +24,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVCaptureDevice.h>
 
-#define KEY_ATTEMPTED_UPLOAD    @"key_attempted_upload"
-
 // Parent name constants: add a new one for each app
 #define PARENT_AUTOMATIC    @"Automatic"
 #define PARENT_MANUAL       @"Manual"
