@@ -151,8 +151,8 @@
         NSInteger currentOffset = scroll.contentOffset.y;
         NSInteger maximumOffset = scroll.contentSize.height - scroll.frame.size.height;
         
-        // Change 10.0 to adjust the distance from bottom
-        if (maximumOffset - currentOffset <= 10) {
+        // Change 1.0 to adjust the distance from bottom
+        if (maximumOffset - currentOffset <= 1.0) {
             isUpdating = true;
             [self update];
         }
@@ -190,33 +190,30 @@
 -(void)updateProjects:(ISenseSearch *)iSS {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        if (projects == nil) {
+
+            projects = [[NSMutableArray alloc] init];
+            projectsFiltered = [[NSMutableArray alloc] init];
+            self.tableView.dataSource = self;
+            self.tableView.delegate = self;
+        }
+
+        if (![iSS.query isEqualToString:@""]){
+            [projectsFiltered addObjectsFromArray:[isenseAPI getProjectsAtPage:iSS.page withPageLimit:iSS.perPage withFilter:CREATED_AT_DESC andQuery:iSS.query]];
+        } else {
+            [projects addObjectsFromArray:[isenseAPI getProjectsAtPage:iSS.page withPageLimit:iSS.perPage withFilter:CREATED_AT_DESC andQuery:iSS.query]];
+        }
+
+        currentPage = iSS.page;
+        currentQuery = iSS.query;
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            if (projects == nil) {
 
-                projects = [[NSMutableArray alloc] init];
-                projectsFiltered = [[NSMutableArray alloc] init];
-                self.tableView.dataSource = self;
-                self.tableView.delegate = self;
-            }
-            
-            if (![iSS.query isEqualToString:@""]){
-                [projectsFiltered addObjectsFromArray:[isenseAPI getProjectsAtPage:iSS.page withPageLimit:iSS.perPage withFilter:CREATED_AT_DESC andQuery:iSS.query]];
-            } else {
-               [projects addObjectsFromArray:[isenseAPI getProjectsAtPage:iSS.page withPageLimit:iSS.perPage withFilter:CREATED_AT_DESC andQuery:iSS.query]];
-            }
-            
-            currentPage = iSS.page;
-            currentQuery = iSS.query;
+            [self.tableView reloadData];
+            [spinnerDialog dismissWithClickedButtonIndex:0 animated:YES];
+
         });
-        
-    });
-
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.tableView reloadData];
-        [spinnerDialog dismissWithClickedButtonIndex:0 animated:YES];
     });
 }
 
@@ -274,24 +271,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (![bar.text isEqualToString:@""]) {
-        if ([projectsFiltered count] == 0) return;
-        else {
-            [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projectsFiltered objectAtIndex:indexPath.row] project_id].intValue];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    } else {
+//    if (![bar.text isEqualToString:@""]) {
+//        if ([projectsFiltered count] == 0) return;
+//        else {
+//            [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projectsFiltered objectAtIndex:indexPath.row] project_id].intValue];
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }
+//    } else {
         if (indexPath.row == cell_count) return;
         else {
             [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projects objectAtIndex:indexPath.row] project_id].intValue];
             [self.navigationController popViewControllerAnimated:YES];
         }
-    }
-    
-    
-    
-    
-    
+    //}
 }
 
 /* Search bar methods */
