@@ -206,8 +206,9 @@
         [motionManager startDeviceMotionUpdates];
     }
 
-    // initialize the array of data points
+    // initialize the array of data points and mutex
     dataPoints = [[NSMutableArray alloc] init];
+    dataPointsMutex = [NSLock new];
 
     // begin the data recording timer with the recordDataPoint selector
     dataRecordingTimer = [NSTimer scheduledTimerWithTimeInterval:sampleRate
@@ -240,8 +241,11 @@
 
             NSLog(@"Data point captured");
 
-            // add a new NSDictionary of this current data point to the dataPoints array
+            // add a new NSDictionary of this current data point to the dataPoints array,
+            // and utilize a mutex to ensure only one thread is adding to this array at one time
+            [dataPointsMutex lock];
             [dataPoints addObject:[dm writeDataToJSONObject:[self populateDataContainer]]];
+            [dataPointsMutex unlock];
         });
     }
 
@@ -361,7 +365,11 @@
     if (motionManager.gyroActive)
         [motionManager stopGyroUpdates];
 
+    // lock the data points array to ensure the data array is not being mutated
+    // while we save it
+    [dataPointsMutex lock];
     [self saveData];
+    [dataPointsMutex unlock];
 }
 
 #pragma end - Recording data
@@ -399,7 +407,7 @@
                           parentName:PARENT_MOTION
                          description:@"Uploaded from iOS Motion"
                            projectID:[dm getProjectID]
-                                data:dataPoints
+                                data:[dataPoints mutableCopy]
                           mediaPaths:nil
                           uploadable:([dm getProjectID] >= 1)
                    hasInitialProject:([dm getProjectID] >= 1)

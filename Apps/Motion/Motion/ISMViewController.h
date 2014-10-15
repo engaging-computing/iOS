@@ -50,8 +50,9 @@
     CLLocationManager *locationManager;
     CMMotionManager *motionManager;
 
-    // Data for a single run session
+    // Data for a single run session and a corresponding mutex lock
     NSMutableArray *dataPoints;
+    NSLock *dataPointsMutex;
 }
 
 // Queue Saver Properties

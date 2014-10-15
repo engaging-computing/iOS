@@ -196,9 +196,10 @@
                 }
             }
 
-            // TODO error checking - data should be a dictionary now
+            // data should be a dictionary now - if not, this data set cannot be uploaded
             if (![currentDS.data isKindOfClass:[NSMutableDictionary class]]) {
                 NSLog(@"Data is not a dictionary in the Data Saver");
+                dataSetsFailed++;
                 continue;
             }
 
@@ -225,7 +226,7 @@
 
                 NSLog(@"Data set ID: %d", returnID);
                 
-                if (returnID == 0 || returnID == -1) {
+                if (returnID <= 0) {
                     dataSetsFailed++;
                     continue;
                 }
