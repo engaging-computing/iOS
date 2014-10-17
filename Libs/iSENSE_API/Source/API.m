@@ -21,9 +21,6 @@
 
 #define BOUNDARY @"*****"
 
-#define PREFS_EMAIL @"api_prefs_key_email"
-#define PREFS_PASSWORD @"api_prefs_key_password"
-
 static NSString *baseUrl, *authenticityToken;
 static RPerson *currentUser;
 static NSString *email, *password;
@@ -844,8 +841,8 @@ static NSString *email, *password;
 -(void)saveCurrentUserToPrefs {
 
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:email forKey:PREFS_EMAIL];
-    [prefs setObject:password forKey:PREFS_PASSWORD];
+    [prefs setObject:email forKey:KEY_USERNAME];
+    [prefs setObject:password forKey:KEY_PASSWORD];
     [prefs synchronize];
 }
 
@@ -858,9 +855,9 @@ static NSString *email, *password;
 -(bool)loadCurrentUserFromPrefs {
 
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    if ([prefs objectForKey:PREFS_EMAIL] && [prefs objectForKey:PREFS_PASSWORD])
-        if ([self createSessionWithEmail:[prefs objectForKey:PREFS_EMAIL]
-                             andPassword:[prefs objectForKey:PREFS_PASSWORD]])
+    if ([prefs objectForKey:KEY_USERNAME] && [prefs objectForKey:KEY_PASSWORD])
+        if ([self createSessionWithEmail:[prefs objectForKey:KEY_USERNAME]
+                             andPassword:[prefs objectForKey:KEY_PASSWORD]])
             return true;
 
     return false;
