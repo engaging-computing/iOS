@@ -25,8 +25,8 @@
 		31739E1B19DB449500CF2DFB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1A19DB449500CF2DFB /* SystemConfiguration.framework */; };
 		31739E1D19DB44A000CF2DFB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1C19DB44A000CF2DFB /* MobileCoreServices.framework */; };
 		31739E1F19DB44B600CF2DFB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1E19DB44B600CF2DFB /* CoreData.framework */; };
-		31739E2E19DB4B6500CF2DFB /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E2919DB4AA400CF2DFB /* libiSENSE_API.a */; };
-		31739E2F19DB4BB900CF2DFB /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31739E2B19DB4AA400CF2DFB /* iSENSE_API_Bundle.bundle */; };
+		31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */; };
+		31A8D9FD19E864540042CF02 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A8D9F719E863EE0042CF02 /* libiSENSE_API.a */; };
 		31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9C919DF11A200A5E448 /* DiceDataController.m */; };
 /* End PBXBuildFile section */
 
@@ -38,23 +38,23 @@
 			remoteGlobalIDString = 31739DD019DB3A7C00CF2DFB;
 			remoteInfo = DiceRoller;
 		};
-		31739E2819DB4AA400CF2DFB /* PBXContainerItemProxy */ = {
+		31A8D9F619E863EE0042CF02 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */;
+			containerPortal = 31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 39FF25E016DFA28A0062C3DC;
 			remoteInfo = iSENSE_API;
 		};
-		31739E2A19DB4AA400CF2DFB /* PBXContainerItemProxy */ = {
+		31A8D9F819E863EE0042CF02 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */;
+			containerPortal = 31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = B71AD6A519C710AE006820A1;
 			remoteInfo = iSENSE_API_Bundle;
 		};
-		31739E2C19DB4B5800CF2DFB /* PBXContainerItemProxy */ = {
+		31A8D9FA19E8640D0042CF02 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */;
+			containerPortal = 31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 39FF25DF16DFA28A0062C3DC;
 			remoteInfo = iSENSE_API;
@@ -86,7 +86,7 @@
 		31739E1A19DB449500CF2DFB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		31739E1C19DB44A000CF2DFB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		31739E1E19DB44B600CF2DFB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = "../../../../Downloads/iOS-master/Libs/iSENSE_API/iSENSE_API.xcodeproj"; sourceTree = "<group>"; };
+		31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
 		31E5C9C819DF11A200A5E448 /* DiceDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceDataController.h; sourceTree = "<group>"; };
 		31E5C9C919DF11A200A5E448 /* DiceDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceDataController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31739E2E19DB4B6500CF2DFB /* libiSENSE_API.a in Frameworks */,
+				31A8D9FD19E864540042CF02 /* libiSENSE_API.a in Frameworks */,
 				31739E1F19DB44B600CF2DFB /* CoreData.framework in Frameworks */,
 				31739E1D19DB44A000CF2DFB /* MobileCoreServices.framework in Frameworks */,
 				31739E1B19DB449500CF2DFB /* SystemConfiguration.framework in Frameworks */,
@@ -203,16 +203,16 @@
 		31739E1619DB428E00CF2DFB /* iSENSE API */ = {
 			isa = PBXGroup;
 			children = (
-				31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */,
+				31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */,
 			);
 			name = "iSENSE API";
 			sourceTree = "<group>";
 		};
-		31739E2419DB4AA400CF2DFB /* Products */ = {
+		31A8D9F219E863ED0042CF02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				31739E2919DB4AA400CF2DFB /* libiSENSE_API.a */,
-				31739E2B19DB4AA400CF2DFB /* iSENSE_API_Bundle.bundle */,
+				31A8D9F719E863EE0042CF02 /* libiSENSE_API.a */,
+				31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				31739E2D19DB4B5800CF2DFB /* PBXTargetDependency */,
+				31A8D9FB19E8640D0042CF02 /* PBXTargetDependency */,
 			);
 			name = DiceRoller;
 			productName = DiceRoller;
@@ -283,8 +283,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 31739E2419DB4AA400CF2DFB /* Products */;
-					ProjectRef = 31739E2319DB4AA400CF2DFB /* iSENSE_API.xcodeproj */;
+					ProductGroup = 31A8D9F219E863ED0042CF02 /* Products */;
+					ProjectRef = 31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -296,18 +296,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		31739E2919DB4AA400CF2DFB /* libiSENSE_API.a */ = {
+		31A8D9F719E863EE0042CF02 /* libiSENSE_API.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libiSENSE_API.a;
-			remoteRef = 31739E2819DB4AA400CF2DFB /* PBXContainerItemProxy */;
+			remoteRef = 31A8D9F619E863EE0042CF02 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		31739E2B19DB4AA400CF2DFB /* iSENSE_API_Bundle.bundle */ = {
+		31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = iSENSE_API_Bundle.bundle;
-			remoteRef = 31739E2A19DB4AA400CF2DFB /* PBXContainerItemProxy */;
+			remoteRef = 31A8D9F819E863EE0042CF02 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -317,9 +317,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */,
 				31739DED19DB3A7C00CF2DFB /* Images.xcassets in Resources */,
 				31739DDF19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */,
-				31739E2F19DB4BB900CF2DFB /* iSENSE_API_Bundle.bundle in Resources */,
 				31739DE819DB3A7C00CF2DFB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,10 +363,10 @@
 			target = 31739DD019DB3A7C00CF2DFB /* DiceRoller */;
 			targetProxy = 31739DF719DB3A7C00CF2DFB /* PBXContainerItemProxy */;
 		};
-		31739E2D19DB4B5800CF2DFB /* PBXTargetDependency */ = {
+		31A8D9FB19E8640D0042CF02 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = iSENSE_API;
-			targetProxy = 31739E2C19DB4B5800CF2DFB /* PBXContainerItemProxy */;
+			targetProxy = 31A8D9FA19E8640D0042CF02 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

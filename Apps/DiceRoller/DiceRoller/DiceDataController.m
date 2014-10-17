@@ -42,8 +42,8 @@
     // operations performed that involve querying the iSENSE website should always be done in a background
     // thread.  in iOS, this is done by creating a dispatch queue.  the "upload_data_to_isense" name is
     // arbitrary, so feel free to change this string.
-    dispatch_queue_t queue = dispatch_queue_create("upload_data_to_isense", NULL);
-    dispatch_async(queue, ^{
+    //dispatch_queue_t queue = dispatch_queue_create("upload_data_to_isense", NULL);
+    //dispatch_async(queue, ^{
         
         // normally, data would be passed into a method that makes this upload call.
         // we will declare an arbitrary dice-roll and name for the data set
@@ -53,7 +53,7 @@
         NSString *dataSetName =[NSString stringWithFormat:@"Rajia's dice sum test %d",numTest];
         
         // declare an instance of the singleton API object
-        API *isenseAPI = [API getInstance];
+        api = [API getInstance];
         
         // if using the development iSENSE site, turn on development mode
         [api useDev:true];
@@ -61,14 +61,14 @@
         // declare a project to upload to, username, and password.
         // this example assumes the project has the fields "white dice", "yellow dice", and "sum"
         int projectID = 876;
-        NSString *userEmail = @"abeer603@gmail.com";
-        NSString *password = @"dice1";
+        NSString *userEmail = @"mobile.fake@example.com";
+        NSString *password = @"mobile";
         
         // login to the iSENSE site
-        [isenseAPI createSessionWithEmail:userEmail andPassword:password];
+        [api createSessionWithEmail:userEmail andPassword:password];
         
         // pull down fields for the iSENSE project as an array of RProjectField objects
-        NSArray *projectFields = [isenseAPI getProjectFieldsWithId:projectID];
+        NSArray *projectFields = [api getProjectFieldsWithId:projectID];
         
         // initialize an array to store your data
         NSMutableArray *rowMajorData = [[NSMutableArray alloc] init];
@@ -122,7 +122,7 @@
         NSDictionary *columnMajorData = [DataManager convertDataToColumnMajor:rowMajorData forProjectID:projectID];
         
         // upload the data to iSENSE
-        [isenseAPI uploadDataToProject:projectID withData:columnMajorData andName:dataSetName];
+        [api uploadDataToProject:projectID withData:columnMajorData andName:dataSetName];
         
         // you're done! this uploadDataToProject method returns a data set ID number that you can store or check.
         // this dataSetID variable will now contain either a positive integer if the data uploaded
@@ -130,7 +130,7 @@
         // you may have misformatted the data
     
         //End Mike's code
-
+    //});
 }
 
 @end
