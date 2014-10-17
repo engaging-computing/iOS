@@ -100,27 +100,15 @@
 
 // displays the correct xib based on orientation and device type - called automatically upon view controller entry
 -(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
-        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-            [isenseBundle loadNibNamed:@"queue_layout-landscape~ipad"
-                                          owner:self
-                                        options:nil];
-        } else {
-            [isenseBundle loadNibNamed:@"queue_layout~ipad"
-                                          owner:self
-                                        options:nil];
-        }
+
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        [isenseBundle loadNibNamed:@"queue_layout-landscape~iphone"
+                             owner:self
+                           options:nil];
     } else {
-        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-            [isenseBundle loadNibNamed:@"queue_layout-landscape~iphone"
-                                          owner:self
-                                        options:nil];
-        } else {
-            [isenseBundle loadNibNamed:@"queue_layout~iphone"
-                                          owner:self
-                                        options:nil];
-        }
+        [isenseBundle loadNibNamed:@"queue_layout~iphone"
+                             owner:self
+                           options:nil];
     }
 }
 
