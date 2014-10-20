@@ -18,6 +18,6 @@
 
 #pragma mark - Methods
 
-- (void) showDieNumber:(int)num;
+- (void) showDieNumber:(int)num colorOfDie:(NSString*)dieColor;
 
 @end

@@ -3,11 +3,15 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "dice-312624_640.png"
+      "filename" : "WhiteDice2.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -30,8 +30,8 @@
     int sum = firstNum + secondNum;
     int numTest = 0;
     
-    [self.firstDieView showDieNumber:firstNum];
-    [self.secondDieView showDieNumber:secondNum];
+    [self.firstDieView showDieNumber:firstNum colorOfDie:(@"White")];
+    [self.secondDieView showDieNumber:secondNum colorOfDie:(@"Yellow")];
     
     self.sumLabel.text = [NSString stringWithFormat:@"The sum is %d", sum];
     //Call uploadData to upload the data set.

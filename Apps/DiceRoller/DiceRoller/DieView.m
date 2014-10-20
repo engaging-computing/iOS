@@ -41,12 +41,20 @@
 */
 
 
-- (void) showDieNumber:(int)num{
+- (void) showDieNumber:(int)num colorOfDie:(NSString*)dieColor{
   //This method takes in a number and appends it to a string called filename using the string withFormat class.
-    NSString *fileName = [NSString stringWithFormat:@"dice%d.png",num];
-   
-    //Set the image to the uiimageview
-    self.dieImageView.image = [UIImage imageNamed:fileName];
+    NSString* white = @"White";
+    NSString* yellow = @"Yellow";
+    
+    if (dieColor == white){
+        NSString *fileName = [NSString stringWithFormat:@"WhiteDice%d.png",num];
+        self.dieImageView.image = [UIImage imageNamed:fileName];
+        
+    }else if (dieColor == yellow){
+        NSString *fileName = [NSString stringWithFormat:@"YellowDice%d.png",num];
+        self.dieImageView.image = [UIImage imageNamed:fileName];
+
+    }
 }
 
 
