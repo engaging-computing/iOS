@@ -13,6 +13,8 @@
 
 @implementation ViewController
 
+int numTest = 0;
+
 - (void)viewDidLoad{
     [super viewDidLoad];
 	api = [API getInstance];
@@ -28,7 +30,6 @@
     int firstNum = [diceController getDieNumber];
     int secondNum = [diceController getDieNumber];
     int sum = firstNum + secondNum;
-    int numTest = 0;
     
     [self.firstDieView showDieNumber:firstNum colorOfDie:(@"White")];
     [self.secondDieView showDieNumber:secondNum colorOfDie:(@"Yellow")];

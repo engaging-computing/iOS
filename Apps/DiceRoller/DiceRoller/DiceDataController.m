@@ -41,8 +41,8 @@
     // thread.  in iOS, this is done by creating a dispatch queue.  the "upload_data_to_isense" name is
     // arbitrary, so feel free to change this string.
     
-        dispatch_queue_t queue = dispatch_queue_create("upload_data_to_isense", NULL);
-        dispatch_async(queue, ^{
+    dispatch_queue_t queue = dispatch_queue_create("upload_data_to_isense", NULL);
+    dispatch_async(queue, ^{
         
         // normally, data would be passed into a method that makes this upload call.
         // we will declare an arbitrary dice-roll and name for the data set
