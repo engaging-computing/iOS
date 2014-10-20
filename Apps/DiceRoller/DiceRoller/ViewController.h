@@ -12,7 +12,6 @@
 #import "DiceDataController.h"
 
 @interface ViewController : UIViewController{
-    //Inside here we can declare api objects
     API *api;
     DiceDataController *diceController;
 }

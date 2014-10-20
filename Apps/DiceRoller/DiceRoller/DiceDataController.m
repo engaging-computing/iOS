@@ -10,8 +10,7 @@
 
 @implementation DiceDataController
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
@@ -28,8 +27,7 @@
 }
 */
 
-- (int) getDieNumber
-{
+- (int) getDieNumber{
     //this uses the arc4random function to generate a random number between 0-6
     int r = (arc4random()%6) + 1;
     return r;
@@ -42,15 +40,16 @@
     // operations performed that involve querying the iSENSE website should always be done in a background
     // thread.  in iOS, this is done by creating a dispatch queue.  the "upload_data_to_isense" name is
     // arbitrary, so feel free to change this string.
-    //dispatch_queue_t queue = dispatch_queue_create("upload_data_to_isense", NULL);
-    //dispatch_async(queue, ^{
+    
+        dispatch_queue_t queue = dispatch_queue_create("upload_data_to_isense", NULL);
+        dispatch_async(queue, ^{
         
         // normally, data would be passed into a method that makes this upload call.
         // we will declare an arbitrary dice-roll and name for the data set
         int whiteDiceValue = num1;
         int yellowDiceValue = num2;
         int diceRollSum = sumNum;
-        NSString *dataSetName =[NSString stringWithFormat:@"Rajia's dice sum test %d",numTest];
+        NSString *dataSetName =[NSString stringWithFormat:@"Rajia's test number %d",numTest];
         
         // declare an instance of the singleton API object
         api = [API getInstance];
@@ -128,9 +127,7 @@
         // this dataSetID variable will now contain either a positive integer if the data uploaded
         // successfully (namely the ID of your new data set), or -1 if the upload failed.  if your upload failed,
         // you may have misformatted the data
-    
-        //End Mike's code
-    //});
+    });
 }
 
 @end
