@@ -82,7 +82,7 @@
 
 - (IBAction)createProjBtnOnClick:(id)sender {
     
-    [self.view makeWaffle:@"Feature coming... eventually"];
+    [self.view makeWaffle:@"Feature to be implemented in future release"];
 }
 
 - (void) didFinishChoosingProject:(ProjectBrowserViewController *) browser withID: (int) project_id {

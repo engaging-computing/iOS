@@ -42,12 +42,13 @@
     }
     
     // DataSaver from Data_CollectorAppDelegate
-    if (dataSaver == nil)
+    if (dataSaver == nil) {
         dataSaver = [(ISMAppDelegate *) [[UIApplication sharedApplication] delegate] dataSaver];
-    
+    }
+
     // Initialize API and start separate thread to reload any user that has been saved to preferences
     api = [API getInstance];
-    [api useDev:true];
+    [api useDev:false];
     dispatch_queue_t queue = dispatch_queue_create("api_load_user_from_preferences", NULL);
     dispatch_async(queue, ^{
         [api loadCurrentUserFromPrefs];

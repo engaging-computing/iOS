@@ -292,7 +292,12 @@ static NSString *email, *password;
     NSString *parameters = [NSString stringWithFormat:@"page=%d&per_page=%d&sort=%s&order=%s&search=%s",
                             page, perPage, sortMode.UTF8String, order.UTF8String, search.UTF8String];
     NSArray *reqResult = [self makeRequestWithBaseUrl:baseUrl withPath:@"projects" withParameters:parameters withRequestType:GET_REQUEST andPostData:nil];
-    
+
+    // if no projects come back, return an empty array
+    if (!reqResult) {
+        return results;
+    }
+
     for (NSDictionary *innerProjJSON in reqResult) {
         RProject *proj = [[RProject alloc] init];
         
@@ -768,10 +773,21 @@ static NSString *email, *password;
     
     NSError *requestError;
     NSHTTPURLResponse *urlResponse;
-    
-    NSData *dataResponse = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    if (requestError) NSLog(@"Error received from server: %@", requestError);
-        
+    NSData *dataResponse;
+
+    @try {
+        dataResponse = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    }
+    @catch (NSException *exception) {
+        // error caught is either stored in requestError or dataResponse will come back nil,
+        // both of which are handled below
+    }
+
+    if (requestError || !dataResponse) {
+        NSLog(@"Error received from server: %@", requestError);
+        return nil;
+    }
+
     if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300) {
         id parsedJSONResponse = [NSJSONSerialization JSONObjectWithData:dataResponse options:NSJSONReadingMutableContainers error:&requestError];
         return parsedJSONResponse;

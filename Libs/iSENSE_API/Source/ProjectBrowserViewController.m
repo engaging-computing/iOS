@@ -197,10 +197,19 @@
             self.tableView.delegate = self;
         }
 
+        NSArray *fetchedProjectsArray = [isenseAPI getProjectsAtPage:iSS.page withPageLimit:iSS.perPage withFilter:CREATED_AT_DESC andQuery:iSS.query];
+
+        // if the array returned back 0, the request likely timed out.
+        // return here and the "No Projects Found" label will reappear.
+        if (fetchedProjectsArray.count == 0) {
+            [spinnerDialog dismissWithClickedButtonIndex:0 animated:YES];
+            return;
+        }
+
         if (![iSS.query isEqualToString:@""]){
-            [projectsFiltered addObjectsFromArray:[isenseAPI getProjectsAtPage:iSS.page withPageLimit:iSS.perPage withFilter:CREATED_AT_DESC andQuery:iSS.query]];
+            [projectsFiltered addObjectsFromArray:fetchedProjectsArray];
         } else {
-            [projects addObjectsFromArray:[isenseAPI getProjectsAtPage:iSS.page withPageLimit:iSS.perPage withFilter:CREATED_AT_DESC andQuery:iSS.query]];
+            [projects addObjectsFromArray:fetchedProjectsArray];
         }
 
         currentPage = iSS.page;
