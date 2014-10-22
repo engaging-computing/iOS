@@ -147,6 +147,17 @@
     }
 }
 
+// restrict length of text entered in the data set name AlertView
+// 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
+// a ~20 character timestamp to the data set name
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength > 90) ? NO : YES;
+
+    return YES;
+}
+
 #pragma end - View and overriden methods
 
 #pragma mark - Recording data
@@ -451,13 +462,17 @@
 
 - (IBAction)nameBtnOnClick:(id)sender {
 
-    UIAlertView *enterNameAlart = [[UIAlertView alloc] initWithTitle:@"Enter a Data Set Name" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView *enterNameAlart = [[UIAlertView alloc] initWithTitle:@"Enter a Data Set Name"
+                                                             message:@""
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                                   otherButtonTitles:@"OK", nil];
     [enterNameAlart setAlertViewStyle:UIAlertViewStylePlainTextInput];
     enterNameAlart.tag = kNAME_DIALOG_TAG;
 
     [enterNameAlart textFieldAtIndex:0].delegate = self;
     [[enterNameAlart textFieldAtIndex:0] becomeFirstResponder];
-    [enterNameAlart textFieldAtIndex:0].placeholder = @"your name or a data set name";
+    [enterNameAlart textFieldAtIndex:0].placeholder = @"data set name";
 
     [enterNameAlart show];
 }
@@ -524,17 +539,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
 
             if (currUser != nil) {
+
                 [self.view makeWaffle:[NSString stringWithFormat:@"Login as %@ successful", email]
                              duration:WAFFLE_LENGTH_SHORT
                              position:WAFFLE_BOTTOM
                                 image:WAFFLE_CHECKMARK];
-                
-                // save the username and password in prefs
-                NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-                [prefs setObject:email forKey:pLOGIN_USERNAME];
-                [prefs setObject:pass forKey:pLOGIN_PASSWORD];
-                [prefs synchronize];
             } else {
+                
                 [self.view makeWaffle:@"Login failed"
                              duration:WAFFLE_LENGTH_SHORT
                              position:WAFFLE_BOTTOM

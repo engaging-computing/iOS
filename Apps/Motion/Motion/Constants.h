@@ -11,8 +11,6 @@
 
 // NSUserDefault (preferences) constants
 #define pPROJECT_ID @"curr_project_id_as_nsnumber"
-#define pLOGIN_USERNAME @"prefs_email"
-#define pLOGIN_PASSWORD @"prefs_pass"
 
 // Dialog constants
 #define kLOGIN_DIALOG_TAG 500
