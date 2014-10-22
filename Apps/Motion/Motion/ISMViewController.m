@@ -49,8 +49,7 @@
     // Initialize API and start separate thread to reload any user that has been saved to preferences
     api = [API getInstance];
     [api useDev:false];
-    dispatch_queue_t queue = dispatch_queue_create("api_load_user_from_preferences", NULL);
-    dispatch_async(queue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [api loadCurrentUserFromPrefs];
     });
 
@@ -248,6 +247,7 @@
         dataRecordingTimer = nil;
     } else {
 
+        // create a new serial queue with each successive data point recorded to ensure completion order
         dispatch_queue_t queue = dispatch_queue_create("motion_recording_data", NULL);
         dispatch_async(queue, ^{
 
@@ -531,8 +531,7 @@
     UIAlertView *spinnerDialog = [self getDispatchDialogWithMessage:@"Logging in..."];
     [spinnerDialog show];
     
-    dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_t_dialog_login", NULL);
-    dispatch_async(queue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         RPerson *currUser = [api createSessionWithEmail:email andPassword:pass];
 
