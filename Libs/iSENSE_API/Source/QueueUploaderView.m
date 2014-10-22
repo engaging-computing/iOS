@@ -54,8 +54,7 @@
         UIAlertView *message = [self getDispatchDialogWithMessage:@"Uploading data sets..."];
         [message show];
 
-        dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_queue_uploader_upload", NULL);
-        dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
             int uploadStatus = [dataSaver upload:parent];
 
@@ -398,8 +397,7 @@
     UIAlertView *message = [self getDispatchDialogWithMessage:@"Logging in..."];
     [message show];
 
-    dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_queue_uploader_log_in", NULL);
-    dispatch_async(queue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         RPerson *user = [api createSessionWithEmail:usernameInput andPassword:passwordInput];
 
@@ -410,8 +408,7 @@
                 // upload data
                 [message setTitle:@"Uploading data sets..."];
 
-                dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_queue_uploader_upload_data", NULL);
-                dispatch_async(queue, ^{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
                     int uploadStatus = [dataSaver upload:parent];
 
@@ -554,8 +551,7 @@
     UIAlertView *message = [self getDispatchDialogWithMessage:@"Loading fields..."];
     [message show];
     
-    dispatch_queue_t queue = dispatch_queue_create("loading_project_fields", NULL);
-    dispatch_async(queue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         [dm retrieveProjectFields];
 
