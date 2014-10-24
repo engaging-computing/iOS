@@ -48,7 +48,7 @@
 
     // Initialize API and start separate thread to reload any user that has been saved to preferences
     api = [API getInstance];
-    [api useDev:false];
+    [api useDev:USE_DEV];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [api loadCurrentUserFromPrefs];
     });
@@ -108,7 +108,10 @@
     [super viewWillAppear:animated];
 
     dm = [DataManager getInstance];
-    [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %d", [dm getProjectID]] forState:UIControlStateNormal];
+    int curProjID = [dm getProjectID];
+    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : @"None";
+
+    [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %@", curProjIDStr] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -182,14 +185,19 @@
             [self beginRecordingData];
         }
 
-        // Emit a beep
-        NSString *beepPath = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/button-37.wav"];
-        SystemSoundID soundID;
-        NSURL *filePath = [NSURL fileURLWithPath:beepPath isDirectory:NO];
-        AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(filePath), &soundID);
-        AudioServicesPlaySystemSound(soundID);
+        [self emitBeep];
     }
 
+}
+
+- (void) emitBeep {
+
+    NSString *beepPath = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/button-37.wav"];
+    NSURL *filePath = [NSURL fileURLWithPath:beepPath isDirectory:NO];
+
+    SystemSoundID soundID;
+    AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(filePath), &soundID);
+    AudioServicesPlaySystemSound(soundID);
 }
 
 - (void)beginRecordingData {
@@ -231,36 +239,44 @@
     // if the recording length is not -1 (AKA Push to Stop), then set a timer that stops recording
     // data after the recording length interval
     if (recordingLength != -1) {
-        [NSTimer scheduledTimerWithTimeInterval:recordingLength
-                                         target:self
-                                       selector:@selector(stopRecordingData)
-                                       userInfo:nil
-                                        repeats:NO];
+        recordingLengthTimer = [NSTimer scheduledTimerWithTimeInterval:recordingLength
+                                                                target:self
+                                                              selector:@selector(stopRecordingData)
+                                                              userInfo:nil
+                                                               repeats:NO];
     }
 }
 
 - (void)recordDataPoint {
 
+    // cancel the timers if we are not recording data and return if so
     if (!isRecording && dataRecordingTimer) {
 
         [dataRecordingTimer invalidate];
         dataRecordingTimer = nil;
-    } else {
 
-        // create a new serial queue with each successive data point recorded to ensure completion order
-        dispatch_queue_t queue = dispatch_queue_create("motion_recording_data", NULL);
-        dispatch_async(queue, ^{
+        // if the recording length has been specified and this timer is still active, invalidate it
+        if (recordingLengthTimer) {
 
-            NSLog(@"Data point captured");
+            [recordingLengthTimer invalidate];
+            recordingLengthTimer = nil;
+        }
 
-            // add a new NSDictionary of this current data point to the dataPoints array,
-            // and utilize a mutex to ensure only one thread is adding to this array at one time
-            [dataPointsMutex lock];
-            [dataPoints addObject:[dm writeDataToJSONObject:[self populateDataContainer]]];
-            [dataPointsMutex unlock];
-        });
+        return;
     }
 
+    // create a new serial queue with each successive data point recorded to ensure completion order
+    dispatch_queue_t queue = dispatch_queue_create("motion_recording_data", NULL);
+    dispatch_async(queue, ^{
+
+        NSLog(@"Data point captured");
+
+        // add a new NSDictionary of this current data point to the dataPoints array,
+        // and utilize a mutex to ensure only one thread is adding to this array at one time
+        [dataPointsMutex lock];
+        [dataPoints addObject:[dm writeDataToJSONObject:[self populateDataContainer]]];
+        [dataPointsMutex unlock];
+    });
 }
 
 // populate the data container with sensor values
@@ -365,8 +381,11 @@
 
     if (dataRecordingTimer)
         [dataRecordingTimer invalidate];
-
     dataRecordingTimer = nil;
+
+    if (recordingLengthTimer)
+        [recordingLengthTimer invalidate];
+    recordingLengthTimer = nil;
 
     if (motionManager.accelerometerActive)
         [motionManager stopAccelerometerUpdates];
