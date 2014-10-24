@@ -109,7 +109,7 @@
 
     dm = [DataManager getInstance];
     int curProjID = [dm getProjectID];
-    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : @"None";
+    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
 
     [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %@", curProjIDStr] forState:UIControlStateNormal];
 }
@@ -184,10 +184,7 @@
 
             [self beginRecordingData];
         }
-
-        [self emitBeep];
     }
-
 }
 
 - (void) emitBeep {
@@ -201,6 +198,8 @@
 }
 
 - (void)beginRecordingData {
+
+    [self emitBeep];
 
     // start recording data
     isRecording = true;
@@ -370,6 +369,8 @@
 }
 
 - (void)stopRecordingData {
+
+    [self emitBeep];
 
     // stop recording data
     isRecording = false;
