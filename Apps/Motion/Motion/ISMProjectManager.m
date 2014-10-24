@@ -93,7 +93,7 @@
     NSLog(@"ID = %d", project_id);
     [dm setProjectID:project_id];
 
-    NSString *curProjIDStr = (project_id > 0) ? [NSString stringWithFormat:@"%d", project_id] : @"None";
+    NSString *curProjIDStr = (project_id > 0) ? [NSString stringWithFormat:@"%d", project_id] : kNO_PROJECT;
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
     
     [self launchFieldMatchingViewControllerFromBrowse:TRUE];
