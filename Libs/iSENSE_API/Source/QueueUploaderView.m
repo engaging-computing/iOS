@@ -176,10 +176,12 @@
 
         // Delete the row from the data source
         cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:indexPath];
+
         [limitedTempQueue removeObjectForKey:[cell getKey]];
         [dataSaver removeDataSet:[cell getKey]];
+
+        [self.mTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [self.mTableView reloadData];
-        [mTableView reloadData];
     }
 }
 

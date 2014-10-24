@@ -19,6 +19,8 @@
 #import "Waffle.h"
 #import "DataManager.h"
 
+#define USE_DEV true
+
 @interface ISMViewController : UIViewController
     <UIAlertViewDelegate,
     UITextFieldDelegate,
@@ -47,6 +49,7 @@
     // Recording state, timer, and sensor objects
     bool isRecording;
     NSTimer *dataRecordingTimer;
+    NSTimer *recordingLengthTimer;
     CLLocationManager *locationManager;
     CMMotionManager *motionManager;
 

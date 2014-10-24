@@ -29,7 +29,10 @@
     [super viewWillAppear:animated];
 
     dm = [DataManager getInstance];
-    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %d", [dm getProjectID]]];
+    int curProjID = [dm getProjectID];
+    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+
+    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
 }
 
 - (void)viewDidLoad {
@@ -89,8 +92,9 @@
     
     NSLog(@"ID = %d", project_id);
     [dm setProjectID:project_id];
-    
-    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %d", project_id]];
+
+    NSString *curProjIDStr = (project_id > 0) ? [NSString stringWithFormat:@"%d", project_id] : kNO_PROJECT;
+    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
     
     [self launchFieldMatchingViewControllerFromBrowse:TRUE];
 }

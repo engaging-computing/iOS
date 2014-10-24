@@ -13,9 +13,11 @@
 
 // Queues are first-in-first-out, so we remove objects from the head
 - (id) dequeue {
+
     NSArray *keys = [self allKeys];
     id firstKey = [keys objectAtIndex:0];
     id headObject = [self objectForKey:firstKey];
+
     if (headObject != nil) {
         [self removeObjectForKey:firstKey];
         return headObject;
@@ -38,18 +40,22 @@
 
 // Allows any arbitrary node to be removed
 - (id) removeFromQueueWithKey:(NSNumber *)key {
-    NSLog(@"%@", [self allKeys].description);
+
     NSArray *keys = [self allKeys];
     NSNumber *firstKey = [keys objectAtIndex:0];
     id headObject;
     if (key == firstKey) {
+
         headObject = [self dequeue];
+        NSLog(@"%@", [self allKeys].description);
         return headObject;
     } else {
+
         headObject = [self objectForKey:key];
         if (headObject != nil) {
+            
             [self removeObjectForKey:key];
-            NSLog(@"Deleted dataset; new queue count is %lu", (unsigned long)self.count);
+            NSLog(@"%@", [self allKeys].description);
             return headObject;
         } else {
             NSLog(@"Cannot remove dataSet: invalid key");
