@@ -14,7 +14,9 @@
 
 @property (strong, nonatomic)UIImageView *dieImageView;
 
-//Create a method to change the image in the dieView Property
+#define WHITE_DICE @"WhiteDice"
+#define YELLOW_DICE @"YellowDice"
+
 
 #pragma mark - Methods
 

@@ -31,8 +31,8 @@ int numTest = 0;
     int secondNum = [diceController getDieNumber];
     int sum = firstNum + secondNum;
     
-    [self.firstDieView showDieNumber:firstNum colorOfDie:(@"White")];
-    [self.secondDieView showDieNumber:secondNum colorOfDie:(@"Yellow")];
+    [self.firstDieView showDieNumber:firstNum colorOfDie:WHITE_DICE];
+    [self.secondDieView showDieNumber:secondNum colorOfDie:YELLOW_DICE];
     
     self.sumLabel.text = [NSString stringWithFormat:@"The sum is %d", sum];
     //Call uploadData to upload the data set.
