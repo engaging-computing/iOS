@@ -20,9 +20,6 @@
     
     // a list of the fields as they appear on iSENSE
     NSMutableArray *projectFields;
-
-    // a list of fields recordable in a particular ordering TODO may not need
-    NSMutableDictionary *allOrderedFieldNames;
 }
 
 + (DataManager *)getInstance;
