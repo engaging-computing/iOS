@@ -42,6 +42,7 @@
 		B792915819E836840064E793 /* li1024x748.png in Resources */ = {isa = PBXBuildFile; fileRef = B792915719E836840064E793 /* li1024x748.png */; };
 		B7C9BBFA19D9B0A90001A833 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C9BBF919D9B0A90001A833 /* CoreLocation.framework */; };
 		B7C9BBFD19D9BAC80001A833 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C9BBFC19D9BAC80001A833 /* CoreMotion.framework */; };
+		B7CB709519F6940800D91C84 /* 60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7CB709419F6940800D91C84 /* 60@3x.png */; };
 		B7D98CE119BF34F800BB8994 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE019BF34F800BB8994 /* Foundation.framework */; };
 		B7D98CE319BF34F800BB8994 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE219BF34F800BB8994 /* CoreGraphics.framework */; };
 		B7D98CE519BF34F800BB8994 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE419BF34F800BB8994 /* UIKit.framework */; };
@@ -55,6 +56,7 @@
 		B7D98D0519BF34F800BB8994 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE419BF34F800BB8994 /* UIKit.framework */; };
 		B7D98D0D19BF34F800BB8994 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7D98D0B19BF34F800BB8994 /* InfoPlist.strings */; };
 		B7D98D0F19BF34F800BB8994 /* MotionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D98D0E19BF34F800BB8994 /* MotionTests.m */; };
+		B7FC2F5B19F5740400D84EBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7FC2F5A19F5740400D84EBF /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +127,7 @@
 		B792915719E836840064E793 /* li1024x748.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li1024x748.png; path = Resources/LaunchImages/li1024x748.png; sourceTree = "<group>"; };
 		B7C9BBF919D9B0A90001A833 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B7C9BBFC19D9BAC80001A833 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		B7CB709419F6940800D91C84 /* 60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "60@3x.png"; path = "Resources/Icons/60@3x.png"; sourceTree = "<group>"; };
 		B7D98CDD19BF34F800BB8994 /* Motion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7D98CE019BF34F800BB8994 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7D98CE219BF34F800BB8994 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -145,6 +148,7 @@
 		B7D98D0A19BF34F800BB8994 /* MotionTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MotionTests-Info.plist"; sourceTree = "<group>"; };
 		B7D98D0C19BF34F800BB8994 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B7D98D0E19BF34F800BB8994 /* MotionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MotionTests.m; sourceTree = "<group>"; };
+		B7FC2F5A19F5740400D84EBF /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +271,7 @@
 				B7477A5119D9886C001C561F /* 57@1x.png */,
 				B7477A5219D9886C001C561F /* 57@2x.png */,
 				B7477A5319D9886C001C561F /* 60@2x.png */,
+				B7CB709419F6940800D91C84 /* 60@3x.png */,
 				B7477A5419D9886C001C561F /* 72@1x.png */,
 				B7477A5519D9886C001C561F /* 72@2x.png */,
 				B7477A5619D9886C001C561F /* 76@1x.png */,
@@ -339,6 +344,7 @@
 		B7D98CE619BF34F800BB8994 /* Motion */ = {
 			isa = PBXGroup;
 			children = (
+				B7FC2F5719F5729D00D84EBF /* Assets */,
 				B72B23ED19C9EFD30000EE66 /* Constants */,
 				B7186A3F19BF4EA500F18847 /* Delegate */,
 				B7186A4119BF4EB000F18847 /* MainView */,
@@ -346,7 +352,6 @@
 				B7186A5919BF565C00F18847 /* RecordingLength */,
 				B7186A5819BF565300F18847 /* SampleRate */,
 				B7186A4019BF4EAB00F18847 /* UI */,
-				B7D98CFB19BF34F800BB8994 /* Images.xcassets */,
 				B7D98CE719BF34F800BB8994 /* Supporting Files */,
 			);
 			path = Motion;
@@ -379,6 +384,15 @@
 				B7D98D0B19BF34F800BB8994 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B7FC2F5719F5729D00D84EBF /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B7D98CFB19BF34F800BB8994 /* Images.xcassets */,
+				B7FC2F5A19F5740400D84EBF /* LaunchScreen.xib */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +444,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = iSENSE;
 				TargetAttributes = {
+					B7D98CDC19BF34F800BB8994 = {
+						DevelopmentTeam = 9Y27428UZP;
+					};
 					B7D98D0019BF34F800BB8994 = {
 						TestTargetID = B7D98CDC19BF34F800BB8994;
 					};
@@ -508,8 +525,10 @@
 				B7477A6119D9886C001C561F /* 60@2x.png in Resources */,
 				B7477A5F19D9886C001C561F /* 57@1x.png in Resources */,
 				B792914A19E834260064E793 /* li320x480.png in Resources */,
+				B7CB709519F6940800D91C84 /* 60@3x.png in Resources */,
 				B792914C19E834260064E793 /* li640x1136.png in Resources */,
 				B7477A6419D9886C001C561F /* 76@1x.png in Resources */,
+				B7FC2F5B19F5740400D84EBF /* LaunchScreen.xib in Resources */,
 				B7477A4A19D98858001C561F /* button-37.wav in Resources */,
 				B7477A6219D9886C001C561F /* 72@1x.png in Resources */,
 				B7D98CEB19BF34F800BB8994 /* InfoPlist.strings in Resources */,
@@ -635,7 +654,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -672,7 +691,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -684,6 +703,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Motion/Motion-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -700,6 +721,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API $(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(BUILT_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -710,6 +732,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Motion/Motion-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -726,6 +750,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API $(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(BUILT_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};

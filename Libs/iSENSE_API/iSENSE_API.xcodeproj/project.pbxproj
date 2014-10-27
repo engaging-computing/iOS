@@ -42,8 +42,6 @@
 		B70E7C8819C0BB8300C2B042 /* RProject.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C4619C0BB8300C2B042 /* RProject.h */; };
 		B70E7C8919C0BB8300C2B042 /* RProjectField.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C4719C0BB8300C2B042 /* RProjectField.h */; };
 		B70E7C8A19C0BB8300C2B042 /* RTutorial.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C4819C0BB8300C2B042 /* RTutorial.h */; };
-		B70E7C8B19C0BB8300C2B042 /* SensorCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C4919C0BB8300C2B042 /* SensorCompatibility.h */; };
-		B70E7C8C19C0BB8300C2B042 /* SensorEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C4A19C0BB8300C2B042 /* SensorEnums.h */; };
 		B70E7C9619C0BB8300C2B042 /* StringGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C5419C0BB8300C2B042 /* StringGrabber.h */; };
 		B70E7C9719C0BB8300C2B042 /* Waffle.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C5519C0BB8300C2B042 /* Waffle.h */; };
 		B70E7C9819C0BB8300C2B042 /* WaffleConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C5619C0BB8300C2B042 /* WaffleConstants.h */; };
@@ -75,7 +73,6 @@
 		B70E7CFD19C0BBA700C2B042 /* RProject.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CC419C0BBA700C2B042 /* RProject.m */; };
 		B70E7CFE19C0BBA700C2B042 /* RProjectField.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CC519C0BBA700C2B042 /* RProjectField.m */; };
 		B70E7CFF19C0BBA700C2B042 /* RTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CC619C0BBA700C2B042 /* RTutorial.m */; };
-		B70E7D0019C0BBA700C2B042 /* SensorCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CC719C0BBA700C2B042 /* SensorCompatibility.m */; };
 		B70E7D0919C0BBA700C2B042 /* StringGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CD019C0BBA700C2B042 /* StringGrabber.m */; };
 		B70E7D0A19C0BBA700C2B042 /* Waffle.m in Sources */ = {isa = PBXBuildFile; fileRef = B70E7CD119C0BBA700C2B042 /* Waffle.m */; };
 		B71AD6A619C710AE006820A1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39216FDE176F5C790070DFCC /* CoreFoundation.framework */; };
@@ -188,8 +185,6 @@
 		B70E7C4619C0BB8300C2B042 /* RProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RProject.h; path = headers/RProject.h; sourceTree = "<group>"; };
 		B70E7C4719C0BB8300C2B042 /* RProjectField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RProjectField.h; path = headers/RProjectField.h; sourceTree = "<group>"; };
 		B70E7C4819C0BB8300C2B042 /* RTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RTutorial.h; path = headers/RTutorial.h; sourceTree = "<group>"; };
-		B70E7C4919C0BB8300C2B042 /* SensorCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SensorCompatibility.h; path = headers/SensorCompatibility.h; sourceTree = "<group>"; };
-		B70E7C4A19C0BB8300C2B042 /* SensorEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SensorEnums.h; path = headers/SensorEnums.h; sourceTree = "<group>"; };
 		B70E7C5419C0BB8300C2B042 /* StringGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringGrabber.h; path = headers/StringGrabber.h; sourceTree = "<group>"; };
 		B70E7C5519C0BB8300C2B042 /* Waffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Waffle.h; path = headers/Waffle.h; sourceTree = "<group>"; };
 		B70E7C5619C0BB8300C2B042 /* WaffleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaffleConstants.h; path = headers/WaffleConstants.h; sourceTree = "<group>"; };
@@ -221,7 +216,6 @@
 		B70E7CC419C0BBA700C2B042 /* RProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RProject.m; path = source/RProject.m; sourceTree = "<group>"; };
 		B70E7CC519C0BBA700C2B042 /* RProjectField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RProjectField.m; path = source/RProjectField.m; sourceTree = "<group>"; };
 		B70E7CC619C0BBA700C2B042 /* RTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RTutorial.m; path = source/RTutorial.m; sourceTree = "<group>"; };
-		B70E7CC719C0BBA700C2B042 /* SensorCompatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SensorCompatibility.m; path = source/SensorCompatibility.m; sourceTree = "<group>"; };
 		B70E7CD019C0BBA700C2B042 /* StringGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringGrabber.m; path = source/StringGrabber.m; sourceTree = "<group>"; };
 		B70E7CD119C0BBA700C2B042 /* Waffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Waffle.m; path = source/Waffle.m; sourceTree = "<group>"; };
 		B71AD6A519C710AE006820A1 /* iSENSE_API_Bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iSENSE_API_Bundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,7 +336,6 @@
 				B70E7D3F19C0BF0C00C2B042 /* Fields */,
 				B70E7D3C19C0BEF800C2B042 /* ProjectBrowse */,
 				B70E7D3B19C0BEEE00C2B042 /* Queue */,
-				B70E7D3919C0BEC900C2B042 /* Sensors */,
 				B70E7D4619C0C03E00C2B042 /* StringGrabber */,
 				B70E7D3719C0BEBE00C2B042 /* Waffle */,
 			);
@@ -361,7 +354,6 @@
 				B70E7D3019C0BD9F00C2B042 /* Global */,
 				B70E7D2F19C0BD8100C2B042 /* ProjectBrowse */,
 				B70E7D2A19C0BC9700C2B042 /* Queue */,
-				B70E7D3219C0BDF600C2B042 /* Sensors */,
 				B70E7D4519C0C02600C2B042 /* StringGrabber */,
 				B70E7D3419C0BE3A00C2B042 /* Waffle */,
 			);
@@ -455,15 +447,6 @@
 			name = Global;
 			sourceTree = "<group>";
 		};
-		B70E7D3219C0BDF600C2B042 /* Sensors */ = {
-			isa = PBXGroup;
-			children = (
-				B70E7C4919C0BB8300C2B042 /* SensorCompatibility.h */,
-				B70E7C4A19C0BB8300C2B042 /* SensorEnums.h */,
-			);
-			name = Sensors;
-			sourceTree = "<group>";
-		};
 		B70E7D3419C0BE3A00C2B042 /* Waffle */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,14 +462,6 @@
 				B70E7CD119C0BBA700C2B042 /* Waffle.m */,
 			);
 			name = Waffle;
-			sourceTree = "<group>";
-		};
-		B70E7D3919C0BEC900C2B042 /* Sensors */ = {
-			isa = PBXGroup;
-			children = (
-				B70E7CC719C0BBA700C2B042 /* SensorCompatibility.m */,
-			);
-			name = Sensors;
 			sourceTree = "<group>";
 		};
 		B70E7D3B19C0BEEE00C2B042 /* Queue */ = {
@@ -658,7 +633,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B70E7C8C19C0BB8300C2B042 /* SensorEnums.h in Headers */,
 				B70E7C6119C0BB8300C2B042 /* API.h in Headers */,
 				B70E7C7619C0BB8300C2B042 /* ISenseSearch.h in Headers */,
 				B70E7C8319C0BB8300C2B042 /* RDataSet.h in Headers */,
@@ -686,7 +660,6 @@
 				B70E7C8019C0BB8300C2B042 /* QueueConstants.h in Headers */,
 				B70E7C6A19C0BB8300C2B042 /* DLAVAlertViewTheme.h in Headers */,
 				B70E7C6719C0BB8300C2B042 /* DLAVAlertViewController.h in Headers */,
-				B70E7C8B19C0BB8300C2B042 /* SensorCompatibility.h in Headers */,
 				B70E7C9819C0BB8300C2B042 /* WaffleConstants.h in Headers */,
 				B70E7C9719C0BB8300C2B042 /* Waffle.h in Headers */,
 				B70E7C6419C0BB8300C2B042 /* DataSaver.h in Headers */,
@@ -835,7 +808,6 @@
 				B70E7CF819C0BBA700C2B042 /* RDataSet.m in Sources */,
 				B70E7CDE19C0BBA700C2B042 /* DataSaver.m in Sources */,
 				B70E7CEB19C0BBA700C2B042 /* DataContainer.m in Sources */,
-				B70E7D0019C0BBA700C2B042 /* SensorCompatibility.m in Sources */,
 				B70E7CFE19C0BBA700C2B042 /* RProjectField.m in Sources */,
 				B70E7CE119C0BBA700C2B042 /* DLAVAlertViewController.m in Sources */,
 				B70E7CE219C0BBA700C2B042 /* DLAVAlertViewTextControlTheme.m in Sources */,

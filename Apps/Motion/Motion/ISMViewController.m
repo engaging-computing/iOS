@@ -42,14 +42,14 @@
     }
     
     // DataSaver from Data_CollectorAppDelegate
-    if (dataSaver == nil)
+    if (dataSaver == nil) {
         dataSaver = [(ISMAppDelegate *) [[UIApplication sharedApplication] delegate] dataSaver];
-    
+    }
+
     // Initialize API and start separate thread to reload any user that has been saved to preferences
     api = [API getInstance];
-    [api useDev:true];
-    dispatch_queue_t queue = dispatch_queue_create("api_load_user_from_preferences", NULL);
-    dispatch_async(queue, ^{
+    [api useDev:USE_DEV];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [api loadCurrentUserFromPrefs];
     });
 
@@ -108,7 +108,10 @@
     [super viewWillAppear:animated];
 
     dm = [DataManager getInstance];
-    [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %d", [dm getProjectID]] forState:UIControlStateNormal];
+    int curProjID = [dm getProjectID];
+    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+
+    [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %@", curProjIDStr] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -146,6 +149,17 @@
     }
 }
 
+// restrict length of text entered in the data set name AlertView
+// 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
+// a ~20 character timestamp to the data set name
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength > 90) ? NO : YES;
+
+    return YES;
+}
+
 #pragma end - View and overriden methods
 
 #pragma mark - Recording data
@@ -170,18 +184,22 @@
 
             [self beginRecordingData];
         }
-
-        // Emit a beep
-        NSString *beepPath = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/button-37.wav"];
-        SystemSoundID soundID;
-        NSURL *filePath = [NSURL fileURLWithPath:beepPath isDirectory:NO];
-        AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(filePath), &soundID);
-        AudioServicesPlaySystemSound(soundID);
     }
+}
 
+- (void) emitBeep {
+
+    NSString *beepPath = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/button-37.wav"];
+    NSURL *filePath = [NSURL fileURLWithPath:beepPath isDirectory:NO];
+
+    SystemSoundID soundID;
+    AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(filePath), &soundID);
+    AudioServicesPlaySystemSound(soundID);
 }
 
 - (void)beginRecordingData {
+
+    [self emitBeep];
 
     // start recording data
     isRecording = true;
@@ -220,35 +238,44 @@
     // if the recording length is not -1 (AKA Push to Stop), then set a timer that stops recording
     // data after the recording length interval
     if (recordingLength != -1) {
-        [NSTimer scheduledTimerWithTimeInterval:recordingLength
-                                         target:self
-                                       selector:@selector(stopRecordingData)
-                                       userInfo:nil
-                                        repeats:NO];
+        recordingLengthTimer = [NSTimer scheduledTimerWithTimeInterval:recordingLength
+                                                                target:self
+                                                              selector:@selector(stopRecordingData)
+                                                              userInfo:nil
+                                                               repeats:NO];
     }
 }
 
 - (void)recordDataPoint {
 
+    // cancel the timers if we are not recording data and return if so
     if (!isRecording && dataRecordingTimer) {
 
         [dataRecordingTimer invalidate];
         dataRecordingTimer = nil;
-    } else {
 
-        dispatch_queue_t queue = dispatch_queue_create("motion_recording_data", NULL);
-        dispatch_async(queue, ^{
+        // if the recording length has been specified and this timer is still active, invalidate it
+        if (recordingLengthTimer) {
 
-            NSLog(@"Data point captured");
+            [recordingLengthTimer invalidate];
+            recordingLengthTimer = nil;
+        }
 
-            // add a new NSDictionary of this current data point to the dataPoints array,
-            // and utilize a mutex to ensure only one thread is adding to this array at one time
-            [dataPointsMutex lock];
-            [dataPoints addObject:[dm writeDataToJSONObject:[self populateDataContainer]]];
-            [dataPointsMutex unlock];
-        });
+        return;
     }
 
+    // create a new serial queue with each successive data point recorded to ensure completion order
+    dispatch_queue_t queue = dispatch_queue_create("motion_recording_data", NULL);
+    dispatch_async(queue, ^{
+
+        NSLog(@"Data point captured");
+
+        // add a new NSDictionary of this current data point to the dataPoints array,
+        // and utilize a mutex to ensure only one thread is adding to this array at one time
+        [dataPointsMutex lock];
+        [dataPoints addObject:[dm writeDataToJSONObject:[self populateDataContainer]]];
+        [dataPointsMutex unlock];
+    });
 }
 
 // populate the data container with sensor values
@@ -343,6 +370,8 @@
 
 - (void)stopRecordingData {
 
+    [self emitBeep];
+
     // stop recording data
     isRecording = false;
     [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
@@ -353,8 +382,11 @@
 
     if (dataRecordingTimer)
         [dataRecordingTimer invalidate];
-
     dataRecordingTimer = nil;
+
+    if (recordingLengthTimer)
+        [recordingLengthTimer invalidate];
+    recordingLengthTimer = nil;
 
     if (motionManager.accelerometerActive)
         [motionManager stopAccelerometerUpdates];
@@ -450,13 +482,17 @@
 
 - (IBAction)nameBtnOnClick:(id)sender {
 
-    UIAlertView *enterNameAlart = [[UIAlertView alloc] initWithTitle:@"Enter a Data Set Name" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView *enterNameAlart = [[UIAlertView alloc] initWithTitle:@"Enter a Data Set Name"
+                                                             message:@""
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                                   otherButtonTitles:@"OK", nil];
     [enterNameAlart setAlertViewStyle:UIAlertViewStylePlainTextInput];
     enterNameAlart.tag = kNAME_DIALOG_TAG;
 
     [enterNameAlart textFieldAtIndex:0].delegate = self;
     [[enterNameAlart textFieldAtIndex:0] becomeFirstResponder];
-    [enterNameAlart textFieldAtIndex:0].placeholder = @"your name or a data set name";
+    [enterNameAlart textFieldAtIndex:0].placeholder = @"data set name";
 
     [enterNameAlart show];
 }
@@ -515,25 +551,20 @@
     UIAlertView *spinnerDialog = [self getDispatchDialogWithMessage:@"Logging in..."];
     [spinnerDialog show];
     
-    dispatch_queue_t queue = dispatch_queue_create("dispatch_queue_t_dialog_login", NULL);
-    dispatch_async(queue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         RPerson *currUser = [api createSessionWithEmail:email andPassword:pass];
 
         dispatch_async(dispatch_get_main_queue(), ^{
 
             if (currUser != nil) {
+
                 [self.view makeWaffle:[NSString stringWithFormat:@"Login as %@ successful", email]
                              duration:WAFFLE_LENGTH_SHORT
                              position:WAFFLE_BOTTOM
                                 image:WAFFLE_CHECKMARK];
-                
-                // save the username and password in prefs
-                NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-                [prefs setObject:email forKey:pLOGIN_USERNAME];
-                [prefs setObject:pass forKey:pLOGIN_PASSWORD];
-                [prefs synchronize];
             } else {
+                
                 [self.view makeWaffle:@"Login failed"
                              duration:WAFFLE_LENGTH_SHORT
                              position:WAFFLE_BOTTOM
