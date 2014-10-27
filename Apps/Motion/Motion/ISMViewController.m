@@ -173,15 +173,6 @@
             [self stopRecordingData];
         } else {
 
-            // check if a project is selected yet
-            if ([dm getProjectID] <= 0) {
-                [self.view makeWaffle:@"Please select a project first"
-                             duration:WAFFLE_LENGTH_SHORT
-                             position:WAFFLE_BOTTOM
-                                image:WAFFLE_RED_X];
-                return;
-            }
-
             [self beginRecordingData];
         }
     }

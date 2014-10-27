@@ -20,6 +20,9 @@
     
     // a list of the fields as they appear on iSENSE
     NSMutableArray *projectFields;
+
+    // a list of fields recordable in a particular ordering TODO may not need
+    NSMutableDictionary *allOrderedFieldNames;
 }
 
 + (DataManager *)getInstance;
@@ -39,5 +42,9 @@
 
 // a staticly available row-to-column major formatting of data
 + (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID;
+
+// a staticly available row-to-column major formatting of data that has been recorded
+// strictly for an arbitrary project (utilized by the DataSaver)
++ (NSMutableDictionary *) convertArbitraryDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recognizedFields;
 
 @end
