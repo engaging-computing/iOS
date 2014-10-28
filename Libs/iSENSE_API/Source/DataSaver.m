@@ -184,8 +184,9 @@
                 if (currentDS.fields == nil) {
                     continue;
                 } else {
-                    currentDS.data = [DataManager convertDataToColumnMajor:currentDS.data
-                                                              forProjectID:currentDS.projID.intValue];
+                    currentDS.data = [DataManager convertArbitraryDataToColumnMajor:currentDS.data
+                                                                       forProjectID:currentDS.projID.intValue
+                                                                andRecognizedFields:currentDS.fields];
                 }
             } else {
                 // see if the data is an array (row-major) instead of a dictionary (column-major).

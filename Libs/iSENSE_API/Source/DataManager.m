@@ -33,6 +33,7 @@
         projectID = 0;
         [self setProjectFieldsToAllFields];
     }
+
     return self;
 }
 
@@ -133,12 +134,18 @@
 // The implementor should keep a JSON array of these returned JSON objects for each point of data
 - (NSMutableDictionary *) writeDataToJSONObject:(DataContainer *)dc {
 
-    NSMutableDictionary *dataJSON = [[NSMutableDictionary alloc] init];
-    
+    // data is required in the container to record it
     if (dc == nil) {
         NSLog(@"Fields object cannot be nil when writing data to JSON object");
         return nil;
     }
+
+    // if no project is currently selected, return the result of writeDataForArbitraryProject
+    if (projectID <= 0) {
+        return [self writeDataForArbitraryProject:dc];
+    }
+
+    NSMutableDictionary *dataJSON = [[NSMutableDictionary alloc] init];
 
     // Loop through each field, and use it's recognized name to key into the data dictionary of the DataContainer
     // object.  If the data is not nil, it will be saved.  Otherwise, a blank string is saved for that field.
@@ -153,6 +160,26 @@
     return dataJSON;
 }
 
+// Similar implementation to writeDataToJSONObject.  However, since no project is currently selected,
+// every possible field is in the projectFields array and all have an ID of 0.  Instead of keying the
+// data by the field ID then, this method will key the data by the name of the field the data is for.
+// In this way, the data can later be reorganized for a particular project by matching the field names
+// as keys in this dictionary to the field IDs of the project corresponding to those recognized field names.
+- (NSMutableDictionary *) writeDataForArbitraryProject:(DataContainer *)dc {
+
+    NSMutableDictionary *dataJSON = [[NSMutableDictionary alloc] init];
+
+    for (RProjectField *field in projectFields) {
+
+        NSString *name = field.recognized_name;
+        NSNumber *dataPoint = [dc.data objectForKey:name];
+
+        [dataJSON setObject:((dataPoint) ? dataPoint : @"") forKey:name];
+    }
+
+    return dataJSON;
+}
+
 // Change the data array from row-major to column-major
 // It should take as an input a JSONArray of the JSONObjects created by the
 // writeDataFieldsToJSONObject method
@@ -160,19 +187,14 @@
 
     NSMutableDictionary *outData = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *row     = [[NSMutableDictionary alloc] init];
-    NSMutableArray *ids          = [[NSMutableArray alloc] init];
-    NSMutableArray *outRow;
+    NSMutableArray      *ids     = [[NSMutableArray      alloc] init];
+    NSMutableArray      *outRow;
 
-    // If the recognized fields are null, set up the recognized fields and fieldIDs.
-    // Otherwise, if recognized fields are not null but the field IDs are, pull the project's field IDs, retaining
-    // the user's passed in field-matched recognized fields array for that project.
-    if (!ids || ids.count == 0) {
-
-        DataManager *dm = [[DataManager alloc] init];
-        [dm setProjectID:projID];
-        [dm retrieveProjectFields];
-        ids = [dm getProjectFieldIDs];
-    }
+    // get the field IDs for this project
+    DataManager *dm = [[DataManager alloc] init];
+    [dm setProjectID:projID];
+    [dm retrieveProjectFields];
+    ids = [dm getProjectFieldIDs];
 
     // reorder the data from row major to column major format
     for (int i = 0; i < ids.count; i++) {
@@ -194,6 +216,51 @@
         [outData setObject:outRow forKey:[NSString stringWithFormat:@"%@", fieldID]];
     }
 
+    return outData;
+}
+
+// Change the arbitrary data array from row-major to column-major, re-keying the data with the
+// proper field IDs pulled from the project
++ (NSMutableDictionary *) convertArbitraryDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recognizedFields {
+
+    NSMutableDictionary *outData = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *row     = [[NSMutableDictionary alloc] init];
+    NSMutableArray      *ids     = [[NSMutableArray      alloc] init];
+    NSMutableArray      *outRow;
+
+    // get the field IDs for this project
+    DataManager *dm = [[DataManager alloc] init];
+    [dm setProjectID:projID];
+    [dm retrieveProjectFields];
+    ids = [dm getProjectFieldIDs];
+
+    // the field IDs should be in ordered, corresponding to the recognized fields
+    if (ids.count != recognizedFields.count) {
+        NSLog(@"Fields IDs do not match recognized fields in convertArbitraryDataToColumnMajor - cannot convert data");
+        return nil;
+    }
+
+    // reorder the data from row major to column major format
+    for (int i = 0; i < ids.count; i++) {
+
+        NSNumber *fieldID = [ids objectAtIndex:i];
+        NSString *fieldName = [recognizedFields objectAtIndex:i];
+        outRow = [[NSMutableArray alloc] init];
+
+        for (int j = 0; j < (int)data.count; j++) {
+
+            row = [data objectAtIndex:j];
+
+            if ([row objectForKey:fieldName]) {
+                [outRow addObject:[NSString stringWithFormat:@"%@", [row objectForKey:fieldName]]];
+            } else {
+                [outRow addObject:@""];
+            }
+        }
+
+        [outData setObject:outRow forKey:[NSString stringWithFormat:@"%@", fieldID]];
+    }
+    
     return outData;
 }
 
