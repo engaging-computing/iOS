@@ -37,10 +37,10 @@
 
 - (NSMutableDictionary *) writeDataToJSONObject:(DataContainer *)dc;
 
-// a staticly available row-to-column major formatting of data
+// a statically available row-to-column major formatting of data
 + (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID;
 
-// a staticly available row-to-column major formatting of data that has been recorded
+// a statically available row-to-column major formatting of data that has been recorded.
 // strictly for an arbitrary project (utilized by the DataSaver)
 + (NSMutableDictionary *) convertArbitraryDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recognizedFields;
 
