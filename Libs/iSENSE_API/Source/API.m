@@ -208,7 +208,7 @@ static NSString *email, *password;
 -(NSArray *)getProjectFieldsWithId:(int)projectId {
     NSMutableArray *fields = [[NSMutableArray alloc] init];
     
-    NSDictionary *requestResult = [self makeRequestWithBaseUrl:baseUrl withPath:[NSString stringWithFormat:@"projects/%d", projectId] withParameters:@"recur=true" withRequestType:GET_REQUEST andPostData:nil];
+    NSDictionary *requestResult = [self makeRequestWithBaseUrl:baseUrl withPath:[NSString stringWithFormat:@"projects/%d", projectId] withParameters:@"recur=false" withRequestType:GET_REQUEST andPostData:nil];
     NSArray *innerFields = [requestResult objectForKey:@"fields"];
     
     for (int i = 0; i < innerFields.count; i++) {
