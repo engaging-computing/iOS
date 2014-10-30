@@ -28,20 +28,20 @@
 - (int) getProjectID;
 - (void) setProjectID:(int)projID;
 
-- (NSMutableArray *) getProjectFields;
-- (void) setProjectFields:(NSMutableArray *)projFields;
+- (NSArray *) getProjectFields;
+- (void) setProjectFields:(NSArray *)projFields;
 
-- (NSMutableArray *) getUserDefinedFields;
-- (NSMutableArray *) getRecognizedFields;
-- (NSMutableArray *) getProjectFieldIDs;
+- (NSArray *) getUserDefinedFields;
+- (NSArray *) getRecognizedFields;
+- (NSArray *) getProjectFieldIDs;
 
-- (NSMutableDictionary *) writeDataToJSONObject:(DataContainer *)dc;
+- (NSDictionary *) writeDataToJSONObject:(DataContainer *)dc;
 
 // a statically available row-to-column major formatting of data
-+ (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID;
++ (NSDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID;
 
 // a statically available row-to-column major formatting of data that has been recorded.
 // strictly for an arbitrary project (utilized by the DataSaver)
-+ (NSMutableDictionary *) convertArbitraryDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recognizedFields;
++ (NSDictionary *) convertArbitraryDataToColumnMajor:(NSArray *)data forProjectID:(int)projID andRecognizedFields:(NSArray *)recognizedFields;
 
 @end

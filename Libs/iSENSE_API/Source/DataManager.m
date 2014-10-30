@@ -91,48 +91,48 @@
     [projectFields addObjectsFromArray:allFieldsAsFieldObjects];
 }
 
-// Get the project ID currently associated with this class
+// Gets the project ID currently associated with this class
 - (int) getProjectID {
     return projectID;
 }
 
-// Set the project ID to associate with this class
+// Sets the project ID to associate with this class
 - (void) setProjectID:(int)projID {
     projectID = projID;
 }
 
-// Get the array of RProjectFields associated with this project
-- (NSMutableArray *) getProjectFields {
-    return projectFields;
+// Returns the array of RProjectFields associated with this project as an immutable copy
+- (NSArray *) getProjectFields {
+    return [projectFields copy];
 }
 
-// Explicitly set the array of RProjectFields for this project
-- (void) setProjectFields:(NSMutableArray *)projFields {
-    projectFields = projFields;
+// Set the array of RProjectFields for this project
+- (void) setProjectFields:(NSArray *)projFields {
+    projectFields = [projFields mutableCopy];
 }
 
 // Retrieve the array of fields for the current project, as displayed on the website
 // valueForKey:@"name" is analagous to mapping over the RProjectField.name property
-- (NSMutableArray *) getUserDefinedFields {
-    return [projectFields valueForKey:@"name"];
+- (NSArray *) getUserDefinedFields {
+    return [[projectFields valueForKey:@"name"] copy];
 }
 
 // Retrieve the array of fields for the current project, as rearranged by the FieldMatching class
 // valueForKey:@"recognized_name" is analagous to mapping over the RProjectField.recognized_name property
-- (NSMutableArray *) getRecognizedFields {
-    return [projectFields valueForKey:@"recognized_name"];
+- (NSArray *) getRecognizedFields {
+    return [[projectFields valueForKey:@"recognized_name"] copy];
 }
 
 // Retrieve the array of field IDs for the current project
 // valueForKey:@"field_id" is analagous to mapping over the RProjectField.field_id property
-- (NSMutableArray *) getProjectFieldIDs {
-    return [projectFields valueForKey:@"field_id"];
+- (NSArray *) getProjectFieldIDs {
+    return [[projectFields valueForKey:@"field_id"] copy];
 }
 
 // Write the data in the data fields object to a JSON object for this current project
 // The format will resemble {"field_id_0":"data_0", "field_id_1":"data_1", ... }
 // The implementor should keep a JSON array of these returned JSON objects for each point of data
-- (NSMutableDictionary *) writeDataToJSONObject:(DataContainer *)dc {
+- (NSDictionary *) writeDataToJSONObject:(DataContainer *)dc {
 
     // data is required in the container to record it
     if (dc == nil) {
@@ -157,7 +157,7 @@
         [dataJSON setObject:((dataPoint) ? dataPoint : @"") forKey:[NSString stringWithFormat:@"%@", field.field_id]];
     }
 
-    return dataJSON;
+    return [dataJSON copy];
 }
 
 // Similar implementation to writeDataToJSONObject.  However, since no project is currently selected,
@@ -165,7 +165,7 @@
 // data by the field ID then, this method will key the data by the name of the field the data is for.
 // In this way, the data can later be reorganized for a particular project by matching the field names
 // as keys in this dictionary to the field IDs of the project corresponding to those recognized field names.
-- (NSMutableDictionary *) writeDataForArbitraryProject:(DataContainer *)dc {
+- (NSDictionary *) writeDataForArbitraryProject:(DataContainer *)dc {
 
     NSMutableDictionary *dataJSON = [[NSMutableDictionary alloc] init];
 
@@ -177,18 +177,20 @@
         [dataJSON setObject:((dataPoint) ? dataPoint : @"") forKey:name];
     }
 
-    return dataJSON;
+    return [dataJSON copy];
 }
 
 // Change the data array from row-major to column-major
 // It should take as an input a JSONArray of the JSONObjects created by the
 // writeDataFieldsToJSONObject method
-+ (NSMutableDictionary *) convertDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID {
++ (NSDictionary *) convertDataToColumnMajor:(NSArray *)data forProjectID:(int)projID {
 
     NSMutableDictionary *outData = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *row     = [[NSMutableDictionary alloc] init];
-    NSMutableArray      *ids     = [[NSMutableArray      alloc] init];
-    NSMutableArray      *outRow;
+    NSMutableArray *outRow;
+
+    NSDictionary *row = [[NSDictionary alloc] init];
+    NSArray *ids = [[NSArray alloc] init];
+
 
     // get the field IDs for this project
     DataManager *dm = [[DataManager alloc] init];
@@ -216,17 +218,18 @@
         [outData setObject:outRow forKey:[NSString stringWithFormat:@"%@", fieldID]];
     }
 
-    return outData;
+    return [outData copy];
 }
 
 // Change the arbitrary data array from row-major to column-major, re-keying the data with the
 // proper field IDs pulled from the project
-+ (NSMutableDictionary *) convertArbitraryDataToColumnMajor:(NSMutableArray *)data forProjectID:(int)projID andRecognizedFields:(NSMutableArray *)recognizedFields {
++ (NSDictionary *) convertArbitraryDataToColumnMajor:(NSArray *)data forProjectID:(int)projID andRecognizedFields:(NSArray *)recognizedFields {
 
     NSMutableDictionary *outData = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *row     = [[NSMutableDictionary alloc] init];
-    NSMutableArray      *ids     = [[NSMutableArray      alloc] init];
-    NSMutableArray      *outRow;
+    NSMutableArray *outRow;
+
+    NSDictionary *row = [[NSDictionary alloc] init];
+    NSArray *ids = [[NSArray alloc] init];
 
     // get the field IDs for this project
     DataManager *dm = [[DataManager alloc] init];
@@ -261,7 +264,7 @@
         [outData setObject:outRow forKey:[NSString stringWithFormat:@"%@", fieldID]];
     }
     
-    return outData;
+    return [outData copy];
 }
 
 @end

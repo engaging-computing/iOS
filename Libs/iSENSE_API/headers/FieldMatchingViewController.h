@@ -31,7 +31,7 @@
     UITextField *alertText;
 }
 
-- (id) initWithMatchedFields:(NSMutableArray *)mf andProjectFields:(NSMutableArray *)pf;
+- (id) initWithMatchedFields:(NSArray *)mf andProjectFields:(NSArray *)pf;
 
 - (IBAction) okOnClick:(id)sender;
 

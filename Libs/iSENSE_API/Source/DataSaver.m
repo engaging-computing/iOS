@@ -191,14 +191,14 @@
             } else {
                 // see if the data is an array (row-major) instead of a dictionary (column-major).
                 // iSENSE expects column-major data, so row-major data will be converted here
-                if ([currentDS.data isKindOfClass:[NSMutableArray class]]) {
+                if ([currentDS.data isKindOfClass:[NSArray class]]) {
                     currentDS.data = [DataManager convertDataToColumnMajor:currentDS.data
                                                               forProjectID:currentDS.projID.intValue];
                 }
             }
 
             // data should be a dictionary now - if not, this data set cannot be uploaded
-            if (![currentDS.data isKindOfClass:[NSMutableDictionary class]]) {
+            if (![currentDS.data isKindOfClass:[NSDictionary class]]) {
                 NSLog(@"Data is not a dictionary in the Data Saver");
                 dataSetsFailed++;
                 continue;
@@ -208,7 +208,7 @@
             __block int returnID = -1;
             if (((NSArray *)currentDS.data).count) {
 
-                NSMutableDictionary *jobj = (NSMutableDictionary *) currentDS.data;
+                NSDictionary *jobj = (NSDictionary *) currentDS.data;
 
                 if ([api getCurrentUser] == nil) {
 
@@ -275,7 +275,7 @@
             
                 // add back the images that need to be uploaded
                 if (failedAtLeastOnce) {
-                    currentDS.picturePaths = newPicturePaths;
+                    currentDS.picturePaths = [newPicturePaths copy];
                     continue;
                 }
             }

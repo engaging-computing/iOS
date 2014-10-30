@@ -535,7 +535,7 @@
                           parentName:PARENT_MOTION
                          description:@"Uploaded from iOS Motion"
                            projectID:[dm getProjectID]
-                                data:[dataPoints mutableCopy]
+                                data:[dataPoints copy]
                           mediaPaths:nil
                           uploadable:([dm getProjectID] >= 1)
                    hasInitialProject:([dm getProjectID] >= 1)
