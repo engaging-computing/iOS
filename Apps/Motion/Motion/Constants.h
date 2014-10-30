@@ -16,7 +16,10 @@
 #define kLOGIN_DIALOG_TAG 500
 #define kLOGIN_USER_TEXT 501
 #define kLOGIN_PASS_TEXT 502
+
 #define kNAME_DIALOG_TAG 600
+#define kLOCATION_DIALOG_IOS_8_AND_LATER_TAG 601
+#define kLOCATION_DIALOG_IOS_7_AND_EARLIER_TAG 602
 
 // Earth's gravity constant
 #define kGRAVITY 9.80665
@@ -28,5 +31,8 @@
 
 // Project constants
 #define kNO_PROJECT @"None"
+
+// Preferences location constant
+#define kOPT_OUT_LOCATION @"user_opt_out_location"
 
 #endif

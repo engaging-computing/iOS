@@ -67,9 +67,6 @@
                                                initWithTarget:self action:@selector(startStopOnLongClick:)];
     [startStopBtn addGestureRecognizer:longPress];
 
-    // Initialize the location manager (TODO - may be best to eventually move this call so it's only called when needed)
-    [self initLocations];
-
     // Initialize the motion manager
     motionManager = [[CMMotionManager alloc] init];
 
@@ -112,6 +109,14 @@
     NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
 
     [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %@", curProjIDStr] forState:UIControlStateNormal];
+
+    // Initialize the location manager and register for updates
+    [self registerLocationUpdates];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+    [self unregisterLocationUpdates];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -143,8 +148,43 @@
 
             break;
         }
+        case kLOCATION_DIALOG_IOS_8_AND_LATER_TAG:
+        case kLOCATION_DIALOG_IOS_7_AND_EARLIER_TAG:
+        {
+            if (buttonIndex == 0) {
+
+                // user does not wish to have location data recorded, save this choice in prefs
+                NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+                [prefs setBool:true forKey:kOPT_OUT_LOCATION];
+                [prefs synchronize];
+
+                return;
+            }
+
+            if (alertView.tag == kLOCATION_DIALOG_IOS_8_AND_LATER_TAG) {
+
+                // Send the user to the Settings for this app to allow them to change location settings.
+                @try {
+
+                    NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    [[UIApplication sharedApplication] openURL:settingsURL];
+
+                } @catch (NSException *e) {
+
+                    // in the event that versions beyond iOS 8 re-disable the ability to launch app settings, we will
+                    // display a dialog to the user
+                    alertView = [[UIAlertView alloc] initWithTitle:@"Cannot navigate to settings"
+                                                           message:@"We are sorry, but it seems Apple disabled our ability to bring you to the settings.  Please manually go to the Location Services settings and enable location updates for this app."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Okay"
+                                                 otherButtonTitles:nil];
+                    [alertView show];
+                }
+            }
+
+            break;
+        }
         default:
-            NSLog(@"Unrecognized dialog!");
             break;
     }
 }
@@ -171,9 +211,12 @@
         if (isRecording) {
 
             [self stopRecordingData];
+
         } else {
 
-            [self beginRecordingData];
+            // check to see if location is authorized for recording data before recording
+            if ([self isLocationAuthorized])
+                [self beginRecordingData];
         }
     }
 }
@@ -400,22 +443,84 @@
 #pragma mark - Location
 
 // Initializes the location manager to begin receiving location updates
-- (void) initLocations {
+- (void) registerLocationUpdates {
+
     if (!locationManager) {
+
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
 
         locationManager.distanceFilter = kCLDistanceFilterNone;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-
-        [locationManager startUpdatingLocation];
     }
+
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [locationManager requestWhenInUseAuthorization];
+    }
+
+    [locationManager startUpdatingLocation];
+}
+
+// Stops the location manager from receiving location updates
+- (void) unregisterLocationUpdates {
+
+    if (locationManager)
+        [locationManager stopUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+}
+
+// check to see if the location was authorized for use (iOS 8 and later)
+- (BOOL) isLocationAuthorized {
+
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    BOOL userOptOutLocation = [prefs boolForKey:kOPT_OUT_LOCATION];
+
+    // If the status is denied and user hasn't yet opted out entirely from being tracked, display an alert that can take the
+    // user to the settings to enable location.  Note this only works in iOS 8 and above since the settings access API has been
+    // removed in iOS versions 5 and 6.  By checking that this app responds to isOperatingSystemAtLeastVersion, we can tell
+    // if this app is running on a device greater than iOS 8.  For all other versions, we will show a dialog that asks the user
+    // to manually navigate to settings to enable location.
+    if (!userOptOutLocation && status == kCLAuthorizationStatusDenied) {
+
+        NSString *title = @"Location services are off";
+        NSString *message;
+        UIAlertView *alertView;
+
+        if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
+
+            message = @"This app requires location data.  To enable location, select 'Settings' and turn on 'While Using the App' in the Location settings.  Select 'Cancel' if you do not wish to have your location recorded.";
+
+            alertView = [[UIAlertView alloc] initWithTitle:title
+                                                   message:message
+                                                  delegate:self
+                                         cancelButtonTitle:@"Cancel"
+                                         otherButtonTitles:@"Settings", nil];
+            alertView.tag = kLOCATION_DIALOG_IOS_8_AND_LATER_TAG;
+
+        } else {
+
+            message = @"This app requires location data.  To enable location, navigate to the Location Services in Settings and turn on location for this application.  To be warned again when location is turned off for this app, select 'Okay'.  If you do not wish to have your location recorded, select 'Cancel'.";
+
+            alertView = [[UIAlertView alloc] initWithTitle:title
+                                                   message:message
+                                                  delegate:self
+                                         cancelButtonTitle:@"Cancel"
+                                         otherButtonTitles:@"Okay", nil];
+            alertView.tag = kLOCATION_DIALOG_IOS_7_AND_EARLIER_TAG;
+
+        }
+
+        [alertView show];
+        return false;
+    }
+
+    return true;
 }
 
 #pragma end - Location
