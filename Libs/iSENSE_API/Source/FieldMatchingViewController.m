@@ -68,11 +68,11 @@
     [self willRotateToInterfaceOrientation:(self.interfaceOrientation) duration:0];
 }
 
-- (id) initWithMatchedFields:(NSMutableArray *)mf andProjectFields:(NSMutableArray *)pf {
+- (id) initWithMatchedFields:(NSArray *)mf andProjectFields:(NSArray *)pf {
     self = [super init];
     if (self) {
-        matchFields = mf;
-        projFields = pf;
+        matchFields = [mf mutableCopy];
+        projFields = [pf mutableCopy];
         isenseBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"]];
         entries = [[NSMutableArray alloc] init];
         
