@@ -9,7 +9,6 @@
 #import "ProjectBrowserViewController.h"
 
 @interface ProjectBrowserViewController ()
-
 @end
 
 @implementation ProjectBrowserViewController
@@ -55,8 +54,6 @@
             [isenseBundle loadNibNamed:@"ProjectBrowserViewController_iPhone"
                                           owner:self
                                         options:nil];
-            
-            
         }
     }
 }
@@ -72,14 +69,13 @@
         isenseAPI = [API getInstance];
         cell_count = 10;
         isUpdating = false;
-        
-        
     }
 
     return self;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+
     [super viewDidAppear:animated];
     
     [self willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
@@ -97,14 +93,8 @@
     [self updateProjects:search];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    
-
-    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -129,6 +119,7 @@
 
 // Default dispatch_async dialog with custom spinner
 - (UIAlertView *) getDispatchDialogWithMessage:(NSString *)dString {
+
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:dString
                                                       message:nil
                                                      delegate:self
@@ -142,9 +133,8 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scroll willDecelerate:(BOOL)decelerate {
+
     // UITableView only moves in one direction, y axis
-    
-    
     if (!isUpdating) {
         NSInteger currentOffset = scroll.contentOffset.y;
         NSInteger maximumOffset = scroll.contentSize.height - scroll.frame.size.height;
@@ -157,7 +147,8 @@
     }
 }
 
-- (void) update{
+- (void) update {
+
     cell_count += 10;
     ISenseSearch *newSearch = [[ISenseSearch alloc] initWithQuery:currentQuery page:(currentPage + 1) itemsPerPage:10 andBuildType:APPEND];
     [self updateProjects:newSearch];
@@ -178,11 +169,9 @@
         } else {
            return [projectsFiltered count]; 
         }
-        
     } else {
         return cell_count + 1;
     }
-	
 }
 
 -(void)updateProjects:(ISenseSearch *)iSS {
@@ -250,15 +239,17 @@
         [spinner startAnimating];
         
         return cell;
-		
+
 	} else if (![currentQuery isEqualToString:@""] && [projectsFiltered count] == 0) {
+
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoProjFoundCell"];
         cell.textLabel.text= @"No Projects Found";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
-        
+
     } else {
+
         int row = (int)indexPath.row;
         
         RProject *proj;
@@ -269,32 +260,34 @@
         }
         
         UITableViewCell *cell = [[ProjectCell alloc] initWithProject:proj];
-        
-        
-        
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    if (![bar.text isEqualToString:@""]) {
-//        if ([projectsFiltered count] == 0) return;
-//        else {
-//            [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projectsFiltered objectAtIndex:indexPath.row] project_id].intValue];
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }
-//    } else {
-        if (indexPath.row == cell_count) return;
-        else {
+
+    if (![currentQuery isEqualToString:@""]) {
+
+        if ([projectsFiltered count] == 0) {
+            return;
+        } else {
+            [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projectsFiltered objectAtIndex:indexPath.row] project_id].intValue];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+
+        if (indexPath.row == cell_count) {
+            return;
+        } else {
             [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projects objectAtIndex:indexPath.row] project_id].intValue];
             [self.navigationController popViewControllerAnimated:YES];
         }
-    //}
+    }
 }
 
 /* Search bar methods */
 - (void)searchBarSearchButtonClicked:(UISearchBar *)search {
+
     spinnerDialog = [self getDispatchDialogWithMessage:@"Loading..."];
     [spinnerDialog show];
     [projectsFiltered removeAllObjects];
@@ -302,17 +295,17 @@
 }
 
 - (void)handleSearch:(UISearchBar *)search {
+
     NSString *query = [search.text copy];
     
     ISenseSearch *newSearch = [[ISenseSearch alloc] initWithQuery:query page:1 itemsPerPage:10 andBuildType:NEW];
     [self updateProjects:newSearch];
-    
-    // Dismiss keyboard.
+
     [search resignFirstResponder];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) search {
-    // Dismiss keyboard.
+
     [search setText:@""];
     [search resignFirstResponder];
     
@@ -323,7 +316,6 @@
     [self updateProjects:newSearch];
     [search setShowsCancelButton:false animated:true];
     [search sizeToFit];
-
 }
 
 
