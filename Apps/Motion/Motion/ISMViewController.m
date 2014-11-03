@@ -611,7 +611,7 @@
     credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
     DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
     [parent addChildViewController:credentialMgr];
-    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Credential Manager" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
     [credentialMgrAlert setContentView:credentialMgr.view];
     [credentialMgrAlert setDismissesOnBackdropTap:YES];
     [credentialMgrAlert show];
@@ -624,7 +624,7 @@
 
 - (void) didPressLogin:(CredentialManager *)mngr {
     
-    [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:YES];
+    [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:NO];
     credentialMgrAlert = nil;
     
     UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Login to iSENSE" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
@@ -633,12 +633,12 @@
     
     [loginAlert textFieldAtIndex:0].delegate = self;
     [loginAlert textFieldAtIndex:0].tag = kLOGIN_USER_TEXT;
-    [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
     [loginAlert textFieldAtIndex:0].placeholder = @"Email";
-    
+    [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
+
     [loginAlert textFieldAtIndex:1].delegate = self;
     [loginAlert textFieldAtIndex:1].tag = kLOGIN_PASS_TEXT;
-    
+
     [loginAlert show];
 }
 

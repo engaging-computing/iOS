@@ -120,7 +120,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="iS Motion" id="d6B-Tu-Otv">
-                        <barButtonItem key="rightBarButtonItem" title="Credentials" id="YgZ-s9-4Sq">
+                        <barButtonItem key="rightBarButtonItem" title="Account" id="YgZ-s9-4Sq">
                             <connections>
                                 <action selector="credentialBarBtnOnClick:" destination="vXZ-lx-hvc" id="NMf-fA-kYZ"/>
                             </connections>
