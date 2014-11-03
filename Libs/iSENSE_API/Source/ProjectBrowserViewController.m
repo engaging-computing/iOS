@@ -36,21 +36,19 @@
     NSBundle *isenseBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"iSENSE_API_Bundle" withExtension:@"bundle"]];
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
-        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-            [isenseBundle loadNibNamed:@"ProjectBrowserViewController~landscape_iPad"
-                                          owner:self
-                                        options:nil];
-        } else {
-            [isenseBundle loadNibNamed:@"ProjectBrowserViewController_iPad"
-                                          owner:self
-                                        options:nil];
-        }
+
+        [isenseBundle loadNibNamed:@"ProjectBrowserViewController_iPad"
+                             owner:self
+                           options:nil];
     } else {
+
         if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+
             [isenseBundle loadNibNamed:@"ProjectBrowserViewController~landscape_iPhone"
                                           owner:self
                                         options:nil];
         } else {
+
             [isenseBundle loadNibNamed:@"ProjectBrowserViewController_iPhone"
                                           owner:self
                                         options:nil];
@@ -77,8 +75,8 @@
 - (void) viewDidAppear:(BOOL)animated {
 
     [super viewDidAppear:animated];
-    
     [self willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
+
     ISenseSearch *search = [[ISenseSearch alloc] init];
     self.tableView.tableHeaderView = bar;
     bar.delegate = self;
@@ -95,13 +93,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:true animated:true];
     [searchBar sizeToFit];
 }
+
 /*
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField.text isEqualToString:@""]) {
@@ -111,10 +109,9 @@
     }
 }
 */
-- (void)didReceiveMemoryWarning
-{
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 // Default dispatch_async dialog with custom spinner
@@ -125,10 +122,13 @@
                                                      delegate:self
                                             cancelButtonTitle:nil
                                             otherButtonTitles:nil];
+
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     spinner.center = CGPointMake(139.5, 75.5);
+
     [message addSubview:spinner];
     [spinner startAnimating];
+
     return message;
 }
 
@@ -136,6 +136,7 @@
 
     // UITableView only moves in one direction, y axis
     if (!isUpdating) {
+
         NSInteger currentOffset = scroll.contentOffset.y;
         NSInteger maximumOffset = scroll.contentSize.height - scroll.frame.size.height;
         
@@ -164,14 +165,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
 	if (![currentQuery isEqualToString:@""]) {
+
         if ([projectsFiltered count] == 0) {
             return 1;
-        } else {
-           return [projectsFiltered count]; 
         }
-    } else {
-        return cell_count + 1;
+
+        return [projectsFiltered count];
     }
+
+    return cell_count + 1;
 }
 
 -(void)updateProjects:(ISenseSearch *)iSS {
@@ -216,7 +218,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-    if (indexPath.row == cell_count){ // Special Case 2
+    if (indexPath.row == cell_count) { // Special Case 2
 		
 		UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"NoReuse"];
         cell.textLabel.text = @"Loading...";
@@ -270,19 +272,20 @@
 
         if ([projectsFiltered count] == 0) {
             return;
-        } else {
-            [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projectsFiltered objectAtIndex:indexPath.row] project_id].intValue];
-            [self.navigationController popViewControllerAnimated:YES];
         }
-    } else {
 
-        if (indexPath.row == cell_count) {
-            return;
-        } else {
-            [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projects objectAtIndex:indexPath.row] project_id].intValue];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
+        [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projectsFiltered objectAtIndex:indexPath.row] project_id].intValue];
+        [self.navigationController popViewControllerAnimated:YES];
+
+        return;
     }
+
+    if (indexPath.row == cell_count) {
+        return;
+    }
+
+    [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projects objectAtIndex:indexPath.row] project_id].intValue];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /* Search bar methods */
