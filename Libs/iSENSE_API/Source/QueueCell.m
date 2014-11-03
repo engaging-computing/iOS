@@ -99,6 +99,12 @@
     return [initial boolValue];
 }
 
+- (BOOL) dataSetSetupWithProjectAndFields {
+    NSNumber *projID = [dataSet projID];
+    id fields = [dataSet fields];
+    return (projID.intValue > 0 && fields != NULL);
+}
+
 - (void) setFields:(NSMutableArray *)fields {
     [dataSet setFields:fields];
 }

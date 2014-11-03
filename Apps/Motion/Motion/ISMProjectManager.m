@@ -38,6 +38,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+
+    // set an observer for the field matched array caught from FieldMatching.  start by removing the observer
+    // to reset any other potential observers registered
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,10 +116,7 @@
         [dm retrieveProjectFields];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            // set an observer for the field matched array caught from FieldMatching
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
-            
+
             // launch the field matching dialog
             FieldMatchingViewController *fmvc = [[FieldMatchingViewController alloc] initWithMatchedFields:[dm getRecognizedFields] andProjectFields:[dm getUserDefinedFields]];
             fmvc.title = @"Field Matching";

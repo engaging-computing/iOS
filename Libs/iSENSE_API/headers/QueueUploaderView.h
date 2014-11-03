@@ -41,7 +41,9 @@
 @end
 
 @interface QueueUploaderView : UIViewController <UIGestureRecognizerDelegate, UIActionSheetDelegate, UITextFieldDelegate, ProjectBrowserDelegate> {
+
     int projID;
+    NSMutableArray *lastSelectedFields;
     
     // bundle for resource files in the iSENSE_API_Bundle
     NSBundle *isenseBundle;

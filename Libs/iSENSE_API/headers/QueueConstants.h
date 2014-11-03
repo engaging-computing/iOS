@@ -15,12 +15,13 @@
 #define QUEUE_SELECT_PROJ   2
 #define QUEUE_LOGIN         500
 
-// options for project action sheet
-#define OPTION_CANCELED            0
-#define OPTION_ENTER_PROJECT       1
-#define OPTION_BROWSE_PROJECTS     2
-#define OPTION_SCAN_PROJECT_QR     3
-#define PROJECT_MANUAL_ENTRY       4
+// options for menu and action sheet
+#define OPTION_CANCELED              0
+#define OPTION_ENTER_PROJECT         1
+#define OPTION_BROWSE_PROJECTS       2
+#define OPTION_SCAN_PROJECT_QR       3
+#define OPTION_PROJECT_MANUAL_ENTRY  4
+#define OPTION_APPLY_PROJ_AND_FIELDS 5
 
 // other character restriction text field tags
 #define TAG_QUEUE_RENAME    700
