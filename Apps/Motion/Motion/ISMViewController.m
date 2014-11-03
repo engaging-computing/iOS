@@ -238,7 +238,7 @@
     // start recording data
     isRecording = true;
     [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
-
+    [self.view setBackgroundColor:UIColorFromHex(0xEEFFEE)];
 
     // initialize the motion manager sensors, if available
     if (motionManager.accelerometerAvailable) {
@@ -409,6 +409,7 @@
     // stop recording data
     isRecording = false;
     [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
+    [self.view setBackgroundColor:UIColorFromHex(0xFFFFFF)];
 
     [xLbl setText:@"X:"];
     [yLbl setText:@"Y:"];
