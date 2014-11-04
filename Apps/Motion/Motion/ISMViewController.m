@@ -77,6 +77,21 @@
 
     // Ensure isRecording is set to false on loading the view
     isRecording = false;
+
+    // Set navigation bar color
+    @try {
+        if ([UINavigationBar instancesRespondToSelector:@selector(barTintColor)]) {
+            // for iOS 7 and higher devices
+            [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
+            [self.navigationController.navigationBar setTintColor:UIColorFromHex(0xFFFFFF)];
+            [self.navigationController.navigationBar setBarTintColor:UIColorFromHex(0x9933CC)];
+        } else {
+            // for iOS 6 and lower devices
+            [self.navigationController.navigationBar setTintColor:UIColorFromHex(0x9933CC)];
+        }
+    } @catch (NSException *e) {
+        // could not set navigation color - ignore the error
+    }
 }
 
 - (void)toggleDev {
