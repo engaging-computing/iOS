@@ -30,7 +30,7 @@
 #define kDEFAULT_DATA_SET_NAME @"John Smith"
 
 // Project constants
-#define kNO_PROJECT @"None"
+#define kNO_PROJECT @"Not Set"
 
 // Preferences location constant
 #define kOPT_OUT_LOCATION @"user_opt_out_location"

@@ -123,7 +123,7 @@
     int curProjID = [dm getProjectID];
     NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
 
-    [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %@", curProjIDStr] forState:UIControlStateNormal];
+    [projectBtn setTitle:[NSString stringWithFormat:@"Project: %@", curProjIDStr] forState:UIControlStateNormal];
 
     // Initialize the location manager and register for updates
     [self registerLocationUpdates];
