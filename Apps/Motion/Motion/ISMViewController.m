@@ -649,7 +649,13 @@
     [loginAlert textFieldAtIndex:0].delegate = self;
     [loginAlert textFieldAtIndex:0].tag = kLOGIN_USER_TEXT;
     [loginAlert textFieldAtIndex:0].placeholder = @"Email";
-    [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
+
+    // since the CredentialManager takes a moment to dismiss and allow the login AlertView become a first responder,
+    // we have to sleep the first responder action for 1.5 seconds.  this can be removed once the Credential Manager
+    // is rewritten
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
+    });
 
     [loginAlert textFieldAtIndex:1].delegate = self;
     [loginAlert textFieldAtIndex:1].tag = kLOGIN_PASS_TEXT;
