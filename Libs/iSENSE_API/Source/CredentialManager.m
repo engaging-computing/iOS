@@ -23,8 +23,10 @@
 
     self.view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 276, 102)];
     gravatarView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 102, 102)];
+
     nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 20, 148, 21)];
     [nameLabel setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1.0]];
+    nameLabel.textAlignment = NSTextAlignmentCenter;
     
     self.view.autoresizesSubviews = NO;
     
@@ -34,8 +36,7 @@
     
     [self.view addSubview:gravatarView];
     [self.view addSubview:nameLabel];
-    
-    
+
     loginoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [loginoutButton setFrame:CGRectMake(150, 54, 75, 44)];
     [loginoutButton addTarget:self action:@selector(loginLogout) forControlEvents:UIControlEventTouchUpInside];
@@ -83,27 +84,26 @@
         NSString *path = [isenseBundle pathForResource:@"default_user" ofType:@"png"];
         UIImage *img = [UIImage imageWithContentsOfFile:path];
         [gravatarView setImage:img];
-        [loginoutButton setTitle:@"Login" forState:UIControlStateNormal];
         [nameLabel setText:@"Not Logged In"];
-    } else {
-        
-        [gravatarView setImage:[[api getCurrentUser] gravatarImage]];
-        [nameLabel setText:[[api getCurrentUser] name]];
-        [loginoutButton setTitle:@"Logout" forState:UIControlStateNormal];
+        [loginoutButton setTitle:@"Login" forState:UIControlStateNormal];
+
+        return;
     }
+        
+    [gravatarView setImage:[[api getCurrentUser] gravatarImage]];
+    [nameLabel setText:[[api getCurrentUser] name]];
+    [loginoutButton setTitle:@"Logout" forState:UIControlStateNormal];
 }
 
 - (void)loginLogout {
     
     if ([api getCurrentUser] == nil) {
         [self.delegate didPressLogin:self];
-    } else {
-        [api deleteSession];
-        [self loadUserInfo];
+        return;
     }
+
+    [api deleteSession];
+    [self loadUserInfo];
 }
-
-
-
 
 @end

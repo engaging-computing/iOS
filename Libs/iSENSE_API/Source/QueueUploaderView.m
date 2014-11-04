@@ -14,19 +14,15 @@
 @synthesize delegate, api, mTableView, currentIndex, dataSaver, managedObjectContext, lastClickedCellIndex, parent, limitedTempQueue;
 
 - (IBAction)enterEditMode:(id)sender {
-    
-    if ([self.mTableView isEditing]) {
-        // If the tableView is already in edit mode, turn it off. Also change the title of the button to reflect the intended verb (‘Edit’, in this case).
-        [self.mTableView setEditing:NO animated:YES];
-        [self.editButtonItem setTitle:@"Edit"];
-    }
-    else {
-        // Turn on edit mode
-        [self.mTableView setEditing:YES animated:YES];
-        [self.editButtonItem setTitle:@"Done"];
-    }
+
+    [self setTableToEditMode:![self.mTableView isEditing]];
 }
 
+- (void) setTableToEditMode:(BOOL)isEditing {
+
+    [self.mTableView setEditing:isEditing animated:YES];
+    [self.editButtonItem setTitle:(isEditing ? @"Done" : @"Edit")];
+}
 
 
 - (id) initWithParentName:(NSString *)parentName andDelegate:(id <QueueUploaderDelegate>)delegateObj {
@@ -166,6 +162,11 @@
     self.editButtonItem.target = self;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationItem.rightBarButtonItem.action = @selector(enterEditMode:);
+
+    // set an observer for the field matched array caught from FieldMatching.  start by removing the observer
+    // to reset any other potential observers registered
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -247,26 +248,26 @@
 	}
 }
 
-- (void) alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
-    if (actionSheet.tag == QUEUE_LOGIN) {
+    if (alertView.tag == QUEUE_LOGIN) {
         
         if (buttonIndex != OPTION_CANCELED) {
-            NSString *usernameInput = [[actionSheet textFieldAtIndex:0] text];
-            NSString *passwordInput = [[actionSheet textFieldAtIndex:1] text];
+            NSString *usernameInput = [[alertView textFieldAtIndex:0] text];
+            NSString *passwordInput = [[alertView textFieldAtIndex:1] text];
             [self loginAndUploadWithUsername:usernameInput withPassword:passwordInput];
         }
         
-    } else if (actionSheet.tag == QUEUE_RENAME) {
+    } else if (alertView.tag == QUEUE_RENAME) {
         
         if (buttonIndex != OPTION_CANCELED) {
             
-            NSString *newDataSetName = [[actionSheet textFieldAtIndex:0] text];
+            NSString *newDataSetName = [[alertView textFieldAtIndex:0] text];
             QueueCell *cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:lastClickedCellIndex];
             [cell setDataSetName:newDataSetName];
         }
         
-    } else if (actionSheet.tag == QUEUE_SELECT_PROJ) {
+    } else if (alertView.tag == QUEUE_SELECT_PROJ) {
         
         if (buttonIndex == OPTION_ENTER_PROJECT) {
             
@@ -276,7 +277,7 @@
                                                     cancelButtonTitle:@"Cancel"
                                                     otherButtonTitles:@"OK", nil];
             
-            message.tag = PROJECT_MANUAL_ENTRY;
+            message.tag = OPTION_PROJECT_MANUAL_ENTRY;
             [message setAlertViewStyle:UIAlertViewStylePlainTextInput];
             [message textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
             [message textFieldAtIndex:0].tag = TAG_QUEUE_PROJ;
@@ -290,11 +291,11 @@
             [self.navigationController pushViewController:browseView animated:YES];
         }
         
-    } else if (actionSheet.tag == PROJECT_MANUAL_ENTRY) {
+    } else if (alertView.tag == OPTION_PROJECT_MANUAL_ENTRY) {
         
         if (buttonIndex != OPTION_CANCELED) {
             
-            NSString *projIDString = [[actionSheet textFieldAtIndex:0] text];
+            NSString *projIDString = [[alertView textFieldAtIndex:0] text];
             projID = [projIDString intValue];
             
             QueueCell *cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:lastClickedCellIndex];
@@ -307,14 +308,29 @@
             [self launchFieldMatchingViewControllerFromBrowse:FALSE];
         }
         
-    } else if (actionSheet.tag == QUEUE_CHANGE_DESC) {
+    } else if (alertView.tag == QUEUE_CHANGE_DESC) {
         
         if (buttonIndex != OPTION_CANCELED) {
 
-            NSString *newDescription = [[actionSheet textFieldAtIndex:0] text];
+            NSString *newDescription = [[alertView textFieldAtIndex:0] text];
             QueueCell *cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:lastClickedCellIndex];
             [cell setDesc:newDescription];
             [dataSaver editDataSetWithKey:cell.mKey andChangeDescription:newDescription];
+        }
+    } else if (alertView.tag == OPTION_APPLY_PROJ_AND_FIELDS) {
+
+        if (buttonIndex != OPTION_CANCELED) {
+
+            for (int i = 0; i < [mTableView numberOfRowsInSection:0]; i++) {
+
+                QueueCell *thisCell = (QueueCell *) [mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                if (![thisCell dataSetHasInitialProject] && ![thisCell dataSetSetupWithProjectAndFields]) {
+
+                    // this cell does not currently have a project or fields, but the user wishes to
+                    // assign the last chosen project/fields to it
+                    [self setCell:thisCell withProjectID:projID andFields:lastSelectedFields];
+                }
+            }
         }
     }
     
@@ -558,9 +574,7 @@
         [dm retrieveProjectFields];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            // set an observer for the field matched array caught from FieldMatching
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
-            
+
             // launch the field matching dialog
             FieldMatchingViewController *fmvc = [[FieldMatchingViewController alloc]
                                                  initWithMatchedFields:[dm getRecognizedFields]
@@ -584,23 +598,52 @@
 
 - (void) retrieveFieldMatchedArray:(NSNotification *)obj {
 
+    // reset the edit menu option
+    [self setTableToEditMode:![self.mTableView isEditing]];
+
     NSMutableArray *fieldMatch =  (NSMutableArray *)[obj object];
 
     if (fieldMatch != nil) {
         // user pressed okay button - set the cell's project and fields
         QueueCell *cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:lastClickedCellIndex];
-        
-        [cell setProjID:[NSString stringWithFormat:@"%d", projID]];
-        [cell.dataSet setProjID:[NSNumber numberWithInt:projID]];
-        [dataSaver editDataSetWithKey:cell.mKey andChangeProjIDTo:[NSNumber numberWithInt:projID]];
-        
-        [cell setFields:fieldMatch];
-        [cell.dataSet setFields:fieldMatch];
-        [dataSaver editDataSetWithKey:cell.mKey andChangeFieldsTo:fieldMatch];
-        
-        [self.mTableView reloadData];
+        [self setCell:cell withProjectID:projID andFields:fieldMatch];
+
+        lastSelectedFields = [fieldMatch mutableCopy];
+
+        // if any other cells contain data sets with no project yet, present a dialog that allows
+        // the user to set these with the matched project and fields as well
+        for (int i = 0; i < [mTableView numberOfRowsInSection:0]; i++) {
+
+            QueueCell *thisCell = (QueueCell *) [mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            if (![thisCell dataSetHasInitialProject] && ![thisCell dataSetSetupWithProjectAndFields]) {
+
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Apply to Other Data Sets"
+                                                                    message:@"Would you like to apply this project and selected fields for all other data sets that do not currently have a project yet?"
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"No"
+                                                          otherButtonTitles:@"Yes", nil];
+                alertView.tag = OPTION_APPLY_PROJ_AND_FIELDS;
+                [alertView show];
+
+                // once a match is found, we can immediately break the loop
+                return;
+            }
+        }
     }
     // else user canceled
+}
+
+- (void) setCell:(QueueCell *)cell withProjectID:(int)projectID andFields:(NSMutableArray *)fields {
+
+    [cell setProjID:[NSString stringWithFormat:@"%d", projectID]];
+    [cell.dataSet setProjID:[NSNumber numberWithInt:projectID]];
+    [dataSaver editDataSetWithKey:cell.mKey andChangeProjIDTo:[NSNumber numberWithInt:projectID]];
+
+    [cell setFields:fields];
+    [cell.dataSet setFields:fields];
+    [dataSaver editDataSetWithKey:cell.mKey andChangeFieldsTo:fields];
+
+    [self.mTableView reloadData];
 }
 
 @end

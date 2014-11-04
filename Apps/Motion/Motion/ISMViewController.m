@@ -77,6 +77,21 @@
 
     // Ensure isRecording is set to false on loading the view
     isRecording = false;
+
+    // Set navigation bar color
+    @try {
+        if ([UINavigationBar instancesRespondToSelector:@selector(barTintColor)]) {
+            // for iOS 7 and higher devices
+            [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
+            [self.navigationController.navigationBar setTintColor:UIColorFromHex(0xFFFFFF)];
+            [self.navigationController.navigationBar setBarTintColor:UIColorFromHex(0x9933CC)];
+        } else {
+            // for iOS 6 and lower devices
+            [self.navigationController.navigationBar setTintColor:UIColorFromHex(0x9933CC)];
+        }
+    } @catch (NSException *e) {
+        // could not set navigation color - ignore the error
+    }
 }
 
 - (void)toggleDev {
@@ -108,7 +123,7 @@
     int curProjID = [dm getProjectID];
     NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
 
-    [projectBtn setTitle:[NSString stringWithFormat:@"To Project: %@", curProjIDStr] forState:UIControlStateNormal];
+    [projectBtn setTitle:[NSString stringWithFormat:@"Project: %@", curProjIDStr] forState:UIControlStateNormal];
 
     // Initialize the location manager and register for updates
     [self registerLocationUpdates];
@@ -238,7 +253,7 @@
     // start recording data
     isRecording = true;
     [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
-
+    [self.view setBackgroundColor:UIColorFromHex(0xFAECFF)];
 
     // initialize the motion manager sensors, if available
     if (motionManager.accelerometerAvailable) {
@@ -409,6 +424,7 @@
     // stop recording data
     isRecording = false;
     [startStopBtn setTitle:@"Hold to Start" forState:UIControlStateNormal];
+    [self.view setBackgroundColor:UIColorFromHex(0xFFFFFF)];
 
     [xLbl setText:@"X:"];
     [yLbl setText:@"Y:"];
@@ -610,7 +626,7 @@
     credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
     DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
     [parent addChildViewController:credentialMgr];
-    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Credential Manager" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
     [credentialMgrAlert setContentView:credentialMgr.view];
     [credentialMgrAlert setDismissesOnBackdropTap:YES];
     [credentialMgrAlert show];
@@ -623,7 +639,7 @@
 
 - (void) didPressLogin:(CredentialManager *)mngr {
     
-    [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:YES];
+    [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:NO];
     credentialMgrAlert = nil;
     
     UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Login to iSENSE" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
@@ -632,12 +648,18 @@
     
     [loginAlert textFieldAtIndex:0].delegate = self;
     [loginAlert textFieldAtIndex:0].tag = kLOGIN_USER_TEXT;
-    [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
     [loginAlert textFieldAtIndex:0].placeholder = @"Email";
-    
+
+    // since the CredentialManager takes a moment to dismiss and allow the login AlertView become a first responder,
+    // we have to sleep the first responder action for 1.5 seconds.  this can be removed once the Credential Manager
+    // is rewritten
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
+    });
+
     [loginAlert textFieldAtIndex:1].delegate = self;
     [loginAlert textFieldAtIndex:1].tag = kLOGIN_PASS_TEXT;
-    
+
     [loginAlert show];
 }
 

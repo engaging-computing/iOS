@@ -19,6 +19,7 @@
 - (void) setProjID:(NSString *)projID;
 - (void) setDesc:(NSString *)desc;
 - (BOOL) dataSetHasInitialProject;
+- (BOOL) dataSetSetupWithProjectAndFields;
 - (void) setFields:(NSMutableArray *)fields;
 - (NSMutableArray *) getFields;
 
