@@ -13,6 +13,7 @@
 		B75158C01A0A5BD50039F76E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75158BF1A0A5BD50039F76E /* CoreLocation.framework */; };
 		B75158C51A0A5C580039F76E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75158C41A0A5C580039F76E /* SystemConfiguration.framework */; };
 		B75158C71A0A5C6C0039F76E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75158C61A0A5C6C0039F76E /* MobileCoreServices.framework */; };
+		B75158CC1A0A9B830039F76E /* ISWProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = B75158CB1A0A9B830039F76E /* ISWProjectController.m */; };
 		B779507A1A093D1600C032EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B77950791A093D1600C032EF /* main.m */; };
 		B779507D1A093D1600C032EF /* ISWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B779507C1A093D1600C032EF /* ISWAppDelegate.m */; };
 		B77950801A093D1600C032EF /* ISWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B779507F1A093D1600C032EF /* ISWViewController.m */; };
@@ -86,6 +87,8 @@
 		B75158C11A0A5BE00039F76E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		B75158C41A0A5C580039F76E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B75158C61A0A5C6C0039F76E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B75158CA1A0A9B830039F76E /* ISWProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISWProjectController.h; sourceTree = "<group>"; };
+		B75158CB1A0A9B830039F76E /* ISWProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISWProjectController.m; sourceTree = "<group>"; };
 		B77950741A093D1600C032EF /* Writer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Writer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77950781A093D1600C032EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B77950791A093D1600C032EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -159,6 +162,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B75158C91A0A9B2B0039F76E /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				B75158CA1A0A9B830039F76E /* ISWProjectController.h */,
+				B75158CB1A0A9B830039F76E /* ISWProjectController.m */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
 		B779506B1A093D1600C032EF = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +199,7 @@
 				B77950A21A093D7E00C032EF /* Constants */,
 				B77950A31A093D8400C032EF /* Delegate */,
 				B77950A41A093D9400C032EF /* MainView */,
+				B75158C91A0A9B2B0039F76E /* Project */,
 				B77950A51A093DF400C032EF /* UI */,
 				B77950771A093D1600C032EF /* Supporting Files */,
 			);
@@ -485,6 +498,7 @@
 				B77950801A093D1600C032EF /* ISWViewController.m in Sources */,
 				B779507D1A093D1600C032EF /* ISWAppDelegate.m in Sources */,
 				B779507A1A093D1600C032EF /* main.m in Sources */,
+				B75158CC1A0A9B830039F76E /* ISWProjectController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
