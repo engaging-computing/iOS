@@ -170,7 +170,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czu-1E-7m3">
                                 <rect key="frame" x="200" y="215" width="200" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="FVt-dB-gnV"/>
                                     <constraint firstAttribute="width" constant="200" id="UtJ-W1-fVx"/>
                                     <constraint firstAttribute="height" constant="30" id="e9P-fz-cKK"/>
                                 </constraints>
@@ -209,9 +208,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lJf-Do-Le6" firstAttribute="trailing" secondItem="NcE-0I-0u1" secondAttribute="trailingMargin" id="1tt-Wv-AOO"/>
-                            <constraint firstItem="czu-1E-7m3" firstAttribute="top" secondItem="5z2-OO-7IW" secondAttribute="bottom" constant="215" id="7Px-YU-QQg"/>
                             <constraint firstItem="5MN-7g-DDJ" firstAttribute="top" secondItem="czu-1E-7m3" secondAttribute="bottom" constant="8" symbolic="YES" id="BQG-q1-cxh"/>
-                            <constraint firstItem="sKQ-FY-YMg" firstAttribute="top" secondItem="qpF-wn-cad" secondAttribute="bottom" constant="215" id="JGe-a9-Cht"/>
                             <constraint firstItem="qpF-wn-cad" firstAttribute="centerX" secondItem="NcE-0I-0u1" secondAttribute="centerX" id="M9c-iz-a6Q"/>
                             <constraint firstItem="qpF-wn-cad" firstAttribute="top" secondItem="5MN-7g-DDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="ORs-Ts-bVG"/>
                             <constraint firstItem="5MN-7g-DDJ" firstAttribute="leading" secondItem="qpF-wn-cad" secondAttribute="leading" id="Pfh-xg-eHP"/>
