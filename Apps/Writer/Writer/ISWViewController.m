@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  ISWViewController.m
 //  Writer
 //
 //  Created by Mike Stowell on 11/4/14.
@@ -31,12 +31,12 @@
 
     [super viewDidLoad];
 
-    // Managed Object Context for Data_CollectorAppDelegate
+    // Managed Object Context for ISWAppDelegate
     if (managedObjectContext == nil) {
         managedObjectContext = [(ISWAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     }
 
-    // DataSaver from Data_CollectorAppDelegate
+    // DataSaver from ISWAppDelegate
     if (dataSaver == nil) {
         dataSaver = [(ISWAppDelegate *) [[UIApplication sharedApplication] delegate] dataSaver];
     }

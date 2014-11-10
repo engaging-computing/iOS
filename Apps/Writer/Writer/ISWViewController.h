@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ISWViewController.h
 //  Writer
 //
 //  Created by Mike Stowell on 11/4/14.
