@@ -9,7 +9,7 @@
         <!--ViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="ViewController" id="BYZ-38-t0r" sceneMemberID="viewController">
+                <viewController title="ViewController" id="BYZ-38-t0r" customClass="ISWViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -32,6 +32,9 @@
                                 <state key="normal" title="Upload">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="uploadBtnOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YlS-9S-kei"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rCY-xT-VVx">
                                 <rect key="frame" x="16" y="84" width="277" height="31"/>
@@ -39,8 +42,12 @@
                                     <constraint firstAttribute="height" constant="30" id="BCd-Ip-Gri"/>
                                 </constraints>
                                 <state key="normal" title="Save Row">
+                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveRowBtnOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AwR-KB-tI3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQf-e3-Lo2">
                                 <rect key="frame" x="16" y="46" width="568" height="31"/>
@@ -48,6 +55,7 @@
                                     <constraint firstAttribute="height" constant="30" id="VQG-VC-QOy"/>
                                 </constraints>
                                 <state key="normal" title="Uploading to Project: Not Set">
+                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -68,8 +76,12 @@
                                     <constraint firstAttribute="height" constant="30" id="94g-0t-0uG"/>
                                 </constraints>
                                 <state key="normal" title="Save Data Set">
+                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveDataSetBtnOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Siy-qy-z1U"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -100,8 +112,22 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="iS Writer" id="kmv-hw-1QN">
-                        <barButtonItem key="rightBarButtonItem" title="Account" id="PDD-qH-Xe2"/>
+                        <barButtonItem key="rightBarButtonItem" title="Account" id="PDD-qH-Xe2">
+                            <connections>
+                                <action selector="credentialBarBtnOnClick:" destination="BYZ-38-t0r" id="PJk-2g-qsm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="contentView" destination="afC-6y-GCJ" id="Z2V-o3-HMN"/>
+                        <outlet property="credentialBarBtn" destination="PDD-qH-Xe2" id="3zz-BS-9Wq"/>
+                        <outlet property="dataSetNameLbl" destination="Y7S-FE-Ls6" id="TdC-tJ-cVF"/>
+                        <outlet property="dataSetNameTxt" destination="54V-NH-Tzx" id="Vza-Yp-RsC"/>
+                        <outlet property="projectBtn" destination="bQf-e3-Lo2" id="bTw-pW-TSV"/>
+                        <outlet property="saveDataSetBtn" destination="lhp-lV-Nqi" id="plM-Uq-9OD"/>
+                        <outlet property="saveRowBtn" destination="rCY-xT-VVx" id="NdN-ny-ffO"/>
+                        <outlet property="uploadBtn" destination="WyQ-Qm-IyM" id="e17-jD-Fp3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -141,14 +167,61 @@
                         <rect key="frame" x="0.0" y="20" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mt4-CA-Skr">
-                                <rect key="frame" x="16" y="8" width="42" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czu-1E-7m3">
+                                <rect key="frame" x="200" y="215" width="200" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="FVt-dB-gnV"/>
+                                    <constraint firstAttribute="width" constant="200" id="UtJ-W1-fVx"/>
+                                    <constraint firstAttribute="height" constant="30" id="e9P-fz-cKK"/>
+                                </constraints>
+                                <state key="normal" title="Enter Project ID">
+                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MN-7g-DDJ">
+                                <rect key="frame" x="200" y="253" width="200" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="nft-vN-du3"/>
+                                </constraints>
+                                <state key="normal" title="Browse Projects">
+                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpF-wn-cad">
+                                <rect key="frame" x="200" y="291" width="200" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="M75-Zc-JyY"/>
+                                </constraints>
+                                <state key="normal" title="Create a Project">
+                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploading to Project: Not Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJf-Do-Le6">
+                                <rect key="frame" x="16" y="137" width="568" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lJf-Do-Le6" firstAttribute="trailing" secondItem="NcE-0I-0u1" secondAttribute="trailingMargin" id="1tt-Wv-AOO"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="top" secondItem="5z2-OO-7IW" secondAttribute="bottom" constant="215" id="7Px-YU-QQg"/>
+                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="top" secondItem="czu-1E-7m3" secondAttribute="bottom" constant="8" symbolic="YES" id="BQG-q1-cxh"/>
+                            <constraint firstItem="sKQ-FY-YMg" firstAttribute="top" secondItem="qpF-wn-cad" secondAttribute="bottom" constant="215" id="JGe-a9-Cht"/>
+                            <constraint firstItem="qpF-wn-cad" firstAttribute="centerX" secondItem="NcE-0I-0u1" secondAttribute="centerX" id="M9c-iz-a6Q"/>
+                            <constraint firstItem="qpF-wn-cad" firstAttribute="top" secondItem="5MN-7g-DDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="ORs-Ts-bVG"/>
+                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="leading" secondItem="qpF-wn-cad" secondAttribute="leading" id="Pfh-xg-eHP"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="trailing" secondItem="5MN-7g-DDJ" secondAttribute="trailing" id="QuL-4h-4CA"/>
+                            <constraint firstItem="lJf-Do-Le6" firstAttribute="leading" secondItem="NcE-0I-0u1" secondAttribute="leadingMargin" id="W1j-n9-BMq"/>
+                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="centerY" secondItem="NcE-0I-0u1" secondAttribute="centerY" id="XUE-aR-kLA"/>
+                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="trailing" secondItem="qpF-wn-cad" secondAttribute="trailing" id="asg-in-IEj"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="top" secondItem="lJf-Do-Le6" secondAttribute="bottom" constant="57" id="tgY-US-WHn"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="leading" secondItem="5MN-7g-DDJ" secondAttribute="leading" id="yzx-be-IbM"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5c-BL-DmB" userLabel="First Responder" sceneMemberID="firstResponder"/>

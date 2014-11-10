@@ -128,6 +128,7 @@
 		B77950CE1A09433F00C032EF /* li1536x2048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li1536x2048.png; path = Resources/LaunchImages/li1536x2048.png; sourceTree = "<group>"; };
 		B77950CF1A09433F00C032EF /* li2048x1496.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li2048x1496.png; path = Resources/LaunchImages/li2048x1496.png; sourceTree = "<group>"; };
 		B77950D01A09433F00C032EF /* li2048x1536.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li2048x1536.png; path = Resources/LaunchImages/li2048x1536.png; sourceTree = "<group>"; };
+		B7EF3E691A11268D00A76516 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +274,7 @@
 		B77950A21A093D7E00C032EF /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				B7EF3E691A11268D00A76516 /* Constants.h */,
 			);
 			name = Constants;
 			sourceTree = "<group>";

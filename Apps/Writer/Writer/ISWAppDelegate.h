@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QueueUploaderView.h"
 
 @interface ISWAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+// DataSaver
+@property (nonatomic, strong) IBOutlet DataSaver *dataSaver;
+
+// Core Data
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
