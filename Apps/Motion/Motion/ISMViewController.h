@@ -44,6 +44,7 @@
     // Sample rate, recording length, and data set name
     double sampleRate;
     int recordingLength;
+    int countdown;
     NSString *dataSetName;
 
     // Recording state, timer, and sensor objects

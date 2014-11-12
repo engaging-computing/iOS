@@ -250,7 +250,6 @@
 
     // start recording data
     isRecording = true;
-    [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
     [self.view makeWaffle:@"Recording data"];
 
     // initialize the motion manager sensors, if available
@@ -285,11 +284,17 @@
     // if the recording length is not -1 (AKA Push to Stop), then set a timer that stops recording
     // data after the recording length interval
     if (recordingLength != -1) {
-        recordingLengthTimer = [NSTimer scheduledTimerWithTimeInterval:recordingLength
+
+        countdown = recordingLength;
+        [startStopBtn setTitle:[NSString stringWithFormat:@"%d", countdown] forState:UIControlStateNormal];
+
+        recordingLengthTimer = [NSTimer scheduledTimerWithTimeInterval:1
                                                                 target:self
-                                                              selector:@selector(stopRecordingData)
+                                                              selector:@selector(countDownDataRecording)
                                                               userInfo:nil
-                                                               repeats:NO];
+                                                               repeats:YES];
+    } else {
+        [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
     }
 }
 
@@ -323,6 +328,15 @@
         [dataPoints addObject:[dm writeDataToJSONObject:[self populateDataContainer]]];
         [dataPointsMutex unlock];
     });
+}
+
+- (void)countDownDataRecording {
+
+    [startStopBtn setTitle:[NSString stringWithFormat:@"%d", --countdown] forState:UIControlStateNormal];
+
+    if (countdown <= 0) {
+        [self stopRecordingData];
+    }
 }
 
 // populate the data container with sensor values
