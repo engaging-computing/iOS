@@ -546,7 +546,7 @@
     [dataSaver addDataSetWithContext:managedObjectContext
                                 name:dataSetName
                           parentName:PARENT_MOTION
-                         description:@"Uploaded from iOS Motion"
+                         description:@"Captured from iOS Motion"
                            projectID:[dm getProjectID]
                                 data:[dataPoints copy]
                           mediaPaths:nil
@@ -623,7 +623,14 @@
     credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
     DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
     [parent addChildViewController:credentialMgr];
-    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+
+    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials"
+                                                      message:@"Need an account? Visit isenseproject.org/users/new to register."
+                                                     delegate:nil
+                                            cancelButtonTitle:@"Close"
+                                            otherButtonTitles:nil];
+
+
     [credentialMgrAlert setContentView:credentialMgr.view];
     [credentialMgrAlert setDismissesOnBackdropTap:YES];
     [credentialMgrAlert show];

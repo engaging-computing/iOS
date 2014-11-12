@@ -70,7 +70,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUa-1z-o5u">
                                 <rect key="frame" x="203" y="68" width="97" height="30"/>
-                                <state key="normal" title="Push to Stop">
+                                <state key="normal" title="10 s">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -112,7 +112,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0MA-CP-WU0">
                                 <rect key="frame" x="88" y="111" width="212" height="30"/>
-                                <state key="normal" title="John Smith">
+                                <state key="normal" title="My Data Set">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -516,23 +516,12 @@
                                     <action selector="browseProjBtnOnClick:" destination="4Pf-f3-0Pt" eventType="touchUpInside" id="SXG-9a-yry"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sz9-Aq-MHq">
-                                <rect key="frame" x="78" y="285" width="164" height="30"/>
-                                <state key="normal" title="Create a Project">
-                                    <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createProjBtnOnClick:" destination="4Pf-f3-0Pt" eventType="touchUpInside" id="JSv-OJ-HN7"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Project" id="qCL-cY-dLu"/>
                     <connections>
                         <outlet property="browseProjBtn" destination="fio-tk-lJn" id="ufn-oI-khS"/>
-                        <outlet property="createProjBtn" destination="Sz9-Aq-MHq" id="6YR-tq-wmW"/>
                         <outlet property="enterProjIDBtn" destination="tua-Dd-95j" id="oHr-bE-kLB"/>
                         <outlet property="projectLbl" destination="k5M-gC-JHY" id="AE9-lh-H6v"/>
                     </connections>

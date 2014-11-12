@@ -72,7 +72,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SjL-qO-n8D">
                                 <rect key="frame" x="594" y="105" width="154" height="43"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Push to Stop">
+                                <state key="normal" title="10 s">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -115,7 +115,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uB5-66-XVl">
                                 <rect key="frame" x="133" y="178" width="615" height="43"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <state key="normal" title="John Smith">
+                                <state key="normal" title="My Data Set">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -545,24 +545,12 @@
                                     <action selector="browseProjBtnOnClick:" destination="b5s-B7-BHF" eventType="touchUpInside" id="yui-Zc-i9b"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ryf-Ga-4IT">
-                                <rect key="frame" x="234" y="646" width="300" height="65"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Create a Project">
-                                    <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createProjBtnOnClick:" destination="b5s-B7-BHF" eventType="touchUpInside" id="OPY-WT-y3r"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Project" id="ujR-aS-UGA"/>
                     <connections>
                         <outlet property="browseProjBtn" destination="4Kq-xz-9T1" id="8Yl-Mq-3SU"/>
-                        <outlet property="createProjBtn" destination="Ryf-Ga-4IT" id="v97-bZ-67b"/>
                         <outlet property="enterProjIDBtn" destination="gDK-0g-6qq" id="dn2-NK-3vx"/>
                         <outlet property="projectLbl" destination="GE7-pp-dxA" id="JIk-6s-43m"/>
                     </connections>

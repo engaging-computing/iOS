@@ -13,7 +13,7 @@
 
 @implementation ISMProjectManager
 
-@synthesize projectLbl, enterProjIDBtn, browseProjBtn, createProjBtn;
+@synthesize projectLbl, enterProjIDBtn, browseProjBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 
@@ -86,11 +86,6 @@
     
     ProjectBrowserViewController *browser = [[ProjectBrowserViewController alloc] initWithDelegate:self];
     [self.navigationController pushViewController:browser animated:YES];
-}
-
-- (IBAction)createProjBtnOnClick:(id)sender {
-    
-    [self.view makeWaffle:@"Feature to be implemented in future release"];
 }
 
 - (void) didFinishChoosingProject:(ProjectBrowserViewController *) browser withID: (int) project_id {

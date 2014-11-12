@@ -24,7 +24,6 @@
 - (NSMutableArray *) getFields;
 
 @property (nonatomic, assign) IBOutlet UILabel *nameAndDate;
-@property (nonatomic, assign) IBOutlet UILabel *dataType;
 @property (nonatomic, assign) IBOutlet UILabel *description;
 @property (nonatomic, assign) IBOutlet UILabel *projIDLabel;
 
