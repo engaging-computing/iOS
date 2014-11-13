@@ -92,13 +92,33 @@
     } @catch (NSException *e) {
         // could not set navigation color - ignore the error
     }
+
+    // If connectivity exists and there is currently no project, set the default project
+    dm = [DataManager getInstance];
+    int curProjID = [dm getProjectID];
+
+    if ([API hasConnectivity] && curProjID <= 0) {
+
+        [dm setProjectID:[api isUsingDev] ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [dm retrieveProjectFields];
+        });
+    }
 }
 
 - (void)toggleDev {
 
-    [api useDev:![api isUsingDev]];
+    bool devSwitch = ![api isUsingDev];
+    [api useDev:devSwitch];
+
     [self.view makeWaffle:([api isUsingDev] ? @"Using dev" : @"Using production")];
     [self checkAPIOnDev];
+
+    [dm setProjectID:devSwitch ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [dm retrieveProjectFields];
+    });
+    [self setProjBtnToCurrentProj];
 }
 
 - (void)checkAPIOnDev {
@@ -119,14 +139,17 @@
 
     [super viewWillAppear:animated];
 
-    dm = [DataManager getInstance];
-    int curProjID = [dm getProjectID];
-    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
-
-    [projectBtn setTitle:[NSString stringWithFormat:@"Project: %@", curProjIDStr] forState:UIControlStateNormal];
+    [self setProjBtnToCurrentProj];
 
     // Initialize the location manager and register for updates
     [self registerLocationUpdates];
+}
+
+- (void)setProjBtnToCurrentProj {
+
+    int curProjID = [dm getProjectID];
+    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+    [projectBtn setTitle:[NSString stringWithFormat:@"Project: %@", curProjIDStr] forState:UIControlStateNormal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

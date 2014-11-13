@@ -158,6 +158,9 @@
 
     int dataSetsToUpload = 0;
     int dataSetsFailed = 0;
+
+    int lastProjUploadSuccess = 0;
+    int lastDataSetUploadSuccess = 0;
     
     NSMutableArray *dataSetsToBeRemoved = [[NSMutableArray alloc] init];
     QDataSet *currentDS;
@@ -231,6 +234,9 @@
                     dataSetsFailed++;
                     continue;
                 }
+
+                lastProjUploadSuccess = currentDS.projID.intValue;
+                lastDataSetUploadSuccess = returnID;
             }
             
             // upload pictures to iSENSE
@@ -296,6 +302,10 @@
     if (dataSetsToUpload > 0) {
         status = (dataSetsFailed > 0) ? DATA_UPLOAD_FAILED : DATA_UPLOAD_SUCCESS;
     }
+
+
+    // TODO - create object that encapsulates status, lastDataSetUploaded, lastProjUploaded
+    // TODO - then return that object instead of just an int status
 
     return status;
 }

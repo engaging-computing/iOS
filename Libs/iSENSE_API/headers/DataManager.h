@@ -23,7 +23,7 @@
 }
 
 + (DataManager *)getInstance;
-- (void) retrieveProjectFields; // analogous to "getOrder"
+- (void) retrieveProjectFields;
 
 - (int) getProjectID;
 - (void) setProjectID:(int)projID;

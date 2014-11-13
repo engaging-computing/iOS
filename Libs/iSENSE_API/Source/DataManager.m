@@ -39,12 +39,7 @@
 
 // Get the project fields of the project id specified by the projectID variable of this class
 - (void) retrieveProjectFields {
-    
-    // have fields already been pulled?
-    if (projectFields && projectFields.count > 0) {
-        NSLog(@"Fields already retrieved for this project.");
-    }
-    
+        
     // if using a project ID of 0, this indicates a project will be selected later.
     if (projectID == 0) {
         [self setProjectFieldsToAllFields];

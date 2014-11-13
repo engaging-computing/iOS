@@ -49,4 +49,8 @@
 // Preferences location constant
 #define kOPT_OUT_LOCATION @"user_opt_out_location"
 
+// Default projects for production and dev
+#define kDEFAULT_PROJ_PRODUCTION 570
+#define kDEFAULT_PROJ_DEV 12
+
 #endif
