@@ -3,8 +3,7 @@
 //  iSENSE API
 //
 //  Created by Jeremy Poulin on 4/26/13.
-//  Copyright 2013 iSENSE Development Team. All rights reserved.
-//  Engaging Computing Lab, Advisor: Fred Martin
+//  Copyright 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import "DataSaver.h"

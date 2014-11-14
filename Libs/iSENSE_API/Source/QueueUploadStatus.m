@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Mike Stowell on 11/13/14.
-//  Copyright (c) 2014 iSENSE. All rights reserved.
+//  Copyright (c) 2014 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

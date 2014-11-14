@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Jeremy Poulin on 8/21/13.
-//  Copyright (c) 2013 Engaging Computing Group, UML. All rights reserved.
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

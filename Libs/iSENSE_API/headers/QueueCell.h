@@ -4,6 +4,7 @@
 //
 //  Created by Jeremy Poulin on 7/2/13.
 //  Modified by Mike Stowell
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved
 //
 
 #import <UIKit/UIKit.h>

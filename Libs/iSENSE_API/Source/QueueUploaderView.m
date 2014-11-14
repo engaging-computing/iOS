@@ -4,7 +4,7 @@
 //
 //  Created by Jeremy Poulin on 6/26/13.
 //  Modified by Mike Stowell
-//  Copyright (c) 2013 Jeremy Poulin. All rights reserved.
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import "QueueUploaderView.h"

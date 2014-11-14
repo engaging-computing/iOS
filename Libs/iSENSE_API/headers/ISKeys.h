@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Michael Stowell on 10/24/13.
-//  Copyright (c) 2013 Jeremy Poulin. All rights reserved.
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #ifndef iSENSE_API_ISKeys_h
