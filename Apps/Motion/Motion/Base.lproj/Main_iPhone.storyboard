@@ -497,7 +497,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tua-Dd-95j">
-                                <rect key="frame" x="78" y="209" width="164" height="30"/>
+                                <rect key="frame" x="78" y="182" width="164" height="30"/>
                                 <state key="normal" title="Enter Project ID">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -507,13 +507,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fio-tk-lJn">
-                                <rect key="frame" x="78" y="247" width="164" height="30"/>
+                                <rect key="frame" x="78" y="220" width="164" height="30"/>
                                 <state key="normal" title="Browse Projects">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="browseProjBtnOnClick:" destination="4Pf-f3-0Pt" eventType="touchUpInside" id="SXG-9a-yry"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRx-sU-sjf">
+                                <rect key="frame" x="78" y="287" width="164" height="30"/>
+                                <state key="normal" title="Use No Project">
+                                    <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="noProjBtnOnClick:" destination="4Pf-f3-0Pt" eventType="touchUpInside" id="hHq-Ca-WQf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -523,6 +533,7 @@
                     <connections>
                         <outlet property="browseProjBtn" destination="fio-tk-lJn" id="ufn-oI-khS"/>
                         <outlet property="enterProjIDBtn" destination="tua-Dd-95j" id="oHr-bE-kLB"/>
+                        <outlet property="noProjBtn" destination="LRx-sU-sjf" id="4hi-XU-zkP"/>
                         <outlet property="projectLbl" destination="k5M-gC-JHY" id="AE9-lh-H6v"/>
                     </connections>
                 </viewController>

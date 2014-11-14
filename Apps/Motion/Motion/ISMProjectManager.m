@@ -61,6 +61,15 @@
     [enterProjAlert show];
 }
 
+- (IBAction)noProjBtnOnClick:(id)sender {
+
+    [dm setProjectID:0];
+    [dm retrieveProjectFields];
+
+    NSString *curProjIDStr = kNO_PROJECT;
+    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
     switch (alertView.tag) {

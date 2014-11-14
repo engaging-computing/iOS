@@ -523,8 +523,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6U-Zy-XhT">
+                                <rect key="frame" x="234" y="658" width="300" height="65"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Use No Project">
+                                    <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="noProjBtnOnClick:" destination="b5s-B7-BHF" eventType="touchUpInside" id="2Q4-u6-a0l"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDK-0g-6qq">
-                                <rect key="frame" x="234" y="459" width="300" height="65"/>
+                                <rect key="frame" x="234" y="400" width="300" height="65"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Enter Project ID">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -535,7 +546,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Kq-xz-9T1">
-                                <rect key="frame" x="234" y="554" width="300" height="65"/>
+                                <rect key="frame" x="234" y="495" width="300" height="65"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Browse Projects">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -552,6 +563,7 @@
                     <connections>
                         <outlet property="browseProjBtn" destination="4Kq-xz-9T1" id="8Yl-Mq-3SU"/>
                         <outlet property="enterProjIDBtn" destination="gDK-0g-6qq" id="dn2-NK-3vx"/>
+                        <outlet property="noProjBtn" destination="C6U-Zy-XhT" id="g0d-U4-Hwo"/>
                         <outlet property="projectLbl" destination="GE7-pp-dxA" id="JIk-6s-43m"/>
                     </connections>
                 </viewController>

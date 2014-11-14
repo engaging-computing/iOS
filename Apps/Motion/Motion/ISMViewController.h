@@ -20,7 +20,7 @@
 #import "DataManager.h"
 #import "QueueUploadStatus.h"
 
-#define USE_DEV true
+#define USE_DEV false
 
 @interface ISMViewController : UIViewController
     <UIAlertViewDelegate,
