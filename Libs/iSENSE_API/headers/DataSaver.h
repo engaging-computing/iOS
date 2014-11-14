@@ -3,8 +3,7 @@
 //  iSENSE API
 //
 //  Created by Jeremy Poulin on 4/26/13.
-//  Copyright 2013 iSENSE Development Team. All rights reserved.
-//  Engaging Computing Lab, Advisor: Fred Martin
+//  Copyright 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #ifndef __iSENSE_API__DataSaver__
@@ -15,6 +14,7 @@
 #import "Queue.h"
 #import "API.h"
 #import "DLAVAlertView.h"
+#import "QueueUploadStatus.h"
 
 #define DATA_NONE_UPLOADED  1500
 #define DATA_UPLOAD_SUCCESS 1501
@@ -34,7 +34,7 @@
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeDescription:(NSString *)newDescription;
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeFieldsTo:(NSMutableArray *)newFields;
 
--(int) upload:(NSString *)parentName;
+-(QueueUploadStatus *) upload:(NSString *)parentName;
 
 -(void) removeAllDataSets;
 

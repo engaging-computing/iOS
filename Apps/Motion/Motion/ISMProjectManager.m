@@ -13,7 +13,7 @@
 
 @implementation ISMProjectManager
 
-@synthesize projectLbl, enterProjIDBtn, browseProjBtn, createProjBtn;
+@synthesize projectLbl, enterProjIDBtn, browseProjBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 
@@ -61,6 +61,15 @@
     [enterProjAlert show];
 }
 
+- (IBAction)noProjBtnOnClick:(id)sender {
+
+    [dm setProjectID:0];
+    [dm retrieveProjectFields];
+
+    NSString *curProjIDStr = kNO_PROJECT;
+    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
     switch (alertView.tag) {
@@ -86,11 +95,6 @@
     
     ProjectBrowserViewController *browser = [[ProjectBrowserViewController alloc] initWithDelegate:self];
     [self.navigationController pushViewController:browser animated:YES];
-}
-
-- (IBAction)createProjBtnOnClick:(id)sender {
-    
-    [self.view makeWaffle:@"Feature to be implemented in future release"];
 }
 
 - (void) didFinishChoosingProject:(ProjectBrowserViewController *) browser withID: (int) project_id {

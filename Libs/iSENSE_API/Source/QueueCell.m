@@ -4,13 +4,14 @@
 //
 //  Created by Jeremy Poulin on 7/2/13.
 //  Modified by Mike Stowell
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved
 //
 
 #import "QueueCell.h"
 
 @implementation QueueCell
 
-@synthesize nameAndDate, dataType, description, projIDLabel, dataSet, mKey;
+@synthesize nameAndDate, description, projIDLabel, dataSet, mKey;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -23,24 +24,15 @@
     self.mKey = key;
     self.nameAndDate.text = ds.name;
     self.description.text = ds.dataDescription;
-    self.projIDLabel.text = (ds.projID.intValue == -1) ? @"No Proj." : [NSString stringWithFormat:@"%d", ds.projID.intValue];
-    
-    NSString *tmpDataType;
-    if (ds.picturePaths == nil) {
-        if (ds.data == nil) {
-            tmpDataType = @"Error";
-        } else {
-            tmpDataType = @"Data";
-        }
+
+    if (ds.projID.intValue <= 0) {
+        self.projIDLabel.text = @"No Project";
+        self.projIDLabel.textColor = [UIColor redColor];
     } else {
-        if (ds.data == nil) {
-            tmpDataType = @"Picture";
-        } else {
-            tmpDataType = @"Data";
-        }
+        self.projIDLabel.text = [NSString stringWithFormat:@"%d", ds.projID.intValue];
+        self.projIDLabel.textColor = [UIColor blackColor];
     }
-    
-    self.dataType.text = tmpDataType;
+
     [self setCheckedSwitch:ds.uploadable.boolValue];
     
     return self;
@@ -84,8 +76,9 @@
 
 - (void) setProjID:(NSString *)projID {
     [self.projIDLabel setText:projID];
-    [dataSet setProjID:[NSNumber numberWithInt:[projID intValue]]];
+    self.projIDLabel.textColor = [UIColor blackColor];
 
+    [dataSet setProjID:[NSNumber numberWithInt:[projID intValue]]];
     [dataSet setUploadable:[NSNumber numberWithBool:(projID > 0)]];
 }
 

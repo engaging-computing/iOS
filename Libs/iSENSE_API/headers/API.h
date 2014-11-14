@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Jeremy Poulin on 8/21/13.
-//  Copyright (c) 2013 Engaging Computing Group, UML. All rights reserved.
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -22,6 +22,10 @@
 // number of the production iSENSE website.
 #define VERSION_MAJOR @"4"
 #define VERSION_MINOR @"1"
+
+// Base URLs for use by any caller
+#define BASE_LIVE_URL @"http://isenseproject.org"
+#define BASE_DEV_URL @"http://rsense-dev.cs.uml.edu"
 
 typedef enum {
     CREATED_AT_DESC,

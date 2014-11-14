@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Virinchi Balabhadrapatruni on 2/28/14.
-//  Copyright (c) 2014 ECG. All rights reserved.
+//  Copyright (c) 2014 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

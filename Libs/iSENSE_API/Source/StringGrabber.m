@@ -3,8 +3,7 @@
 //  Data_Collector
 //
 //  Created by Mike Stowell on 12/28/12.
-//  Copyright 2013 iSENSE Development Team. All rights reserved.
-//  Engaging Computing Lab, Advisor: Fred Martin
+//  Copyright 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 

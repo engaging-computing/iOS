@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select data sets you would like to try to upload.  Press and hold data sets to edit them." lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select data sets to upload." lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
                     <rect key="frame" x="8" y="8" width="584" height="52"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="52" id="yfN-EO-oyj"/>
@@ -62,7 +62,7 @@
                 <constraint firstItem="36" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" id="viY-mC-JBx"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <point key="canvasLocation" x="526" y="529"/>
+            <point key="canvasLocation" x="552" y="578"/>
         </view>
     </objects>
 </document>

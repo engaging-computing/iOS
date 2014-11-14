@@ -18,8 +18,9 @@
 #import "ISMRecordingLength.h"
 #import "Waffle.h"
 #import "DataManager.h"
+#import "QueueUploadStatus.h"
 
-#define USE_DEV true
+#define USE_DEV false
 
 @interface ISMViewController : UIViewController
     <UIAlertViewDelegate,
@@ -44,6 +45,7 @@
     // Sample rate, recording length, and data set name
     double sampleRate;
     int recordingLength;
+    int countdown;
     NSString *dataSetName;
 
     // Recording state, timer, and sensor objects
@@ -56,6 +58,9 @@
     // Data for a single run session and a corresponding mutex lock
     NSMutableArray *dataPoints;
     NSLock *dataPointsMutex;
+
+    // Visualization URL constructed after data is uploaded
+    NSString *visURL;
 }
 
 // Queue Saver Properties

@@ -92,13 +92,33 @@
     } @catch (NSException *e) {
         // could not set navigation color - ignore the error
     }
+
+    // If connectivity exists and there is currently no project, set the default project
+    dm = [DataManager getInstance];
+    int curProjID = [dm getProjectID];
+
+    if ([API hasConnectivity] && curProjID <= 0) {
+
+        [dm setProjectID:[api isUsingDev] ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [dm retrieveProjectFields];
+        });
+    }
 }
 
 - (void)toggleDev {
 
-    [api useDev:![api isUsingDev]];
+    bool devSwitch = ![api isUsingDev];
+    [api useDev:devSwitch];
+
     [self.view makeWaffle:([api isUsingDev] ? @"Using dev" : @"Using production")];
     [self checkAPIOnDev];
+
+    [dm setProjectID:devSwitch ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [dm retrieveProjectFields];
+    });
+    [self setProjBtnToCurrentProj];
 }
 
 - (void)checkAPIOnDev {
@@ -119,14 +139,17 @@
 
     [super viewWillAppear:animated];
 
-    dm = [DataManager getInstance];
-    int curProjID = [dm getProjectID];
-    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
-
-    [projectBtn setTitle:[NSString stringWithFormat:@"Project: %@", curProjIDStr] forState:UIControlStateNormal];
+    [self setProjBtnToCurrentProj];
 
     // Initialize the location manager and register for updates
     [self registerLocationUpdates];
+}
+
+- (void)setProjBtnToCurrentProj {
+
+    int curProjID = [dm getProjectID];
+    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+    [projectBtn setTitle:[NSString stringWithFormat:@"Project: %@", curProjIDStr] forState:UIControlStateNormal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -199,6 +222,14 @@
 
             break;
         }
+        case kVISUALIZE_DIALOG_TAG:
+        {
+            if (buttonIndex != 0) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:visURL]];
+            }
+            
+            break;
+        }
         default:
             break;
     }
@@ -250,7 +281,6 @@
 
     // start recording data
     isRecording = true;
-    [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
     [self.view makeWaffle:@"Recording data"];
 
     // initialize the motion manager sensors, if available
@@ -285,12 +315,19 @@
     // if the recording length is not -1 (AKA Push to Stop), then set a timer that stops recording
     // data after the recording length interval
     if (recordingLength != -1) {
-        recordingLengthTimer = [NSTimer scheduledTimerWithTimeInterval:recordingLength
+
+        countdown = recordingLength;
+        [startStopBtn setTitle:[NSString stringWithFormat:@"%d", countdown] forState:UIControlStateNormal];
+
+        recordingLengthTimer = [NSTimer scheduledTimerWithTimeInterval:1
                                                                 target:self
-                                                              selector:@selector(stopRecordingData)
+                                                              selector:@selector(countDownDataRecording)
                                                               userInfo:nil
-                                                               repeats:NO];
+                                                               repeats:YES];
+        return;
     }
+
+    [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
 }
 
 - (void)recordDataPoint {
@@ -323,6 +360,15 @@
         [dataPoints addObject:[dm writeDataToJSONObject:[self populateDataContainer]]];
         [dataPointsMutex unlock];
     });
+}
+
+- (void)countDownDataRecording {
+
+    [startStopBtn setTitle:[NSString stringWithFormat:@"%d", --countdown] forState:UIControlStateNormal];
+
+    if (countdown <= 0) {
+        [self stopRecordingData];
+    }
 }
 
 // populate the data container with sensor values
@@ -546,7 +592,7 @@
     [dataSaver addDataSetWithContext:managedObjectContext
                                 name:dataSetName
                           parentName:PARENT_MOTION
-                         description:@"Uploaded from iOS Motion"
+                         description:@"Captured from iOS Motion"
                            projectID:[dm getProjectID]
                                 data:[dataPoints copy]
                           mediaPaths:nil
@@ -564,25 +610,43 @@
     [self.navigationController pushViewController:queueUploader animated:YES];
 }
 
-- (void) didFinishUploadingDataWithStatus:(int)status {
+- (void) didFinishUploadingDataWithStatus:(QueueUploadStatus *)status {
 
-    switch (status) {
-        case DATA_NONE_UPLOADED:
-            [self.view makeWaffle:@"No data uploaded"];
-            break;
+    int uploadStatus = [status getStatus];
+    int project = [status getProject];
+    int dataSetID = [status getDataSetID];
 
-        case DATA_UPLOAD_FAILED:
-            [self.view makeWaffle:@"One or more data sets failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-            break;
+    if (uploadStatus == DATA_NONE_UPLOADED) {
 
-        case DATA_UPLOAD_SUCCESS:
-            [self.view makeWaffle:@"Data set(s) uploaded successfully" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
-            break;
+        [self.view makeWaffle:@"No data uploaded"];
+        return;
 
-        default:
-            NSLog(@"Unrecognized upload status received from QueueUploadViewController in ISMViewController");
-            break;
+    } else if (uploadStatus == DATA_UPLOAD_FAILED && project <= 0) {
+
+        [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+
     }
+
+    NSString *prependMessage;
+    if (uploadStatus == DATA_UPLOAD_FAILED)
+        prependMessage = @"Some data set(s) failed to upload, but at least one succeeded.";
+    else /* uploadedStatus == DATA_UPLOAD_SUCCESS */
+        prependMessage = @"All data set(s) uploaded successfully.";
+
+    NSString *message = [NSString stringWithFormat:@"%@ Would you like to visualize the last successfully uploaded data set?", prependMessage];
+
+    UIAlertView *visDataAlert = [[UIAlertView alloc] initWithTitle:@"Visualize Data"
+                                                           message:message
+                                                          delegate:self
+                                                 cancelButtonTitle:@"No"
+                                                 otherButtonTitles:@"Yes", nil];
+    visDataAlert.tag = kVISUALIZE_DIALOG_TAG;
+    [visDataAlert show];
+
+    visURL = [NSString stringWithFormat:@"%@/projects/%d/data_sets/%d?embed=true",
+              [api isUsingDev] ? BASE_DEV_URL : BASE_LIVE_URL,
+              project, dataSetID];
 }
 
 #pragma end - Upload
@@ -623,7 +687,14 @@
     credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
     DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
     [parent addChildViewController:credentialMgr];
-    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+
+    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials"
+                                                      message:@"Need an account? Visit isenseproject.org/users/new to register."
+                                                     delegate:nil
+                                            cancelButtonTitle:@"Close"
+                                            otherButtonTitles:nil];
+
+
     [credentialMgrAlert setContentView:credentialMgr.view];
     [credentialMgrAlert setDismissesOnBackdropTap:YES];
     [credentialMgrAlert show];

@@ -7,19 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Constants.h"
 
-#define kBTN_ONE_S 1
-#define kBTN_TWO_S 2
-#define kBTN_FIVE_S 5
-#define kBTN_TEN_S 10
-#define kBTN_THIRTY_S 30
-#define kBTN_ONE_M 60
-#define kBTN_TWO_M 120
-#define kBTN_FIVE_M 300
-#define kBTN_TEN_M 600
-#define kBTN_THIRTY_M 1800
-#define kBTN_ONE_H 3600
-#define kBTN_PUSH_TO_STOP -1
 
 @class ISMRecordingLength;
 

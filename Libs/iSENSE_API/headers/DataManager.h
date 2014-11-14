@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Mike Stowell on 9/19/14.
-//  Copyright (c) 2014 Jeremy Poulin. All rights reserved.
+//  Copyright (c) 2014 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -23,7 +23,7 @@
 }
 
 + (DataManager *)getInstance;
-- (void) retrieveProjectFields; // analogous to "getOrder"
+- (void) retrieveProjectFields;
 
 - (int) getProjectID;
 - (void) setProjectID:(int)projID;

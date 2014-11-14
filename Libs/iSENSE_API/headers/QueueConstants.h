@@ -3,7 +3,7 @@
 //  Data_Walk
 //
 //  Created by Michael Stowell on 9/6/13.
-//  Copyright (c) 2013 iSENSE. All rights reserved.
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #ifndef Data_Walk_QueueConstants_h

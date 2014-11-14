@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment version="2048" defaultVersion="1072" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment version="2048" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QueueUploaderView">
@@ -17,25 +16,20 @@
             <rect key="frame" x="0.0" y="64" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select data sets you would like to try to upload.  Press and hold data sets to edit them." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
-                    <rect key="frame" x="20" y="8" width="280" height="59"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Check data sets to upload." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                    <rect key="frame" x="20" y="8" width="280" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="59" id="pfd-oW-Iyk"/>
+                        <constraint firstAttribute="height" constant="30" id="YO9-aX-S9O"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="38">
-                    <rect key="frame" x="20" y="75" width="280" height="383"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="40"/>
-                        <outlet property="delegate" destination="-1" id="41"/>
-                    </connections>
-                </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12">
                     <rect key="frame" x="20" y="466" width="280" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="UHY-EQ-kpv"/>
+                    </constraints>
                     <state key="normal" title="Upload">
                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,22 +38,30 @@
                         <action selector="upload:" destination="-1" eventType="touchUpInside" id="43"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="38">
+                    <rect key="frame" x="20" y="46" width="280" height="412"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="40"/>
+                        <outlet property="delegate" destination="-1" id="41"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="12" firstAttribute="leading" secondItem="38" secondAttribute="leading" id="3hJ-bi-MSD"/>
-                <constraint firstItem="3" firstAttribute="trailing" secondItem="38" secondAttribute="trailing" id="9fp-ta-WeJ"/>
-                <constraint firstItem="38" firstAttribute="trailing" secondItem="12" secondAttribute="trailing" id="KlC-jj-RVs"/>
-                <constraint firstItem="38" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="8" symbolic="YES" id="MhH-x1-UxQ"/>
-                <constraint firstItem="3" firstAttribute="leading" secondItem="38" secondAttribute="leading" id="NuX-Wf-8vR"/>
-                <constraint firstItem="3" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="QaP-XY-UyP"/>
-                <constraint firstItem="12" firstAttribute="bottom" secondItem="1" secondAttribute="bottomMargin" id="SD8-1k-S7G"/>
-                <constraint firstItem="38" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="UcT-2a-iKM"/>
-                <constraint firstItem="12" firstAttribute="top" secondItem="38" secondAttribute="bottom" constant="8" symbolic="YES" id="XJZ-kQ-BR4"/>
-                <constraint firstItem="3" firstAttribute="top" secondItem="1" secondAttribute="topMargin" id="a43-sg-ZHF"/>
+                <constraint firstItem="3" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="6k3-Ae-BWO"/>
+                <constraint firstItem="12" firstAttribute="top" secondItem="38" secondAttribute="bottom" constant="8" id="Cdw-T1-WkY"/>
+                <constraint firstAttribute="trailing" secondItem="38" secondAttribute="trailing" constant="20" id="DYb-1b-YZ0"/>
+                <constraint firstAttribute="trailing" secondItem="12" secondAttribute="trailing" constant="20" id="Twe-bU-UGh"/>
+                <constraint firstAttribute="bottom" secondItem="12" secondAttribute="bottom" constant="8" id="cZw-fQ-Nat"/>
+                <constraint firstItem="3" firstAttribute="top" secondItem="1" secondAttribute="top" constant="8" id="hIW-Ek-Z4K"/>
+                <constraint firstItem="38" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="8" id="lHi-qF-q1V"/>
+                <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="20" id="qcn-aj-3Lm"/>
+                <constraint firstItem="38" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="rK5-4Z-Loh"/>
+                <constraint firstItem="12" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="txd-Ul-xiv"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="585" y="519"/>
+            <point key="canvasLocation" x="567" y="595"/>
         </view>
     </objects>
 </document>

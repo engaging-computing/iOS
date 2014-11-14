@@ -3,8 +3,7 @@
 //  iSENSE API
 //
 //  Created by Jeremy Poulin on 4/26/13.
-//  Copyright 2013 iSENSE Development Team. All rights reserved.
-//  Engaging Computing Lab, Advisor: Fred Martin
+//  Copyright 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import "DataSaver.h"
@@ -152,12 +151,15 @@
     return TRUE;
 }
 
--(int)upload:(NSString *)parentName {
+-(QueueUploadStatus *) upload:(NSString *)parentName {
 
     API *api = [API getInstance];
 
     int dataSetsToUpload = 0;
     int dataSetsFailed = 0;
+
+    int lastProjUploadSuccess = 0;
+    int lastDataSetUploadSuccess = 0;
     
     NSMutableArray *dataSetsToBeRemoved = [[NSMutableArray alloc] init];
     QDataSet *currentDS;
@@ -231,6 +233,9 @@
                     dataSetsFailed++;
                     continue;
                 }
+
+                lastProjUploadSuccess = currentDS.projID.intValue;
+                lastDataSetUploadSuccess = returnID;
             }
             
             // upload pictures to iSENSE
@@ -270,7 +275,9 @@
                         [newPicturePaths addObject:pictures[i]];
                         continue;
                     }
-            
+
+                    lastProjUploadSuccess = currentDS.projID.intValue;
+                    lastDataSetUploadSuccess = returnID;
                 }
             
                 // add back the images that need to be uploaded
@@ -297,7 +304,11 @@
         status = (dataSetsFailed > 0) ? DATA_UPLOAD_FAILED : DATA_UPLOAD_SUCCESS;
     }
 
-    return status;
+    QueueUploadStatus *uploadStatusObj = [[QueueUploadStatus alloc]
+                                          initWithStatus:status
+                                          project:lastProjUploadSuccess
+                                          andDataSetID:lastDataSetUploadSuccess];
+    return uploadStatusObj;
 }
 
 -(void)removeDataSets:(NSArray *)keys {

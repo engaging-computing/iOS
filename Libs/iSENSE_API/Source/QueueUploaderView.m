@@ -4,7 +4,7 @@
 //
 //  Created by Jeremy Poulin on 6/26/13.
 //  Modified by Mike Stowell
-//  Copyright (c) 2013 Jeremy Poulin. All rights reserved.
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import "QueueUploaderView.h"
@@ -52,7 +52,7 @@
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-            int uploadStatus = [dataSaver upload:parent];
+            QueueUploadStatus *uploadStatus = [dataSaver upload:parent];
 
             dispatch_async(dispatch_get_main_queue(), ^{
 
@@ -428,7 +428,7 @@
 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-                    int uploadStatus = [dataSaver upload:parent];
+                    QueueUploadStatus *uploadStatus = [dataSaver upload:parent];
 
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.delegate didFinishUploadingDataWithStatus:uploadStatus];

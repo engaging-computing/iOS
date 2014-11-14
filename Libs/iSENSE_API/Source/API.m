@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Jeremy Poulin on 8/21/13.
-//  Copyright (c) 2013 Engaging Computing Group, UML. All rights reserved.
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import "API.h"
@@ -139,7 +139,8 @@ static NSString *email, *password;
     email = @"";
     password = @"";
     currentUser = nil;
-    
+
+    [self clearCurrentUserFromPrefs];
 }
 
 /**
@@ -877,6 +878,18 @@ static NSString *email, *password;
             return true;
 
     return false;
+}
+
+/**
+ * Called internally via the deleteSession function in the API, this method will
+ * clear the NSUserDefaults keys for the current username and password
+ */
+-(void)clearCurrentUserFromPrefs {
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs removeObjectForKey:KEY_USERNAME];
+    [prefs removeObjectForKey:KEY_PASSWORD];
+    [prefs synchronize];
 }
 
 @end

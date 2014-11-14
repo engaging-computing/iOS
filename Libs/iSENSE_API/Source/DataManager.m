@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Mike Stowell on 9/19/14.
-//  Copyright (c) 2014 Jeremy Poulin. All rights reserved.
+//  Copyright (c) 2014 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import "DataManager.h"
@@ -39,12 +39,7 @@
 
 // Get the project fields of the project id specified by the projectID variable of this class
 - (void) retrieveProjectFields {
-    
-    // have fields already been pulled?
-    if (projectFields && projectFields.count > 0) {
-        NSLog(@"Fields already retrieved for this project.");
-    }
-    
+        
     // if using a project ID of 0, this indicates a project will be selected later.
     if (projectID == 0) {
         [self setProjectFieldsToAllFields];

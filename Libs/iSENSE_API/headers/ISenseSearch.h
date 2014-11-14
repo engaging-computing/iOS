@@ -3,8 +3,7 @@
 //  iOS Data Collector
 //
 //  Created by Jeremy Poulin on 2/5/13.
-//  Copyright 2013 iSENSE Development Team. All rights reserved.
-//  Engaging Computing Lab, Advisor: Fred Martin
+//  Copyright 2013 iSENSE Project, UMass Lowell All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

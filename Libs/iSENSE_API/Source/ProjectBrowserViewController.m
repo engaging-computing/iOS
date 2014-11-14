@@ -2,8 +2,8 @@
 //  ProjectBrowserViewController.m
 //  iSENSE_API
 //
-//  Created by Virinchi Balabhadrapatruni on 1/31/14.
-//  Copyright (c) 2014 ECG. All rights reserved.
+//  Created by Jeremy Poulin on 1/31/14.
+//  Copyright (c) 2014 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import "ProjectBrowserViewController.h"

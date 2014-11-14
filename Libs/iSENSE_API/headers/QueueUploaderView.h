@@ -4,7 +4,7 @@
 //
 //  Created by Jeremy Poulin on 6/26/13.
 //  Modified by Mike Stowell
-//  Copyright (c) 2013 Jeremy Poulin. All rights reserved.
+//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -17,6 +17,7 @@
 
 #import "QueueConstants.h"
 #import "QueueCell.h"
+#import "QueueUploadStatus.h"
 
 #import "DataManager.h"
 #import "FieldMatchingViewController.h"
@@ -36,7 +37,7 @@
 @protocol QueueUploaderDelegate <NSObject>
 
 @required
-- (void) didFinishUploadingDataWithStatus:(int)status;
+- (void) didFinishUploadingDataWithStatus:(QueueUploadStatus *)status;
 
 @end
 
