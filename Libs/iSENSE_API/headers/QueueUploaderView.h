@@ -17,6 +17,7 @@
 
 #import "QueueConstants.h"
 #import "QueueCell.h"
+#import "QueueUploadStatus.h"
 
 #import "DataManager.h"
 #import "FieldMatchingViewController.h"
@@ -36,7 +37,7 @@
 @protocol QueueUploaderDelegate <NSObject>
 
 @required
-- (void) didFinishUploadingDataWithStatus:(int)status;
+- (void) didFinishUploadingDataWithStatus:(QueueUploadStatus *)status;
 
 @end
 

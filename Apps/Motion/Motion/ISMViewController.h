@@ -18,6 +18,7 @@
 #import "ISMRecordingLength.h"
 #import "Waffle.h"
 #import "DataManager.h"
+#import "QueueUploadStatus.h"
 
 #define USE_DEV true
 
@@ -57,6 +58,9 @@
     // Data for a single run session and a corresponding mutex lock
     NSMutableArray *dataPoints;
     NSLock *dataPointsMutex;
+
+    // Visualization URL constructed after data is uploaded
+    NSString *visURL;
 }
 
 // Queue Saver Properties

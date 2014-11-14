@@ -23,6 +23,10 @@
 #define VERSION_MAJOR @"4"
 #define VERSION_MINOR @"1"
 
+// Base URLs for use by any caller
+#define BASE_LIVE_URL @"http://isenseproject.org"
+#define BASE_DEV_URL @"http://rsense-dev.cs.uml.edu"
+
 typedef enum {
     CREATED_AT_DESC,
     CREATED_AT_ASC,

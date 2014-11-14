@@ -152,7 +152,7 @@
     return TRUE;
 }
 
--(int)upload:(NSString *)parentName {
+-(QueueUploadStatus *) upload:(NSString *)parentName {
 
     API *api = [API getInstance];
 
@@ -276,7 +276,9 @@
                         [newPicturePaths addObject:pictures[i]];
                         continue;
                     }
-            
+
+                    lastProjUploadSuccess = currentDS.projID.intValue;
+                    lastDataSetUploadSuccess = returnID;
                 }
             
                 // add back the images that need to be uploaded
@@ -303,11 +305,11 @@
         status = (dataSetsFailed > 0) ? DATA_UPLOAD_FAILED : DATA_UPLOAD_SUCCESS;
     }
 
-
-    // TODO - create object that encapsulates status, lastDataSetUploaded, lastProjUploaded
-    // TODO - then return that object instead of just an int status
-
-    return status;
+    QueueUploadStatus *uploadStatusObj = [[QueueUploadStatus alloc]
+                                          initWithStatus:status
+                                          project:lastProjUploadSuccess
+                                          andDataSetID:lastDataSetUploadSuccess];
+    return uploadStatusObj;
 }
 
 -(void)removeDataSets:(NSArray *)keys {

@@ -222,6 +222,14 @@
 
             break;
         }
+        case kVISUALIZE_DIALOG_TAG:
+        {
+            if (buttonIndex != 0) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:visURL]];
+            }
+            
+            break;
+        }
         default:
             break;
     }
@@ -601,24 +609,41 @@
     [self.navigationController pushViewController:queueUploader animated:YES];
 }
 
-- (void) didFinishUploadingDataWithStatus:(int)status {
+- (void) didFinishUploadingDataWithStatus:(QueueUploadStatus *)status {
 
-    switch (status) {
-        case DATA_NONE_UPLOADED:
-            [self.view makeWaffle:@"No data uploaded"];
-            break;
+    int uploadStatus = [status getStatus];
+    int project = [status getProject];
+    int dataSetID = [status getDataSetID];
 
-        case DATA_UPLOAD_FAILED:
-            [self.view makeWaffle:@"One or more data sets failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-            break;
+    if (uploadStatus == DATA_NONE_UPLOADED) {
 
-        case DATA_UPLOAD_SUCCESS:
-            [self.view makeWaffle:@"Data set(s) uploaded successfully" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
-            break;
+        [self.view makeWaffle:@"No data uploaded"];
 
-        default:
-            NSLog(@"Unrecognized upload status received from QueueUploadViewController in ISMViewController");
-            break;
+    } else if (uploadStatus == DATA_UPLOAD_FAILED && project <= 0) {
+
+        [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+
+    } else {
+
+        NSString *prependMessage;
+        if (uploadStatus == DATA_UPLOAD_FAILED)
+            prependMessage = @"Some data set(s) failed to upload, but at least one succeeded.";
+        else /* uploadedStatus == DATA_UPLOAD_SUCCESS */
+            prependMessage = @"All data set(s) uploaded successfully.";
+
+        NSString *message = [NSString stringWithFormat:@"%@ Would you like to visualize the last successfully uploaded data set?", prependMessage];
+
+        UIAlertView *visDataAlert = [[UIAlertView alloc] initWithTitle:@"Visualize Data"
+                                                               message:message
+                                                              delegate:self
+                                                     cancelButtonTitle:@"No"
+                                                     otherButtonTitles:@"Yes", nil];
+        visDataAlert.tag = kVISUALIZE_DIALOG_TAG;
+        [visDataAlert show];
+
+        visURL = [NSString stringWithFormat:@"%@/projects/%d/data_sets/%d?embed=true",
+                  [api isUsingDev] ? BASE_DEV_URL : BASE_LIVE_URL,
+                  project, dataSetID];
     }
 }
 

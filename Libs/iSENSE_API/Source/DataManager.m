@@ -3,7 +3,7 @@
 //  iSENSE_API
 //
 //  Created by Mike Stowell on 9/19/14.
-//  Copyright (c) 2014 Jeremy Poulin. All rights reserved.
+//  Copyright (c) 2014 iSENSE. All rights reserved.
 //
 
 #import "DataManager.h"

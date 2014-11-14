@@ -21,6 +21,8 @@
 #define kLOCATION_DIALOG_IOS_8_AND_LATER_TAG 601
 #define kLOCATION_DIALOG_IOS_7_AND_EARLIER_TAG 602
 
+#define kVISUALIZE_DIALOG_TAG 700
+
 // Recording length
 #define kBTN_ONE_S 1
 #define kBTN_TWO_S 2

@@ -15,6 +15,7 @@
 #import "Queue.h"
 #import "API.h"
 #import "DLAVAlertView.h"
+#import "QueueUploadStatus.h"
 
 #define DATA_NONE_UPLOADED  1500
 #define DATA_UPLOAD_SUCCESS 1501
@@ -34,7 +35,7 @@
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeDescription:(NSString *)newDescription;
 -(BOOL) editDataSetWithKey:(NSNumber *)key andChangeFieldsTo:(NSMutableArray *)newFields;
 
--(int) upload:(NSString *)parentName;
+-(QueueUploadStatus *) upload:(NSString *)parentName;
 
 -(void) removeAllDataSets;
 
