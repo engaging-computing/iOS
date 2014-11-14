@@ -324,9 +324,10 @@
                                                               selector:@selector(countDownDataRecording)
                                                               userInfo:nil
                                                                repeats:YES];
-    } else {
-        [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
+        return;
     }
+
+    [startStopBtn setTitle:@"Hold to Stop" forState:UIControlStateNormal];
 }
 
 - (void)recordDataPoint {
@@ -618,33 +619,34 @@
     if (uploadStatus == DATA_NONE_UPLOADED) {
 
         [self.view makeWaffle:@"No data uploaded"];
+        return;
 
     } else if (uploadStatus == DATA_UPLOAD_FAILED && project <= 0) {
 
         [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
 
-    } else {
-
-        NSString *prependMessage;
-        if (uploadStatus == DATA_UPLOAD_FAILED)
-            prependMessage = @"Some data set(s) failed to upload, but at least one succeeded.";
-        else /* uploadedStatus == DATA_UPLOAD_SUCCESS */
-            prependMessage = @"All data set(s) uploaded successfully.";
-
-        NSString *message = [NSString stringWithFormat:@"%@ Would you like to visualize the last successfully uploaded data set?", prependMessage];
-
-        UIAlertView *visDataAlert = [[UIAlertView alloc] initWithTitle:@"Visualize Data"
-                                                               message:message
-                                                              delegate:self
-                                                     cancelButtonTitle:@"No"
-                                                     otherButtonTitles:@"Yes", nil];
-        visDataAlert.tag = kVISUALIZE_DIALOG_TAG;
-        [visDataAlert show];
-
-        visURL = [NSString stringWithFormat:@"%@/projects/%d/data_sets/%d?embed=true",
-                  [api isUsingDev] ? BASE_DEV_URL : BASE_LIVE_URL,
-                  project, dataSetID];
     }
+
+    NSString *prependMessage;
+    if (uploadStatus == DATA_UPLOAD_FAILED)
+        prependMessage = @"Some data set(s) failed to upload, but at least one succeeded.";
+    else /* uploadedStatus == DATA_UPLOAD_SUCCESS */
+        prependMessage = @"All data set(s) uploaded successfully.";
+
+    NSString *message = [NSString stringWithFormat:@"%@ Would you like to visualize the last successfully uploaded data set?", prependMessage];
+
+    UIAlertView *visDataAlert = [[UIAlertView alloc] initWithTitle:@"Visualize Data"
+                                                           message:message
+                                                          delegate:self
+                                                 cancelButtonTitle:@"No"
+                                                 otherButtonTitles:@"Yes", nil];
+    visDataAlert.tag = kVISUALIZE_DIALOG_TAG;
+    [visDataAlert show];
+
+    visURL = [NSString stringWithFormat:@"%@/projects/%d/data_sets/%d?embed=true",
+              [api isUsingDev] ? BASE_DEV_URL : BASE_LIVE_URL,
+              project, dataSetID];
 }
 
 #pragma end - Upload

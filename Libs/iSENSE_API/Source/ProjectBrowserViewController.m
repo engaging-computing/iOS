@@ -2,7 +2,7 @@
 //  ProjectBrowserViewController.m
 //  iSENSE_API
 //
-//  Created by Jeremy Poolin' on 1/31/14.
+//  Created by Jeremy Poulin on 1/31/14.
 //  Copyright (c) 2014 iSENSE Project, UMass Lowell. All rights reserved.
 //
 
