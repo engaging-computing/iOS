@@ -45,6 +45,12 @@
 // Upload button control
 -(IBAction)upload:(id)sender {
 
+    // check for connectivity
+    if (![API hasConnectivity]) {
+        [self.view makeWaffle:@"No internet connectivity - cannot upload data" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
     if ([api getCurrentUser] != nil) {
 
         UIAlertView *message = [self getDispatchDialogWithMessage:@"Uploading data sets..."];
@@ -61,10 +67,10 @@
                 [message dismissWithClickedButtonIndex:0 animated:YES];
                 [self.navigationController popViewControllerAnimated:YES];
             });
-
         });
 
     } else {
+
         NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
         NSString *user = [prefs objectForKey:KEY_USERNAME];
         NSString *pass = [prefs objectForKey:KEY_PASSWORD];
@@ -88,7 +94,6 @@
         } else {
             
             [self.navigationController popViewControllerAnimated:YES];
-            
         }
     }
 }
@@ -228,6 +233,12 @@
             break;
             
         case QUEUE_SELECT_PROJ:
+
+            // check for connectivity
+            if (![API hasConnectivity]) {
+                [self.view makeWaffle:@"No internet connectivity - cannot select a project" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+                return;
+            }
             
             cell = (QueueCell *) [self.mTableView cellForRowAtIndexPath:lastClickedCellIndex];
             if (![cell dataSetHasInitialProject]) {
