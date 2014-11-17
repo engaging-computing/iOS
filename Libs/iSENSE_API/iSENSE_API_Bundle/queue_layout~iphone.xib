@@ -61,7 +61,7 @@
                 <constraint firstItem="12" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="txd-Ul-xiv"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="567" y="595"/>
+            <point key="canvasLocation" x="580" y="613"/>
         </view>
     </objects>
 </document>

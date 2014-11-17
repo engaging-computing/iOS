@@ -111,7 +111,7 @@
     bool devSwitch = ![api isUsingDev];
     [api useDev:devSwitch];
 
-    [self.view makeWaffle:([api isUsingDev] ? @"Using dev" : @"Using production")];
+    [self.view makeWaffle:(devSwitch ? @"Using dev" : @"Using production")];
     [self checkAPIOnDev];
 
     [dm setProjectID:devSwitch ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION];
@@ -706,9 +706,15 @@
 }
 
 - (void) didPressLogin:(CredentialManager *)mngr {
-    
+
     [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:NO];
     credentialMgrAlert = nil;
+
+    // check for connectivity
+    if (![API hasConnectivity]) {
+        [self.view makeWaffle:@"No internet connectivity - cannot login" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
     
     UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Login to iSENSE" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     [loginAlert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];

@@ -51,7 +51,13 @@
 }
 
 - (IBAction)enterProjIDBtnOnClick:(id)sender {
-    
+
+    // check for connectivity
+    if (![API hasConnectivity]) {
+        [self.view makeWaffle:@"No internet connectivity - cannot enter a project ID" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
     UIAlertView *enterProjAlert = [[UIAlertView alloc] initWithTitle:@"Enter Project ID #" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     
     enterProjAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -92,6 +98,12 @@
 }
 
 - (IBAction)browseProjBtnOnClick:(id)sender {
+
+    // check for connectivity
+    if (![API hasConnectivity]) {
+        [self.view makeWaffle:@"No internet connectivity - cannot browse projects" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
     
     ProjectBrowserViewController *browser = [[ProjectBrowserViewController alloc] initWithDelegate:self];
     [self.navigationController pushViewController:browser animated:YES];
