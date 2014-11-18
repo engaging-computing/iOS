@@ -19,6 +19,7 @@
 #import "Waffle.h"
 #import "DataManager.h"
 #import "QueueUploadStatus.h"
+#import "ISMTutorialViewController.h"
 
 #define USE_DEV false
 
