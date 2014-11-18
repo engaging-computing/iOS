@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oG7-46-Qhk">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Page View Controller-->
+        <scene sceneID="SI0-Og-fIp">
+            <objects>
+                <pageViewController storyboardIdentifier="TutorialController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="GFy-r7-tbV" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aQJ-r3-DD0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="356"/>
+        </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="2CG-jx-qCv">
+            <objects>
+                <viewController storyboardIdentifier="TutorialStartController" id="oG7-46-Qhk" customClass="ISMTutorialViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pQE-wZ-jEG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Aaa-VY-1TN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6iv-Q9-OVc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ed8-9J-X4Y">
+                                <rect key="frame" x="200" y="530" width="200" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="3UM-oe-bkz"/>
+                                    <constraint firstAttribute="height" constant="30" id="M3q-OZ-I2d"/>
+                                </constraints>
+                                <state key="normal" title="Take Me to Motion">
+                                    <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToMotionBtnOnClick:" destination="oG7-46-Qhk" eventType="touchUpInside" id="nbX-UL-Y1V"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ed8-9J-X4Y" secondAttribute="bottom" constant="20" symbolic="YES" id="AjD-Pe-YtD"/>
+                            <constraint firstItem="ed8-9J-X4Y" firstAttribute="centerX" secondItem="6iv-Q9-OVc" secondAttribute="centerX" id="kBM-rj-6Y0"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="goToMotionBtn" destination="ed8-9J-X4Y" id="shP-fo-Krc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iKw-oi-nCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="1660"/>
+        </scene>
+        <!--Tutorial Content Controller-->
+        <scene sceneID="TS4-BB-BhV">
+            <objects>
+                <viewController storyboardIdentifier="TutorialContentController" id="llN-hH-1X4" customClass="ISMTutorialContentController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Je6-Wc-ACR"/>
+                        <viewControllerLayoutGuide type="bottom" id="nNb-88-eSv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vhd-Mb-E1R">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fPd-uY-Nhu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Placeholder Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydF-1g-Knp">
+                                <rect key="frame" x="16" y="8" width="568" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ydF-1g-Knp" firstAttribute="top" secondItem="Je6-Wc-ACR" secondAttribute="bottom" constant="8" id="5Jf-p4-pA7"/>
+                            <constraint firstItem="nNb-88-eSv" firstAttribute="top" secondItem="fPd-uY-Nhu" secondAttribute="bottom" id="P4c-mW-msl"/>
+                            <constraint firstItem="ydF-1g-Knp" firstAttribute="trailing" secondItem="vhd-Mb-E1R" secondAttribute="trailingMargin" id="cc3-gR-Wz1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fPd-uY-Nhu" secondAttribute="trailing" constant="-16" id="fNc-ov-dWG"/>
+                            <constraint firstItem="ydF-1g-Knp" firstAttribute="leading" secondItem="vhd-Mb-E1R" secondAttribute="leadingMargin" id="joT-QB-GdM"/>
+                            <constraint firstItem="fPd-uY-Nhu" firstAttribute="top" secondItem="Je6-Wc-ACR" secondAttribute="bottom" id="mpa-YB-3h4"/>
+                            <constraint firstItem="fPd-uY-Nhu" firstAttribute="leading" secondItem="vhd-Mb-E1R" secondAttribute="leadingMargin" constant="-16" id="x7e-n2-Iae"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="backgroundImg" destination="fPd-uY-Nhu" id="J3i-Pr-KEk"/>
+                        <outlet property="titleTxt" destination="ydF-1g-Knp" id="957-uz-ori"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4y9-ji-gdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="1010"/>
+        </scene>
+    </scenes>
+</document>

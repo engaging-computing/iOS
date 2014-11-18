@@ -55,4 +55,7 @@
 #define kDEFAULT_PROJ_PRODUCTION 570
 #define kDEFAULT_PROJ_DEV 12
 
+// Preferences tutorial constant
+#define kDISPLAYED_TUTORIAL @"displayed_tutorial"
+
 #endif

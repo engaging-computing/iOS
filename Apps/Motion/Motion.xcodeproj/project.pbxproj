@@ -29,6 +29,16 @@
 		B76C43C519C8722800B0A19B /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF219BF34F800BB8994 /* Main_iPhone.storyboard */; };
 		B76C43C619C8723100B0A19B /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CF519BF34F800BB8994 /* Main_iPad.storyboard */; };
 		B76C43C719C8764200B0A19B /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7186A3A19BF369400F18847 /* iSENSE_API_Bundle.bundle */; };
+		B77484891A1B87400038E9A7 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B77484881A1B87400038E9A7 /* Tutorial.storyboard */; };
+		B774848E1A1B8AFE0038E9A7 /* ISMTutorialContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = B774848D1A1B8AFE0038E9A7 /* ISMTutorialContentController.m */; };
+		B77484911A1B93EA0038E9A7 /* ISMTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B77484901A1B93EA0038E9A7 /* ISMTutorialViewController.m */; };
+		B774849C1A1BAD730038E9A7 /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B77484951A1BAD730038E9A7 /* tutorial_1.png */; };
+		B774849D1A1BAD730038E9A7 /* tutorial_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B77484961A1BAD730038E9A7 /* tutorial_2.png */; };
+		B774849E1A1BAD730038E9A7 /* tutorial_3.png in Resources */ = {isa = PBXBuildFile; fileRef = B77484971A1BAD730038E9A7 /* tutorial_3.png */; };
+		B774849F1A1BAD730038E9A7 /* tutorial_4.png in Resources */ = {isa = PBXBuildFile; fileRef = B77484981A1BAD730038E9A7 /* tutorial_4.png */; };
+		B77484A01A1BAD730038E9A7 /* tutorial_5.png in Resources */ = {isa = PBXBuildFile; fileRef = B77484991A1BAD730038E9A7 /* tutorial_5.png */; };
+		B77484A11A1BAD730038E9A7 /* tutorial_6.png in Resources */ = {isa = PBXBuildFile; fileRef = B774849A1A1BAD730038E9A7 /* tutorial_6.png */; };
+		B77484A41A1BAE6B0038E9A7 /* tutorial_7.png in Resources */ = {isa = PBXBuildFile; fileRef = B77484A31A1BAE6B0038E9A7 /* tutorial_7.png */; };
 		B792914A19E834260064E793 /* li320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914119E834260064E793 /* li320x480.png */; };
 		B792914B19E834260064E793 /* li640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914219E834260064E793 /* li640x960.png */; };
 		B792914C19E834260064E793 /* li640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914319E834260064E793 /* li640x1136.png */; };
@@ -114,6 +124,18 @@
 		B7477A5619D9886C001C561F /* 76@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "76@1x.png"; path = "Resources/Icons/76@1x.png"; sourceTree = "<group>"; };
 		B7477A5719D9886C001C561F /* 76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "76@2x.png"; path = "Resources/Icons/76@2x.png"; sourceTree = "<group>"; };
 		B7477A5819D9886C001C561F /* 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1024x1024.png; path = Resources/Icons/1024x1024.png; sourceTree = "<group>"; };
+		B77484881A1B87400038E9A7 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		B774848C1A1B8AFE0038E9A7 /* ISMTutorialContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMTutorialContentController.h; sourceTree = "<group>"; };
+		B774848D1A1B8AFE0038E9A7 /* ISMTutorialContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMTutorialContentController.m; sourceTree = "<group>"; };
+		B774848F1A1B93EA0038E9A7 /* ISMTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMTutorialViewController.h; sourceTree = "<group>"; };
+		B77484901A1B93EA0038E9A7 /* ISMTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMTutorialViewController.m; sourceTree = "<group>"; };
+		B77484951A1BAD730038E9A7 /* tutorial_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_1.png; path = Resources/TutorialImages/tutorial_1.png; sourceTree = "<group>"; };
+		B77484961A1BAD730038E9A7 /* tutorial_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_2.png; path = Resources/TutorialImages/tutorial_2.png; sourceTree = "<group>"; };
+		B77484971A1BAD730038E9A7 /* tutorial_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_3.png; path = Resources/TutorialImages/tutorial_3.png; sourceTree = "<group>"; };
+		B77484981A1BAD730038E9A7 /* tutorial_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_4.png; path = Resources/TutorialImages/tutorial_4.png; sourceTree = "<group>"; };
+		B77484991A1BAD730038E9A7 /* tutorial_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_5.png; path = Resources/TutorialImages/tutorial_5.png; sourceTree = "<group>"; };
+		B774849A1A1BAD730038E9A7 /* tutorial_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_6.png; path = Resources/TutorialImages/tutorial_6.png; sourceTree = "<group>"; };
+		B77484A31A1BAE6B0038E9A7 /* tutorial_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_7.png; path = Resources/TutorialImages/tutorial_7.png; sourceTree = "<group>"; };
 		B792914119E834260064E793 /* li320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li320x480.png; path = Resources/LaunchImages/li320x480.png; sourceTree = "<group>"; };
 		B792914219E834260064E793 /* li640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li640x960.png; path = Resources/LaunchImages/li640x960.png; sourceTree = "<group>"; };
 		B792914319E834260064E793 /* li640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li640x1136.png; path = Resources/LaunchImages/li640x1136.png; sourceTree = "<group>"; };
@@ -201,6 +223,7 @@
 				B7477A4919D98858001C561F /* button-37.wav */,
 				B7186A5C19BF606000F18847 /* Icons */,
 				B792913319E82CE40064E793 /* LaunchIcons */,
+				B77484921A1BAAFB0038E9A7 /* TutorialImages */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -219,6 +242,7 @@
 			children = (
 				B7D98CF219BF34F800BB8994 /* Main_iPhone.storyboard */,
 				B7D98CF519BF34F800BB8994 /* Main_iPad.storyboard */,
+				B77484881A1B87400038E9A7 /* Tutorial.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -289,6 +313,31 @@
 			name = Constants;
 			sourceTree = "<group>";
 		};
+		B774848B1A1B8AA50038E9A7 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				B774848C1A1B8AFE0038E9A7 /* ISMTutorialContentController.h */,
+				B774848D1A1B8AFE0038E9A7 /* ISMTutorialContentController.m */,
+				B774848F1A1B93EA0038E9A7 /* ISMTutorialViewController.h */,
+				B77484901A1B93EA0038E9A7 /* ISMTutorialViewController.m */,
+			);
+			name = Tutorials;
+			sourceTree = "<group>";
+		};
+		B77484921A1BAAFB0038E9A7 /* TutorialImages */ = {
+			isa = PBXGroup;
+			children = (
+				B77484951A1BAD730038E9A7 /* tutorial_1.png */,
+				B77484961A1BAD730038E9A7 /* tutorial_2.png */,
+				B77484971A1BAD730038E9A7 /* tutorial_3.png */,
+				B77484981A1BAD730038E9A7 /* tutorial_4.png */,
+				B77484991A1BAD730038E9A7 /* tutorial_5.png */,
+				B774849A1A1BAD730038E9A7 /* tutorial_6.png */,
+				B77484A31A1BAE6B0038E9A7 /* tutorial_7.png */,
+			);
+			name = TutorialImages;
+			sourceTree = "<group>";
+		};
 		B792913319E82CE40064E793 /* LaunchIcons */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +400,7 @@
 				B7186A5B19BF567B00F18847 /* Project */,
 				B7186A5919BF565C00F18847 /* RecordingLength */,
 				B7186A5819BF565300F18847 /* SampleRate */,
+				B774848B1A1B8AA50038E9A7 /* Tutorials */,
 				B7186A4019BF4EAB00F18847 /* UI */,
 				B7D98CE719BF34F800BB8994 /* Supporting Files */,
 			);
@@ -513,13 +563,16 @@
 				B7477A5C19D9886C001C561F /* 40@2x.png in Resources */,
 				B7477A5A19D9886C001C561F /* 29@2x.png in Resources */,
 				B7477A6319D9886C001C561F /* 72@2x.png in Resources */,
+				B774849C1A1BAD730038E9A7 /* tutorial_1.png in Resources */,
 				B792914D19E834260064E793 /* li768x1004.png in Resources */,
 				B76C43C519C8722800B0A19B /* Main_iPhone.storyboard in Resources */,
 				B76C43C619C8723100B0A19B /* Main_iPad.storyboard in Resources */,
 				B7477A6519D9886C001C561F /* 76@2x.png in Resources */,
+				B77484A01A1BAD730038E9A7 /* tutorial_5.png in Resources */,
 				B7477A5E19D9886C001C561F /* 50@2x.png in Resources */,
 				B7477A6019D9886C001C561F /* 57@2x.png in Resources */,
 				B7477A5919D9886C001C561F /* 29@1x.png in Resources */,
+				B774849F1A1BAD730038E9A7 /* tutorial_4.png in Resources */,
 				B792915019E834260064E793 /* li1024x768.png in Resources */,
 				B7D98CFC19BF34F800BB8994 /* Images.xcassets in Resources */,
 				B7477A6119D9886C001C561F /* 60@2x.png in Resources */,
@@ -527,11 +580,16 @@
 				B792914A19E834260064E793 /* li320x480.png in Resources */,
 				B7CB709519F6940800D91C84 /* 60@3x.png in Resources */,
 				B792914C19E834260064E793 /* li640x1136.png in Resources */,
+				B77484891A1B87400038E9A7 /* Tutorial.storyboard in Resources */,
 				B7477A6419D9886C001C561F /* 76@1x.png in Resources */,
 				B7FC2F5B19F5740400D84EBF /* LaunchScreen.xib in Resources */,
+				B77484A11A1BAD730038E9A7 /* tutorial_6.png in Resources */,
 				B7477A4A19D98858001C561F /* button-37.wav in Resources */,
 				B7477A6219D9886C001C561F /* 72@1x.png in Resources */,
+				B77484A41A1BAE6B0038E9A7 /* tutorial_7.png in Resources */,
+				B774849D1A1BAD730038E9A7 /* tutorial_2.png in Resources */,
 				B7D98CEB19BF34F800BB8994 /* InfoPlist.strings in Resources */,
+				B774849E1A1BAD730038E9A7 /* tutorial_3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +608,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B774848E1A1B8AFE0038E9A7 /* ISMTutorialContentController.m in Sources */,
 				B7186A5019BF561C00F18847 /* ISMProjectManager.m in Sources */,
+				B77484911A1B93EA0038E9A7 /* ISMTutorialViewController.m in Sources */,
 				B7186A4A19BF55FC00F18847 /* ISMRecordingLength.m in Sources */,
 				B7D98CF119BF34F800BB8994 /* ISMAppDelegate.m in Sources */,
 				B7D98CFA19BF34F800BB8994 /* ISMViewController.m in Sources */,
