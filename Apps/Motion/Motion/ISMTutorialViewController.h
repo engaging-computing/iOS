@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ISMTutorialContentController.h"
 
-@interface ISMTutorialViewController : UIViewController <UIPageViewControllerDataSource> {
-
-}
+@interface ISMTutorialViewController : UIViewController <UIPageViewControllerDataSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *goToMotionBtn;
 - (IBAction)goToMotionBtnOnClick:(id)sender;
