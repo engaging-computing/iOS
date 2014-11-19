@@ -105,12 +105,10 @@
         });
     }
 
+    // Display one-time tutorial
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
     if (!tutorialShown) {
-
-        [prefs setBool:true forKey:kDISPLAYED_TUTORIAL];
-        [prefs synchronize];
 
         UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
         ISMTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
