@@ -57,6 +57,10 @@
 
 - (IBAction)goToMotionBtnOnClick:(id)sender {
 
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setBool:true forKey:kDISPLAYED_TUTORIAL];
+    [prefs synchronize];
+
     [self.pageViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
