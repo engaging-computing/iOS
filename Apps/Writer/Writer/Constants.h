@@ -9,6 +9,11 @@
 #ifndef Writer_Constants_h
 #define Writer_Constants_h
 
+// dialog constants
 #define kLOGIN_DIALOG_TAG 100
+#define kVISUALIZE_DIALOG_TAG 200
+
+// project constants
+#define kNO_PROJECT @"Not Set"
 
 #endif

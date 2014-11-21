@@ -7,7 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProjectBrowserViewController.h"
+#import "FieldMatchingViewController.h"
+#import "DataManager.h"
+#import "Constants.h"
+#import "Waffle.h"
 
-@interface ISWProjectController : UIViewController
+#define kPROJ_MANUAL_ENTRY_DIALOG 100
+
+@interface ISWProjectController : UIViewController <ProjectBrowserDelegate, UIAlertViewDelegate> {
+    DataManager *dm;
+}
+
+@property (weak, nonatomic) IBOutlet UILabel *projectLbl;
+
+@property (weak, nonatomic) IBOutlet UIButton *enterProjIDBtn;
+- (IBAction)enterProjIDBtnOnClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *browseProjBtn;
+- (IBAction)browseProjBtnOnClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *noProjBtn;
+- (IBAction)noProjBtnOnClick:(id)sender;
+
 
 @end

@@ -71,7 +71,64 @@
     } @catch (NSException *e) {
         // could not set navigation color - ignore the error
     }
+
+    // make table clear
+    contentView.backgroundColor = [UIColor clearColor];
+    contentView.backgroundView = nil;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    dm = [DataManager getInstance];
+    NSLog(@"Project ID = %d", [dm getProjectID]);
+
+    // TODO get fields.  for now, test code by populating an arbitrary FieldCell
+    dataArr = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 5; i++) {
+
+        FieldData *data = [[FieldData alloc] init];
+        data.fieldName = [NSString stringWithFormat:@"Field %d", i];
+        [dataArr addObject:data];
+    }
+    
+}
+
+#pragma mark - TableView code
+
+// There is a single column in this table
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+    return 1;
+}
+
+// There are as many rows as there are DataSets
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    return dataArr.count;
+}
+
+// Initialize a single object in the table
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    NSLog(@"\n");
+    for (int i = 0; i < dataArr.count; i++) {
+        NSLog(@"Name: %@, Data: %@", ((FieldData *)[dataArr objectAtIndex:i]).fieldName, ((FieldData *)[dataArr objectAtIndex:i]).fieldData);
+    }
+
+    NSString *cellIdentifier = [NSString stringWithFormat:@"FieldCellIdentifier%d", indexPath.row];
+    FieldCell *cell = (FieldCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        UIViewController *tmpVC = [[UIViewController alloc] initWithNibName:@"FieldCell" bundle:nil];
+        cell = (FieldCell *) tmpVC.view;
+    }
+
+    FieldData *tmp = [dataArr objectAtIndex:indexPath.row];
+    [cell setupCellWithField:tmp.fieldName];
+
+    return cell;
+}
+
+#pragma end - TableView code
 
 - (void)toggleDev {
 
@@ -122,7 +179,14 @@
 
             break;
         }
+        case kVISUALIZE_DIALOG_TAG:
+        {
+            if (buttonIndex != 0) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:visURL]];
+            }
 
+            break;
+        }
         default:
         {
             break;
@@ -146,33 +210,59 @@
     [self.navigationController pushViewController:queueUploader animated:YES];
 }
 
-- (void) didFinishUploadingDataWithStatus:(int)status {
+- (void) didFinishUploadingDataWithStatus:(QueueUploadStatus *)status {
 
-    switch (status) {
-        case DATA_NONE_UPLOADED:
-            [self.view makeWaffle:@"No data uploaded"];
-            break;
+    int uploadStatus = [status getStatus];
+    int project = [status getProject];
+    int dataSetID = [status getDataSetID];
 
-        case DATA_UPLOAD_FAILED:
-            [self.view makeWaffle:@"One or more data sets failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-            break;
+    if (uploadStatus == DATA_NONE_UPLOADED) {
 
-        case DATA_UPLOAD_SUCCESS:
-            [self.view makeWaffle:@"Data set(s) uploaded successfully" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
-            break;
+        [self.view makeWaffle:@"No data uploaded"];
+        return;
 
-        default:
-            NSLog(@"Unrecognized upload status received from QueueUploadViewController in ISMViewController");
-            break;
+    } else if (uploadStatus == DATA_UPLOAD_FAILED && project <= 0) {
+
+        [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+
     }
+
+    NSString *prependMessage;
+    if (uploadStatus == DATA_UPLOAD_FAILED)
+        prependMessage = @"Some data set(s) failed to upload, but at least one succeeded.";
+    else /* uploadedStatus == DATA_UPLOAD_SUCCESS */
+        prependMessage = @"All data set(s) uploaded successfully.";
+
+    NSString *message = [NSString stringWithFormat:@"%@ Would you like to visualize the last successfully uploaded data set?", prependMessage];
+
+    UIAlertView *visDataAlert = [[UIAlertView alloc] initWithTitle:@"Visualize Data"
+                                                           message:message
+                                                          delegate:self
+                                                 cancelButtonTitle:@"No"
+                                                 otherButtonTitles:@"Yes", nil];
+    visDataAlert.tag = kVISUALIZE_DIALOG_TAG;
+    [visDataAlert show];
+
+    visURL = [NSString stringWithFormat:@"%@/projects/%d/data_sets/%d?embed=true",
+              [api isUsingDev] ? BASE_DEV_URL : BASE_LIVE_URL,
+              project, dataSetID];
 }
+
 
 - (void) createCredentialManagerDialog {
 
     credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
     DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
     [parent addChildViewController:credentialMgr];
-    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+
+    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials"
+                                                      message:@"Need an account? Visit isenseproject.org/users/new to register."
+                                                     delegate:nil
+                                            cancelButtonTitle:@"Close"
+                                            otherButtonTitles:nil];
+
+
     [credentialMgrAlert setContentView:credentialMgr.view];
     [credentialMgrAlert setDismissesOnBackdropTap:YES];
     [credentialMgrAlert show];
