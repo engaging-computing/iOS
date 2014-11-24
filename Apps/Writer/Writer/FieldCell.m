@@ -12,15 +12,11 @@
 
 
 - (void) awakeFromNib {
-
-    // Initialization code
 }
 
 - (void) setSelected:(BOOL)selected animated:(BOOL)animated {
 
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (FieldCell *) setupCellWithField:(NSString *)field {
@@ -40,7 +36,6 @@
 
 - (NSString *) getData {
 
-    // TODO or should we return what is in the UITextField?
     return self.fieldDataTxt.text;
 }
 

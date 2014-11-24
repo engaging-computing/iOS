@@ -105,7 +105,6 @@
 
 - (void) didFinishChoosingProject:(ProjectBrowserViewController *) browser withID: (int) project_id {
 
-    NSLog(@"ID = %d", project_id);
     [dm setProjectID:project_id];
 
     NSString *curProjIDStr = (project_id > 0) ? [NSString stringWithFormat:@"%d", project_id] : kNO_PROJECT;

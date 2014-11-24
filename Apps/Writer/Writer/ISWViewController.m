@@ -110,11 +110,6 @@
 // Initialize a single object in the table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSLog(@"\n");
-    for (int i = 0; i < dataArr.count; i++) {
-        NSLog(@"Name: %@, Data: %@", ((FieldData *)[dataArr objectAtIndex:i]).fieldName, ((FieldData *)[dataArr objectAtIndex:i]).fieldData);
-    }
-
     NSString *cellIdentifier = [NSString stringWithFormat:@"FieldCellIdentifier%d", indexPath.row];
     FieldCell *cell = (FieldCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
@@ -228,11 +223,9 @@
 
     }
 
-    NSString *prependMessage;
-    if (uploadStatus == DATA_UPLOAD_FAILED)
-        prependMessage = @"Some data set(s) failed to upload, but at least one succeeded.";
-    else /* uploadedStatus == DATA_UPLOAD_SUCCESS */
-        prependMessage = @"All data set(s) uploaded successfully.";
+    NSString *prependMessage = (uploadStatus == DATA_UPLOAD_FAILED) ?
+        @"Some data set(s) failed to upload, but at least one succeeded." :
+        @"All data set(s) uploaded successfully.";
 
     NSString *message = [NSString stringWithFormat:@"%@ Would you like to visualize the last successfully uploaded data set?", prependMessage];
 
