@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BhT-L6-cWy">
-                        <rect key="frame" x="167" y="10" width="145" height="30"/>
+                        <rect key="frame" x="167" y="7" width="145" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="145" id="xPu-SU-92s"/>
                         </constraints>
@@ -31,8 +31,8 @@
                             </mask>
                         </variation>
                     </textField>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Field" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp8-S9-jBb">
-                        <rect key="frame" x="8" y="14" width="145" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp8-S9-jBb">
+                        <rect key="frame" x="8" y="11" width="145" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="145" id="5k3-lv-the"/>
                         </constraints>
@@ -47,17 +47,21 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Gp8-S9-jBb" firstAttribute="width" secondItem="BhT-L6-cWy" secondAttribute="width" id="0pI-n7-ake"/>
-                    <constraint firstItem="Gp8-S9-jBb" firstAttribute="top" secondItem="bZk-Zg-9gb" secondAttribute="topMargin" constant="4" id="1ei-YO-3bc"/>
-                    <constraint firstItem="BhT-L6-cWy" firstAttribute="trailing" secondItem="bZk-Zg-9gb" secondAttribute="trailingMargin" id="A9t-Le-wcW"/>
-                    <constraint firstItem="Gp8-S9-jBb" firstAttribute="leading" secondItem="bZk-Zg-9gb" secondAttribute="leadingMargin" id="AWm-He-gg9"/>
-                    <constraint firstItem="BhT-L6-cWy" firstAttribute="top" secondItem="bZk-Zg-9gb" secondAttribute="topMargin" id="J5e-1e-vyB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Gp8-S9-jBb" secondAttribute="bottom" constant="3" id="8jg-pe-pzD"/>
+                    <constraint firstItem="Gp8-S9-jBb" firstAttribute="width" secondItem="BhT-L6-cWy" secondAttribute="width" id="Ccj-cZ-pa3"/>
+                    <constraint firstItem="BhT-L6-cWy" firstAttribute="leading" secondItem="Gp8-S9-jBb" secondAttribute="trailing" constant="14" id="DLS-vS-fXh"/>
                     <constraint firstItem="BhT-L6-cWy" firstAttribute="leading" secondItem="Gp8-S9-jBb" secondAttribute="trailing" constant="14" id="Ln4-Fg-92T"/>
-                    <constraint firstItem="BhT-L6-cWy" firstAttribute="leading" secondItem="Gp8-S9-jBb" secondAttribute="trailing" constant="14" id="Ogh-3G-Wq1"/>
+                    <constraint firstItem="BhT-L6-cWy" firstAttribute="top" secondItem="bZk-Zg-9gb" secondAttribute="topMargin" constant="1" id="NBl-pi-n47"/>
+                    <constraint firstItem="Gp8-S9-jBb" firstAttribute="leading" secondItem="bZk-Zg-9gb" secondAttribute="leadingMargin" id="ROh-kt-bHF"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="BhT-L6-cWy" secondAttribute="bottom" constant="2" id="W32-ZV-iCJ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="BhT-L6-cWy" secondAttribute="bottom" constant="2" id="dWd-k9-WmQ"/>
+                    <constraint firstItem="BhT-L6-cWy" firstAttribute="trailing" secondItem="bZk-Zg-9gb" secondAttribute="trailingMargin" id="smm-S5-uHM"/>
+                    <constraint firstItem="BhT-L6-cWy" firstAttribute="leading" secondItem="Gp8-S9-jBb" secondAttribute="trailing" constant="14" id="vZT-f8-zBy"/>
+                    <constraint firstItem="Gp8-S9-jBb" firstAttribute="top" secondItem="bZk-Zg-9gb" secondAttribute="topMargin" constant="3" id="ybq-ID-Oyw"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="DLS-vS-fXh"/>
                         <exclude reference="Ln4-Fg-92T"/>
                         <exclude reference="dWd-k9-WmQ"/>
                     </mask>
