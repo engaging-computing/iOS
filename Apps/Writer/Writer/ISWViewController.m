@@ -196,21 +196,11 @@
         return;
     }
 
-    // get the y co-ordinate of the textfield in the cell
-    int textYOrigin = activeTextField.frame.origin.y;
+    // map the textfield's dimensions to the superview and get its Y coordinate
+    CGPoint point = [activeTextField convertPoint:activeTextField.frame.origin toView:self.view];
+    int textY = point.y;
 
-    // get the cell number in which the textfield is contained in the tableview
-    int cellNumber = activeTextField.tag;
-
-    // get the size of a single cell and multiply it by the cell number
-    FieldCell *cell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:activeTextField.tag inSection:0]];
-    int cellYOrigin = cell.frame.size.height * cellNumber;
-
-    // get the y-coordinate of the table view
-    int contentYOrigin = contentView.frame.origin.y;
-
-    // calculate both the position of the text field and the remaining space in the view not overlapped by the keyboard
-    int textY = textYOrigin + cellYOrigin + contentYOrigin;
+    // calculate the remaining space in the view not overlapped by the keyboard
     int spaceAboveKeyboard = self.view.frame.size.height - keyboardHeight;
 
     if (textY < spaceAboveKeyboard) {
