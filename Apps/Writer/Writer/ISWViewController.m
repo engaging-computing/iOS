@@ -59,6 +59,8 @@
 
     // Attach the data set name text field to the application delegate to restrict character input
     dataSetNameTxt.delegate = self;
+    dataSetNameTxt.returnKeyType = UIReturnKeyDone;
+    dataSetNameTxt.tag = kDATA_SET_NAME_TAG;
 
     // Set navigation bar color
     @try {
@@ -83,17 +85,19 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     dm = [DataManager getInstance];
-    NSLog(@"Project ID = %d", [dm getProjectID]);
+
+    // Add an observer to track the keyboard showing
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidHideNotification object:nil];
 
     // TODO get fields.  for now, test code by populating an arbitrary FieldCell
     dataArr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
 
         FieldData *data = [[FieldData alloc] init];
         data.fieldName = [NSString stringWithFormat:@"Field %d", i];
         [dataArr addObject:data];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,11 +166,94 @@
 
 #pragma end - TableView code
 
+#pragma mark - Keyboard code
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+
+    CGRect dimen = [self getKeyboardDimensions:notification];
+    [self animateTextFieldUp:true withKeyboardDimensions:dimen];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+
+    CGRect dimen = [self getKeyboardDimensions:notification];
+    [self animateTextFieldUp:false withKeyboardDimensions:dimen];
+}
+
+- (CGRect)getKeyboardDimensions:(NSNotification *)notification {
+
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    return [keyboardFrameBegin CGRectValue];
+}
+
+- (void)animateTextFieldUp:(BOOL)up withKeyboardDimensions:(CGRect)dimen {
+
+    const int keyboardHeight = dimen.size.height;
+
+    if (activeTextField != nil && activeTextField.tag == kDATA_SET_NAME_TAG) {
+        // do not consider a keyboard shift for the data set name textfield
+        return;
+    }
+
+    // get the y co-ordinate of the textfield in the cell
+    int textYOrigin = activeTextField.frame.origin.y;
+
+    // get the cell number in which the textfield is contained in the tableview
+    int cellNumber = activeTextField.tag;
+
+    // get the size of a single cell and multiply it by the cell number
+    FieldCell *cell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:activeTextField.tag inSection:0]];
+    int cellYOrigin = cell.frame.size.height * cellNumber;
+
+    // get the y-coordinate of the table view
+    int contentYOrigin = contentView.frame.origin.y;
+
+    // calculate both the position of the text field and the remaining space in the view not overlapped by the keyboard
+    int textY = textYOrigin + cellYOrigin + contentYOrigin;
+    int spaceAboveKeyboard = self.view.frame.size.height - keyboardHeight;
+
+    if (textY < spaceAboveKeyboard) {
+        // do not shift view up if the tapped textfield will be visible when the keyboard is shown
+        return;
+    }
+
+    if (!up) {
+        // reset the active text field if we're moving the keyboard back down
+        activeTextField = nil;
+    }
+
+    // animate the keyboard
+    const float movementDuration = 0.3f;
+
+    int movement = (up ? -keyboardHeight : keyboardHeight);
+
+    [UIView beginAnimations: @"animateTextField" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
+#pragma end - Keyboard code
+
 #pragma mark - UITextField code
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+
+    activeTextField = textField;
+}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
 
     [textField resignFirstResponder];
+
+    if (activeTextField != nil && activeTextField.tag == kDATA_SET_NAME_TAG) {
+        // textfield is data set name - do not need to save data in the dataArr
+        return;
+    }
 
     // retrieve the cell at the given indexPath using the UITextField's tag that was assigned in cellForRowAtIndexPath
     FieldCell *editCell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];

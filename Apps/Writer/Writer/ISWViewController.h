@@ -37,6 +37,9 @@
 
     // Array to hold data for manual entry
     NSMutableArray *dataArr;
+
+    // Reference to the last clicked TextField
+    UITextField *activeTextField;
 }
 
 // Queue Saver properties
