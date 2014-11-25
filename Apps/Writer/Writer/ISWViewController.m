@@ -155,6 +155,7 @@
     // tag the cell's UITextField with the indexPath of the cell
     cell.fieldDataTxt.tag = indexPath.row;
     cell.fieldDataTxt.delegate = self;
+    cell.fieldDataTxt.returnKeyType = UIReturnKeyDone;
 
     return cell;
 }
@@ -164,6 +165,8 @@
 #pragma mark - UITextField code
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+
+    [textField resignFirstResponder];
 
     // retrieve the cell at the given indexPath using the UITextField's tag that was assigned in cellForRowAtIndexPath
     FieldCell *editCell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];
