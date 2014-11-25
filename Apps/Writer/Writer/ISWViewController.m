@@ -191,6 +191,9 @@
 
     const int keyboardHeight = dimen.size.height;
 
+    int textFieldHeight = activeTextField.frame.size.height;
+    int padding = textFieldHeight * 3 / 2;
+
     if (activeTextField != nil && activeTextField.tag == kDATA_SET_NAME_TAG) {
         // do not consider a keyboard shift for the data set name textfield
         return;
@@ -203,10 +206,14 @@
     // calculate the remaining space in the view not overlapped by the keyboard
     int spaceAboveKeyboard = self.view.frame.size.height - keyboardHeight;
 
-    if (textY < spaceAboveKeyboard) {
+    if (textY < spaceAboveKeyboard - textFieldHeight) {
         // do not shift view up if the tapped textfield will be visible when the keyboard is shown
         return;
     }
+
+    // if the textfield will be overlapped by the keyboard but also will be pushed too far up,
+    // only push the view up to the height of the area above the keyboard (with some padding)
+    int movementValue = (textY - textFieldHeight < keyboardHeight) ? (spaceAboveKeyboard - padding) : keyboardHeight;
 
     if (!up) {
         // reset the active text field if we're moving the keyboard back down
@@ -216,13 +223,13 @@
     // animate the keyboard
     const float movementDuration = 0.3f;
 
-    int movement = (up ? -keyboardHeight : keyboardHeight);
+    int movementDirection = (up ? -movementValue : movementValue);
 
     [UIView beginAnimations: @"animateTextField" context: nil];
     [UIView setAnimationBeginsFromCurrentState: YES];
     [UIView setAnimationDuration: movementDuration];
     
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    self.view.frame = CGRectOffset(self.view.frame, 0, movementDirection);
     [UIView commitAnimations];
 }
 
