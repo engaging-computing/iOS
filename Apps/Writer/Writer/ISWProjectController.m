@@ -80,6 +80,7 @@
             if (buttonIndex != 0) {
                 NSString *projAsString = [[alertView textFieldAtIndex:0] text];
                 [dm setProjectID:[projAsString intValue]];
+                [dm retrieveProjectFields];
 
                 [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
             }
@@ -106,6 +107,7 @@
 - (void) didFinishChoosingProject:(ProjectBrowserViewController *) browser withID: (int) project_id {
 
     [dm setProjectID:project_id];
+    [dm retrieveProjectFields];
 
     NSString *curProjIDStr = (project_id > 0) ? [NSString stringWithFormat:@"%d", project_id] : kNO_PROJECT;
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];

@@ -38,6 +38,9 @@
     // Array to hold data for manual entry
     NSMutableArray *dataArr;
 
+    // Dictionary of data to upload
+    NSMutableDictionary *dataToUpload;
+
     // Reference to the last clicked TextField
     UITextField *activeTextField;
 }

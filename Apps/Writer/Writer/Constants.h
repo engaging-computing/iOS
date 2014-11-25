@@ -15,6 +15,7 @@
 
 // project constants
 #define kNO_PROJECT @"Not Set"
+#define kPREFS_PROJ @"prefs_proj"
 
 // textfield constants
 #define kDATA_SET_NAME_TAG -1

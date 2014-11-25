@@ -47,9 +47,20 @@
     // Initialize API and start separate thread to reload any user that has been saved to preferences
     api = [API getInstance];
     [api useDev:USE_DEV];
+    [self checkAPIOnDev];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [api loadCurrentUserFromPrefs];
     });
+
+    // Load the last used project from prefs, if available
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    int projID = [prefs integerForKey:kPREFS_PROJ];
+    if (projID > 0) {
+
+        dm = [DataManager getInstance];
+        [dm setProjectID:projID];
+        [dm retrieveProjectFields];
+    }
 
     // Set the data set name label to be our secret dev/non-dev switch
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleDev)];
@@ -90,14 +101,36 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidHideNotification object:nil];
 
-    // TODO get fields.  for now, test code by populating an arbitrary FieldCell
-    dataArr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 10; i++) {
+    // get the fields for the project and display them for manual entry
+    int projID = [dm getProjectID];
+    if (projID > 0) {
 
-        FieldData *data = [[FieldData alloc] init];
-        data.fieldName = [NSString stringWithFormat:@"Field %d", i];
-        [dataArr addObject:data];
+        dataArr = [[NSMutableArray alloc] init];
+        NSArray *fields = [dm getProjectFields];
+
+        for (RProjectField *field in fields) {
+
+            // TODO set up FieldData objects with the TYPE from the field. then make the cell check the type i.e. number for numberkeyboard or time for autofill data
+
+            FieldData *data = [[FieldData alloc] init];
+            data.fieldName = field.name;
+            [dataArr addObject:data];
+        }
     }
+
+    // reload the content view
+    [contentView reloadData];
+
+    // save the project in preferences
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setInteger:projID forKey:kPREFS_PROJ];
+    [prefs synchronize];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+    // remove the keyboard observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,7 +139,40 @@
 }
 
 - (IBAction)saveRowBtnOnClick:(id)sender {
-    // TODO
+
+    // if no project has been set yet, do not enable row saving
+    int projectID = [dm getProjectID];
+    if (projectID <= 0) {
+
+        [self.view makeWaffle:@"Cannot save data without a project" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
+    // get the project's field IDs from the DataManager
+    NSArray *fieldIDs = [dm getProjectFieldIDs];
+
+    // initialize the data dictionary if nil
+    if (!dataToUpload) {
+
+        dataToUpload = [[NSMutableDictionary alloc] init];
+    }
+
+    int i = 0;
+    for (NSNumber *fieldID in fieldIDs) {
+
+        NSMutableArray *arr = [dataToUpload objectForKey:fieldID];
+
+        // if array does not yet exist, create it
+        if (!arr) {
+            arr = [[NSMutableArray alloc] init];
+            [dataToUpload setObject:arr forKey:fieldID];
+        }
+
+        NSString *data = ((FieldData *)[dataArr objectAtIndex:i++]).fieldData;
+        if (data == nil) data = @"";
+
+        [arr addObject:data];
+    }
 }
 
 - (IBAction)saveDataSetBtnOnClick:(id)sender {
@@ -222,7 +288,6 @@
 
     // animate the keyboard
     const float movementDuration = 0.3f;
-
     int movementDirection = (up ? -movementValue : movementValue);
 
     [UIView beginAnimations: @"animateTextField" context: nil];
