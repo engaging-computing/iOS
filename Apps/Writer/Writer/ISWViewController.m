@@ -27,6 +27,9 @@
 // UI
 @synthesize credentialBarBtn, dataSetNameLbl, dataSetNameTxt, projectBtn, saveRowBtn, saveDataSetBtn, contentView, uploadBtn;
 
+
+#pragma mark - View and UI code
+
 - (void)viewDidLoad {
 
     [super viewDidLoad];
@@ -93,6 +96,33 @@
     
 }
 
+- (void)didReceiveMemoryWarning {
+
+    [super didReceiveMemoryWarning];
+}
+
+- (IBAction)saveRowBtnOnClick:(id)sender {
+    // TODO
+}
+
+- (IBAction)saveDataSetBtnOnClick:(id)sender {
+    // TODO
+}
+
+- (IBAction)credentialBarBtnOnClick:(id)sender {
+
+    [self createCredentialManagerDialog];
+}
+
+- (IBAction)uploadBtnOnClick:(id)sender {
+
+    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION andDelegate:self];
+    queueUploader.title = @"Upload";
+    [self.navigationController pushViewController:queueUploader animated:YES];
+}
+
+#pragma end - View and UI code
+
 #pragma mark - TableView code
 
 // There is a single column in this table
@@ -131,7 +161,9 @@
 
 #pragma end - TableView code
 
-- (void) textFieldDidEndEditing:(UITextField *)textField {
+#pragma mark - UITextField code
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
 
     // retrieve the cell at the given indexPath using the UITextField's tag that was assigned in cellForRowAtIndexPath
     FieldCell *editCell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];
@@ -141,6 +173,25 @@
     FieldData *data = [dataArr objectAtIndex:textField.tag];
     data.fieldData = dataStr;
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+
+    [textField resignFirstResponder];
+    return YES;
+}
+
+// restrict length of text entered
+// 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
+// a ~20 character timestamp to the data set name
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength <= 90);
+}
+
+#pragma end - UITextField code
+
+#pragma mark - iSENSE and API code
 
 - (void)toggleDev {
 
@@ -163,18 +214,122 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didPressLogin:(CredentialManager *)mngr {
 
-    [super didReceiveMemoryWarning];
+    [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:NO];
+    credentialMgrAlert = nil;
+
+    UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Login to iSENSE"
+                                                         message:@""
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:@"OK", nil];
+    [loginAlert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+    loginAlert.tag = kLOGIN_DIALOG_TAG;
+
+    [loginAlert textFieldAtIndex:0].delegate = self;
+    [loginAlert textFieldAtIndex:0].placeholder = @"Email";
+
+    // since the CredentialManager takes a moment to dismiss and allow the login AlertView become a first responder,
+    // we have to sleep the first responder action for 1.5 seconds.  this can be removed once the Credential Manager
+    // is rewritten
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
+    });
+
+    [loginAlert textFieldAtIndex:1].delegate = self;
+
+    [loginAlert show];
 }
 
-- (IBAction)saveRowBtnOnClick:(id)sender {
-    // TODO
+// Login to iSENSE
+- (void)login:(NSString *)email withPassword:(NSString *)pass {
+
+    UIAlertView *spinnerDialog = [self getDispatchDialogWithMessage:@"Logging in..."];
+    [spinnerDialog show];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        RPerson *currUser = [api createSessionWithEmail:email andPassword:pass];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            if (currUser != nil) {
+
+                [self.view makeWaffle:[NSString stringWithFormat:@"Login as %@ successful", email]
+                             duration:WAFFLE_LENGTH_SHORT
+                             position:WAFFLE_BOTTOM
+                                image:WAFFLE_CHECKMARK];
+            } else {
+
+                [self.view makeWaffle:@"Login failed"
+                             duration:WAFFLE_LENGTH_SHORT
+                             position:WAFFLE_BOTTOM
+                                image:WAFFLE_RED_X];
+            }
+            [spinnerDialog dismissWithClickedButtonIndex:0 animated:YES];
+        });
+    });
 }
 
-- (IBAction)saveDataSetBtnOnClick:(id)sender {
-    // TODO
+- (void)didFinishUploadingDataWithStatus:(QueueUploadStatus *)status {
+
+    int uploadStatus = [status getStatus];
+    int project = [status getProject];
+    int dataSetID = [status getDataSetID];
+
+    if (uploadStatus == DATA_NONE_UPLOADED) {
+
+        [self.view makeWaffle:@"No data uploaded"];
+        return;
+
+    } else if (uploadStatus == DATA_UPLOAD_FAILED && project <= 0) {
+
+        [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
+    NSString *prependMessage = (uploadStatus == DATA_UPLOAD_FAILED) ?
+    @"Some data set(s) failed to upload, but at least one succeeded." :
+    @"All data set(s) uploaded successfully.";
+
+    NSString *message = [NSString stringWithFormat:@"%@ Would you like to visualize the last successfully uploaded data set?", prependMessage];
+
+    UIAlertView *visDataAlert = [[UIAlertView alloc] initWithTitle:@"Visualize Data"
+                                                           message:message
+                                                          delegate:self
+                                                 cancelButtonTitle:@"No"
+                                                 otherButtonTitles:@"Yes", nil];
+    visDataAlert.tag = kVISUALIZE_DIALOG_TAG;
+    [visDataAlert show];
+
+    visURL = [NSString stringWithFormat:@"%@/projects/%d/data_sets/%d?embed=true",
+              [api isUsingDev] ? BASE_DEV_URL : BASE_LIVE_URL,
+              project, dataSetID];
 }
+
+
+- (void)createCredentialManagerDialog {
+
+    credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
+    DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
+    [parent addChildViewController:credentialMgr];
+
+    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials"
+                                                      message:@"Need an account? Visit isenseproject.org/users/new to register."
+                                                     delegate:nil
+                                            cancelButtonTitle:@"Close"
+                                            otherButtonTitles:nil];
+
+
+    [credentialMgrAlert setContentView:credentialMgr.view];
+    [credentialMgrAlert setDismissesOnBackdropTap:YES];
+    [credentialMgrAlert show];
+}
+
+#pragma mark - iSENSE and API code
+
+#pragma mark - UIAlertView code
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
@@ -206,142 +361,8 @@
     }
 }
 
-// restrict length of text entered
-// 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
-// a ~20 character timestamp to the data set name
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-
-    NSUInteger newLength = [textField.text length] + [string length] - range.length;
-    return (newLength <= 90);
-}
-
-- (IBAction)uploadBtnOnClick:(id)sender {
-
-    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION andDelegate:self];
-    queueUploader.title = @"Upload";
-    [self.navigationController pushViewController:queueUploader animated:YES];
-}
-
-- (void) didFinishUploadingDataWithStatus:(QueueUploadStatus *)status {
-
-    int uploadStatus = [status getStatus];
-    int project = [status getProject];
-    int dataSetID = [status getDataSetID];
-
-    if (uploadStatus == DATA_NONE_UPLOADED) {
-
-        [self.view makeWaffle:@"No data uploaded"];
-        return;
-
-    } else if (uploadStatus == DATA_UPLOAD_FAILED && project <= 0) {
-
-        [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-        return;
-    }
-
-    NSString *prependMessage = (uploadStatus == DATA_UPLOAD_FAILED) ?
-        @"Some data set(s) failed to upload, but at least one succeeded." :
-        @"All data set(s) uploaded successfully.";
-
-    NSString *message = [NSString stringWithFormat:@"%@ Would you like to visualize the last successfully uploaded data set?", prependMessage];
-
-    UIAlertView *visDataAlert = [[UIAlertView alloc] initWithTitle:@"Visualize Data"
-                                                           message:message
-                                                          delegate:self
-                                                 cancelButtonTitle:@"No"
-                                                 otherButtonTitles:@"Yes", nil];
-    visDataAlert.tag = kVISUALIZE_DIALOG_TAG;
-    [visDataAlert show];
-
-    visURL = [NSString stringWithFormat:@"%@/projects/%d/data_sets/%d?embed=true",
-              [api isUsingDev] ? BASE_DEV_URL : BASE_LIVE_URL,
-              project, dataSetID];
-}
-
-
-- (void) createCredentialManagerDialog {
-
-    credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
-    DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
-    [parent addChildViewController:credentialMgr];
-
-    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials"
-                                                      message:@"Need an account? Visit isenseproject.org/users/new to register."
-                                                     delegate:nil
-                                            cancelButtonTitle:@"Close"
-                                            otherButtonTitles:nil];
-
-
-    [credentialMgrAlert setContentView:credentialMgr.view];
-    [credentialMgrAlert setDismissesOnBackdropTap:YES];
-    [credentialMgrAlert show];
-}
-
-- (IBAction)credentialBarBtnOnClick:(id)sender {
-
-    [self createCredentialManagerDialog];
-}
-
-- (void) didPressLogin:(CredentialManager *)mngr {
-
-    [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:NO];
-    credentialMgrAlert = nil;
-
-    UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Login to iSENSE"
-                                                         message:@""
-                                                        delegate:self
-                                               cancelButtonTitle:@"Cancel"
-                                               otherButtonTitles:@"OK", nil];
-    [loginAlert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-    loginAlert.tag = kLOGIN_DIALOG_TAG;
-
-    [loginAlert textFieldAtIndex:0].delegate = self;
-    [loginAlert textFieldAtIndex:0].placeholder = @"Email";
-
-    // since the CredentialManager takes a moment to dismiss and allow the login AlertView become a first responder,
-    // we have to sleep the first responder action for 1.5 seconds.  this can be removed once the Credential Manager
-    // is rewritten
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [[loginAlert textFieldAtIndex:0] becomeFirstResponder];
-    });
-
-    [loginAlert textFieldAtIndex:1].delegate = self;
-
-    [loginAlert show];
-}
-
-// Login to iSENSE
-- (void) login:(NSString *)email withPassword:(NSString *)pass {
-
-    UIAlertView *spinnerDialog = [self getDispatchDialogWithMessage:@"Logging in..."];
-    [spinnerDialog show];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-        RPerson *currUser = [api createSessionWithEmail:email andPassword:pass];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-
-            if (currUser != nil) {
-
-                [self.view makeWaffle:[NSString stringWithFormat:@"Login as %@ successful", email]
-                             duration:WAFFLE_LENGTH_SHORT
-                             position:WAFFLE_BOTTOM
-                                image:WAFFLE_CHECKMARK];
-            } else {
-
-                [self.view makeWaffle:@"Login failed"
-                             duration:WAFFLE_LENGTH_SHORT
-                             position:WAFFLE_BOTTOM
-                                image:WAFFLE_RED_X];
-            }
-            [spinnerDialog dismissWithClickedButtonIndex:0 animated:YES];
-        });
-    });
-}
-
 // Default dispatch_async dialog with custom spinner
-- (UIAlertView *) getDispatchDialogWithMessage:(NSString *)dString {
+- (UIAlertView *)getDispatchDialogWithMessage:(NSString *)dString {
 
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:dString
                                                       message:nil
@@ -355,5 +376,6 @@
     return message;
 }
 
+#pragma end - UIAlertView code
 
 @end
