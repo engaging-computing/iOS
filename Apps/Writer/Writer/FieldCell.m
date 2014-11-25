@@ -19,10 +19,12 @@
     [super setSelected:selected animated:animated];
 }
 
-- (FieldCell *) setupCellWithField:(NSString *)field {
+- (FieldCell *) setupCellWithField:(NSString *)field andData:(NSString *)data {
 
     self.fieldNameLbl.text = field;
     self.fieldNameLbl.backgroundColor = [UIColor clearColor];
+
+    self.fieldDataTxt.text = data;
     
     self.backgroundColor = [UIColor clearColor];
 

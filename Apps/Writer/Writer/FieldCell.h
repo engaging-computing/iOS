@@ -11,7 +11,7 @@
 
 @interface FieldCell : UITableViewCell
 
-- (FieldCell *) setupCellWithField:(NSString *)field;
+- (FieldCell *) setupCellWithField:(NSString *)field andData:(NSString *)data;
 - (void) setFieldData:(NSString *)fieldData;
 - (NSString *) getData;
 

@@ -118,12 +118,29 @@
     }
 
     FieldData *tmp = [dataArr objectAtIndex:indexPath.row];
-    [cell setupCellWithField:tmp.fieldName];
+    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
+
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+    // tag the cell's UITextField with the indexPath of the cell
+    cell.fieldDataTxt.tag = indexPath.row;
+    cell.fieldDataTxt.delegate = self;
 
     return cell;
 }
 
 #pragma end - TableView code
+
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+
+    // retrieve the cell at the given indexPath using the UITextField's tag that was assigned in cellForRowAtIndexPath
+    FieldCell *editCell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];
+    NSString *dataStr = editCell.fieldDataTxt.text;
+
+    // store the data in the data array now that the user is no longer editing the cell
+    FieldData *data = [dataArr objectAtIndex:textField.tag];
+    data.fieldData = dataStr;
+}
 
 - (void)toggleDev {
 
@@ -220,7 +237,6 @@
 
         [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
         return;
-
     }
 
     NSString *prependMessage = (uploadStatus == DATA_UPLOAD_FAILED) ?
