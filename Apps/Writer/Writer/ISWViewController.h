@@ -41,8 +41,9 @@
     // Dictionary of data to upload
     NSMutableDictionary *dataToUpload;
 
-    // Reference to the last clicked TextField
+    // Reference to the last clicked TextField and current keyboard display
     UITextField *activeTextField;
+    bool isKeyboardDisplaying;
 }
 
 // Queue Saver properties

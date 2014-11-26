@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) NSString *fieldName;
 @property (strong, nonatomic) NSString *fieldData;
+@property (strong, nonatomic) NSNumber *fieldType;
 
 @end

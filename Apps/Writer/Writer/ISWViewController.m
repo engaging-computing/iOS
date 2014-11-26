@@ -110,10 +110,9 @@
 
         for (RProjectField *field in fields) {
 
-            // TODO set up FieldData objects with the TYPE from the field. then make the cell check the type i.e. number for numberkeyboard or time for autofill data
-
             FieldData *data = [[FieldData alloc] init];
             data.fieldName = field.name;
+            data.fieldType = field.type;
             [dataArr addObject:data];
         }
     }
@@ -225,7 +224,37 @@
     // tag the cell's UITextField with the indexPath of the cell
     cell.fieldDataTxt.tag = indexPath.row;
     cell.fieldDataTxt.delegate = self;
-    cell.fieldDataTxt.returnKeyType = UIReturnKeyDone;
+    //cell.fieldDataTxt.returnKeyType = UIReturnKeyDone;
+
+    // add a done button to the keyboard
+    UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
+    [keyboardDoneButtonView sizeToFit];
+    UIBarButtonItem *flexableItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                  target:nil
+                                                                                  action:NULL];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:self
+                                                                  action:@selector(doneClicked:)];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:flexableItem, doneButton, nil]];
+    cell.fieldDataTxt.inputAccessoryView = keyboardDoneButtonView;
+
+
+    // set up the cell depending on the type of field data
+    if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
+
+        // TODO
+
+    } else if (tmp.fieldType.intValue == TYPE_NUMBER) {
+
+        // TODO
+        cell.fieldDataTxt.keyboardType = UIKeyboardTypeNumberPad;
+
+    } else if (tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
+
+        // TODO
+
+    }
 
     return cell;
 }
@@ -236,14 +265,24 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification {
 
-    CGRect dimen = [self getKeyboardDimensions:notification];
-    [self animateTextFieldUp:true withKeyboardDimensions:dimen];
+    if (!isKeyboardDisplaying) {
+
+        isKeyboardDisplaying = true;
+
+        CGRect dimen = [self getKeyboardDimensions:notification];
+        [self animateTextFieldUp:true withKeyboardDimensions:dimen];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
 
-    CGRect dimen = [self getKeyboardDimensions:notification];
-    [self animateTextFieldUp:false withKeyboardDimensions:dimen];
+    if (isKeyboardDisplaying) {
+
+        isKeyboardDisplaying = false;
+
+        CGRect dimen = [self getKeyboardDimensions:notification];
+        [self animateTextFieldUp:false withKeyboardDimensions:dimen];
+    }
 }
 
 - (CGRect)getKeyboardDimensions:(NSNotification *)notification {
@@ -258,7 +297,7 @@
     const int keyboardHeight = dimen.size.height;
 
     int textFieldHeight = activeTextField.frame.size.height;
-    int padding = textFieldHeight * 3 / 2;
+    int padding = textFieldHeight;// * 3 / 2;
 
     if (activeTextField != nil && activeTextField.tag == kDATA_SET_NAME_TAG) {
         // do not consider a keyboard shift for the data set name textfield
@@ -298,6 +337,11 @@
     [UIView commitAnimations];
 }
 
+- (IBAction)doneClicked:(id)sender {
+
+    [self.view endEditing:YES];
+}
+
 #pragma end - Keyboard code
 
 #pragma mark - UITextField code
@@ -305,7 +349,8 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 
-    activeTextField = textField;
+    if (!isKeyboardDisplaying)
+        activeTextField = textField;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
