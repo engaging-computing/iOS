@@ -70,7 +70,7 @@
 
     // Attach the data set name text field to the application delegate to restrict character input
     dataSetNameTxt.delegate = self;
-    dataSetNameTxt.returnKeyType = UIReturnKeyDone;
+    dataSetNameTxt.inputAccessoryView = [self createDoneKeyboardView];
     dataSetNameTxt.tag = kDATA_SET_NAME_TAG;
 
     // Set navigation bar color
@@ -224,21 +224,9 @@
     // tag the cell's UITextField with the indexPath of the cell
     cell.fieldDataTxt.tag = indexPath.row;
     cell.fieldDataTxt.delegate = self;
-    //cell.fieldDataTxt.returnKeyType = UIReturnKeyDone;
 
     // add a done button to the keyboard
-    UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
-    [keyboardDoneButtonView sizeToFit];
-    UIBarButtonItem *flexableItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                  target:nil
-                                                                                  action:NULL];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:self
-                                                                  action:@selector(doneClicked:)];
-    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:flexableItem, doneButton, nil]];
-    cell.fieldDataTxt.inputAccessoryView = keyboardDoneButtonView;
-
+    cell.fieldDataTxt.inputAccessoryView = [self createDoneKeyboardView];
 
     // set up the cell depending on the type of field data
     if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
@@ -340,6 +328,38 @@
 - (IBAction)doneClicked:(id)sender {
 
     [self.view endEditing:YES];
+}
+
+- (UIToolbar *) createDoneKeyboardView {
+
+    // create a toolbar with a done button to be displayed over the keyboard
+    UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
+    [keyboardDoneButtonView sizeToFit];
+    UIBarButtonItem *flexableItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                  target:nil
+                                                                                  action:NULL];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:self
+                                                                  action:@selector(doneClicked:)];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:flexableItem, doneButton, nil]];
+
+    // color the toolbar the same as the navigation bar
+    @try {
+        if ([UIToolbar instancesRespondToSelector:@selector(barTintColor)]) {
+            // for iOS 7 and higher devices
+            [keyboardDoneButtonView setBarStyle:UIBarStyleBlack];
+            [keyboardDoneButtonView setTintColor:UIColorFromHex(0xFFFFFF)];
+            [keyboardDoneButtonView setBarTintColor:UIColorFromHex(0x89D986)];
+        } else {
+            // for iOS 6 and lower devices
+            [keyboardDoneButtonView setTintColor:UIColorFromHex(0x89D986)];
+        }
+    } @catch (NSException *e) {
+        // could not set toolbar color - ignore the error
+    }
+
+    return keyboardDoneButtonView;
 }
 
 #pragma end - Keyboard code
