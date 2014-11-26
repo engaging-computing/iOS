@@ -74,5 +74,6 @@ typedef enum {
 -(int) uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *) name withTarget: (TargetType) ttype withContributorKey:(NSString *) conKey as:(NSString *) conName;
 
 -(NSString *) getVersion;
++(NSString *) getTimeStamp;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "Constants.h"
 #import "API.h"
@@ -22,15 +23,19 @@
 
 @interface ISWViewController : UIViewController
     <UIAlertViewDelegate, UITextFieldDelegate, CredentialManagerDelegate, QueueUploaderDelegate,
-    UITableViewDelegate, UITableViewDataSource> {
+    UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate> {
 
+    // iSENSE API, DataManager, and dev switch
     API *api;
     DataManager *dm;
-
     UILabel *devLbl;
-    
+
+    // Credentials
     CredentialManager *credentialMgr;
     DLAVAlertView *credentialMgrAlert;
+
+    // Location Manager
+    CLLocationManager *locationManager;
 
     // Visualization URL constructed after data is uploaded
     NSString *visURL;
