@@ -20,6 +20,7 @@
 #import "DataManager.h"
 #import "QueueUploadStatus.h"
 #import "ISMTutorialViewController.h"
+#import "GlobalColors.h"
 
 #define USE_DEV false
 

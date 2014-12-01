@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "Constants.h"
 #import "API.h"
@@ -17,26 +18,38 @@
 #import "Waffle.h"
 #import "FieldCell.h"
 #import "FieldData.h"
+#import "GlobalColors.h"
 
 #define USE_DEV true
 
 @interface ISWViewController : UIViewController
     <UIAlertViewDelegate, UITextFieldDelegate, CredentialManagerDelegate, QueueUploaderDelegate,
-    UITableViewDelegate, UITableViewDataSource> {
+    UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate> {
 
+    // iSENSE API, DataManager, and dev switch
     API *api;
     DataManager *dm;
-
     UILabel *devLbl;
-    
-    CredentialManager *credentialMgr;
-    DLAVAlertView *credentialMgrAlert;
+
+    // Credentials
+    CredentialManager *credentialMngr;
+    DLAVAlertView *credentialMngrAlert;
+
+    // Location Manager
+    CLLocationManager *locationManager;
 
     // Visualization URL constructed after data is uploaded
     NSString *visURL;
 
     // Array to hold data for manual entry
     NSMutableArray *dataArr;
+
+    // Dictionary of data to upload
+    NSMutableDictionary *dataToUpload;
+
+    // Reference to the last clicked TextField and current keyboard display
+    UITextField *activeTextField;
+    bool isKeyboardDisplaying;
 }
 
 // Queue Saver properties

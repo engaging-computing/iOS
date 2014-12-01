@@ -12,5 +12,6 @@
 
 @synthesize fieldName;
 @synthesize fieldData;
+@synthesize fieldType;
 
 @end
