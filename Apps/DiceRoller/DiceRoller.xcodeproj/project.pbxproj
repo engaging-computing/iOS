@@ -28,6 +28,7 @@
 		31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */; };
 		31A8D9FD19E864540042CF02 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A8D9F719E863EE0042CF02 /* libiSENSE_API.a */; };
 		31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9C919DF11A200A5E448 /* DiceDataController.m */; };
+		31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E8DA511A2A53410049502B /* ISDRProjectManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,9 +87,12 @@
 		31739E1A19DB449500CF2DFB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		31739E1C19DB44A000CF2DFB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		31739E1E19DB44B600CF2DFB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3181CF541A2CD49B008F8C37 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
 		31E5C9C819DF11A200A5E448 /* DiceDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceDataController.h; sourceTree = "<group>"; };
 		31E5C9C919DF11A200A5E448 /* DiceDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceDataController.m; sourceTree = "<group>"; };
+		31E8DA4E1A2A53050049502B /* ISDRProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISDRProjectManager.h; sourceTree = "<group>"; };
+		31E8DA511A2A53410049502B /* ISDRProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISDRProjectManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,8 @@
 		31739DDA19DB3A7C00CF2DFB /* DiceRoller */ = {
 			isa = PBXGroup;
 			children = (
+				3181CF521A2CD45E008F8C37 /* Constants */,
+				31E8DA4C1A2A528A0049502B /* Project */,
 				31739DE319DB3A7C00CF2DFB /* AppDelegate.h */,
 				31739DE419DB3A7C00CF2DFB /* AppDelegate.m */,
 				31739DE619DB3A7C00CF2DFB /* Main.storyboard */,
@@ -208,6 +214,14 @@
 			name = "iSENSE API";
 			sourceTree = "<group>";
 		};
+		3181CF521A2CD45E008F8C37 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				3181CF541A2CD49B008F8C37 /* Constants.h */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
 		31A8D9F219E863ED0042CF02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +229,15 @@
 				31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		31E8DA4C1A2A528A0049502B /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				31E8DA4E1A2A53050049502B /* ISDRProjectManager.h */,
+				31E8DA511A2A53410049502B /* ISDRProjectManager.m */,
+			);
+			name = Project;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31739DEB19DB3A7C00CF2DFB /* ViewController.m in Sources */,
+				31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */,
 				31739E0B19DB3BC400CF2DFB /* DieView.m in Sources */,
 				31739DE519DB3A7C00CF2DFB /* AppDelegate.m in Sources */,
 				31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */,
