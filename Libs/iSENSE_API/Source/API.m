@@ -465,7 +465,7 @@ static NSString *email, *password;
 -(int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload andName:(NSString *)name {
     
     // append a timestamp to the name of the data set
-    name = [NSString stringWithFormat:@"%@ - %@", name, [self appendedTimeStamp]];
+    name = [NSString stringWithFormat:@"%@ - %@", name, [API getTimeStamp]];
     
     NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
     
@@ -505,7 +505,7 @@ static NSString *email, *password;
     
     NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
     
-    name = [NSString stringWithFormat:@"%@ - %@", name, [self appendedTimeStamp]];
+    name = [NSString stringWithFormat:@"%@ - %@", name, [API getTimeStamp]];
     
     [requestData setObject:name forKey:@"title"];
     [requestData setObject:conKey forKey:@"contribution_key"];
@@ -814,7 +814,7 @@ static NSString *email, *password;
  *
  * @return A pretty formatted date and timestamp
  */
--(NSString *)appendedTimeStamp {
++(NSString *)getTimeStamp {
     
     // get time and date
     NSDate *now = [NSDate date];

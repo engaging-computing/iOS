@@ -83,11 +83,11 @@
         if ([UINavigationBar instancesRespondToSelector:@selector(barTintColor)]) {
             // for iOS 7 and higher devices
             [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
-            [self.navigationController.navigationBar setTintColor:UIColorFromHex(0xFFFFFF)];
-            [self.navigationController.navigationBar setBarTintColor:UIColorFromHex(0x9933CC)];
+            [self.navigationController.navigationBar setTintColor:UIColorFromHex(cNAV_WHITE_TINT)];
+            [self.navigationController.navigationBar setBarTintColor:UIColorFromHex(cNAV_MOTION_PURPLE_TINT)];
         } else {
             // for iOS 6 and lower devices
-            [self.navigationController.navigationBar setTintColor:UIColorFromHex(0x9933CC)];
+            [self.navigationController.navigationBar setTintColor:UIColorFromHex(cNAV_MOTION_PURPLE_TINT)];
         }
     } @catch (NSException *e) {
         // could not set navigation color - ignore the error
