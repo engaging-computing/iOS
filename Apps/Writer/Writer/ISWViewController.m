@@ -47,7 +47,7 @@
     // Initialize API and start separate thread to reload any user that has been saved to preferences
     api = [API getInstance];
     [api useDev:USE_DEV];
-    [self checkAPIOnDev];
+    [self createDevUILabel];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [api loadCurrentUserFromPrefs];
     });
@@ -78,11 +78,11 @@
         if ([UINavigationBar instancesRespondToSelector:@selector(barTintColor)]) {
             // for iOS 7 and higher devices
             [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
-            [self.navigationController.navigationBar setTintColor:UIColorFromHex(0xFFFFFF)];
-            [self.navigationController.navigationBar setBarTintColor:UIColorFromHex(0x89D986)];
+            [self.navigationController.navigationBar setTintColor:UIColorFromHex(cNAV_WHITE_TINT)];
+            [self.navigationController.navigationBar setBarTintColor:UIColorFromHex(cNAV_WRITER_GREEN_TINT)];
         } else {
             // for iOS 6 and lower devices
-            [self.navigationController.navigationBar setTintColor:UIColorFromHex(0x89D986)];
+            [self.navigationController.navigationBar setTintColor:UIColorFromHex(cNAV_WRITER_GREEN_TINT)];
         }
     } @catch (NSException *e) {
         // could not set navigation color - ignore the error
@@ -91,6 +91,9 @@
     // make table clear
     contentView.backgroundColor = [UIColor clearColor];
     contentView.backgroundView = nil;
+
+    // present dialog if location is not authorized yet
+    [self isLocationAuthorized]; // TODO check if iOS 8 is presenting this dialog correctly
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -124,9 +127,6 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setInteger:projID forKey:kPREFS_PROJ];
     [prefs synchronize];
-
-    // present dialog if location is not authorized yet
-    [self isLocationAuthorized];
 
     // initialize the location manager and register for updates
     [self registerLocationUpdates];
@@ -243,7 +243,7 @@
         // automatically fill in the timestamp
         cell.fieldDataTxt.text = [API getTimeStamp];
         cell.fieldDataTxt.enabled = false;
-        cell.fieldDataTxt.backgroundColor = UIColorFromHex(0xCCCCCC);
+        cell.fieldDataTxt.backgroundColor = UIColorFromHex(cTEXT_FIELD_DISABLED);
 
     } else if (tmp.fieldType.intValue == TYPE_NUMBER) {
 
@@ -257,7 +257,7 @@
         cell.fieldDataTxt.text = [NSString stringWithFormat:@"%f",
                                   (tmp.fieldType.intValue == TYPE_LAT ? lc2d.latitude : lc2d.longitude)];
         cell.fieldDataTxt.enabled = false;
-        cell.fieldDataTxt.backgroundColor = UIColorFromHex(0xCCCCCC);
+        cell.fieldDataTxt.backgroundColor = UIColorFromHex(cTEXT_FIELD_DISABLED);
     }
 
     return cell;
@@ -301,7 +301,7 @@
     const int keyboardHeight = dimen.size.height;
 
     int textFieldHeight = activeTextField.frame.size.height;
-    int padding = textFieldHeight;// * 3 / 2;
+    int padding = textFieldHeight;
 
     if (activeTextField != nil && activeTextField.tag == kDATA_SET_NAME_TAG) {
         // do not consider a keyboard shift for the data set name textfield
@@ -365,11 +365,11 @@
         if ([UIToolbar instancesRespondToSelector:@selector(barTintColor)]) {
             // for iOS 7 and higher devices
             [keyboardDoneButtonView setBarStyle:UIBarStyleBlack];
-            [keyboardDoneButtonView setTintColor:UIColorFromHex(0xFFFFFF)];
-            [keyboardDoneButtonView setBarTintColor:UIColorFromHex(0x89D986)];
+            [keyboardDoneButtonView setTintColor:UIColorFromHex(cNAV_WHITE_TINT)];
+            [keyboardDoneButtonView setBarTintColor:UIColorFromHex(cNAV_WRITER_GREEN_TINT)];
         } else {
             // for iOS 6 and lower devices
-            [keyboardDoneButtonView setTintColor:UIColorFromHex(0x89D986)];
+            [keyboardDoneButtonView setTintColor:UIColorFromHex(cNAV_WRITER_GREEN_TINT)];
         }
     } @catch (NSException *e) {
         // could not set toolbar color - ignore the error
@@ -430,10 +430,10 @@
 
     [api useDev:![api isUsingDev]];
     [self.view makeWaffle:([api isUsingDev] ? @"Using dev" : @"Using production")];
-    [self checkAPIOnDev];
+    [self createDevUILabel];
 }
 
-- (void)checkAPIOnDev {
+- (void)createDevUILabel {
 
     if ([api isUsingDev]) {
         devLbl = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
@@ -449,8 +449,8 @@
 
 - (void)didPressLogin:(CredentialManager *)mngr {
 
-    [credentialMgrAlert dismissWithClickedButtonIndex:0 animated:NO];
-    credentialMgrAlert = nil;
+    [credentialMngrAlert dismissWithClickedButtonIndex:0 animated:NO];
+    credentialMngrAlert = nil;
 
     UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Login to iSENSE"
                                                          message:@""
@@ -544,20 +544,20 @@
 
 - (void)createCredentialManagerDialog {
 
-    credentialMgr = [[CredentialManager alloc] initWithDelegate:self];
+    credentialMngr = [[CredentialManager alloc] initWithDelegate:self];
     DLAVAlertViewController *parent = [DLAVAlertViewController sharedController];
-    [parent addChildViewController:credentialMgr];
+    [parent addChildViewController:credentialMngr];
 
-    credentialMgrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials"
+    credentialMngrAlert = [[DLAVAlertView alloc] initWithTitle:@"Account Credentials"
                                                       message:@"Need an account? Visit isenseproject.org/users/new to register."
                                                      delegate:nil
                                             cancelButtonTitle:@"Close"
                                             otherButtonTitles:nil];
 
 
-    [credentialMgrAlert setContentView:credentialMgr.view];
-    [credentialMgrAlert setDismissesOnBackdropTap:YES];
-    [credentialMgrAlert show];
+    [credentialMngrAlert setContentView:credentialMngr.view];
+    [credentialMngrAlert setDismissesOnBackdropTap:YES];
+    [credentialMngrAlert show];
 }
 
 #pragma mark - iSENSE and API code
@@ -582,7 +582,7 @@
         case kLOCATION_DIALOG_IOS_8_AND_LATER_TAG:
         case kLOCATION_DIALOG_IOS_7_AND_EARLIER_TAG:
         {
-            if (buttonIndex == 0) {
+            if (buttonIndex == OPTION_CANCELED) {
 
                 // user does not wish to have location data recorded, save this choice in prefs
                 NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -617,7 +617,7 @@
         }
         case kVISUALIZE_DIALOG_TAG:
         {
-            if (buttonIndex != 0) {
+            if (buttonIndex != OPTION_CANCELED) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:visURL]];
             }
 

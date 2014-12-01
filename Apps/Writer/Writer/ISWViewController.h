@@ -18,6 +18,7 @@
 #import "Waffle.h"
 #import "FieldCell.h"
 #import "FieldData.h"
+#import "GlobalColors.h"
 
 #define USE_DEV true
 
@@ -31,8 +32,8 @@
     UILabel *devLbl;
 
     // Credentials
-    CredentialManager *credentialMgr;
-    DLAVAlertView *credentialMgrAlert;
+    CredentialManager *credentialMngr;
+    DLAVAlertView *credentialMngrAlert;
 
     // Location Manager
     CLLocationManager *locationManager;

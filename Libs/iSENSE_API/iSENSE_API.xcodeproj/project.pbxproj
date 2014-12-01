@@ -11,6 +11,7 @@
 		39FF25E416DFA28A0062C3DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39FF25E316DFA28A0062C3DC /* Foundation.framework */; };
 		76444EDF180F069300C41E3D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76444EDE180F069300C41E3D /* MobileCoreServices.framework */; };
 		765992C518D37FF00062CC09 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765992C418D37FF00062CC09 /* Security.framework */; };
+		B709BE8F1A2CA171002FAC06 /* GlobalColors.h in Headers */ = {isa = PBXBuildFile; fileRef = B709BE8E1A2CA171002FAC06 /* GlobalColors.h */; };
 		B70E7C6119C0BB8300C2B042 /* API.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C1E19C0BB8300C2B042 /* API.h */; };
 		B70E7C6219C0BB8300C2B042 /* CredentialManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C1F19C0BB8300C2B042 /* CredentialManager.h */; };
 		B70E7C6419C0BB8300C2B042 /* DataSaver.h in Headers */ = {isa = PBXBuildFile; fileRef = B70E7C2119C0BB8300C2B042 /* DataSaver.h */; };
@@ -156,6 +157,7 @@
 		39FF25E316DFA28A0062C3DC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		76444EDE180F069300C41E3D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		765992C418D37FF00062CC09 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B709BE8E1A2CA171002FAC06 /* GlobalColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalColors.h; path = headers/GlobalColors.h; sourceTree = "<group>"; };
 		B70E7C1E19C0BB8300C2B042 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = API.h; path = headers/API.h; sourceTree = "<group>"; };
 		B70E7C1F19C0BB8300C2B042 /* CredentialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CredentialManager.h; path = headers/CredentialManager.h; sourceTree = "<group>"; };
 		B70E7C2119C0BB8300C2B042 /* DataSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSaver.h; path = headers/DataSaver.h; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				B70E7C3419C0BB8300C2B042 /* ISKeys.h */,
+				B709BE8E1A2CA171002FAC06 /* GlobalColors.h */,
 			);
 			name = Global;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				B70E7C6F19C0BB8300C2B042 /* FieldMatchCell.h in Headers */,
 				B70E7C6E19C0BB8300C2B042 /* FieldGrabber.h in Headers */,
 				B70E7C8019C0BB8300C2B042 /* QueueConstants.h in Headers */,
+				B709BE8F1A2CA171002FAC06 /* GlobalColors.h in Headers */,
 				B70E7C6A19C0BB8300C2B042 /* DLAVAlertViewTheme.h in Headers */,
 				B70E7C6719C0BB8300C2B042 /* DLAVAlertViewController.h in Headers */,
 				B70E7C9819C0BB8300C2B042 /* WaffleConstants.h in Headers */,
