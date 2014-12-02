@@ -54,7 +54,7 @@
 
     // Load the last used project from prefs, if available
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    int projID = [prefs integerForKey:kPREFS_PROJ];
+    int projID = (int) [prefs integerForKey:kPREFS_PROJ];
     if (projID > 0) {
 
         dm = [DataManager getInstance];
@@ -118,18 +118,27 @@
             data.fieldType = field.type;
             [dataArr addObject:data];
         }
+
+        // save the project in preferences
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setInteger:projID forKey:kPREFS_PROJ];
+        [prefs synchronize];
     }
 
-    // reload the content view
-    [contentView reloadData];
+    // set the project button text
+    [projectBtn setTitle:[NSString stringWithFormat:@"Uploading to Project: %@",
+                          (projID > 0 ? [NSNumber numberWithInt:projID] : kNO_PROJECT)]
+                forState:UIControlStateNormal];
 
-    // save the project in preferences
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setInteger:projID forKey:kPREFS_PROJ];
-    [prefs synchronize];
+    // reload the content view
+    [contentView layoutIfNeeded];
+    [contentView reloadData];
 
     // initialize the location manager and register for updates
     [self registerLocationUpdates];
+
+    // add timestamps and geospatial data to appropriate field cells
+    [self setupTimeAndGeospatialData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -168,23 +177,71 @@
     int i = 0;
     for (NSNumber *fieldID in fieldIDs) {
 
-        NSMutableArray *arr = [dataToUpload objectForKey:fieldID];
+        NSMutableArray *arr = [dataToUpload objectForKey:[NSString stringWithFormat:@"%@", fieldID]];
 
         // if array does not yet exist, create it
         if (!arr) {
+
             arr = [[NSMutableArray alloc] init];
-            [dataToUpload setObject:arr forKey:fieldID];
+            [dataToUpload setObject:arr forKey:[NSString stringWithFormat:@"%@", fieldID]];
         }
 
         NSString *data = ((FieldData *)[dataArr objectAtIndex:i++]).fieldData;
-        if (data == nil) data = @"";
+        if (data == nil) {
+
+            data = @"";
+        }
 
         [arr addObject:data];
     }
+
+    // reset the timestamps and geospatial data
+    [self setupTimeAndGeospatialData];
+
+    [self.view makeWaffle:@"Row of data saved" duration:WAFFLE_LENGTH_SHORT position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
 }
 
 - (IBAction)saveDataSetBtnOnClick:(id)sender {
-    // TODO
+
+    NSString *dataSetName = dataSetNameTxt.text;
+
+    // saving data requires a data set name
+    if (dataSetName.length == 0) {
+
+        [self.view makeWaffle:@"Please enter a data set name first" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
+    // saving data requires a project
+    if ([dm getProjectID] <= 0) {
+
+        [self.view makeWaffle:@"Please select a project to upload to" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
+    // saving data requires data
+    if (dataToUpload == nil || dataToUpload.count == 0) {
+
+        [self.view makeWaffle:@"Please enter some data before saving" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
+    // save the data set
+    [dataSaver addDataSetWithContext:managedObjectContext
+                                name:dataSetName
+                          parentName:PARENT_WRITER
+                         description:@"Recorded from iOS Writer"
+                           projectID:[dm getProjectID]
+                                data:[dataToUpload copy]
+                          mediaPaths:nil
+                          uploadable:true
+                   hasInitialProject:true
+                           andFields:nil];
+
+    // reset the data dictionary
+    dataToUpload = [[NSMutableDictionary alloc] init];
+
+    [self.view makeWaffle:@"Data set saved" duration:WAFFLE_LENGTH_SHORT position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
 }
 
 - (IBAction)credentialBarBtnOnClick:(id)sender {
@@ -194,7 +251,7 @@
 
 - (IBAction)uploadBtnOnClick:(id)sender {
 
-    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION andDelegate:self];
+    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_WRITER andDelegate:self];
     queueUploader.title = @"Upload";
     [self.navigationController pushViewController:queueUploader animated:YES];
 }
@@ -218,7 +275,7 @@
 // Initialize a single object in the table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSString *cellIdentifier = [NSString stringWithFormat:@"FieldCellIdentifier%d", indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"FieldCellIdentifier%ld", (long)indexPath.row];
     FieldCell *cell = (FieldCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         UIViewController *tmpVC = [[UIViewController alloc] initWithNibName:@"FieldCell" bundle:nil];
@@ -237,11 +294,10 @@
     // add a done button to the keyboard
     cell.fieldDataTxt.inputAccessoryView = [self createDoneKeyboardView];
 
-    // set up the cell depending on the type of field data
-    if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
+    // set up the cell textfields depending on the type of field data
+    if (tmp.fieldType.intValue == TYPE_TIMESTAMP || tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
 
-        // automatically fill in the timestamp
-        cell.fieldDataTxt.text = [API getTimeStamp];
+        // disable timestamp and geospatial fields
         cell.fieldDataTxt.enabled = false;
         cell.fieldDataTxt.backgroundColor = UIColorFromHex(cTEXT_FIELD_DISABLED);
 
@@ -249,15 +305,6 @@
 
         // set numbers only for numeric fields
         cell.fieldDataTxt.keyboardType = UIKeyboardTypeNumberPad;
-
-    } else if (tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
-
-        // automatically fill in geospatial data
-        CLLocationCoordinate2D lc2d = [[locationManager location] coordinate];
-        cell.fieldDataTxt.text = [NSString stringWithFormat:@"%f",
-                                  (tmp.fieldType.intValue == TYPE_LAT ? lc2d.latitude : lc2d.longitude)];
-        cell.fieldDataTxt.enabled = false;
-        cell.fieldDataTxt.backgroundColor = UIColorFromHex(cTEXT_FIELD_DISABLED);
     }
 
     return cell;
@@ -436,8 +483,8 @@
 - (void)createDevUILabel {
 
     if ([api isUsingDev]) {
-        devLbl = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
-        devLbl.font = [UIFont fontWithName:@"Helvetica" size:8];
+        devLbl = [[UILabel alloc] initWithFrame:CGRectMake(70, 0, 80, 30)];
+        devLbl.font = [UIFont fontWithName:@"Helvetica" size:12];
         devLbl.backgroundColor = [UIColor clearColor];
         devLbl.text = @"USING DEV";
         devLbl.textColor = [UIColor redColor];
@@ -731,5 +778,37 @@
 }
 
 #pragma end - Location
+
+#pragma mark - Data setup
+
+- (void)setupTimeAndGeospatialData {
+
+    for (int i = 0; i < dataArr.count; i++) {
+
+        FieldCell *cell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        FieldData *tmp = [dataArr objectAtIndex:i];
+
+        // set up the cell depending on the type of field data
+        if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
+
+            // automatically fill in the timestamp
+            NSString *timeStamp = [API getTimeStamp];
+            tmp.fieldData = timeStamp;
+            cell.fieldDataTxt.text = timeStamp;
+
+        } else if (tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
+
+            // automatically fill in geospatial data
+            CLLocationCoordinate2D lc2d = [[locationManager location] coordinate];
+            NSString *geospatialPoint = [NSString stringWithFormat:@"%f",
+                                         (tmp.fieldType.intValue == TYPE_LAT ? lc2d.latitude : lc2d.longitude)];
+
+            tmp.fieldData = geospatialPoint;
+            cell.fieldDataTxt.text = geospatialPoint;
+        }
+    }
+}
+
+#pragma end - Data setup
 
 @end
