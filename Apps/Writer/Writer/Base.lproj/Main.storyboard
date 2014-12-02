@@ -42,7 +42,6 @@
                                     <constraint firstAttribute="height" constant="30" id="BCd-Ip-Gri"/>
                                 </constraints>
                                 <state key="normal" title="Save Row">
-                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -73,7 +72,6 @@
                                     <constraint firstAttribute="height" constant="30" id="94g-0t-0uG"/>
                                 </constraints>
                                 <state key="normal" title="Save Data Set">
-                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

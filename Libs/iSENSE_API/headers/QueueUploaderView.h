@@ -32,6 +32,7 @@
 #define PARENT_CAR_RAMP     @"CarRampPhysics"
 #define PARENT_CANOBIE      @"CanobiePhysics"
 #define PARENT_MOTION       @"ISMotion"
+#define PARENT_WRITER       @"ISWriter"
 
 @class QueueUploaderView;
 @protocol QueueUploaderDelegate <NSObject>
