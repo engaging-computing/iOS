@@ -62,6 +62,13 @@
         [dm retrieveProjectFields];
     }
 
+    // Set disabled state text of the two save buttons
+    [saveRowBtn setTitle:@"..." forState:UIControlStateDisabled];
+    [saveDataSetBtn setTitle:@"..." forState:UIControlStateDisabled];
+
+    // Create the keyboard toolbar with an attached "Done" button
+    doneKeyboardView = [self createDoneKeyboardView];
+
     // Set the data set name label to be our secret dev/non-dev switch
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleDev)];
     tapGestureRecognizer.numberOfTapsRequired = 7;
@@ -70,7 +77,7 @@
 
     // Attach the data set name text field to the application delegate to restrict character input
     dataSetNameTxt.delegate = self;
-    dataSetNameTxt.inputAccessoryView = [self createDoneKeyboardView];
+    dataSetNameTxt.inputAccessoryView = doneKeyboardView;
     dataSetNameTxt.tag = kDATA_SET_NAME_TAG;
 
     // Set navigation bar color
@@ -256,6 +263,12 @@
     [self.navigationController pushViewController:queueUploader animated:YES];
 }
 
+- (void) setSaveButtonsEnabled:(bool)enabled {
+
+    saveRowBtn.enabled = enabled;
+    saveDataSetBtn.enabled = enabled;
+}
+
 #pragma end - View and UI code
 
 #pragma mark - TableView code
@@ -292,7 +305,7 @@
     cell.fieldDataTxt.delegate = self;
 
     // add a done button to the keyboard
-    cell.fieldDataTxt.inputAccessoryView = [self createDoneKeyboardView];
+    cell.fieldDataTxt.inputAccessoryView = doneKeyboardView;
 
     // set up the cell textfields depending on the type of field data
     if (tmp.fieldType.intValue == TYPE_TIMESTAMP || tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
@@ -432,8 +445,15 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 
-    if (!isKeyboardDisplaying)
+    if (!isKeyboardDisplaying) {
+
         activeTextField = textField;
+
+        if (activeTextField.tag != kDATA_SET_NAME_TAG) {
+
+            [self setSaveButtonsEnabled:false];
+        }
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -443,6 +463,8 @@
     if (activeTextField != nil && activeTextField.tag == kDATA_SET_NAME_TAG) {
         // textfield is data set name - do not need to save data in the dataArr
         return;
+    } else {
+         [self setSaveButtonsEnabled:true];
     }
 
     // retrieve the cell at the given indexPath using the UITextField's tag that was assigned in cellForRowAtIndexPath
@@ -788,6 +810,9 @@
         FieldCell *cell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         FieldData *tmp = [dataArr objectAtIndex:i];
 
+        // clear out pre-existing data
+        tmp.fieldData = nil;
+
         // set up the cell depending on the type of field data
         if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
 
@@ -805,6 +830,11 @@
 
             tmp.fieldData = geospatialPoint;
             cell.fieldDataTxt.text = geospatialPoint;
+
+        } else {
+
+            // reset any other text or numeric field
+            cell.fieldDataTxt.text = @"";
         }
     }
 }

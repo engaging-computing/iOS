@@ -50,6 +50,9 @@
     // Reference to the last clicked TextField and current keyboard display
     UITextField *activeTextField;
     bool isKeyboardDisplaying;
+
+    // Toolbar with a "Done" button to be attached to all textfield keyboards
+    UIToolbar *doneKeyboardView;
 }
 
 // Queue Saver properties
