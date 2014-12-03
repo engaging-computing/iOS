@@ -100,7 +100,7 @@
     contentView.backgroundView = nil;
 
     // present dialog if location is not authorized yet
-    [self isLocationAuthorized]; // TODO check if iOS 8 is presenting this dialog correctly
+    [self isLocationAuthorized];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -296,8 +296,8 @@
     }
 
     FieldData *tmp = [dataArr objectAtIndex:indexPath.row];
-    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
 
+    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     // tag the cell's UITextField with the indexPath of the cell
@@ -635,7 +635,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
-    // TODO add cases for alert dialogs
     switch (alertView.tag) {
 
         case kLOGIN_DIALOG_TAG:
@@ -748,6 +747,9 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
 }
 
 // check to see if the location was authorized for use (iOS 8 and later)
