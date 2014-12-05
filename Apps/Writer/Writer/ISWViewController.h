@@ -53,6 +53,9 @@
 
     // Toolbar with a "Done" button to be attached to all textfield keyboards
     UIToolbar *doneKeyboardView;
+
+    // Amount of pixels the keyboard was shifted
+    int keyboardShift;
 }
 
 // Queue Saver properties
