@@ -448,11 +448,6 @@
     if (!isKeyboardDisplaying) {
 
         activeTextField = textField;
-
-        if (activeTextField.tag != kDATA_SET_NAME_TAG) {
-
-            [self setSaveButtonsEnabled:false];
-        }
     }
 }
 
@@ -463,17 +458,7 @@
     if (activeTextField != nil && activeTextField.tag == kDATA_SET_NAME_TAG) {
         // textfield is data set name - do not need to save data in the dataArr
         return;
-    } else {
-         [self setSaveButtonsEnabled:true];
     }
-
-    // retrieve the cell at the given indexPath using the UITextField's tag that was assigned in cellForRowAtIndexPath
-    FieldCell *editCell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];
-    NSString *dataStr = editCell.fieldDataTxt.text;
-
-    // store the data in the data array now that the user is no longer editing the cell
-    FieldData *data = [dataArr objectAtIndex:textField.tag];
-    data.fieldData = dataStr;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -482,11 +467,21 @@
     return YES;
 }
 
-// restrict length of text entered
-// 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
-// a ~20 character timestamp to the data set name
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
+    // if the tag is a data textfield, save the new text entered into the data array
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+
+    if (textField.tag != kDATA_SET_NAME_TAG) {
+
+        FieldData *data = [dataArr objectAtIndex:textField.tag];
+        data.fieldData = newText;
+    }
+
+    // restrict length of text entered
+    // 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
+    // a ~20 character timestamp to the data set name
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     return (newLength <= 90);
 }
@@ -505,13 +500,16 @@
 - (void)createDevUILabel {
 
     if ([api isUsingDev]) {
+
         devLbl = [[UILabel alloc] initWithFrame:CGRectMake(70, 0, 80, 30)];
         devLbl.font = [UIFont fontWithName:@"Helvetica" size:12];
         devLbl.backgroundColor = [UIColor clearColor];
         devLbl.text = @"USING DEV";
         devLbl.textColor = [UIColor redColor];
         [self.view addSubview:devLbl];
+
     } else if (devLbl) {
+
         [devLbl removeFromSuperview];
     }
 }
