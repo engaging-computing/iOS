@@ -62,6 +62,13 @@
         [dm retrieveProjectFields];
     }
 
+    // Set disabled state text of the two save buttons
+    [saveRowBtn setTitle:@"..." forState:UIControlStateDisabled];
+    [saveDataSetBtn setTitle:@"..." forState:UIControlStateDisabled];
+
+    // Create the keyboard toolbar with an attached "Done" button
+    doneKeyboardView = [self createDoneKeyboardView];
+
     // Set the data set name label to be our secret dev/non-dev switch
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleDev)];
     tapGestureRecognizer.numberOfTapsRequired = 7;
@@ -70,7 +77,7 @@
 
     // Attach the data set name text field to the application delegate to restrict character input
     dataSetNameTxt.delegate = self;
-    dataSetNameTxt.inputAccessoryView = [self createDoneKeyboardView];
+    dataSetNameTxt.inputAccessoryView = doneKeyboardView;
     dataSetNameTxt.tag = kDATA_SET_NAME_TAG;
 
     // Set navigation bar color
@@ -93,7 +100,7 @@
     contentView.backgroundView = nil;
 
     // present dialog if location is not authorized yet
-    [self isLocationAuthorized]; // TODO check if iOS 8 is presenting this dialog correctly
+    [self isLocationAuthorized];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -256,6 +263,12 @@
     [self.navigationController pushViewController:queueUploader animated:YES];
 }
 
+- (void) setSaveButtonsEnabled:(bool)enabled {
+
+    saveRowBtn.enabled = enabled;
+    saveDataSetBtn.enabled = enabled;
+}
+
 #pragma end - View and UI code
 
 #pragma mark - TableView code
@@ -283,8 +296,8 @@
     }
 
     FieldData *tmp = [dataArr objectAtIndex:indexPath.row];
-    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
 
+    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     // tag the cell's UITextField with the indexPath of the cell
@@ -292,7 +305,7 @@
     cell.fieldDataTxt.delegate = self;
 
     // add a done button to the keyboard
-    cell.fieldDataTxt.inputAccessoryView = [self createDoneKeyboardView];
+    cell.fieldDataTxt.inputAccessoryView = doneKeyboardView;
 
     // set up the cell textfields depending on the type of field data
     if (tmp.fieldType.intValue == TYPE_TIMESTAMP || tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
@@ -362,7 +375,7 @@
     // calculate the remaining space in the view not overlapped by the keyboard
     int spaceAboveKeyboard = self.view.frame.size.height - keyboardHeight;
 
-    if (textY < spaceAboveKeyboard - textFieldHeight) {
+    if (keyboardShift == 0 && textY < spaceAboveKeyboard - textFieldHeight) {
         // do not shift view up if the tapped textfield will be visible when the keyboard is shown
         return;
     }
@@ -371,14 +384,12 @@
     // only push the view up to the height of the area above the keyboard (with some padding)
     int movementValue = (textY - textFieldHeight < keyboardHeight) ? (spaceAboveKeyboard - padding) : keyboardHeight;
 
-    if (!up) {
-        // reset the active text field if we're moving the keyboard back down
-        activeTextField = nil;
-    }
+    if (keyboardShift == 0)
+        keyboardShift = movementValue;
 
     // animate the keyboard
     const float movementDuration = 0.3f;
-    int movementDirection = (up ? -movementValue : movementValue);
+    int movementDirection = (up ? -movementValue : keyboardShift);
 
     [UIView beginAnimations: @"animateTextField" context: nil];
     [UIView setAnimationBeginsFromCurrentState: YES];
@@ -386,6 +397,12 @@
     
     self.view.frame = CGRectOffset(self.view.frame, 0, movementDirection);
     [UIView commitAnimations];
+
+    if (!up) {
+        // reset the active text field and keyboard shift if we're moving the keyboard back down
+        activeTextField = nil;
+        keyboardShift = 0;
+    }
 }
 
 - (IBAction)doneClicked:(id)sender {
@@ -432,8 +449,10 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 
-    if (!isKeyboardDisplaying)
+    if (!isKeyboardDisplaying) {
+
         activeTextField = textField;
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -444,14 +463,6 @@
         // textfield is data set name - do not need to save data in the dataArr
         return;
     }
-
-    // retrieve the cell at the given indexPath using the UITextField's tag that was assigned in cellForRowAtIndexPath
-    FieldCell *editCell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];
-    NSString *dataStr = editCell.fieldDataTxt.text;
-
-    // store the data in the data array now that the user is no longer editing the cell
-    FieldData *data = [dataArr objectAtIndex:textField.tag];
-    data.fieldData = dataStr;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -460,11 +471,21 @@
     return YES;
 }
 
-// restrict length of text entered
-// 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
-// a ~20 character timestamp to the data set name
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
+    // if the tag is a data textfield, save the new text entered into the data array
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+
+    if (textField.tag != kDATA_SET_NAME_TAG) {
+
+        FieldData *data = [dataArr objectAtIndex:textField.tag];
+        data.fieldData = newText;
+    }
+
+    // restrict length of text entered
+    // 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
+    // a ~20 character timestamp to the data set name
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     return (newLength <= 90);
 }
@@ -483,13 +504,16 @@
 - (void)createDevUILabel {
 
     if ([api isUsingDev]) {
+
         devLbl = [[UILabel alloc] initWithFrame:CGRectMake(70, 0, 80, 30)];
         devLbl.font = [UIFont fontWithName:@"Helvetica" size:12];
         devLbl.backgroundColor = [UIColor clearColor];
         devLbl.text = @"USING DEV";
         devLbl.textColor = [UIColor redColor];
         [self.view addSubview:devLbl];
+
     } else if (devLbl) {
+
         [devLbl removeFromSuperview];
     }
 }
@@ -613,7 +637,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
-    // TODO add cases for alert dialogs
     switch (alertView.tag) {
 
         case kLOGIN_DIALOG_TAG:
@@ -728,6 +751,9 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+}
+
 // check to see if the location was authorized for use (iOS 8 and later)
 - (BOOL) isLocationAuthorized {
 
@@ -788,6 +814,9 @@
         FieldCell *cell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         FieldData *tmp = [dataArr objectAtIndex:i];
 
+        // clear out pre-existing data
+        tmp.fieldData = nil;
+
         // set up the cell depending on the type of field data
         if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
 
@@ -805,6 +834,11 @@
 
             tmp.fieldData = geospatialPoint;
             cell.fieldDataTxt.text = geospatialPoint;
+
+        } else {
+
+            // reset any other text or numeric field
+            cell.fieldDataTxt.text = @"";
         }
     }
 }
