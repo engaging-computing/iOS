@@ -182,6 +182,8 @@
     }
 
     int i = 0;
+    int rowsTotal = 0;
+
     for (NSNumber *fieldID in fieldIDs) {
 
         NSMutableArray *arr = [dataToUpload objectForKey:[NSString stringWithFormat:@"%@", fieldID]];
@@ -200,12 +202,18 @@
         }
 
         [arr addObject:data];
+
+        // keep a count of how many items are in the array currently to report to the user
+        rowsTotal = arr.count;
     }
 
     // reset the timestamps and geospatial data
     [self setupTimeAndGeospatialData];
 
-    [self.view makeWaffle:@"Row of data saved" duration:WAFFLE_LENGTH_SHORT position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
+    [self.view makeWaffle:[NSString stringWithFormat:@"Row saved: %d %@ total", rowsTotal, (rowsTotal == 1 ? @"row" : @"rows")]
+                 duration:WAFFLE_LENGTH_LONG
+                 position:WAFFLE_BOTTOM
+                    image:WAFFLE_CHECKMARK];
 }
 
 - (IBAction)saveDataSetBtnOnClick:(id)sender {
