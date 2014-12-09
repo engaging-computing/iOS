@@ -25,4 +25,7 @@
 // preferences location constant
 #define kOPT_OUT_LOCATION @"user_opt_out_location"
 
+// preferences tutorial constant
+#define kDISPLAYED_TUTORIAL @"displayed_tutorial"
+
 #endif

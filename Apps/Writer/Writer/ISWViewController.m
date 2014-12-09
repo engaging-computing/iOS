@@ -8,6 +8,7 @@
 
 #import "ISWViewController.h"
 #import "ISWAppDelegate.h"
+#import "ISWTutorialViewController.h"
 
 @interface ISWViewController ()
 @end
@@ -101,6 +102,15 @@
 
     // present dialog if location is not authorized yet
     [self isLocationAuthorized];
+
+    // Display one-time tutorial
+    BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
+    if (!tutorialShown) {
+
+        UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+        ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+        [self presentViewController:tutorialController animated:YES completion:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -876,7 +886,7 @@
 
         NSString *timeStamp = [NSString stringWithFormat:@"%@, %@", rawTime, cmp[0]];
         return timeStamp;
-        
+
     } @catch (NSException *e) {
         // if an error occurs, return the empty string
         return @"";
