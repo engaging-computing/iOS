@@ -195,10 +195,15 @@
             [dataToUpload setObject:arr forKey:[NSString stringWithFormat:@"%@", fieldID]];
         }
 
-        NSString *data = ((FieldData *)[dataArr objectAtIndex:i++]).fieldData;
-        if (data == nil) {
+        FieldData *thisData = (FieldData *)[dataArr objectAtIndex:i++];
+        NSString *data = thisData.fieldData;
 
+        if (data == nil) {
+            // data cannot be nil, so use empty string
             data = @"";
+        } else if (thisData.fieldType.intValue == TYPE_TIMESTAMP) {
+            // iSENSE requires timestamps in "date, time" format, so switch this timestamp around from "time, date" format
+            data = [self reverseTimestamp:data];
         }
 
         [arr addObject:data];
@@ -829,7 +834,8 @@
         if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
 
             // automatically fill in the timestamp
-            NSString *timeStamp = [API getTimeStamp];
+            NSString *timeStamp = [self createTimestamp];
+
             tmp.fieldData = timeStamp;
             cell.fieldDataTxt.text = timeStamp;
 
@@ -848,6 +854,55 @@
             // reset any other text or numeric field
             cell.fieldDataTxt.text = @"";
         }
+    }
+}
+
+- (NSString *)createTimestamp {
+
+    @try {
+        // get time and date
+        NSDate *now = [NSDate date];
+
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+
+        // format the timestamp
+        NSString *rawTime = [formatter stringFromDate:now];
+        NSArray *cmp = [rawTime componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+
+        [formatter setDateFormat:@"HH:mm:ss"];
+        rawTime = [formatter stringFromDate:now];
+
+        NSString *timeStamp = [NSString stringWithFormat:@"%@, %@", rawTime, cmp[0]];
+        return timeStamp;
+        
+    } @catch (NSException *e) {
+        // if an error occurs, return the empty string
+        return @"";
+    }
+}
+
+- (NSString *)reverseTimestamp:(NSString *)original {
+
+    @try {
+        // change the format of the timestamp from hh:mm:ss, MM/DD/YY to MM/DD/YY, hh:mm::ss
+        NSMutableArray *cmp = [[original componentsSeparatedByString:@","] mutableCopy];
+
+        // strip white space
+        cmp[0] = [cmp[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        cmp[1] = [cmp[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+        // iSENSE uses European standard for dates, so swap the month/day
+        NSArray *dateCmp = [cmp[1] componentsSeparatedByString:@"/"];
+        cmp[1] = [NSString stringWithFormat:@"%@/%@/%@", dateCmp[1], dateCmp[0], dateCmp[2]];
+
+        // ".000" used because iSENSE requires millisecond precision
+        return [NSString stringWithFormat:@"%@, %@.000", cmp[1], cmp[0]];
+
+    } @catch (NSException *e) {
+        // if an error occurs, return the empty string
+        return @"";
     }
 }
 
