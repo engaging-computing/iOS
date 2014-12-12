@@ -152,14 +152,16 @@
                 forState:UIControlStateNormal];
 
     // reload the content view
-    [contentView layoutIfNeeded];
-    [contentView reloadData];
+    [self reloadContentView];
 
     // initialize the location manager and register for updates
     [self registerLocationUpdates];
 
     // add timestamps and geospatial data to appropriate field cells
     [self setupTimeAndGeospatialData];
+
+    // reset the footer view text
+    [self setFooterViewText];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -228,11 +230,6 @@
 
     // reset the timestamps and geospatial data
     [self setupTimeAndGeospatialData];
-
-    [self.view makeWaffle:[NSString stringWithFormat:@"Row saved: %d %@ total", rowsTotal, (rowsTotal == 1 ? @"row" : @"rows")]
-                 duration:WAFFLE_LENGTH_LONG
-                 position:WAFFLE_BOTTOM
-                    image:WAFFLE_CHECKMARK];
 
     // change the footer text to reflect amount of data sets saved currently in the data array
     [self setFooterViewText];
@@ -370,8 +367,6 @@
 
     [wrapperView addSubview:tableFooter];
     contentView.tableFooterView = wrapperView;
-
-    [self setFooterViewText];
 }
 
 - (void)setFooterViewText {
@@ -396,6 +391,14 @@
         tableFooter.textColor = UIColorFromHex(cNAV_WRITER_GREEN_TINT);
     }
 }
+
+- (void) reloadContentView {
+
+    [contentView setNeedsDisplay];
+    [contentView layoutIfNeeded];
+    [contentView reloadData];
+}
+
 
 #pragma end - TableView code
 
