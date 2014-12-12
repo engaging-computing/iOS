@@ -22,7 +22,7 @@
     _pageTitles = @[@"Welcome to iSENSE Writer",
                     @"Login to your isenseproject.org account",
                     @"Select a project to contribute to",
-                    @"Enter a data set and a row of data",
+                    @"Enter a name and a row of data",
                     @"Save a row of data, repeat as desired",
                     @"Save a data set, a collection of rows",
                     @"View your data sets ready to upload",
