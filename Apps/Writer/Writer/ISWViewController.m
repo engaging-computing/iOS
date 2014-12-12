@@ -111,6 +111,10 @@
         ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
         [self presentViewController:tutorialController animated:YES completion:nil];
     }
+
+    // add a footer view to the table to either display a warning that no project is selected or
+    // a count of the number of data rows currently saved for this data set
+    [self addFooterView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -229,6 +233,9 @@
                  duration:WAFFLE_LENGTH_LONG
                  position:WAFFLE_BOTTOM
                     image:WAFFLE_CHECKMARK];
+
+    // change the footer text to reflect amount of data sets saved currently in the data array
+    [self setFooterViewText];
 }
 
 - (IBAction)saveDataSetBtnOnClick:(id)sender {
@@ -272,6 +279,9 @@
     dataToUpload = [[NSMutableDictionary alloc] init];
 
     [self.view makeWaffle:@"Data set saved" duration:WAFFLE_LENGTH_SHORT position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
+
+    // change the footer text to reflect amount of data sets saved currently in the data array (at this point, 0)
+    [self setFooterViewText];
 }
 
 - (IBAction)credentialBarBtnOnClick:(id)sender {
@@ -344,6 +354,47 @@
     }
 
     return cell;
+}
+
+- (void)addFooterView {
+
+    FieldCell *tmp = [[FieldCell alloc] init];
+    CGRect footerRect = tmp.frame;
+    UIView *wrapperView = [[UIView alloc] initWithFrame:footerRect];
+
+    tableFooter = [[UILabel alloc] initWithFrame:footerRect];
+    tableFooter.backgroundColor = [contentView backgroundColor];
+    tableFooter.opaque = YES;
+    tableFooter.font = [UIFont boldSystemFontOfSize:15];
+    tableFooter.numberOfLines = 5;
+
+    [wrapperView addSubview:tableFooter];
+    contentView.tableFooterView = wrapperView;
+
+    [self setFooterViewText];
+}
+
+- (void)setFooterViewText {
+
+    if ([dm getProjectID] <= 0) {
+
+        tableFooter.text = @"No project currently selected\nSelect one to start entering data";
+        tableFooter.textColor = [UIColor redColor];
+
+    } else {
+
+        // try to get any array of data saved in the dataToUpload - if failed, create an empty array
+        NSArray *dataRow;
+        @try {
+            dataRow = [[dataToUpload allValues] objectAtIndex:0];
+        } @catch (NSException *e) {
+            dataRow = [[NSArray alloc] init];
+        }
+
+        tableFooter.text = [NSString stringWithFormat:@"%d %@ saved for this data set",
+                            dataRow.count, (dataRow.count == 1 ? @"row" : @"rows")];
+        tableFooter.textColor = UIColorFromHex(cNAV_WRITER_GREEN_TINT);
+    }
 }
 
 #pragma end - TableView code

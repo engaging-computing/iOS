@@ -20,7 +20,7 @@
 #import "FieldData.h"
 #import "GlobalColors.h"
 
-#define USE_DEV true
+#define USE_DEV false
 
 @interface ISWViewController : UIViewController
     <UIAlertViewDelegate, UITextFieldDelegate, CredentialManagerDelegate, QueueUploaderDelegate,
@@ -56,6 +56,9 @@
 
     // Amount of pixels the keyboard was shifted
     int keyboardShift;
+
+    // Footer view for the table view
+    UILabel *tableFooter;
 }
 
 // Queue Saver properties
