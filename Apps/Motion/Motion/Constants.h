@@ -11,6 +11,8 @@
 
 // NSUserDefault (preferences) constants
 #define pPROJECT_ID @"curr_project_id_as_nsnumber"
+#define pSAMPLE_RATE @"curr_sample_rate"
+#define pRECORDING_LENGTH @"curr_recording_length"
 #define pDISPLAYED_TUTORIAL @"displayed_tutorial"
 
 // Dialog constants

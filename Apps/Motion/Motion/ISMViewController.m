@@ -95,9 +95,7 @@
 
     // Initialize the DataManager
     dm = [DataManager getInstance];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [dm retrieveProjectFields];
-    });
+    [dm retrieveProjectFields];
 
     // Display one-time tutorial and preset setup
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -109,6 +107,11 @@
         ISMTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
         [tutorialController setDelegate:self];
         [self presentViewController:tutorialController animated:NO completion:nil];
+
+    } else {
+
+        // if the tutorial is not being shown, setup the application in its last state using prefs
+        [self loadSetupFromPrefs];
     }
 }
 
@@ -252,7 +255,7 @@
 
 #pragma end - View and overriden methods
 
-#pragma mark - Preset setup
+#pragma mark - Presets and prefs setup
 
 - (void) didFinishSavingPresetWithID:(int)presetID {
 
@@ -279,21 +282,48 @@
         recordingLength = kREC_LENGTH_PUSH_TO_STOP;
     }
 
-    // set the project
+    [self setupAppWithProject:projID sampleRate:sampleRate andRecordingLength:recordingLength];
+}
+
+- (void)loadSetupFromPrefs {
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    int projID = [prefs integerForKey:pPROJECT_ID];
+    double sRate = [prefs doubleForKey:pSAMPLE_RATE];
+    int recLength = [prefs integerForKey:pRECORDING_LENGTH];
+
+    if (projID >= 0 && sRate != 0.0 && recLength != 0) {
+        [self setupAppWithProject:projID sampleRate:sRate andRecordingLength:recLength];
+    }
+}
+
+- (void)setupAppWithProject:(int)projID sampleRate:(double)sRate andRecordingLength:(int)recLength {
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    sampleRate = sRate;
+    recordingLength = recLength;
+
+    // set and save the project
     [dm setProjectID:projID];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [dm retrieveProjectFields];
     });
     [self setProjBtnToCurrentProj];
+    [prefs setInteger:projID forKey:pPROJECT_ID];
 
-    // set the sample rate
+    // set and save the sample rate
     [sampleRateBtn setTitle:[self sampleRateAsString:sampleRate] forState:UIControlStateNormal];
+    [prefs setDouble:sampleRate forKey:pSAMPLE_RATE];
 
-    // set the recording length
+    // set and save the recording length
     [recordingLengthBtn setTitle:[self recordingLengthAsString:recordingLength] forState:UIControlStateNormal];
+    [prefs setInteger:recordingLength forKey:pRECORDING_LENGTH];
+
+    [prefs synchronize];
 }
 
-#pragma end - Preset setup
+#pragma end - Presets and prefs setup
 
 #pragma mark - Recording data
 
@@ -855,6 +885,10 @@
     
     sampleRate = sampleRateInSeconds;
     [sampleRateBtn setTitle:sampleRateAsString forState:UIControlStateNormal];
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setDouble:sampleRate forKey:pSAMPLE_RATE];
+    [prefs synchronize];
 }
 
 // Called when returning from the recording length selection screen
@@ -864,6 +898,10 @@
 
     recordingLength = recordingLengthInSeconds;
     [recordingLengthBtn setTitle:recordingLengthAsString forState:UIControlStateNormal];
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setInteger:recordingLength forKey:pRECORDING_LENGTH];
+    [prefs synchronize];
 }
 
 - (NSString *) sampleRateAsString:(double)sr {

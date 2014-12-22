@@ -74,6 +74,11 @@
 
     NSString *curProjIDStr = kNO_PROJECT;
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+
+    // save the new project selection in prefs
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setInteger:[dm getProjectID] forKey:pPROJECT_ID];
+    [prefs synchronize];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -167,7 +172,11 @@
         }
         
         [dm setProjectFields:updatedProjectFields];
-        
+
+        // save the new project selection in prefs
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setInteger:[dm getProjectID] forKey:pPROJECT_ID];
+        [prefs synchronize];
     }
     // else user canceled
 }
