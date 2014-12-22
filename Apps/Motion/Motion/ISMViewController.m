@@ -108,11 +108,11 @@
         [tutorialController setDelegate:self];
         [self presentViewController:tutorialController animated:NO completion:nil];
 
-    } else {
-
-        // if the tutorial is not being shown, setup the application in its last state using prefs
-        [self loadSetupFromPrefs];
+        return;
     }
+
+    // if the tutorial is not being shown, setup the application in its last state using prefs
+    [self loadSetupFromPrefs];
 }
 
 - (void)toggleDev {
@@ -904,40 +904,53 @@
     [prefs synchronize];
 }
 
+- (void) initSampleRateAndRecLengthDictionaries {
+
+    sampleRateStrings = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         sS_RATE_TWENTY_MS,             [NSNumber numberWithDouble:kS_RATE_TWENTY_MS],
+                         sS_RATE_FIFTY_MS,              [NSNumber numberWithDouble:kS_RATE_FIFTY_MS],
+                         sS_RATE_ONE_HUNDRED_MS,        [NSNumber numberWithDouble:kS_RATE_ONE_HUNDRED_MS],
+                         sS_RATE_TWO_HUNDRED_FIFTY_MS,  [NSNumber numberWithDouble:kS_RATE_TWO_HUNDRED_FIFTY_MS],
+                         sS_RATE_FIVE_HUNDRED_MS,       [NSNumber numberWithDouble:kS_RATE_FIVE_HUNDRED_MS],
+                         sS_RATE_ONE_S,                 [NSNumber numberWithDouble:kS_RATE_ONE_S],
+                         sS_RATE_TWO_S,                 [NSNumber numberWithDouble:kS_RATE_TWO_S],
+                         sS_RATE_THREE_S,               [NSNumber numberWithDouble:kS_RATE_THREE_S],
+                         sS_RATE_FIVE_S,                [NSNumber numberWithDouble:kS_RATE_FIVE_S],
+                         sS_RATE_TEN_S,                 [NSNumber numberWithDouble:kS_RATE_TEN_S],
+                         sS_RATE_FIFTEEN_S,             [NSNumber numberWithDouble:kS_RATE_FIFTEEN_S],
+                         sS_RATE_THIRTY_S,              [NSNumber numberWithDouble:kS_RATE_THIRTY_S],
+                         nil];
+
+    recLengthStrings = [[NSDictionary alloc] initWithObjectsAndKeys:
+                        sREC_LENGTH_ONE_S,          [NSNumber numberWithInt:kREC_LENGTH_ONE_S],
+                        sREC_LENGTH_TWO_S,          [NSNumber numberWithInt:kREC_LENGTH_TWO_S],
+                        sREC_LENGTH_FIVE_S,         [NSNumber numberWithInt:kREC_LENGTH_FIVE_S],
+                        sREC_LENGTH_TEN_S,          [NSNumber numberWithInt:kREC_LENGTH_TEN_S],
+                        sREC_LENGTH_THIRTY_S,       [NSNumber numberWithInt:kREC_LENGTH_THIRTY_S],
+                        sREC_LENGTH_ONE_M,          [NSNumber numberWithInt:kREC_LENGTH_ONE_M],
+                        sREC_LENGTH_TWO_M,          [NSNumber numberWithInt:kREC_LENGTH_TWO_M],
+                        sREC_LENGTH_FIVE_M,         [NSNumber numberWithInt:kREC_LENGTH_FIVE_M],
+                        sREC_LENGTH_TEN_M,          [NSNumber numberWithInt:kREC_LENGTH_TEN_M],
+                        sREC_LENGTH_THIRTY_M,       [NSNumber numberWithInt:kREC_LENGTH_THIRTY_M],
+                        sREC_LENGTH_ONE_H,          [NSNumber numberWithInt:kREC_LENGTH_ONE_H],
+                        sREC_LENGTH_PUSH_TO_STOP,   [NSNumber numberWithInt:kREC_LENGTH_PUSH_TO_STOP],
+                        nil];
+}
+
 - (NSString *) sampleRateAsString:(double)sr {
 
-    if (sr == kS_RATE_TWENTY_MS)            return sS_RATE_TWENTY_MS;
-    if (sr == kS_RATE_FIFTY_MS)             return sS_RATE_FIFTY_MS;
-    if (sr == kS_RATE_ONE_HUNDRED_MS)       return sS_RATE_ONE_HUNDRED_MS;
-    if (sr == kS_RATE_TWO_HUNDRED_FIFTY_MS) return sS_RATE_TWO_HUNDRED_FIFTY_MS;
-    if (sr == kS_RATE_FIVE_HUNDRED_MS)      return sS_RATE_FIVE_HUNDRED_MS;
-    if (sr == kS_RATE_ONE_S)                return sS_RATE_ONE_S;
-    if (sr == kS_RATE_TWO_S)                return sS_RATE_TWO_S;
-    if (sr == kS_RATE_THREE_S)              return sS_RATE_THREE_S;
-    if (sr == kS_RATE_FIVE_S)               return sS_RATE_FIVE_S;
-    if (sr == kS_RATE_TEN_S)                return sS_RATE_TEN_S;
-    if (sr == kS_RATE_FIFTEEN_S)            return sS_RATE_FIFTEEN_S;
-    if (sr == kS_RATE_THIRTY_S)             return sS_RATE_THIRTY_S;
+    if (!sampleRateStrings)
+        [self initSampleRateAndRecLengthDictionaries];
 
-    return @"";
+    return [sampleRateStrings objectForKey:[NSNumber numberWithDouble:sr]];
 }
 
 - (NSString *) recordingLengthAsString:(int)rl {
 
-    if (rl == kREC_LENGTH_ONE_S) return sREC_LENGTH_ONE_S;
-    if (rl == kREC_LENGTH_TWO_S) return sREC_LENGTH_TWO_S;
-    if (rl == kREC_LENGTH_FIVE_S) return sREC_LENGTH_FIVE_S;
-    if (rl == kREC_LENGTH_TEN_S) return sREC_LENGTH_TEN_S;
-    if (rl == kREC_LENGTH_THIRTY_S) return sREC_LENGTH_THIRTY_S;
-    if (rl == kREC_LENGTH_ONE_M) return sREC_LENGTH_ONE_M;
-    if (rl == kREC_LENGTH_TWO_M) return sREC_LENGTH_TWO_M;
-    if (rl == kREC_LENGTH_FIVE_M) return sREC_LENGTH_FIVE_M;
-    if (rl == kREC_LENGTH_TEN_M) return sREC_LENGTH_TEN_M;
-    if (rl == kREC_LENGTH_THIRTY_M) return sREC_LENGTH_THIRTY_M;
-    if (rl == kREC_LENGTH_ONE_H) return sREC_LENGTH_ONE_H;
-    if (rl == kREC_LENGTH_PUSH_TO_STOP) return sREC_LENGTH_PUSH_TO_STOP;
+    if (!recLengthStrings)
+        [self initSampleRateAndRecLengthDictionaries];
 
-    return @"";
+    return [recLengthStrings objectForKey:[NSNumber numberWithInt:rl]];
 }
 
 #pragma end - Sample rate and recording length

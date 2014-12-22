@@ -65,6 +65,11 @@
 
     // Visualization URL constructed after data is uploaded
     NSString *visURL;
+
+    // Dictionaries of sample rate and recording lengths whose key is an int/double
+    // and value is the respective sample rate/recording length as a string
+    NSDictionary *sampleRateStrings;
+    NSDictionary *recLengthStrings;
 }
 
 // Queue Saver Properties

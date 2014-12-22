@@ -9,6 +9,12 @@
 #import "ISMPresets.h"
 #import "Constants.h"
 
+#ifdef __IPHONE_6_0
+# define LINE_BREAK_WORD_WRAP NSLineBreakByWordWrapping
+#else
+# define LINE_BREAK_WORD_WRAP UILineBreakModeWordWrap
+#endif
+
 @interface ISMPresets ()
 @end
 
@@ -32,8 +38,9 @@
     [super viewDidLoad];
 
     // set # of lines for the title label
-    [titleLbl setNumberOfLines:4];
-    [titleLbl setFrame:CGRectMake(titleLbl.frame.origin.x, titleLbl.frame.origin.y, titleLbl.frame.size.width, titleLbl.frame.size.height * 4)];
+    [titleLbl setNumberOfLines:0];
+    [titleLbl setLineBreakMode:LINE_BREAK_WORD_WRAP];
+    [titleLbl sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning {
