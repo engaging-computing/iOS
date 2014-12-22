@@ -27,8 +27,4 @@
 @property (weak, nonatomic) IBOutlet UIButton *browseProjBtn;
 - (IBAction)browseProjBtnOnClick:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *noProjBtn;
-- (IBAction)noProjBtnOnClick:(id)sender;
-
-
 @end

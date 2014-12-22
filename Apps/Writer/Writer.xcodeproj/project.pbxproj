@@ -50,6 +50,17 @@
 		B7896FFE1A1E25520002151C /* FieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7896FFD1A1E25520002151C /* FieldCell.xib */; };
 		B78970021A1E29040002151C /* FieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B78970011A1E29040002151C /* FieldCell.m */; };
 		B78970051A1E294D0002151C /* FieldData.m in Sources */ = {isa = PBXBuildFile; fileRef = B78970041A1E294D0002151C /* FieldData.m */; };
+		B7BF1DD01A374D000012821E /* ISWTutorialContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BF1DCD1A374D000012821E /* ISWTutorialContentController.m */; };
+		B7BF1DD11A374D000012821E /* ISWTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BF1DCF1A374D000012821E /* ISWTutorialViewController.m */; };
+		B7BF1DD31A374E930012821E /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DD21A374E930012821E /* Tutorial.storyboard */; };
+		B7BF1DDD1A374FE80012821E /* tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DD51A374FE80012821E /* tutorial1.png */; };
+		B7BF1DDE1A374FE80012821E /* tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DD61A374FE80012821E /* tutorial2.png */; };
+		B7BF1DDF1A374FE80012821E /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DD71A374FE80012821E /* tutorial3.png */; };
+		B7BF1DE01A374FE80012821E /* tutorial4.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DD81A374FE80012821E /* tutorial4.png */; };
+		B7BF1DE11A374FE80012821E /* tutorial5.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DD91A374FE80012821E /* tutorial5.png */; };
+		B7BF1DE21A374FE80012821E /* tutorial6.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DDA1A374FE80012821E /* tutorial6.png */; };
+		B7BF1DE31A374FE80012821E /* tutorial7.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DDB1A374FE80012821E /* tutorial7.png */; };
+		B7BF1DE41A374FE80012821E /* tutorial8.png in Resources */ = {isa = PBXBuildFile; fileRef = B7BF1DDC1A374FE80012821E /* tutorial8.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +147,19 @@
 		B78970011A1E29040002151C /* FieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldCell.m; sourceTree = "<group>"; };
 		B78970031A1E294D0002151C /* FieldData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldData.h; sourceTree = "<group>"; };
 		B78970041A1E294D0002151C /* FieldData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldData.m; sourceTree = "<group>"; };
+		B7BF1DCC1A374D000012821E /* ISWTutorialContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISWTutorialContentController.h; sourceTree = "<group>"; };
+		B7BF1DCD1A374D000012821E /* ISWTutorialContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISWTutorialContentController.m; sourceTree = "<group>"; };
+		B7BF1DCE1A374D000012821E /* ISWTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISWTutorialViewController.h; sourceTree = "<group>"; };
+		B7BF1DCF1A374D000012821E /* ISWTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISWTutorialViewController.m; sourceTree = "<group>"; };
+		B7BF1DD21A374E930012821E /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		B7BF1DD51A374FE80012821E /* tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial1.png; path = Resources/TutorialImages/tutorial1.png; sourceTree = "<group>"; };
+		B7BF1DD61A374FE80012821E /* tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial2.png; path = Resources/TutorialImages/tutorial2.png; sourceTree = "<group>"; };
+		B7BF1DD71A374FE80012821E /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial3.png; path = Resources/TutorialImages/tutorial3.png; sourceTree = "<group>"; };
+		B7BF1DD81A374FE80012821E /* tutorial4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial4.png; path = Resources/TutorialImages/tutorial4.png; sourceTree = "<group>"; };
+		B7BF1DD91A374FE80012821E /* tutorial5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial5.png; path = Resources/TutorialImages/tutorial5.png; sourceTree = "<group>"; };
+		B7BF1DDA1A374FE80012821E /* tutorial6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial6.png; path = Resources/TutorialImages/tutorial6.png; sourceTree = "<group>"; };
+		B7BF1DDB1A374FE80012821E /* tutorial7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial7.png; path = Resources/TutorialImages/tutorial7.png; sourceTree = "<group>"; };
+		B7BF1DDC1A374FE80012821E /* tutorial8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial8.png; path = Resources/TutorialImages/tutorial8.png; sourceTree = "<group>"; };
 		B7EF3E691A11268D00A76516 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +234,7 @@
 				B7896FFF1A1E286C0002151C /* FieldCell */,
 				B77950A41A093D9400C032EF /* MainView */,
 				B75158C91A0A9B2B0039F76E /* Project */,
+				B7BF1DCA1A374CAD0012821E /* Tutorials */,
 				B77950A51A093DF400C032EF /* UI */,
 				B77950771A093D1600C032EF /* Supporting Files */,
 			);
@@ -255,6 +280,7 @@
 			children = (
 				B77950A61A093E1500C032EF /* Icons */,
 				B77950A71A093E1A00C032EF /* LaunchIcons */,
+				B7BF1DD41A374FD10012821E /* TutorialImages */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -311,6 +337,7 @@
 			children = (
 				B77950811A093D1600C032EF /* Main.storyboard */,
 				B7896FFD1A1E25520002151C /* FieldCell.xib */,
+				B7BF1DD21A374E930012821E /* Tutorial.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -364,6 +391,32 @@
 				B78970041A1E294D0002151C /* FieldData.m */,
 			);
 			name = FieldCell;
+			sourceTree = "<group>";
+		};
+		B7BF1DCA1A374CAD0012821E /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				B7BF1DCC1A374D000012821E /* ISWTutorialContentController.h */,
+				B7BF1DCD1A374D000012821E /* ISWTutorialContentController.m */,
+				B7BF1DCE1A374D000012821E /* ISWTutorialViewController.h */,
+				B7BF1DCF1A374D000012821E /* ISWTutorialViewController.m */,
+			);
+			name = Tutorials;
+			sourceTree = "<group>";
+		};
+		B7BF1DD41A374FD10012821E /* TutorialImages */ = {
+			isa = PBXGroup;
+			children = (
+				B7BF1DD51A374FE80012821E /* tutorial1.png */,
+				B7BF1DD61A374FE80012821E /* tutorial2.png */,
+				B7BF1DD71A374FE80012821E /* tutorial3.png */,
+				B7BF1DD81A374FE80012821E /* tutorial4.png */,
+				B7BF1DD91A374FE80012821E /* tutorial5.png */,
+				B7BF1DDA1A374FE80012821E /* tutorial6.png */,
+				B7BF1DDB1A374FE80012821E /* tutorial7.png */,
+				B7BF1DDC1A374FE80012821E /* tutorial8.png */,
+			);
+			name = TutorialImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,21 +524,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7BF1DE01A374FE80012821E /* tutorial4.png in Resources */,
 				B75158BB1A0A5B360039F76E /* iSENSE_API_Bundle.bundle in Resources */,
 				B77950D61A09433F00C032EF /* li1024x748.png in Resources */,
 				B77950DB1A09433F00C032EF /* li2048x1536.png in Resources */,
 				B77950C41A09407A00C032EF /* 76@2x.png in Resources */,
 				B77950C11A09407A00C032EF /* 72@1x.png in Resources */,
 				B77950B71A09407A00C032EF /* 29@1x.png in Resources */,
+				B7BF1DDD1A374FE80012821E /* tutorial1.png in Resources */,
 				B77950D81A09433F00C032EF /* li1536x2008.png in Resources */,
 				B77950C31A09407A00C032EF /* 76@1x.png in Resources */,
 				B77950D91A09433F00C032EF /* li1536x2048.png in Resources */,
 				B77950C21A09407A00C032EF /* 72@2x.png in Resources */,
+				B7BF1DE41A374FE80012821E /* tutorial8.png in Resources */,
+				B7BF1DE31A374FE80012821E /* tutorial7.png in Resources */,
 				B77950831A093D1600C032EF /* Main.storyboard in Resources */,
+				B7BF1DDE1A374FE80012821E /* tutorial2.png in Resources */,
 				B77950C51A09407A00C032EF /* 1024x1024.png in Resources */,
 				B77950BB1A09407A00C032EF /* 50@1x.png in Resources */,
 				B77950881A093D1600C032EF /* LaunchScreen.xib in Resources */,
 				B77950BE1A09407A00C032EF /* 57@2x.png in Resources */,
+				B7BF1DDF1A374FE80012821E /* tutorial3.png in Resources */,
 				B77950B91A09407A00C032EF /* 40@1x.png in Resources */,
 				B77950D31A09433F00C032EF /* li640x1136.png in Resources */,
 				B77950BA1A09407A00C032EF /* 40@2x.png in Resources */,
@@ -497,10 +556,13 @@
 				B77950D51A09433F00C032EF /* li768x1024.png in Resources */,
 				B77950D41A09433F00C032EF /* li768x1004.png in Resources */,
 				B77950C01A09407A00C032EF /* 60@3x.png in Resources */,
+				B7BF1DE21A374FE80012821E /* tutorial6.png in Resources */,
 				B77950D21A09433F00C032EF /* li640x960.png in Resources */,
 				B77950DA1A09433F00C032EF /* li2048x1496.png in Resources */,
 				B77950D71A09433F00C032EF /* li1024x768.png in Resources */,
+				B7BF1DE11A374FE80012821E /* tutorial5.png in Resources */,
 				B7896FFE1A1E25520002151C /* FieldCell.xib in Resources */,
+				B7BF1DD31A374E930012821E /* Tutorial.storyboard in Resources */,
 				B77950BD1A09407A00C032EF /* 57@1x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,9 +581,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7BF1DD01A374D000012821E /* ISWTutorialContentController.m in Sources */,
 				B77950801A093D1600C032EF /* ISWViewController.m in Sources */,
 				B779507D1A093D1600C032EF /* ISWAppDelegate.m in Sources */,
 				B78970051A1E294D0002151C /* FieldData.m in Sources */,
+				B7BF1DD11A374D000012821E /* ISWTutorialViewController.m in Sources */,
 				B779507A1A093D1600C032EF /* main.m in Sources */,
 				B75158CC1A0A9B830039F76E /* ISWProjectController.m in Sources */,
 				B78970021A1E29040002151C /* FieldCell.m in Sources */,

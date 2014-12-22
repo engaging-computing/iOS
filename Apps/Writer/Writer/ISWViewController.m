@@ -8,6 +8,7 @@
 
 #import "ISWViewController.h"
 #import "ISWAppDelegate.h"
+#import "ISWTutorialViewController.h"
 
 @interface ISWViewController ()
 @end
@@ -54,13 +55,20 @@
 
     // Load the last used project from prefs, if available
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    int projID = [prefs integerForKey:kPREFS_PROJ];
+    int projID = (int) [prefs integerForKey:kPREFS_PROJ];
     if (projID > 0) {
 
         dm = [DataManager getInstance];
         [dm setProjectID:projID];
         [dm retrieveProjectFields];
     }
+
+    // Set disabled state text of the two save buttons
+    [saveRowBtn setTitle:@"..." forState:UIControlStateDisabled];
+    [saveDataSetBtn setTitle:@"..." forState:UIControlStateDisabled];
+
+    // Create the keyboard toolbar with an attached "Done" button
+    doneKeyboardView = [self createDoneKeyboardView];
 
     // Set the data set name label to be our secret dev/non-dev switch
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleDev)];
@@ -70,7 +78,7 @@
 
     // Attach the data set name text field to the application delegate to restrict character input
     dataSetNameTxt.delegate = self;
-    dataSetNameTxt.inputAccessoryView = [self createDoneKeyboardView];
+    dataSetNameTxt.inputAccessoryView = doneKeyboardView;
     dataSetNameTxt.tag = kDATA_SET_NAME_TAG;
 
     // Set navigation bar color
@@ -93,7 +101,20 @@
     contentView.backgroundView = nil;
 
     // present dialog if location is not authorized yet
-    [self isLocationAuthorized]; // TODO check if iOS 8 is presenting this dialog correctly
+    [self isLocationAuthorized];
+
+    // Display one-time tutorial
+    BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
+    if (!tutorialShown) {
+
+        UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+        ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+        [self presentViewController:tutorialController animated:YES completion:nil];
+    }
+
+    // add a footer view to the table to either display a warning that no project is selected or
+    // a count of the number of data rows currently saved for this data set
+    [self addFooterView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -118,18 +139,29 @@
             data.fieldType = field.type;
             [dataArr addObject:data];
         }
+
+        // save the project in preferences
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setInteger:projID forKey:kPREFS_PROJ];
+        [prefs synchronize];
     }
 
-    // reload the content view
-    [contentView reloadData];
+    // set the project button text
+    [projectBtn setTitle:[NSString stringWithFormat:@"Uploading to Project: %@",
+                          (projID > 0 ? [NSNumber numberWithInt:projID] : kNO_PROJECT)]
+                forState:UIControlStateNormal];
 
-    // save the project in preferences
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setInteger:projID forKey:kPREFS_PROJ];
-    [prefs synchronize];
+    // reload the content view
+    [self reloadContentView];
 
     // initialize the location manager and register for updates
     [self registerLocationUpdates];
+
+    // add timestamps and geospatial data to appropriate field cells
+    [self setupTimeAndGeospatialData];
+
+    // reset the footer view text
+    [self setFooterViewText];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -166,25 +198,87 @@
     }
 
     int i = 0;
+    int rowsTotal = 0;
+
     for (NSNumber *fieldID in fieldIDs) {
 
-        NSMutableArray *arr = [dataToUpload objectForKey:fieldID];
+        NSMutableArray *arr = [dataToUpload objectForKey:[NSString stringWithFormat:@"%@", fieldID]];
 
         // if array does not yet exist, create it
         if (!arr) {
+
             arr = [[NSMutableArray alloc] init];
-            [dataToUpload setObject:arr forKey:fieldID];
+            [dataToUpload setObject:arr forKey:[NSString stringWithFormat:@"%@", fieldID]];
         }
 
-        NSString *data = ((FieldData *)[dataArr objectAtIndex:i++]).fieldData;
-        if (data == nil) data = @"";
+        FieldData *thisData = (FieldData *)[dataArr objectAtIndex:i++];
+        NSString *data = thisData.fieldData;
+
+        if (data == nil) {
+            // data cannot be nil, so use empty string
+            data = @"";
+        } else if (thisData.fieldType.intValue == TYPE_TIMESTAMP) {
+            // iSENSE requires timestamps in "date, time" format, so switch this timestamp around from "time, date" format
+            data = [self reverseTimestamp:data];
+        }
 
         [arr addObject:data];
+
+        // keep a count of how many items are in the array currently to report to the user
+        rowsTotal = arr.count;
     }
+
+    // reset the timestamps and geospatial data
+    [self setupTimeAndGeospatialData];
+
+    // change the footer text to reflect amount of data sets saved currently in the data array
+    [self setFooterViewText];
 }
 
 - (IBAction)saveDataSetBtnOnClick:(id)sender {
-    // TODO
+
+    NSString *dataSetName = dataSetNameTxt.text;
+
+    // saving data requires a data set name
+    if (dataSetName.length == 0) {
+
+        [self.view makeWaffle:@"Please enter a data set name first" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
+    // saving data requires a project
+    if ([dm getProjectID] <= 0) {
+
+        [self.view makeWaffle:@"Please select a project to upload to" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
+    // saving data requires data
+    if (dataToUpload == nil || dataToUpload.count == 0) {
+
+        [self.view makeWaffle:@"Please enter some data before saving" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        return;
+    }
+
+    // save the data set
+    [dataSaver addDataSetWithContext:managedObjectContext
+                                name:dataSetName
+                          parentName:PARENT_WRITER
+                         description:@"Recorded from iOS Writer"
+                           projectID:[dm getProjectID]
+                                data:[dataToUpload copy]
+                          mediaPaths:nil
+                          uploadable:true
+                   hasInitialProject:true
+                           andFields:nil];
+
+    // reset the data dictionary
+    dataToUpload = [[NSMutableDictionary alloc] init];
+
+    [self.view makeWaffle:@"Data set saved" duration:WAFFLE_LENGTH_SHORT position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
+
+    // change the footer text to reflect amount of data sets saved currently in the data array (at this point, 0)
+    [self setFooterViewText];
 }
 
 - (IBAction)credentialBarBtnOnClick:(id)sender {
@@ -194,9 +288,15 @@
 
 - (IBAction)uploadBtnOnClick:(id)sender {
 
-    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_MOTION andDelegate:self];
+    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_WRITER andDelegate:self];
     queueUploader.title = @"Upload";
     [self.navigationController pushViewController:queueUploader animated:YES];
+}
+
+- (void) setSaveButtonsEnabled:(bool)enabled {
+
+    saveRowBtn.enabled = enabled;
+    saveDataSetBtn.enabled = enabled;
 }
 
 #pragma end - View and UI code
@@ -218,7 +318,7 @@
 // Initialize a single object in the table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSString *cellIdentifier = [NSString stringWithFormat:@"FieldCellIdentifier%d", indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"FieldCellIdentifier%ld", (long)indexPath.row];
     FieldCell *cell = (FieldCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         UIViewController *tmpVC = [[UIViewController alloc] initWithNibName:@"FieldCell" bundle:nil];
@@ -226,8 +326,8 @@
     }
 
     FieldData *tmp = [dataArr objectAtIndex:indexPath.row];
-    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
 
+    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     // tag the cell's UITextField with the indexPath of the cell
@@ -235,13 +335,12 @@
     cell.fieldDataTxt.delegate = self;
 
     // add a done button to the keyboard
-    cell.fieldDataTxt.inputAccessoryView = [self createDoneKeyboardView];
+    cell.fieldDataTxt.inputAccessoryView = doneKeyboardView;
 
-    // set up the cell depending on the type of field data
-    if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
+    // set up the cell textfields depending on the type of field data
+    if (tmp.fieldType.intValue == TYPE_TIMESTAMP || tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
 
-        // automatically fill in the timestamp
-        cell.fieldDataTxt.text = [API getTimeStamp];
+        // disable timestamp and geospatial fields
         cell.fieldDataTxt.enabled = false;
         cell.fieldDataTxt.backgroundColor = UIColorFromHex(cTEXT_FIELD_DISABLED);
 
@@ -249,19 +348,57 @@
 
         // set numbers only for numeric fields
         cell.fieldDataTxt.keyboardType = UIKeyboardTypeNumberPad;
-
-    } else if (tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
-
-        // automatically fill in geospatial data
-        CLLocationCoordinate2D lc2d = [[locationManager location] coordinate];
-        cell.fieldDataTxt.text = [NSString stringWithFormat:@"%f",
-                                  (tmp.fieldType.intValue == TYPE_LAT ? lc2d.latitude : lc2d.longitude)];
-        cell.fieldDataTxt.enabled = false;
-        cell.fieldDataTxt.backgroundColor = UIColorFromHex(cTEXT_FIELD_DISABLED);
     }
 
     return cell;
 }
+
+- (void)addFooterView {
+
+    FieldCell *tmp = [[FieldCell alloc] init];
+    CGRect footerRect = tmp.frame;
+    UIView *wrapperView = [[UIView alloc] initWithFrame:footerRect];
+
+    tableFooter = [[UILabel alloc] initWithFrame:footerRect];
+    tableFooter.backgroundColor = [contentView backgroundColor];
+    tableFooter.opaque = YES;
+    tableFooter.font = [UIFont boldSystemFontOfSize:15];
+    tableFooter.numberOfLines = 5;
+
+    [wrapperView addSubview:tableFooter];
+    contentView.tableFooterView = wrapperView;
+}
+
+- (void)setFooterViewText {
+
+    if ([dm getProjectID] <= 0) {
+
+        tableFooter.text = @"No project currently selected\nSelect one to start entering data";
+        tableFooter.textColor = [UIColor redColor];
+
+    } else {
+
+        // try to get any array of data saved in the dataToUpload - if failed, create an empty array
+        NSArray *dataRow;
+        @try {
+            dataRow = [[dataToUpload allValues] objectAtIndex:0];
+        } @catch (NSException *e) {
+            dataRow = [[NSArray alloc] init];
+        }
+
+        tableFooter.text = [NSString stringWithFormat:@"%d %@ saved for this data set",
+                            dataRow.count, (dataRow.count == 1 ? @"row" : @"rows")];
+        tableFooter.textColor = UIColorFromHex(cNAV_WRITER_GREEN_TINT);
+    }
+}
+
+- (void) reloadContentView {
+
+    [contentView setNeedsDisplay];
+    [contentView layoutIfNeeded];
+    [contentView reloadData];
+}
+
 
 #pragma end - TableView code
 
@@ -315,7 +452,7 @@
     // calculate the remaining space in the view not overlapped by the keyboard
     int spaceAboveKeyboard = self.view.frame.size.height - keyboardHeight;
 
-    if (textY < spaceAboveKeyboard - textFieldHeight) {
+    if (keyboardShift == 0 && textY < spaceAboveKeyboard - textFieldHeight) {
         // do not shift view up if the tapped textfield will be visible when the keyboard is shown
         return;
     }
@@ -324,14 +461,12 @@
     // only push the view up to the height of the area above the keyboard (with some padding)
     int movementValue = (textY - textFieldHeight < keyboardHeight) ? (spaceAboveKeyboard - padding) : keyboardHeight;
 
-    if (!up) {
-        // reset the active text field if we're moving the keyboard back down
-        activeTextField = nil;
-    }
+    if (keyboardShift == 0)
+        keyboardShift = movementValue;
 
     // animate the keyboard
     const float movementDuration = 0.3f;
-    int movementDirection = (up ? -movementValue : movementValue);
+    int movementDirection = (up ? -movementValue : keyboardShift);
 
     [UIView beginAnimations: @"animateTextField" context: nil];
     [UIView setAnimationBeginsFromCurrentState: YES];
@@ -339,6 +474,12 @@
     
     self.view.frame = CGRectOffset(self.view.frame, 0, movementDirection);
     [UIView commitAnimations];
+
+    if (!up) {
+        // reset the active text field and keyboard shift if we're moving the keyboard back down
+        activeTextField = nil;
+        keyboardShift = 0;
+    }
 }
 
 - (IBAction)doneClicked:(id)sender {
@@ -385,8 +526,10 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 
-    if (!isKeyboardDisplaying)
+    if (!isKeyboardDisplaying) {
+
         activeTextField = textField;
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -397,14 +540,6 @@
         // textfield is data set name - do not need to save data in the dataArr
         return;
     }
-
-    // retrieve the cell at the given indexPath using the UITextField's tag that was assigned in cellForRowAtIndexPath
-    FieldCell *editCell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];
-    NSString *dataStr = editCell.fieldDataTxt.text;
-
-    // store the data in the data array now that the user is no longer editing the cell
-    FieldData *data = [dataArr objectAtIndex:textField.tag];
-    data.fieldData = dataStr;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -413,11 +548,21 @@
     return YES;
 }
 
-// restrict length of text entered
-// 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
-// a ~20 character timestamp to the data set name
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
+    // if the tag is a data textfield, save the new text entered into the data array
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+
+    if (textField.tag != kDATA_SET_NAME_TAG) {
+
+        FieldData *data = [dataArr objectAtIndex:textField.tag];
+        data.fieldData = newText;
+    }
+
+    // restrict length of text entered
+    // 90 is chosen because 128 is the limit on iSENSE, and the app will eventually append
+    // a ~20 character timestamp to the data set name
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     return (newLength <= 90);
 }
@@ -436,13 +581,16 @@
 - (void)createDevUILabel {
 
     if ([api isUsingDev]) {
-        devLbl = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 80, 30)];
-        devLbl.font = [UIFont fontWithName:@"Helvetica" size:8];
+
+        devLbl = [[UILabel alloc] initWithFrame:CGRectMake(70, 0, 80, 30)];
+        devLbl.font = [UIFont fontWithName:@"Helvetica" size:12];
         devLbl.backgroundColor = [UIColor clearColor];
         devLbl.text = @"USING DEV";
         devLbl.textColor = [UIColor redColor];
         [self.view addSubview:devLbl];
+
     } else if (devLbl) {
+
         [devLbl removeFromSuperview];
     }
 }
@@ -566,7 +714,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
-    // TODO add cases for alert dialogs
     switch (alertView.tag) {
 
         case kLOGIN_DIALOG_TAG:
@@ -681,6 +828,9 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+}
+
 // check to see if the location was authorized for use (iOS 8 and later)
 - (BOOL) isLocationAuthorized {
 
@@ -731,5 +881,95 @@
 }
 
 #pragma end - Location
+
+#pragma mark - Data setup
+
+- (void)setupTimeAndGeospatialData {
+
+    for (int i = 0; i < dataArr.count; i++) {
+
+        FieldCell *cell = (FieldCell *) [contentView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        FieldData *tmp = [dataArr objectAtIndex:i];
+
+        // clear out pre-existing data
+        tmp.fieldData = nil;
+
+        // set up the cell depending on the type of field data
+        if (tmp.fieldType.intValue == TYPE_TIMESTAMP) {
+
+            // automatically fill in the timestamp
+            NSString *timeStamp = [self createTimestamp];
+
+            tmp.fieldData = timeStamp;
+            cell.fieldDataTxt.text = timeStamp;
+
+        } else if (tmp.fieldType.intValue == TYPE_LAT || tmp.fieldType.intValue == TYPE_LON) {
+
+            // automatically fill in geospatial data
+            CLLocationCoordinate2D lc2d = [[locationManager location] coordinate];
+            NSString *geospatialPoint = [NSString stringWithFormat:@"%f",
+                                         (tmp.fieldType.intValue == TYPE_LAT ? lc2d.latitude : lc2d.longitude)];
+
+            tmp.fieldData = geospatialPoint;
+            cell.fieldDataTxt.text = geospatialPoint;
+
+        } else {
+
+            // reset any other text or numeric field
+            cell.fieldDataTxt.text = @"";
+        }
+    }
+}
+
+- (NSString *)createTimestamp {
+
+    @try {
+        // get time and date
+        NSDate *now = [NSDate date];
+
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+
+        // format the timestamp
+        NSString *rawTime = [formatter stringFromDate:now];
+        NSArray *cmp = [rawTime componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+
+        [formatter setDateFormat:@"HH:mm:ss"];
+        rawTime = [formatter stringFromDate:now];
+
+        NSString *timeStamp = [NSString stringWithFormat:@"%@, %@", rawTime, cmp[0]];
+        return timeStamp;
+
+    } @catch (NSException *e) {
+        // if an error occurs, return the empty string
+        return @"";
+    }
+}
+
+- (NSString *)reverseTimestamp:(NSString *)original {
+
+    @try {
+        // change the format of the timestamp from hh:mm:ss, MM/DD/YY to MM/DD/YY, hh:mm::ss
+        NSMutableArray *cmp = [[original componentsSeparatedByString:@","] mutableCopy];
+
+        // strip white space
+        cmp[0] = [cmp[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        cmp[1] = [cmp[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+        // iSENSE uses European standard for dates, so swap the month/day
+        NSArray *dateCmp = [cmp[1] componentsSeparatedByString:@"/"];
+        cmp[1] = [NSString stringWithFormat:@"%@/%@/%@", dateCmp[1], dateCmp[0], dateCmp[2]];
+
+        // ".000" used because iSENSE requires millisecond precision
+        return [NSString stringWithFormat:@"%@, %@.000", cmp[1], cmp[0]];
+
+    } @catch (NSException *e) {
+        // if an error occurs, return the empty string
+        return @"";
+    }
+}
+
+#pragma end - Data setup
 
 @end

@@ -42,7 +42,6 @@
                                     <constraint firstAttribute="height" constant="30" id="BCd-Ip-Gri"/>
                                 </constraints>
                                 <state key="normal" title="Save Row">
-                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -73,7 +72,6 @@
                                     <constraint firstAttribute="height" constant="30" id="94g-0t-0uG"/>
                                 </constraints>
                                 <state key="normal" title="Save Data Set">
-                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -173,10 +171,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czu-1E-7m3">
-                                <rect key="frame" x="200" y="215" width="200" height="31"/>
+                                <rect key="frame" x="200" y="253" width="200" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="UtJ-W1-fVx"/>
-                                    <constraint firstAttribute="height" constant="30" id="e9P-fz-cKK"/>
+                                    <constraint firstAttribute="height" constant="30" id="K06-kL-Mwm"/>
+                                    <constraint firstAttribute="width" constant="200" id="Y5b-BB-mI5"/>
                                 </constraints>
                                 <state key="normal" title="Enter Project ID">
                                     <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -186,10 +184,19 @@
                                     <action selector="enterProjIDBtnOnClick:" destination="1Zr-XN-9Mm" eventType="touchUpInside" id="v3S-qJ-v1d"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MN-7g-DDJ">
-                                <rect key="frame" x="200" y="253" width="200" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploading to Project: Not Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJf-Do-Le6">
+                                <rect key="frame" x="16" y="139" width="568" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="nft-vN-du3"/>
+                                    <constraint firstAttribute="height" constant="21" id="aOy-UD-Krz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MN-7g-DDJ">
+                                <rect key="frame" x="200" y="291" width="200" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Og1-N4-zfp"/>
                                 </constraints>
                                 <state key="normal" title="Browse Projects">
                                     <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,45 +206,25 @@
                                     <action selector="browseProjBtnOnClick:" destination="1Zr-XN-9Mm" eventType="touchUpInside" id="Knl-ez-KLo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploading to Project: Not Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJf-Do-Le6">
-                                <rect key="frame" x="16" y="137" width="568" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpF-wn-cad">
-                                <rect key="frame" x="200" y="319" width="200" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="M75-Zc-JyY"/>
-                                </constraints>
-                                <state key="normal" title="Use No Project">
-                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="noProjBtnOnClick:" destination="1Zr-XN-9Mm" eventType="touchUpInside" id="e6P-yg-gy4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lJf-Do-Le6" firstAttribute="trailing" secondItem="NcE-0I-0u1" secondAttribute="trailingMargin" id="1tt-Wv-AOO"/>
-                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="top" secondItem="czu-1E-7m3" secondAttribute="bottom" constant="8" symbolic="YES" id="BQG-q1-cxh"/>
-                            <constraint firstItem="qpF-wn-cad" firstAttribute="centerX" secondItem="NcE-0I-0u1" secondAttribute="centerX" id="M9c-iz-a6Q"/>
-                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="leading" secondItem="qpF-wn-cad" secondAttribute="leading" id="Pfh-xg-eHP"/>
-                            <constraint firstItem="czu-1E-7m3" firstAttribute="trailing" secondItem="5MN-7g-DDJ" secondAttribute="trailing" id="QuL-4h-4CA"/>
-                            <constraint firstItem="lJf-Do-Le6" firstAttribute="leading" secondItem="NcE-0I-0u1" secondAttribute="leadingMargin" id="W1j-n9-BMq"/>
-                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="centerY" secondItem="NcE-0I-0u1" secondAttribute="centerY" id="XUE-aR-kLA"/>
-                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="trailing" secondItem="qpF-wn-cad" secondAttribute="trailing" id="asg-in-IEj"/>
-                            <constraint firstItem="qpF-wn-cad" firstAttribute="top" secondItem="5MN-7g-DDJ" secondAttribute="bottom" constant="36" id="tK0-xV-NsD"/>
-                            <constraint firstItem="czu-1E-7m3" firstAttribute="top" secondItem="lJf-Do-Le6" secondAttribute="bottom" constant="57" id="tgY-US-WHn"/>
-                            <constraint firstItem="czu-1E-7m3" firstAttribute="leading" secondItem="5MN-7g-DDJ" secondAttribute="leading" id="yzx-be-IbM"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="centerY" secondItem="NcE-0I-0u1" secondAttribute="centerY" id="3Yz-38-VJD"/>
+                            <constraint firstItem="lJf-Do-Le6" firstAttribute="trailing" secondItem="NcE-0I-0u1" secondAttribute="trailingMargin" id="Adv-zv-K2i"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="trailing" secondItem="5MN-7g-DDJ" secondAttribute="trailing" id="AkP-1B-V6V"/>
+                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="top" secondItem="czu-1E-7m3" secondAttribute="bottom" constant="8" symbolic="YES" id="Ckj-T1-pVN"/>
+                            <constraint firstItem="lJf-Do-Le6" firstAttribute="top" secondItem="5z2-OO-7IW" secondAttribute="bottom" constant="139" id="DH0-gR-9AL"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="top" secondItem="lJf-Do-Le6" secondAttribute="bottom" constant="93" id="J5P-oH-xhB"/>
+                            <constraint firstItem="sKQ-FY-YMg" firstAttribute="top" secondItem="5MN-7g-DDJ" secondAttribute="bottom" constant="215" id="XM8-42-e8B"/>
+                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="leading" secondItem="czu-1E-7m3" secondAttribute="leading" id="aYX-yZ-Efs"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="centerX" secondItem="lJf-Do-Le6" secondAttribute="centerX" id="jg6-qz-zOS"/>
+                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="centerX" secondItem="NcE-0I-0u1" secondAttribute="centerX" id="vmd-Em-ovn"/>
+                            <constraint firstItem="lJf-Do-Le6" firstAttribute="leading" secondItem="NcE-0I-0u1" secondAttribute="leadingMargin" id="xzQ-Z9-Poc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="browseProjBtn" destination="5MN-7g-DDJ" id="3PH-wl-d1U"/>
                         <outlet property="enterProjIDBtn" destination="czu-1E-7m3" id="ksy-4G-ixj"/>
-                        <outlet property="noProjBtn" destination="qpF-wn-cad" id="OVg-Kk-lgj"/>
                         <outlet property="projectLbl" destination="lJf-Do-Le6" id="kGS-o0-ih4"/>
                     </connections>
                 </viewController>

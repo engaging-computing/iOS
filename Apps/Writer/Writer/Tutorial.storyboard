@@ -17,7 +17,7 @@
         <!--Tutorial View Controller-->
         <scene sceneID="2CG-jx-qCv">
             <objects>
-                <viewController storyboardIdentifier="TutorialStartController" id="oG7-46-Qhk" customClass="ISMTutorialViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialStartController" id="oG7-46-Qhk" customClass="ISWTutorialViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pQE-wZ-jEG"/>
                         <viewControllerLayoutGuide type="bottom" id="Aaa-VY-1TN"/>
@@ -32,12 +32,12 @@
                                     <constraint firstAttribute="width" constant="200" id="3UM-oe-bkz"/>
                                     <constraint firstAttribute="height" constant="30" id="M3q-OZ-I2d"/>
                                 </constraints>
-                                <state key="normal" title="Take Me to Motion">
-                                    <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Take Me to Writer">
+                                    <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="goToMotionBtnOnClick:" destination="oG7-46-Qhk" eventType="touchUpInside" id="nbX-UL-Y1V"/>
+                                    <action selector="goToWriterBtnOnClick:" destination="oG7-46-Qhk" eventType="touchUpInside" id="uP3-4d-RLx"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -49,7 +49,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="goToMotionBtn" destination="ed8-9J-X4Y" id="shP-fo-Krc"/>
+                        <outlet property="goToWriterBtn" destination="ed8-9J-X4Y" id="MaS-qf-vLT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKw-oi-nCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -59,7 +59,7 @@
         <!--Tutorial Content Controller-->
         <scene sceneID="TS4-BB-BhV">
             <objects>
-                <viewController storyboardIdentifier="TutorialContentController" id="llN-hH-1X4" customClass="ISMTutorialContentController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialContentController" id="llN-hH-1X4" customClass="ISWTutorialContentController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Je6-Wc-ACR"/>
                         <viewControllerLayoutGuide type="bottom" id="nNb-88-eSv"/>
@@ -91,8 +91,8 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="backgroundImg" destination="fPd-uY-Nhu" id="J3i-Pr-KEk"/>
-                        <outlet property="titleTxt" destination="ydF-1g-Knp" id="957-uz-ori"/>
+                        <outlet property="backgroundImg" destination="fPd-uY-Nhu" id="D45-Xs-hxU"/>
+                        <outlet property="titleTxt" destination="ydF-1g-Knp" id="F6x-X1-L0w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4y9-ji-gdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
