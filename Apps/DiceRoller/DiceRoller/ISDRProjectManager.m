@@ -101,7 +101,7 @@
     }
     
     ProjectBrowserViewController *browser = [[ProjectBrowserViewController alloc] initWithDelegate:self];
-    [self.navigationController pushViewController:browser animated:YES];
+    [self presentViewController:browser animated:YES completion:nil];
 }
 
 - (void) didFinishChoosingProject:(ProjectBrowserViewController *) browser withID: (int) project_id {
