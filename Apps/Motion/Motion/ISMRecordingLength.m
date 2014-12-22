@@ -45,51 +45,51 @@
 }
 
 - (IBAction)oneSBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_ONE_S withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_ONE_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)twoSBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_TWO_S withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_TWO_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)fiveSBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_FIVE_S withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_FIVE_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)tenSBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_TEN_S withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_TEN_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)oneMBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_ONE_M withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_ONE_M withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)thirtySBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_THIRTY_S withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_THIRTY_S withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)twoMBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_TWO_M withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_TWO_M withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)fiveMBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_FIVE_M withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_FIVE_M withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)tenMBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_TEN_M withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_TEN_M withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)thirtyMBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_THIRTY_M withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_THIRTY_M withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)oneHBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_ONE_H withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_ONE_H withName:[(UIButton *)sender titleLabel].text];
 }
 
 - (IBAction)pushToStopBtnOnClick:(id)sender {
-    [self recordingLengthSelected:kBTN_PUSH_TO_STOP withName:[(UIButton *)sender titleLabel].text];
+    [self recordingLengthSelected:kREC_LENGTH_PUSH_TO_STOP withName:[(UIButton *)sender titleLabel].text];
 }
 
 @end

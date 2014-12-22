@@ -13,6 +13,8 @@
 
 @implementation ISMTutorialViewController
 
+@synthesize delegate;
+
 - (void)viewDidLoad {
 
     [super viewDidLoad];
@@ -66,7 +68,7 @@
 
         UIStoryboard *presetStoryboard = [UIStoryboard storyboardWithName:@"Preset" bundle:nil];
         ISMPresets *presetController = [presetStoryboard instantiateViewControllerWithIdentifier:@"PresetStartController"];
-        [presetController setDelegate:nil];
+        [presetController setDelegate:delegate];
         [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:presetController animated:NO completion:nil];
     }];
 }

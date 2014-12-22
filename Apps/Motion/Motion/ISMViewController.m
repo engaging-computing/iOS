@@ -93,17 +93,11 @@
         // could not set navigation color - ignore the error
     }
 
-    // If connectivity exists and there is currently no project, set the default project
+    // Initialize the DataManager
     dm = [DataManager getInstance];
-    int curProjID = [dm getProjectID];
-
-    if ([API hasConnectivity] && curProjID <= 0) {
-
-        [dm setProjectID:[api isUsingDev] ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [dm retrieveProjectFields];
-        });
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [dm retrieveProjectFields];
+    });
 
     // Display one-time tutorial and preset setup
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -113,6 +107,7 @@
         
         UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
         ISMTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+        [tutorialController setDelegate:self];
         [self presentViewController:tutorialController animated:NO completion:nil];
     }
 }
@@ -260,8 +255,42 @@
 #pragma mark - Preset setup
 
 - (void) didFinishSavingPresetWithID:(int)presetID {
-    // TODO
-    NSLog(@"Preset setup complete with ID: %d", presetID);
+
+    int projID;
+    BOOL dev = [api isUsingDev];
+
+    // setup the project, sample rate, and recording length based on the preset selected
+    if (presetID == kPRESET_ACCEL) {
+
+        projID = dev ? kDEFAULT_ACCEL_DEV : kDEFAULT_ACCEL_PRODUCTION;
+        sampleRate = kS_RATE_FIFTY_MS;
+        recordingLength = kREC_LENGTH_TEN_S;
+
+    } else if (presetID == kPRESET_GPS) {
+
+        projID = dev ? kDEFAULT_GPS_DEV : kDEFAULT_GPS_PRODUCTION;
+        sampleRate = kS_RATE_ONE_S;
+        recordingLength = kREC_LENGTH_PUSH_TO_STOP;
+
+    } else /* presetID == kPRESET_DEFAULT */ {
+
+        projID = dev ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION;
+        sampleRate = kS_RATE_FIFTY_MS;
+        recordingLength = kREC_LENGTH_PUSH_TO_STOP;
+    }
+
+    // set the project
+    [dm setProjectID:projID];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [dm retrieveProjectFields];
+    });
+    [self setProjBtnToCurrentProj];
+
+    // set the sample rate
+    [sampleRateBtn setTitle:[self sampleRateAsString:sampleRate] forState:UIControlStateNormal];
+
+    // set the recording length
+    [recordingLengthBtn setTitle:[self recordingLengthAsString:recordingLength] forState:UIControlStateNormal];
 }
 
 #pragma end - Preset setup
@@ -835,6 +864,42 @@
 
     recordingLength = recordingLengthInSeconds;
     [recordingLengthBtn setTitle:recordingLengthAsString forState:UIControlStateNormal];
+}
+
+- (NSString *) sampleRateAsString:(double)sr {
+
+    if (sr == kS_RATE_TWENTY_MS)            return sS_RATE_TWENTY_MS;
+    if (sr == kS_RATE_FIFTY_MS)             return sS_RATE_FIFTY_MS;
+    if (sr == kS_RATE_ONE_HUNDRED_MS)       return sS_RATE_ONE_HUNDRED_MS;
+    if (sr == kS_RATE_TWO_HUNDRED_FIFTY_MS) return sS_RATE_TWO_HUNDRED_FIFTY_MS;
+    if (sr == kS_RATE_FIVE_HUNDRED_MS)      return sS_RATE_FIVE_HUNDRED_MS;
+    if (sr == kS_RATE_ONE_S)                return sS_RATE_ONE_S;
+    if (sr == kS_RATE_TWO_S)                return sS_RATE_TWO_S;
+    if (sr == kS_RATE_THREE_S)              return sS_RATE_THREE_S;
+    if (sr == kS_RATE_FIVE_S)               return sS_RATE_FIVE_S;
+    if (sr == kS_RATE_TEN_S)                return sS_RATE_TEN_S;
+    if (sr == kS_RATE_FIFTEEN_S)            return sS_RATE_FIFTEEN_S;
+    if (sr == kS_RATE_THIRTY_S)             return sS_RATE_THIRTY_S;
+
+    return @"";
+}
+
+- (NSString *) recordingLengthAsString:(int)rl {
+
+    if (rl == kREC_LENGTH_ONE_S) return sREC_LENGTH_ONE_S;
+    if (rl == kREC_LENGTH_TWO_S) return sREC_LENGTH_TWO_S;
+    if (rl == kREC_LENGTH_FIVE_S) return sREC_LENGTH_FIVE_S;
+    if (rl == kREC_LENGTH_TEN_S) return sREC_LENGTH_TEN_S;
+    if (rl == kREC_LENGTH_THIRTY_S) return sREC_LENGTH_THIRTY_S;
+    if (rl == kREC_LENGTH_ONE_M) return sREC_LENGTH_ONE_M;
+    if (rl == kREC_LENGTH_TWO_M) return sREC_LENGTH_TWO_M;
+    if (rl == kREC_LENGTH_FIVE_M) return sREC_LENGTH_FIVE_M;
+    if (rl == kREC_LENGTH_TEN_M) return sREC_LENGTH_TEN_M;
+    if (rl == kREC_LENGTH_THIRTY_M) return sREC_LENGTH_THIRTY_M;
+    if (rl == kREC_LENGTH_ONE_H) return sREC_LENGTH_ONE_H;
+    if (rl == kREC_LENGTH_PUSH_TO_STOP) return sREC_LENGTH_PUSH_TO_STOP;
+
+    return @"";
 }
 
 #pragma end - Sample rate and recording length
