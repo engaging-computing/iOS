@@ -11,6 +11,7 @@
 
 // NSUserDefault (preferences) constants
 #define pPROJECT_ID @"curr_project_id_as_nsnumber"
+#define pDISPLAYED_TUTORIAL @"displayed_tutorial"
 
 // Dialog constants
 #define kLOGIN_DIALOG_TAG 500
@@ -55,7 +56,9 @@
 #define kDEFAULT_PROJ_PRODUCTION 570
 #define kDEFAULT_PROJ_DEV 12
 
-// Preferences tutorial constant
-#define kDISPLAYED_TUTORIAL @"displayed_tutorial"
+// Preset constants
+#define kPRESET_GPS 0
+#define kPRESET_ACCEL 1
+#define kPRESET_DEFAULT 2
 
 #endif

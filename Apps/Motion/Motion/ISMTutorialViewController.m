@@ -58,10 +58,17 @@
 - (IBAction)goToMotionBtnOnClick:(id)sender {
 
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setBool:true forKey:kDISPLAYED_TUTORIAL];
+    [prefs setBool:true forKey:pDISPLAYED_TUTORIAL];
     [prefs synchronize];
 
-    [self.pageViewController dismissViewControllerAnimated:YES completion:nil];
+    // dismiss the tutorial controller and launch the preset setup
+    [self.pageViewController dismissViewControllerAnimated:NO completion:^{
+
+        UIStoryboard *presetStoryboard = [UIStoryboard storyboardWithName:@"Preset" bundle:nil];
+        ISMPresets *presetController = [presetStoryboard instantiateViewControllerWithIdentifier:@"PresetStartController"];
+        [presetController setDelegate:nil];
+        [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:presetController animated:NO completion:nil];
+    }];
 }
 
 #pragma mark - Page View Controller Data Source

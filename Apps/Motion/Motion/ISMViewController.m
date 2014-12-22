@@ -105,14 +105,15 @@
         });
     }
 
-    // Display one-time tutorial
+    // Display one-time tutorial and preset setup
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
-    if (!tutorialShown) {
+    BOOL tutorialShown = [prefs boolForKey:pDISPLAYED_TUTORIAL];
 
+    if (!tutorialShown) {
+        
         UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
         ISMTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
-        [self presentViewController:tutorialController animated:YES completion:nil];
+        [self presentViewController:tutorialController animated:NO completion:nil];
     }
 }
 
@@ -255,6 +256,15 @@
 }
 
 #pragma end - View and overriden methods
+
+#pragma mark - Preset setup
+
+- (void) didFinishSavingPresetWithID:(int)presetID {
+    // TODO
+    NSLog(@"Preset setup complete with ID: %d", presetID);
+}
+
+#pragma end - Preset setup
 
 #pragma mark - Recording data
 

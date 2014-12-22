@@ -21,6 +21,7 @@
 #import "QueueUploadStatus.h"
 #import "ISMTutorialViewController.h"
 #import "GlobalColors.h"
+#import "ISMPresets.h"
 
 #define USE_DEV false
 
@@ -31,7 +32,8 @@
     ISMSampleRateDelegate,
     ISMRecordingLengthDelegate,
     CLLocationManagerDelegate,
-    QueueUploaderDelegate>
+    QueueUploaderDelegate,
+    ISMPresetsDelegate>
 {
     // API and DataManager
     API *api;

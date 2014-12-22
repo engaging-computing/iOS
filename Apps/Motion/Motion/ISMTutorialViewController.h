@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ISMTutorialContentController.h"
+#import "ISMPresets.h"
 
 @interface ISMTutorialViewController : UIViewController <UIPageViewControllerDataSource>
 
