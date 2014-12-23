@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ISMTutorialContentController.h"
+#import "ISMPresets.h"
 
 @interface ISMTutorialViewController : UIViewController <UIPageViewControllerDataSource>
+
+@property (nonatomic, weak) id <ISMPresetsDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIButton *goToMotionBtn;
 - (IBAction)goToMotionBtnOnClick:(id)sender;

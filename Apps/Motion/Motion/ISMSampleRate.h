@@ -8,19 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define kBTN_TWENTY_MS 0.02
-#define kBTN_FIFTY_MS 0.05
-#define kBTN_ONE_HUNDRED_MS 0.1
-#define kBTN_TWO_HUNDRED_FIFTY_MS 0.25
-#define kBTN_FIVE_HUNDRED_MS 0.5
-#define kBTN_ONE_S 1
-#define kBTN_TWO_S 2
-#define kBTN_THREE_S 3
-#define kBTN_FIVE_S 5
-#define kBTN_TEN_S 10
-#define kBTN_FIFTEEN_S 15
-#define kBTN_THIRTY_S 30
-
 @class ISMSampleRate;
 
 @protocol ISMSampleRateDelegate <NSObject>

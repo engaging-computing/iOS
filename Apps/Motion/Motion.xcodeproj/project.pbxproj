@@ -11,6 +11,7 @@
 		B7186A4719BF55D700F18847 /* ISMSampleRate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4619BF55D700F18847 /* ISMSampleRate.m */; };
 		B7186A4A19BF55FC00F18847 /* ISMRecordingLength.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4919BF55FC00F18847 /* ISMRecordingLength.m */; };
 		B7186A5019BF561C00F18847 /* ISMProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4F19BF561C00F18847 /* ISMProjectManager.m */; };
+		B7443EF21A4869B100609821 /* Preset.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7443EF11A4869B100609821 /* Preset.storyboard */; };
 		B7477A4A19D98858001C561F /* button-37.wav in Resources */ = {isa = PBXBuildFile; fileRef = B7477A4919D98858001C561F /* button-37.wav */; };
 		B7477A5919D9886C001C561F /* 29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7477A4B19D9886C001C561F /* 29@1x.png */; };
 		B7477A5A19D9886C001C561F /* 29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7477A4C19D9886C001C561F /* 29@2x.png */; };
@@ -39,6 +40,7 @@
 		B77484A01A1BAD730038E9A7 /* tutorial_5.png in Resources */ = {isa = PBXBuildFile; fileRef = B77484991A1BAD730038E9A7 /* tutorial_5.png */; };
 		B77484A11A1BAD730038E9A7 /* tutorial_6.png in Resources */ = {isa = PBXBuildFile; fileRef = B774849A1A1BAD730038E9A7 /* tutorial_6.png */; };
 		B77484A41A1BAE6B0038E9A7 /* tutorial_7.png in Resources */ = {isa = PBXBuildFile; fileRef = B77484A31A1BAE6B0038E9A7 /* tutorial_7.png */; };
+		B78091881A4858F500D35211 /* ISMPresets.m in Sources */ = {isa = PBXBuildFile; fileRef = B78091871A4858F500D35211 /* ISMPresets.m */; };
 		B792914A19E834260064E793 /* li320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914119E834260064E793 /* li320x480.png */; };
 		B792914B19E834260064E793 /* li640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914219E834260064E793 /* li640x960.png */; };
 		B792914C19E834260064E793 /* li640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = B792914319E834260064E793 /* li640x1136.png */; };
@@ -109,6 +111,7 @@
 		B7186A4E19BF561C00F18847 /* ISMProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMProjectManager.h; sourceTree = "<group>"; };
 		B7186A4F19BF561C00F18847 /* ISMProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMProjectManager.m; sourceTree = "<group>"; };
 		B72B23EE19C9EFF60000EE66 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		B7443EF11A4869B100609821 /* Preset.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preset.storyboard; sourceTree = "<group>"; };
 		B7477A4919D98858001C561F /* button-37.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "button-37.wav"; path = "Resources/button-37.wav"; sourceTree = "<group>"; };
 		B7477A4B19D9886C001C561F /* 29@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "29@1x.png"; path = "Resources/Icons/29@1x.png"; sourceTree = "<group>"; };
 		B7477A4C19D9886C001C561F /* 29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "29@2x.png"; path = "Resources/Icons/29@2x.png"; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 		B77484991A1BAD730038E9A7 /* tutorial_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_5.png; path = Resources/TutorialImages/tutorial_5.png; sourceTree = "<group>"; };
 		B774849A1A1BAD730038E9A7 /* tutorial_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_6.png; path = Resources/TutorialImages/tutorial_6.png; sourceTree = "<group>"; };
 		B77484A31A1BAE6B0038E9A7 /* tutorial_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_7.png; path = Resources/TutorialImages/tutorial_7.png; sourceTree = "<group>"; };
+		B78091861A4858F500D35211 /* ISMPresets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMPresets.h; sourceTree = "<group>"; };
+		B78091871A4858F500D35211 /* ISMPresets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMPresets.m; sourceTree = "<group>"; };
 		B792914119E834260064E793 /* li320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li320x480.png; path = Resources/LaunchImages/li320x480.png; sourceTree = "<group>"; };
 		B792914219E834260064E793 /* li640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li640x960.png; path = Resources/LaunchImages/li640x960.png; sourceTree = "<group>"; };
 		B792914319E834260064E793 /* li640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = li640x1136.png; path = Resources/LaunchImages/li640x1136.png; sourceTree = "<group>"; };
@@ -243,6 +248,7 @@
 				B7D98CF219BF34F800BB8994 /* Main_iPhone.storyboard */,
 				B7D98CF519BF34F800BB8994 /* Main_iPad.storyboard */,
 				B77484881A1B87400038E9A7 /* Tutorial.storyboard */,
+				B7443EF11A4869B100609821 /* Preset.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -279,6 +285,8 @@
 			children = (
 				B7186A4E19BF561C00F18847 /* ISMProjectManager.h */,
 				B7186A4F19BF561C00F18847 /* ISMProjectManager.m */,
+				B78091861A4858F500D35211 /* ISMPresets.h */,
+				B78091871A4858F500D35211 /* ISMPresets.m */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -563,6 +571,7 @@
 				B7477A5C19D9886C001C561F /* 40@2x.png in Resources */,
 				B7477A5A19D9886C001C561F /* 29@2x.png in Resources */,
 				B7477A6319D9886C001C561F /* 72@2x.png in Resources */,
+				B7443EF21A4869B100609821 /* Preset.storyboard in Resources */,
 				B774849C1A1BAD730038E9A7 /* tutorial_1.png in Resources */,
 				B792914D19E834260064E793 /* li768x1004.png in Resources */,
 				B76C43C519C8722800B0A19B /* Main_iPhone.storyboard in Resources */,
@@ -616,6 +625,7 @@
 				B7D98CFA19BF34F800BB8994 /* ISMViewController.m in Sources */,
 				B7D98CED19BF34F800BB8994 /* main.m in Sources */,
 				B7186A4719BF55D700F18847 /* ISMSampleRate.m in Sources */,
+				B78091881A4858F500D35211 /* ISMPresets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

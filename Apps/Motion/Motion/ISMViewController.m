@@ -93,27 +93,26 @@
         // could not set navigation color - ignore the error
     }
 
-    // If connectivity exists and there is currently no project, set the default project
+    // Initialize the DataManager
     dm = [DataManager getInstance];
-    int curProjID = [dm getProjectID];
+    [dm retrieveProjectFields];
 
-    if ([API hasConnectivity] && curProjID <= 0) {
-
-        [dm setProjectID:[api isUsingDev] ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [dm retrieveProjectFields];
-        });
-    }
-
-    // Display one-time tutorial
+    // Display one-time tutorial and preset setup
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
-    if (!tutorialShown) {
+    BOOL tutorialShown = [prefs boolForKey:pDISPLAYED_TUTORIAL];
 
+    if (!tutorialShown) {
+        
         UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
         ISMTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
-        [self presentViewController:tutorialController animated:YES completion:nil];
+        [tutorialController setDelegate:self];
+        [self presentViewController:tutorialController animated:NO completion:nil];
+
+        return;
     }
+
+    // if the tutorial is not being shown, setup the application in its last state using prefs
+    [self loadSetupFromPrefs];
 }
 
 - (void)toggleDev {
@@ -255,6 +254,76 @@
 }
 
 #pragma end - View and overriden methods
+
+#pragma mark - Presets and prefs setup
+
+- (void) didFinishSavingPresetWithID:(int)presetID {
+
+    int projID;
+    BOOL dev = [api isUsingDev];
+
+    // setup the project, sample rate, and recording length based on the preset selected
+    if (presetID == kPRESET_ACCEL) {
+
+        projID = dev ? kDEFAULT_ACCEL_DEV : kDEFAULT_ACCEL_PRODUCTION;
+        sampleRate = kS_RATE_FIFTY_MS;
+        recordingLength = kREC_LENGTH_TEN_S;
+
+    } else if (presetID == kPRESET_GPS) {
+
+        projID = dev ? kDEFAULT_GPS_DEV : kDEFAULT_GPS_PRODUCTION;
+        sampleRate = kS_RATE_ONE_S;
+        recordingLength = kREC_LENGTH_PUSH_TO_STOP;
+
+    } else /* presetID == kPRESET_DEFAULT */ {
+
+        projID = dev ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION;
+        sampleRate = kS_RATE_FIFTY_MS;
+        recordingLength = kREC_LENGTH_PUSH_TO_STOP;
+    }
+
+    [self setupAppWithProject:projID sampleRate:sampleRate andRecordingLength:recordingLength];
+}
+
+- (void)loadSetupFromPrefs {
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    int projID = [prefs integerForKey:pPROJECT_ID];
+    double sRate = [prefs doubleForKey:pSAMPLE_RATE];
+    int recLength = [prefs integerForKey:pRECORDING_LENGTH];
+
+    if (projID >= 0 && sRate != 0.0 && recLength != 0) {
+        [self setupAppWithProject:projID sampleRate:sRate andRecordingLength:recLength];
+    }
+}
+
+- (void)setupAppWithProject:(int)projID sampleRate:(double)sRate andRecordingLength:(int)recLength {
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    sampleRate = sRate;
+    recordingLength = recLength;
+
+    // set and save the project
+    [dm setProjectID:projID];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [dm retrieveProjectFields];
+    });
+    [self setProjBtnToCurrentProj];
+    [prefs setInteger:projID forKey:pPROJECT_ID];
+
+    // set and save the sample rate
+    [sampleRateBtn setTitle:[self sampleRateAsString:sampleRate] forState:UIControlStateNormal];
+    [prefs setDouble:sampleRate forKey:pSAMPLE_RATE];
+
+    // set and save the recording length
+    [recordingLengthBtn setTitle:[self recordingLengthAsString:recordingLength] forState:UIControlStateNormal];
+    [prefs setInteger:recordingLength forKey:pRECORDING_LENGTH];
+
+    [prefs synchronize];
+}
+
+#pragma end - Presets and prefs setup
 
 #pragma mark - Recording data
 
@@ -816,6 +885,10 @@
     
     sampleRate = sampleRateInSeconds;
     [sampleRateBtn setTitle:sampleRateAsString forState:UIControlStateNormal];
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setDouble:sampleRate forKey:pSAMPLE_RATE];
+    [prefs synchronize];
 }
 
 // Called when returning from the recording length selection screen
@@ -825,6 +898,59 @@
 
     recordingLength = recordingLengthInSeconds;
     [recordingLengthBtn setTitle:recordingLengthAsString forState:UIControlStateNormal];
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setInteger:recordingLength forKey:pRECORDING_LENGTH];
+    [prefs synchronize];
+}
+
+- (void) initSampleRateAndRecLengthDictionaries {
+
+    sampleRateStrings = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         sS_RATE_TWENTY_MS,             [NSNumber numberWithDouble:kS_RATE_TWENTY_MS],
+                         sS_RATE_FIFTY_MS,              [NSNumber numberWithDouble:kS_RATE_FIFTY_MS],
+                         sS_RATE_ONE_HUNDRED_MS,        [NSNumber numberWithDouble:kS_RATE_ONE_HUNDRED_MS],
+                         sS_RATE_TWO_HUNDRED_FIFTY_MS,  [NSNumber numberWithDouble:kS_RATE_TWO_HUNDRED_FIFTY_MS],
+                         sS_RATE_FIVE_HUNDRED_MS,       [NSNumber numberWithDouble:kS_RATE_FIVE_HUNDRED_MS],
+                         sS_RATE_ONE_S,                 [NSNumber numberWithDouble:kS_RATE_ONE_S],
+                         sS_RATE_TWO_S,                 [NSNumber numberWithDouble:kS_RATE_TWO_S],
+                         sS_RATE_THREE_S,               [NSNumber numberWithDouble:kS_RATE_THREE_S],
+                         sS_RATE_FIVE_S,                [NSNumber numberWithDouble:kS_RATE_FIVE_S],
+                         sS_RATE_TEN_S,                 [NSNumber numberWithDouble:kS_RATE_TEN_S],
+                         sS_RATE_FIFTEEN_S,             [NSNumber numberWithDouble:kS_RATE_FIFTEEN_S],
+                         sS_RATE_THIRTY_S,              [NSNumber numberWithDouble:kS_RATE_THIRTY_S],
+                         nil];
+
+    recLengthStrings = [[NSDictionary alloc] initWithObjectsAndKeys:
+                        sREC_LENGTH_ONE_S,          [NSNumber numberWithInt:kREC_LENGTH_ONE_S],
+                        sREC_LENGTH_TWO_S,          [NSNumber numberWithInt:kREC_LENGTH_TWO_S],
+                        sREC_LENGTH_FIVE_S,         [NSNumber numberWithInt:kREC_LENGTH_FIVE_S],
+                        sREC_LENGTH_TEN_S,          [NSNumber numberWithInt:kREC_LENGTH_TEN_S],
+                        sREC_LENGTH_THIRTY_S,       [NSNumber numberWithInt:kREC_LENGTH_THIRTY_S],
+                        sREC_LENGTH_ONE_M,          [NSNumber numberWithInt:kREC_LENGTH_ONE_M],
+                        sREC_LENGTH_TWO_M,          [NSNumber numberWithInt:kREC_LENGTH_TWO_M],
+                        sREC_LENGTH_FIVE_M,         [NSNumber numberWithInt:kREC_LENGTH_FIVE_M],
+                        sREC_LENGTH_TEN_M,          [NSNumber numberWithInt:kREC_LENGTH_TEN_M],
+                        sREC_LENGTH_THIRTY_M,       [NSNumber numberWithInt:kREC_LENGTH_THIRTY_M],
+                        sREC_LENGTH_ONE_H,          [NSNumber numberWithInt:kREC_LENGTH_ONE_H],
+                        sREC_LENGTH_PUSH_TO_STOP,   [NSNumber numberWithInt:kREC_LENGTH_PUSH_TO_STOP],
+                        nil];
+}
+
+- (NSString *) sampleRateAsString:(double)sr {
+
+    if (!sampleRateStrings)
+        [self initSampleRateAndRecLengthDictionaries];
+
+    return [sampleRateStrings objectForKey:[NSNumber numberWithDouble:sr]];
+}
+
+- (NSString *) recordingLengthAsString:(int)rl {
+
+    if (!recLengthStrings)
+        [self initSampleRateAndRecLengthDictionaries];
+
+    return [recLengthStrings objectForKey:[NSNumber numberWithInt:rl]];
 }
 
 #pragma end - Sample rate and recording length
