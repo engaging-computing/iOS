@@ -87,9 +87,6 @@
 		B71AD6E619C7119B006820A1 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6BA19C7119B006820A1 /* Default~iphone.png */; };
 		B71AD6E719C7119B006820A1 /* FieldMatchCell~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6BB19C7119B006820A1 /* FieldMatchCell~ipad.xib */; };
 		B71AD6E819C7119B006820A1 /* FieldMatchCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6BC19C7119B006820A1 /* FieldMatchCell~iphone.xib */; };
-		B71AD6E919C7119B006820A1 /* FieldMatching-landscape~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6BD19C7119B006820A1 /* FieldMatching-landscape~ipad.xib */; };
-		B71AD6EA19C7119B006820A1 /* FieldMatching-landscape~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6BE19C7119B006820A1 /* FieldMatching-landscape~iphone.xib */; };
-		B71AD6EB19C7119B006820A1 /* FieldMatching~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6BF19C7119B006820A1 /* FieldMatching~ipad.xib */; };
 		B71AD6ED19C7119B006820A1 /* Fields.strings in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6C119C7119B006820A1 /* Fields.strings */; };
 		B71AD6EE19C7119B006820A1 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6C219C7119B006820A1 /* info.png */; };
 		B71AD6EF19C7119B006820A1 /* launchImage-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6C319C7119B006820A1 /* launchImage-iPad.png */; };
@@ -118,7 +115,7 @@
 		B71AD70919C7119B006820A1 /* waffle_check.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6DD19C7119B006820A1 /* waffle_check.png */; };
 		B71AD70A19C7119B006820A1 /* waffle_warn.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6DE19C7119B006820A1 /* waffle_warn.png */; };
 		B71AD70B19C7119B006820A1 /* waffle_x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6DF19C7119B006820A1 /* waffle_x.png */; };
-		B71B55AD19E566F500415DED /* FieldMatching~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71B55AC19E566F500415DED /* FieldMatching~iphone.xib */; };
+		B71B55AD19E566F500415DED /* FieldMatching.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71B55AC19E566F500415DED /* FieldMatching.xib */; };
 		B76C43C019C8706A00B0A19B /* QDataSetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B76C43BE19C8706A00B0A19B /* QDataSetModel.xcdatamodeld */; };
 		B7D848C919CC8453006BE163 /* DataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D848C819CC8453006BE163 /* DataManager.h */; };
 		B7D848CB19CC8463006BE163 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D848CA19CC8463006BE163 /* DataManager.m */; };
@@ -235,9 +232,6 @@
 		B71AD6BA19C7119B006820A1 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		B71AD6BB19C7119B006820A1 /* FieldMatchCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FieldMatchCell~ipad.xib"; sourceTree = "<group>"; };
 		B71AD6BC19C7119B006820A1 /* FieldMatchCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FieldMatchCell~iphone.xib"; sourceTree = "<group>"; };
-		B71AD6BD19C7119B006820A1 /* FieldMatching-landscape~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FieldMatching-landscape~ipad.xib"; sourceTree = "<group>"; };
-		B71AD6BE19C7119B006820A1 /* FieldMatching-landscape~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FieldMatching-landscape~iphone.xib"; sourceTree = "<group>"; };
-		B71AD6BF19C7119B006820A1 /* FieldMatching~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FieldMatching~ipad.xib"; sourceTree = "<group>"; };
 		B71AD6C119C7119B006820A1 /* Fields.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Fields.strings; sourceTree = "<group>"; };
 		B71AD6C219C7119B006820A1 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
 		B71AD6C319C7119B006820A1 /* launchImage-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launchImage-iPad.png"; sourceTree = "<group>"; };
@@ -266,7 +260,7 @@
 		B71AD6DD19C7119B006820A1 /* waffle_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waffle_check.png; sourceTree = "<group>"; };
 		B71AD6DE19C7119B006820A1 /* waffle_warn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waffle_warn.png; sourceTree = "<group>"; };
 		B71AD6DF19C7119B006820A1 /* waffle_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waffle_x.png; sourceTree = "<group>"; };
-		B71B55AC19E566F500415DED /* FieldMatching~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FieldMatching~iphone.xib"; sourceTree = "<group>"; };
+		B71B55AC19E566F500415DED /* FieldMatching.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldMatching.xib; sourceTree = "<group>"; };
 		B76C43BF19C8706A00B0A19B /* QDataSetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QDataSetModel.xcdatamodel; sourceTree = "<group>"; };
 		B7D848C819CC8453006BE163 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = headers/DataManager.h; sourceTree = "<group>"; };
 		B7D848CA19CC8463006BE163 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = source/DataManager.m; sourceTree = "<group>"; };
@@ -599,10 +593,7 @@
 				B71AD6BA19C7119B006820A1 /* Default~iphone.png */,
 				B71AD6BB19C7119B006820A1 /* FieldMatchCell~ipad.xib */,
 				B71AD6BC19C7119B006820A1 /* FieldMatchCell~iphone.xib */,
-				B71AD6BD19C7119B006820A1 /* FieldMatching-landscape~ipad.xib */,
-				B71AD6BE19C7119B006820A1 /* FieldMatching-landscape~iphone.xib */,
-				B71AD6BF19C7119B006820A1 /* FieldMatching~ipad.xib */,
-				B71B55AC19E566F500415DED /* FieldMatching~iphone.xib */,
+				B71B55AC19E566F500415DED /* FieldMatching.xib */,
 				B71AD6C119C7119B006820A1 /* Fields.strings */,
 				B71AD6C219C7119B006820A1 /* info.png */,
 				B71AD6C319C7119B006820A1 /* launchImage-iPad.png */,
@@ -760,7 +751,6 @@
 				B71AD6E019C7119B006820A1 /* barcode.png in Resources */,
 				B71AD70519C7119B006820A1 /* unchecked.png in Resources */,
 				B71AD6F719C7119B006820A1 /* projectblock_dark.png in Resources */,
-				B71AD6E919C7119B006820A1 /* FieldMatching-landscape~ipad.xib in Resources */,
 				B71AD70619C7119B006820A1 /* unchecked@2x.png in Resources */,
 				B71AD6F319C7119B006820A1 /* menuIcon.png in Resources */,
 				B71AD6FA19C7119B006820A1 /* ProjectBrowserViewController~landscape_iPhone.xib in Resources */,
@@ -768,7 +758,7 @@
 				B71AD70819C7119B006820A1 /* users.png in Resources */,
 				B71AD70419C7119B006820A1 /* Strings.strings in Resources */,
 				B71AD6E219C7119B006820A1 /* checked@2x.png in Resources */,
-				B71B55AD19E566F500415DED /* FieldMatching~iphone.xib in Resources */,
+				B71B55AD19E566F500415DED /* FieldMatching.xib in Resources */,
 				B71AD6FE19C7119B006820A1 /* queue_layout~iphone.xib in Resources */,
 				B71AD6E619C7119B006820A1 /* Default~iphone.png in Resources */,
 				B71AD6AC19C710AE006820A1 /* InfoPlist.strings in Resources */,
@@ -778,7 +768,6 @@
 				B71AD6EF19C7119B006820A1 /* launchImage-iPad.png in Resources */,
 				B71AD6E519C7119B006820A1 /* Default.png in Resources */,
 				B71AD6F619C7119B006820A1 /* projectblock_clean.png in Resources */,
-				B71AD6EA19C7119B006820A1 /* FieldMatching-landscape~iphone.xib in Resources */,
 				B71AD6F919C7119B006820A1 /* ProjectBrowserViewController_iPhone.xib in Resources */,
 				B71AD70119C7119B006820A1 /* reset.png in Resources */,
 				B71AD70019C7119B006820A1 /* QueueCell~iphone.xib in Resources */,
@@ -793,7 +782,6 @@
 				B71AD70B19C7119B006820A1 /* waffle_x.png in Resources */,
 				B71AD6E719C7119B006820A1 /* FieldMatchCell~ipad.xib in Resources */,
 				B71AD6E419C7119B006820A1 /* Default-568h@2x.png in Resources */,
-				B71AD6EB19C7119B006820A1 /* FieldMatching~ipad.xib in Resources */,
 				B71AD6F519C7119B006820A1 /* navBar~landscape_iPhone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -892,7 +880,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = /Applications;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
@@ -914,7 +902,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = /Applications;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
