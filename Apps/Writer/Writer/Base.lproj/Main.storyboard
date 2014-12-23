@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8lc-rR-xie">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8lc-rR-xie">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -171,10 +171,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czu-1E-7m3">
-                                <rect key="frame" x="200" y="253" width="200" height="31"/>
+                                <rect key="frame" x="200" y="234" width="200" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="K06-kL-Mwm"/>
-                                    <constraint firstAttribute="width" constant="200" id="Y5b-BB-mI5"/>
+                                    <constraint firstAttribute="width" constant="200" id="3jG-H0-7Ov"/>
+                                    <constraint firstAttribute="height" constant="30" id="hOy-V0-C19"/>
                                 </constraints>
                                 <state key="normal" title="Enter Project ID">
                                     <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -186,17 +186,14 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploading to Project: Not Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJf-Do-Le6">
                                 <rect key="frame" x="16" y="139" width="568" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="aOy-UD-Krz"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MN-7g-DDJ">
-                                <rect key="frame" x="200" y="291" width="200" height="31"/>
+                                <rect key="frame" x="200" y="272" width="200" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Og1-N4-zfp"/>
+                                    <constraint firstAttribute="height" constant="30" id="AZr-sI-D76"/>
                                 </constraints>
                                 <state key="normal" title="Browse Projects">
                                     <color key="titleColor" red="0.21768342500000001" green="0.53704568610000003" blue="0.21631970510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -209,17 +206,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="czu-1E-7m3" firstAttribute="centerY" secondItem="NcE-0I-0u1" secondAttribute="centerY" id="3Yz-38-VJD"/>
-                            <constraint firstItem="lJf-Do-Le6" firstAttribute="trailing" secondItem="NcE-0I-0u1" secondAttribute="trailingMargin" id="Adv-zv-K2i"/>
-                            <constraint firstItem="czu-1E-7m3" firstAttribute="trailing" secondItem="5MN-7g-DDJ" secondAttribute="trailing" id="AkP-1B-V6V"/>
-                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="top" secondItem="czu-1E-7m3" secondAttribute="bottom" constant="8" symbolic="YES" id="Ckj-T1-pVN"/>
-                            <constraint firstItem="lJf-Do-Le6" firstAttribute="top" secondItem="5z2-OO-7IW" secondAttribute="bottom" constant="139" id="DH0-gR-9AL"/>
-                            <constraint firstItem="czu-1E-7m3" firstAttribute="top" secondItem="lJf-Do-Le6" secondAttribute="bottom" constant="93" id="J5P-oH-xhB"/>
-                            <constraint firstItem="sKQ-FY-YMg" firstAttribute="top" secondItem="5MN-7g-DDJ" secondAttribute="bottom" constant="215" id="XM8-42-e8B"/>
-                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="leading" secondItem="czu-1E-7m3" secondAttribute="leading" id="aYX-yZ-Efs"/>
-                            <constraint firstItem="czu-1E-7m3" firstAttribute="centerX" secondItem="lJf-Do-Le6" secondAttribute="centerX" id="jg6-qz-zOS"/>
-                            <constraint firstItem="5MN-7g-DDJ" firstAttribute="centerX" secondItem="NcE-0I-0u1" secondAttribute="centerX" id="vmd-Em-ovn"/>
-                            <constraint firstItem="lJf-Do-Le6" firstAttribute="leading" secondItem="NcE-0I-0u1" secondAttribute="leadingMargin" id="xzQ-Z9-Poc"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="top" secondItem="lJf-Do-Le6" secondAttribute="bottom" constant="74" id="6PL-G2-Q9E"/>
+                            <constraint firstItem="lJf-Do-Le6" firstAttribute="trailing" secondItem="NcE-0I-0u1" secondAttribute="trailingMargin" id="9jO-eZ-7oZ"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="leading" secondItem="5MN-7g-DDJ" secondAttribute="leading" id="FBc-0u-zV7"/>
+                            <constraint firstAttribute="centerY" secondItem="czu-1E-7m3" secondAttribute="centerY" constant="19" id="HT6-pA-y4S"/>
+                            <constraint firstAttribute="centerX" secondItem="5MN-7g-DDJ" secondAttribute="centerX" id="KP4-0s-bJY"/>
+                            <constraint firstItem="lJf-Do-Le6" firstAttribute="leading" secondItem="NcE-0I-0u1" secondAttribute="leadingMargin" id="aHs-2l-hxY"/>
+                            <constraint firstItem="czu-1E-7m3" firstAttribute="trailing" secondItem="5MN-7g-DDJ" secondAttribute="trailing" id="c4E-VQ-hcq"/>
+                            <constraint firstAttribute="centerY" secondItem="5MN-7g-DDJ" secondAttribute="centerY" constant="-19" id="oDL-a5-zTZ"/>
+                            <constraint firstAttribute="centerX" secondItem="czu-1E-7m3" secondAttribute="centerX" id="zzG-Qu-h0f"/>
                         </constraints>
                     </view>
                     <connections>

@@ -18,32 +18,10 @@
 
 // displays the correct xib based on orientation and device type - called automatically upon view controller entry
 -(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
-        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-            [isenseBundle loadNibNamed:@"FieldMatching-landscape~ipad"
-                                 owner:self
-                               options:nil];
-            //[self viewDidLoad];
-        } else {
-            [isenseBundle loadNibNamed:@"FieldMatching~ipad"
-                                 owner:self
-                               options:nil];
-            //[self viewDidLoad];
-        }
-    } else {
-        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-            [isenseBundle loadNibNamed:@"FieldMatching-landscape~iphone"
-                                 owner:self
-                               options:nil];
-            //[self viewDidLoad];
-        } else {
-            [isenseBundle loadNibNamed:@"FieldMatching~iphone"
-                                 owner:self
-                               options:nil];
-            //[self viewDidLoad];
-        }
-    }
+
+    [isenseBundle loadNibNamed:@"FieldMatching"
+                         owner:self
+                       options:nil];
 }
 
 // Allows the device to rotate as necessary.
