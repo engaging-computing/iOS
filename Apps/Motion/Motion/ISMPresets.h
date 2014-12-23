@@ -25,9 +25,6 @@
 @property (nonatomic, weak) id <ISMPresetsDelegate> delegate;
 - (id)initWithDelegate: (__weak id<ISMPresetsDelegate>) delegateObject;
 
-// UI properties
-@property (weak, nonatomic) IBOutlet UILabel *titleLbl;
-
 @property (weak, nonatomic) IBOutlet UIButton *gpsPresetBtn;
 - (IBAction)gpsPresetBtnOnClick:(id)sender;
 

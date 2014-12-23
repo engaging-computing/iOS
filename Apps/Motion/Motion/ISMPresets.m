@@ -9,19 +9,13 @@
 #import "ISMPresets.h"
 #import "Constants.h"
 
-#ifdef __IPHONE_6_0
-# define LINE_BREAK_WORD_WRAP NSLineBreakByWordWrapping
-#else
-# define LINE_BREAK_WORD_WRAP UILineBreakModeWordWrap
-#endif
-
 @interface ISMPresets ()
 @end
 
 @implementation ISMPresets
 
 @synthesize delegate;
-@synthesize titleLbl, gpsPresetBtn, accelPresetBtn, defaultPresetBtn;
+@synthesize gpsPresetBtn, accelPresetBtn, defaultPresetBtn;
 
 - (id)initWithDelegate: (__weak id<ISMPresetsDelegate>) delegateObject {
 
@@ -36,11 +30,6 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-
-    // set # of lines for the title label
-    [titleLbl setNumberOfLines:0];
-    [titleLbl setLineBreakMode:LINE_BREAK_WORD_WRAP];
-    [titleLbl sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning {

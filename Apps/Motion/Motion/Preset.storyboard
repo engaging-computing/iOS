@@ -48,24 +48,27 @@
                                     <action selector="defaultPresetBtnOnClick:" destination="hEn-Hx-Teq" eventType="touchUpInside" id="OrV-Ei-oUG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How would you like to use this application?  Choose default to setup the application settings yourself." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQ0-OJ-cbg">
-                                <rect key="frame" x="16" y="20" width="568" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="How would you like to use this application?  Choose default to setup the application settings yourself." translatesAutoresizingMaskIntoConstraints="NO" id="AS3-RW-h9D">
+                                <rect key="frame" x="16" y="8" width="568" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="xOm-sM-l6a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="BQ0-OJ-cbg" firstAttribute="trailing" secondItem="iTP-tU-IX4" secondAttribute="trailingMargin" id="1Z1-ay-sp7"/>
+                            <constraint firstItem="AS3-RW-h9D" firstAttribute="trailing" secondItem="iTP-tU-IX4" secondAttribute="trailingMargin" id="22f-gJ-wta"/>
                             <constraint firstItem="zep-4s-8RD" firstAttribute="trailing" secondItem="dve-mL-l2b" secondAttribute="trailing" id="AvK-Er-Dfb"/>
                             <constraint firstItem="yH1-lL-kOZ" firstAttribute="leading" secondItem="dve-mL-l2b" secondAttribute="leading" id="Bkq-rB-qDW"/>
-                            <constraint firstItem="BQ0-OJ-cbg" firstAttribute="top" secondItem="OCM-R7-lyC" secondAttribute="bottom" constant="20" id="Cwn-eQ-Af6"/>
+                            <constraint firstItem="AS3-RW-h9D" firstAttribute="top" secondItem="OCM-R7-lyC" secondAttribute="bottom" constant="8" id="IoS-0U-qHz"/>
                             <constraint firstItem="zep-4s-8RD" firstAttribute="top" secondItem="dve-mL-l2b" secondAttribute="bottom" constant="8" symbolic="YES" id="KCY-3V-xFx"/>
                             <constraint firstItem="dve-mL-l2b" firstAttribute="centerX" secondItem="iTP-tU-IX4" secondAttribute="centerX" id="ibT-FV-rwa"/>
+                            <constraint firstItem="AS3-RW-h9D" firstAttribute="leading" secondItem="iTP-tU-IX4" secondAttribute="leadingMargin" id="khI-IT-VGN"/>
                             <constraint firstItem="dve-mL-l2b" firstAttribute="top" secondItem="yH1-lL-kOZ" secondAttribute="bottom" constant="8" symbolic="YES" id="leb-rm-W6F"/>
                             <constraint firstAttribute="centerY" secondItem="dve-mL-l2b" secondAttribute="centerY" id="mvk-a2-erT"/>
-                            <constraint firstItem="BQ0-OJ-cbg" firstAttribute="leading" secondItem="iTP-tU-IX4" secondAttribute="leadingMargin" id="pE4-uz-CEh"/>
                             <constraint firstItem="yH1-lL-kOZ" firstAttribute="trailing" secondItem="dve-mL-l2b" secondAttribute="trailing" id="tyz-A0-0xr"/>
                             <constraint firstItem="dve-mL-l2b" firstAttribute="leading" secondItem="zep-4s-8RD" secondAttribute="leading" id="yy1-mh-9hQ"/>
                         </constraints>
@@ -74,12 +77,11 @@
                         <outlet property="accelPresetBtn" destination="dve-mL-l2b" id="s4e-nN-Viw"/>
                         <outlet property="defaultPresetBtn" destination="zep-4s-8RD" id="wiU-yF-QeL"/>
                         <outlet property="gpsPresetBtn" destination="yH1-lL-kOZ" id="18L-PF-57J"/>
-                        <outlet property="titleLbl" destination="BQ0-OJ-cbg" id="F0v-qX-8Jw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ws5-Wg-Tds" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="392" y="443"/>
+            <point key="canvasLocation" x="85" y="506"/>
         </scene>
     </scenes>
 </document>
