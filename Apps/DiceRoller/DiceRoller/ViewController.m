@@ -19,6 +19,9 @@ int numTest = 0;
     [super viewDidLoad];
 	api = [API getInstance];
     diceController = [[DiceDataController alloc] init];
+    int projectID = 876;
+    DataManager *dm = [DataManager getInstance];
+    [dm setProjectID:projectID];
 }
 
 - (void)didReceiveMemoryWarning{

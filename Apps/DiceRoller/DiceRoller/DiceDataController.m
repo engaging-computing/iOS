@@ -59,7 +59,7 @@
         
         // declare a project to upload to, username, and password.
         // this example assumes the project has the fields "white dice", "yellow dice", and "sum"
-        int projectID = 876;
+        
         NSString *userEmail = @"mobile.fake@example.com";
         NSString *password = @"mobile";
         
@@ -67,7 +67,8 @@
         [api createSessionWithEmail:userEmail andPassword:password];
         
         // pull down fields for the iSENSE project as an array of RProjectField objects
-        NSArray *projectFields = [api getProjectFieldsWithId:projectID];
+        DataManager *dm = [DataManager getInstance];
+        NSArray *projectFields = [api getProjectFieldsWithId:[dm getProjectID]];
         
         // initialize an array to store your data
         NSMutableArray *rowMajorData = [[NSMutableArray alloc] init];
@@ -118,10 +119,10 @@
         // column-major format.  that is, our data object needs to be a dictionary where the keys are
         // the field IDs and the values are an array of all data points for that key.  luckily, the iSENSE
         // iOS library comes with a DataManager object that will perform this conversion step for us.
-        NSDictionary *columnMajorData = [DataManager convertDataToColumnMajor:rowMajorData forProjectID:projectID];
+        NSDictionary *columnMajorData = [DataManager convertDataToColumnMajor:rowMajorData forProjectID:[dm getProjectID]];
         
         // upload the data to iSENSE
-        [api uploadDataToProject:projectID withData:columnMajorData andName:dataSetName];
+        [api uploadDataToProject:[dm getProjectID] withData:columnMajorData andName:dataSetName];
         
         // you're done! this uploadDataToProject method returns a data set ID number that you can store or check.
         // this dataSetID variable will now contain either a positive integer if the data uploaded
