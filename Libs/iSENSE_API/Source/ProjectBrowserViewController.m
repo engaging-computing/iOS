@@ -284,8 +284,18 @@
         return;
     }
 
+    // delegate the project selection back to the caller
     [self.delegate didFinishChoosingProject:self withID:[(RProject *)[projects objectAtIndex:indexPath.row] project_id].intValue];
-    [self.navigationController popViewControllerAnimated:YES];
+
+    // if a navigation controller exists, pop the view controller from the navigation controller
+    if (self.navigationController) {
+
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+
+    // otherwise, dismiss the view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /* Search bar methods */
