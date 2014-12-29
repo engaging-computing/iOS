@@ -103,7 +103,7 @@
 		B71AD6FA19C7119B006820A1 /* ProjectBrowserViewController~landscape_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6CE19C7119B006820A1 /* ProjectBrowserViewController~landscape_iPhone.xib */; };
 		B71AD6FC19C7119B006820A1 /* queue_layout-landscape~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6D019C7119B006820A1 /* queue_layout-landscape~iphone.xib */; };
 		B71AD6FE19C7119B006820A1 /* queue_layout~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6D219C7119B006820A1 /* queue_layout~iphone.xib */; };
-		B71AD70019C7119B006820A1 /* QueueCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6D419C7119B006820A1 /* QueueCell~iphone.xib */; };
+		B71AD70019C7119B006820A1 /* QueueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6D419C7119B006820A1 /* QueueCell.xib */; };
 		B71AD70119C7119B006820A1 /* reset.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6D519C7119B006820A1 /* reset.png */; };
 		B71AD70219C7119B006820A1 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6D619C7119B006820A1 /* settings.png */; };
 		B71AD70319C7119B006820A1 /* spacer.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6D719C7119B006820A1 /* spacer.png */; };
@@ -248,7 +248,7 @@
 		B71AD6CE19C7119B006820A1 /* ProjectBrowserViewController~landscape_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ProjectBrowserViewController~landscape_iPhone.xib"; sourceTree = "<group>"; };
 		B71AD6D019C7119B006820A1 /* queue_layout-landscape~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "queue_layout-landscape~iphone.xib"; sourceTree = "<group>"; };
 		B71AD6D219C7119B006820A1 /* queue_layout~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "queue_layout~iphone.xib"; sourceTree = "<group>"; };
-		B71AD6D419C7119B006820A1 /* QueueCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "QueueCell~iphone.xib"; sourceTree = "<group>"; };
+		B71AD6D419C7119B006820A1 /* QueueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QueueCell.xib; sourceTree = "<group>"; };
 		B71AD6D519C7119B006820A1 /* reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset.png; sourceTree = "<group>"; };
 		B71AD6D619C7119B006820A1 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		B71AD6D719C7119B006820A1 /* spacer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spacer.png; sourceTree = "<group>"; };
@@ -610,7 +610,7 @@
 				B71AD6CE19C7119B006820A1 /* ProjectBrowserViewController~landscape_iPhone.xib */,
 				B71AD6D019C7119B006820A1 /* queue_layout-landscape~iphone.xib */,
 				B71AD6D219C7119B006820A1 /* queue_layout~iphone.xib */,
-				B71AD6D419C7119B006820A1 /* QueueCell~iphone.xib */,
+				B71AD6D419C7119B006820A1 /* QueueCell.xib */,
 				B71AD6D519C7119B006820A1 /* reset.png */,
 				B71AD6D619C7119B006820A1 /* settings.png */,
 				B71AD6D719C7119B006820A1 /* spacer.png */,
@@ -770,7 +770,7 @@
 				B71AD6F619C7119B006820A1 /* projectblock_clean.png in Resources */,
 				B71AD6F919C7119B006820A1 /* ProjectBrowserViewController_iPhone.xib in Resources */,
 				B71AD70119C7119B006820A1 /* reset.png in Resources */,
-				B71AD70019C7119B006820A1 /* QueueCell~iphone.xib in Resources */,
+				B71AD70019C7119B006820A1 /* QueueCell.xib in Resources */,
 				B71AD70A19C7119B006820A1 /* waffle_warn.png in Resources */,
 				B71AD6FC19C7119B006820A1 /* queue_layout-landscape~iphone.xib in Resources */,
 				B71AD70219C7119B006820A1 /* settings.png in Resources */,
