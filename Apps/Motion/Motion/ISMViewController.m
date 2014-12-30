@@ -97,22 +97,27 @@
     dm = [DataManager getInstance];
     [dm retrieveProjectFields];
 
+    // if the tutorial is not being shown, setup the application in its last state using prefs
+    [self loadSetupFromPrefs];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+
+    [super viewDidAppear:animated];
+
     // Display one-time tutorial and preset setup
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     BOOL tutorialShown = [prefs boolForKey:pDISPLAYED_TUTORIAL];
 
     if (!tutorialShown) {
-        
+
         UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
         ISMTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
         [tutorialController setDelegate:self];
-        [self presentViewController:tutorialController animated:NO completion:nil];
+        [self.parentViewController presentViewController:tutorialController animated:NO completion:nil];
 
         return;
     }
-
-    // if the tutorial is not being shown, setup the application in its last state using prefs
-    [self loadSetupFromPrefs];
 }
 
 - (void)toggleDev {
@@ -289,9 +294,9 @@
 
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 
-    int projID = [prefs integerForKey:pPROJECT_ID];
+    int projID = (int) [prefs integerForKey:pPROJECT_ID];
     double sRate = [prefs doubleForKey:pSAMPLE_RATE];
-    int recLength = [prefs integerForKey:pRECORDING_LENGTH];
+    int recLength = (int) [prefs integerForKey:pRECORDING_LENGTH];
 
     if (projID >= 0 && sRate != 0.0 && recLength != 0) {
         [self setupAppWithProject:projID sampleRate:sRate andRecordingLength:recLength];

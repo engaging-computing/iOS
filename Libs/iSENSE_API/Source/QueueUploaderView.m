@@ -102,11 +102,11 @@
 -(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-        [isenseBundle loadNibNamed:@"queue_layout-landscape~iphone"
+        [isenseBundle loadNibNamed:@"QueueLayout-landscape"
                              owner:self
                            options:nil];
     } else {
-        [isenseBundle loadNibNamed:@"queue_layout~iphone"
+        [isenseBundle loadNibNamed:@"QueueLayout"
                              owner:self
                            options:nil];
     }
