@@ -24,15 +24,44 @@
     return self;
 }
 
+- (bool) projectHasValidFields {
+    //this still needs to be implemented.
+    
+    //Create an instance of dataManager
+    dm = [DataManager getInstance];
+    
+    
+    return true;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
     dm = [DataManager getInstance];
-    int curProjID = [dm getProjectID];
-    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
     
-    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+    
+    //RAjaToDo So this only changes initally so depending on actual condition, is default project actully have correct fields and does project selected from browse projects actually have correct fields. We need to implement a check as well in the area where enter project button changes.
+    if([dm getProjectID] <= 900){
+        
+        int curProjID = [dm getProjectID];
+        NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+        //RAjaToDo Changes Inital Text and when browse button is clicked.
+        [projectLbl setText:[NSString stringWithFormat:@"WhatUploading to Project: %@", curProjIDStr]];
+    }else{
+        //Rajia: If we are in here it means that the project selected does not have properly formatted fields.
+        //We need to present a statement informing the user.
+        //Set back to default project.
+        
+        //Testing: Start off with correct project number and make sure that it uploads properly. Change via enter proj and make sure it does not upload. Finally, Change via browse and make sure uploads back to default.
+        //RAjaToDo Testing Passed! Need to implement this same feature when project number is manually entered.
+        [self.view makeWaffle:@"Error: Selected Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        int curProjID = 876;
+        [dm setProjectID:curProjID];
+        NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+        [projectLbl setText:[NSString stringWithFormat:@"WhatUploading to Project: %@", curProjIDStr]];
+
+    }
 }
 
 - (void)viewDidLoad {
@@ -69,6 +98,7 @@
     [dm retrieveProjectFields];
     
     NSString *curProjIDStr = kNO_PROJECT;
+    //RajiaTODo Seems to never be encountered.
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
 }
 
@@ -81,8 +111,26 @@
                 NSString *projAsString = [[alertView textFieldAtIndex:0] text];
                 [dm setProjectID:[projAsString intValue]];
                 
-                [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
-                
+                if([dm getProjectID] <= 900){
+                    //RAjaToDo Changes when the project number that is entered is valid.
+                    [projectLbl setText:[NSString stringWithFormat:@"NotUploading to Project: %@", projAsString]];
+                }else{
+                    //Rajia: If we are in here it means that the project entered does not have properly formatted fields.
+                    //We need to present a statement informing the user.
+                    //Set back to default project.
+                    
+                    //Testing: Start off with correct project number and make sure that it uploads properly. Change via enter proj and make sure it does not upload. Finally, Change via browse and make sure uploads back to default.
+                    
+                    [self.view makeWaffle:@"Error: Entered Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+                    
+                    //Set back to default project
+                    int curProjID = 876;
+                    [dm setProjectID:curProjID];
+                    NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+                    [projectLbl setText:[NSString stringWithFormat:@"WhatUploading to Project: %@", curProjIDStr]];
+                    
+                }
+
         }
             break;
         }
