@@ -24,15 +24,6 @@
     return self;
 }
 
-- (bool) projectHasValidFields {
-    //this still needs to be implemented.
-    
-    //Create an instance of dataManager
-    dm = [DataManager getInstance];
-    
-    
-    return true;
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -40,9 +31,12 @@
     
     dm = [DataManager getInstance];
     
+    pm = [ [ISDRProjectManager alloc] init];
+    
+    bool projectValid = [pm projectHasValidFields];
     
     //RAjaToDo So this only changes initally so depending on actual condition, is default project actully have correct fields and does project selected from browse projects actually have correct fields. We need to implement a check as well in the area where enter project button changes.
-    if([dm getProjectID] <= 900){
+    if( projectValid ){
         
         int curProjID = [dm getProjectID];
         NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
@@ -61,6 +55,21 @@
         NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
         [projectLbl setText:[NSString stringWithFormat:@"WhatUploading to Project: %@", curProjIDStr]];
 
+    }
+}
+
+
+- (bool) projectHasValidFields {
+    //this still needs to be implemented.
+    
+    //Create an instance of dataManager
+    //dm = [DataManager getInstance];
+    
+    if([dm getProjectID] <= 1000){
+        return true;
+    }
+    else{
+        return false;
     }
 }
 
@@ -110,8 +119,9 @@
             if (buttonIndex != 0) {
                 NSString *projAsString = [[alertView textFieldAtIndex:0] text];
                 [dm setProjectID:[projAsString intValue]];
-                
-                if([dm getProjectID] <= 900){
+                bool projectisValid = [pm projectHasValidFields];
+
+                if(projectisValid){
                     //RAjaToDo Changes when the project number that is entered is valid.
                     [projectLbl setText:[NSString stringWithFormat:@"NotUploading to Project: %@", projAsString]];
                 }else{

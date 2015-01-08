@@ -17,6 +17,7 @@
 
 @interface ISDRProjectManager : UIViewController <ProjectBrowserDelegate, UIAlertViewDelegate> {
     DataManager *dm;
+    ISDRProjectManager *pm; 
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *projectLbl;
