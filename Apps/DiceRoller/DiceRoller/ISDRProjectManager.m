@@ -35,45 +35,42 @@
     
     bool projectValid = [pm projectHasValidFields];
     
-    //RAjaToDo So this only changes initally so depending on actual condition, is default project actully have correct fields and does project selected from browse projects actually have correct fields. We need to implement a check as well in the area where enter project button changes.
     if( projectValid ){
         
         int curProjID = [dm getProjectID];
         NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
-        //RAjaToDo Changes Inital Text and when browse button is clicked.
-        [projectLbl setText:[NSString stringWithFormat:@"WhatUploading to Project: %@", curProjIDStr]];
-    }else{
-        //Rajia: If we are in here it means that the project selected does not have properly formatted fields.
-        //We need to present a statement informing the user.
-        //Set back to default project.
+        [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
         
-        //Testing: Start off with correct project number and make sure that it uploads properly. Change via enter proj and make sure it does not upload. Finally, Change via browse and make sure uploads back to default.
-        //RAjaToDo Testing Passed! Need to implement this same feature when project number is manually entered.
+    }else{
+        
+        // If we are in here it means that the project selected does not have properly formatted fields.
+        // Present an error message to the user and set project back to default project.
+        
         [self.view makeWaffle:@"Error: Selected Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
         int curProjID = 876;
         [dm setProjectID:curProjID];
         NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
-        [projectLbl setText:[NSString stringWithFormat:@"WhatUploading to Project: %@", curProjIDStr]];
+        [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
 
     }
 }
 
 
 - (bool) projectHasValidFields {
-    //this needs to check whether a method has three fields named yellow, white and sum. If it does then return true, else return false!
+    
+    //Checks whether a method has three fields named yellow, white and sum. If it the project does, then returns true. If not, returns false.
     
     bool hasWhiteDieField = false;
     bool hasYellowDieField = false;
     bool hasSumField = false;
-    //bool hasExtraField = false;
     
-    // declare an instance of the singleton API object
+    //Declares an instance of API
     api = [API getInstance];
     
-    //Pull down fields for the iSENSE project as an array of RProjectField objects
+    //Pulls down fields for the iSENSE project
     NSArray *projectFields = [api getProjectFieldsWithId:[dm getProjectID]];
     
-    //Now we want to loop through all the project fields to see if it has all three fields. Once a field is found, its bool is set to true.
+    //Loop through all the project fields to see if they are the required fields.
     for (RProjectField *field in projectFields) {
         
         if ([field.name.lowercaseString rangeOfString:@"white"].location != NSNotFound) {
@@ -87,14 +84,11 @@
             // if we're here, this means the project has a field for the sum.
             hasSumField = true;
             
-        } else {
-            //The project contains a field that is not for white, yellow or sum.
         }
     }
 
     
-    //Now we want to check to see if all three booleans are true. If they are, the project is valid! If not the project is invalid.
-    //RATodo add && (hasExtraField == false)
+    //Check to see if all three booleans are true. If they are, the project is valid! If not the project is invalid.
     if( (hasWhiteDieField == true) && (hasYellowDieField == true) && (hasSumField == true) ){
         return true;
     }
@@ -137,7 +131,6 @@
     [dm retrieveProjectFields];
     
     NSString *curProjIDStr = kNO_PROJECT;
-    //RajiaTODo Seems to never be encountered.
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
 }
 
@@ -152,22 +145,17 @@
                 bool projectisValid = [pm projectHasValidFields];
 
                 if(projectisValid){
-                    //RAjaToDo Changes when the project number that is entered is valid.
-                    [projectLbl setText:[NSString stringWithFormat:@"NotUploading to Project: %@", projAsString]];
+                    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
                 }else{
-                    //Rajia: If we are in here it means that the project entered does not have properly formatted fields.
-                    //We need to present a statement informing the user.
-                    //Set back to default project.
                     
-                    //Testing: Start off with correct project number and make sure that it uploads properly. Change via enter proj and make sure it does not upload. Finally, Change via browse and make sure uploads back to default.
+                    //Project entered does not have properly formatted fields.
+                    //Present an error message informing the user and set project back to default.
                     
                     [self.view makeWaffle:@"Error: Entered Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-                    
-                    //Set back to default project
                     int curProjID = 876;
                     [dm setProjectID:curProjID];
                     NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
-                    [projectLbl setText:[NSString stringWithFormat:@"WhatUploading to Project: %@", curProjIDStr]];
+                    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
                     
                 }
 

@@ -32,7 +32,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 - (IBAction)closeBtnOnClick:(id)sender;
 
-// TODO This still needs to be implemented
 -(bool)projectHasValidFields;
 
 @end
