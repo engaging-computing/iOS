@@ -60,12 +60,42 @@
 
 
 - (bool) projectHasValidFields {
-    //this still needs to be implemented.
+    //this needs to check whether a method has three fields named yellow, white and sum. If it does then return true, else return false!
     
-    //Create an instance of dataManager
-    //dm = [DataManager getInstance];
+    bool hasWhiteDieField = false;
+    bool hasYellowDieField = false;
+    bool hasSumField = false;
+    //bool hasExtraField = false;
     
-    if([dm getProjectID] <= 1000){
+    // declare an instance of the singleton API object
+    api = [API getInstance];
+    
+    //Pull down fields for the iSENSE project as an array of RProjectField objects
+    NSArray *projectFields = [api getProjectFieldsWithId:[dm getProjectID]];
+    
+    //Now we want to loop through all the project fields to see if it has all three fields. Once a field is found, its bool is set to true.
+    for (RProjectField *field in projectFields) {
+        
+        if ([field.name.lowercaseString rangeOfString:@"white"].location != NSNotFound) {
+            // if we're here, this means the project has a field for the white die.
+            hasWhiteDieField = true;
+        } else if ([field.name.lowercaseString rangeOfString:@"yellow"].location != NSNotFound) {
+            // if we're here, this means the project has a field for the yellow die.
+            hasYellowDieField = true;
+            
+        } else if ([field.name.lowercaseString rangeOfString:@"sum"].location != NSNotFound) {
+            // if we're here, this means the project has a field for the sum.
+            hasSumField = true;
+            
+        } else {
+            //The project contains a field that is not for white, yellow or sum.
+        }
+    }
+
+    
+    //Now we want to check to see if all three booleans are true. If they are, the project is valid! If not the project is invalid.
+    //RATodo add && (hasExtraField == false)
+    if( (hasWhiteDieField == true) && (hasYellowDieField == true) && (hasSumField == true) ){
         return true;
     }
     else{
