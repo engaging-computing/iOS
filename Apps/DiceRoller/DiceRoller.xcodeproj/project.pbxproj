@@ -27,6 +27,7 @@
 		31739E1F19DB44B600CF2DFB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1E19DB44B600CF2DFB /* CoreData.framework */; };
 		31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */; };
 		31A8D9FD19E864540042CF02 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A8D9F719E863EE0042CF02 /* libiSENSE_API.a */; };
+		31B62A671A645E5F00B988CD /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B62A661A645E5F00B988CD /* Launch Screen.xib */; };
 		31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9C919DF11A200A5E448 /* DiceDataController.m */; };
 		31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E8DA511A2A53410049502B /* ISDRProjectManager.m */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		31739E1E19DB44B600CF2DFB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3181CF541A2CD49B008F8C37 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
+		31B62A661A645E5F00B988CD /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		31E5C9C819DF11A200A5E448 /* DiceDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceDataController.h; sourceTree = "<group>"; };
 		31E5C9C919DF11A200A5E448 /* DiceDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceDataController.m; sourceTree = "<group>"; };
 		31E8DA4E1A2A53050049502B /* ISDRProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISDRProjectManager.h; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				31739DE319DB3A7C00CF2DFB /* AppDelegate.h */,
 				31739DE419DB3A7C00CF2DFB /* AppDelegate.m */,
 				31739DE619DB3A7C00CF2DFB /* Main.storyboard */,
+				31B62A661A645E5F00B988CD /* Launch Screen.xib */,
 				31739DE919DB3A7C00CF2DFB /* ViewController.h */,
 				31739DEA19DB3A7C00CF2DFB /* ViewController.m */,
 				31739DEC19DB3A7C00CF2DFB /* Images.xcassets */,
@@ -344,6 +347,7 @@
 				31739DED19DB3A7C00CF2DFB /* Images.xcassets in Resources */,
 				31739DDF19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */,
 				31739DE819DB3A7C00CF2DFB /* Main.storyboard in Resources */,
+				31B62A671A645E5F00B988CD /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
