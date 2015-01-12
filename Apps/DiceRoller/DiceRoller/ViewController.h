@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *sumLabel;
 @property (weak, nonatomic) IBOutlet DieView *firstDieView;
 @property (weak, nonatomic) IBOutlet DieView *secondDieView;
-
+@property (weak, nonatomic) IBOutlet UIButton *exitButton;
+- (IBAction)closeBtnOnClick:(id)sender;
 @end
