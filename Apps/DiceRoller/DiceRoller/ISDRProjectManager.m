@@ -24,15 +24,72 @@
     return self;
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
     dm = [DataManager getInstance];
-    int curProjID = [dm getProjectID];
-    NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
     
-    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+    pm = [[ISDRProjectManager alloc] init];
+    
+    bool projectValid = [pm projectHasValidFields];
+    
+    if (projectValid) {
+        
+        int curProjID = [dm getProjectID];
+        NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+        [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+        
+    } else {
+        
+        // If we are in here it means that the project selected does not have properly formatted fields.
+        // Present an error message to the user and set project back to default project.
+        
+        [self.view makeWaffle:@"Error: Selected Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        int curProjID = 876;
+        [dm setProjectID:curProjID];
+        NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+        [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+
+    }
+}
+
+
+- (bool) projectHasValidFields {
+    
+    //Checks whether a method has three fields named yellow, white and sum. If it the project does, then returns true. If not, returns false.
+    
+    bool hasWhiteDieField = false;
+    bool hasYellowDieField = false;
+    bool hasSumField = false;
+    
+    //Declares an instance of API
+    api = [API getInstance];
+    
+    //Pulls down fields for the iSENSE project
+    NSArray *projectFields = [api getProjectFieldsWithId:[dm getProjectID]];
+    
+    //Loop through all the project fields to see if they are the required fields.
+    for (RProjectField *field in projectFields) {
+        
+        if ([field.name.lowercaseString rangeOfString:@"white"].location != NSNotFound) {
+            // if we're here, this means the project has a field for the white die.
+            hasWhiteDieField = true;
+        } else if ([field.name.lowercaseString rangeOfString:@"yellow"].location != NSNotFound) {
+            // if we're here, this means the project has a field for the yellow die.
+            hasYellowDieField = true;
+            
+        } else if ([field.name.lowercaseString rangeOfString:@"sum"].location != NSNotFound) {
+            // if we're here, this means the project has a field for the sum.
+            hasSumField = true;
+            
+        }
+    }
+
+    
+    //Check to see if all three booleans are true. If they are, the project is valid! If not the project is invalid.
+    return (hasWhiteDieField && hasYellowDieField && hasSumField);
 }
 
 - (void)viewDidLoad {
@@ -80,9 +137,25 @@
             if (buttonIndex != 0) {
                 NSString *projAsString = [[alertView textFieldAtIndex:0] text];
                 [dm setProjectID:[projAsString intValue]];
+                bool projectisValid = [pm projectHasValidFields];
+
+                if(projectisValid){
+                    
+                    [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
+                    break;
+                    
+                }
                 
-                [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
+                //Project entered does not have properly formatted fields.
+                //Present an error message informing the user and set project back to default.
                 
+                [self.view makeWaffle:@"Error: Entered Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+                int curProjID = 876;
+                [dm setProjectID:curProjID];
+                NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+                [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+                
+                break;
         }
             break;
         }

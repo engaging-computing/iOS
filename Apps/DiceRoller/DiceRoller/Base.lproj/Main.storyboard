@@ -19,6 +19,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="felt" translatesAutoresizingMaskIntoConstraints="NO" id="n46-wr-ryr">
                                 <rect key="frame" x="-1" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oDq-J8-RBt" customClass="DieView">
                                 <rect key="frame" x="32" y="107" width="100" height="100"/>
@@ -44,7 +45,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh0-7Y-hWY">
-                                <rect key="frame" x="49" y="453" width="60" height="30"/>
+                                <rect key="frame" x="52" y="405" width="60" height="30"/>
                                 <state key="normal" title="Project">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,8 +54,20 @@
                                     <segue destination="857-Fg-prl" kind="modal" id="YH0-ym-HCu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUj-Cm-IdV">
+                                <rect key="frame" x="119" y="497" width="70" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Exit App">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kXy-xv-GeX"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sat-KG-MbZ">
-                                <rect key="frame" x="218" y="453" width="46" height="30"/>
+                                <rect key="frame" x="219" y="405" width="46" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,6 +77,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="exitButton" destination="tUj-Cm-IdV" id="E1r-F3-esH"/>
                         <outlet property="firstDieView" destination="oDq-J8-RBt" id="wCK-Ov-3d0"/>
                         <outlet property="rollButton" destination="bBH-zl-IQS" id="WzP-5f-HIT"/>
                         <outlet property="secondDieView" destination="s1n-g2-Erx" id="kZa-FP-YOu"/>

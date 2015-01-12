@@ -17,6 +17,8 @@
 
 @interface ISDRProjectManager : UIViewController <ProjectBrowserDelegate, UIAlertViewDelegate> {
     DataManager *dm;
+    ISDRProjectManager *pm;
+    API *api;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *projectLbl;
@@ -29,5 +31,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 - (IBAction)closeBtnOnClick:(id)sender;
+
+-(bool)projectHasValidFields;
 
 @end
