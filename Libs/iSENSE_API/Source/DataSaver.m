@@ -214,22 +214,22 @@
 
                 if ([api getCurrentUser] == nil) {
 
-                    DLAVAlertView *contribKeyAlert = [[DLAVAlertView alloc] initWithTitle:@"Enter Contributor Key" message:[NSString stringWithFormat:@"%@%@", @"Data Set: ", currentDS.name] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
-                    [contribKeyAlert setAlertViewStyle:DLAVAlertViewStyleLoginAndPasswordInput];
-                    [contribKeyAlert textFieldAtIndex:0].placeholder = @"Contributor Name";
-                    [contribKeyAlert textFieldAtIndex:1].placeholder = @"Contributor Key";
-                    [contribKeyAlert showWithCompletion:^(DLAVAlertView *alertView, NSInteger buttonIndex) {
-                        if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Upload"]) {
-                            returnID = [api uploadDataToProject:currentDS.projID.intValue withData:jobj withContributorKey:[contribKeyAlert textFieldTextAtIndex:1] as:[contribKeyAlert textFieldTextAtIndex:0] andName:currentDS.name];
-                        }
-                    }];
+                    returnID = [api uploadDataToProject:currentDS.projID.intValue
+                                               withData:jobj
+                                     withContributorKey:[api getCurrentContributorKey]
+                                                     as:@"iOS Contributor"
+                                                andName:currentDS.name];
                 } else {
-                   returnID = [api uploadDataToProject:currentDS.projID.intValue withData:jobj andName:currentDS.name];
+
+                    returnID = [api uploadDataToProject:currentDS.projID.intValue
+                                              withData:jobj
+                                               andName:currentDS.name];
                 }
 
                 NSLog(@"Data set ID: %d", returnID);
                 
                 if (returnID <= 0) {
+
                     dataSetsFailed++;
                     continue;
                 }
@@ -249,7 +249,6 @@
                 for (int i = 0; i < pictures.count; i++) {
             
                     // track the images that fail to upload
-                    
                     if ([api getCurrentUser] == nil) {
 
                         DLAVAlertView *contribKeyAlert = [[DLAVAlertView alloc] initWithTitle:@"Enter Contributor Key" message:[NSString stringWithFormat:@"%@%@", @"Data Set: ", currentDS.name] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
@@ -270,6 +269,7 @@
                     }
                     
                     if (returnID == -1) {
+
                         dataSetsFailed++;
                         failedAtLeastOnce = true;
                         [newPicturePaths addObject:pictures[i]];
@@ -282,6 +282,7 @@
             
                 // add back the images that need to be uploaded
                 if (failedAtLeastOnce) {
+
                     currentDS.picturePaths = [newPicturePaths copy];
                     continue;
                 }
@@ -292,8 +293,6 @@
         } else {
             continue;
         }
-        
-        
     }
     
     [self removeDataSets:dataSetsToBeRemoved];

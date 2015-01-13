@@ -18,14 +18,14 @@
     [self setTableToEditMode:![self.mTableView isEditing]];
 }
 
-- (void) setTableToEditMode:(BOOL)isEditing {
+- (void)setTableToEditMode:(BOOL)isEditing {
 
     [self.mTableView setEditing:isEditing animated:YES];
     [self.editButtonItem setTitle:(isEditing ? @"Done" : @"Edit")];
 }
 
 
-- (id) initWithParentName:(NSString *)parentName andDelegate:(id <QueueUploaderDelegate>)delegateObj {
+- (id)initWithParentName:(NSString *)parentName andDelegate:(id <QueueUploaderDelegate>)delegateObj {
 
     self = [super init];
 
@@ -43,7 +43,7 @@
 }
 
 // Upload button control
--(IBAction)upload:(id)sender {
+- (IBAction)upload:(id)sender {
 
     // check for connectivity
     if (![API hasConnectivity]) {
@@ -75,31 +75,26 @@
         NSString *user = [prefs objectForKey:KEY_USERNAME];
         NSString *pass = [prefs objectForKey:KEY_PASSWORD];
         
-        if ([API hasConnectivity]) {
-            
-            if (user == nil || pass == nil) {
-                
-                UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Login"
-                                                                  message:nil
-                                                                 delegate:self
-                                                        cancelButtonTitle:@"Cancel"
-                                                        otherButtonTitles:@"Okay", nil];
-                message.tag = QUEUE_LOGIN;
-                [message setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-                [message show];
-            } else {
-                [self loginAndUploadWithUsername:user withPassword:pass];
-            }
-            
+
+        if (user == nil || pass == nil) {
+
+
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:nil
+                                                              message:@"Would you like to use a contributor key or login with an account?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                                    otherButtonTitles:@"Key", @"Account", nil];
+            message.tag = QUEUE_SELECT_USER_OR_KEY;
+            [message setAlertViewStyle:UIAlertViewStyleDefault];
+            [message show];
         } else {
-            
-            [self.navigationController popViewControllerAnimated:YES];
+            [self loginAndUploadWithUsername:user withPassword:pass];
         }
     }
 }
 
 // displays the correct xib based on orientation and device type - called automatically upon view controller entry
--(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
         [isenseBundle loadNibNamed:@"QueueLayout-landscape"
@@ -112,7 +107,7 @@
     }
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
 
     [super viewDidAppear:YES];
     
@@ -191,7 +186,7 @@
     }
 }
 
-- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     UIAlertView *message;
     QueueCell *cell;
@@ -259,7 +254,7 @@
 	}
 }
 
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
     if (alertView.tag == QUEUE_LOGIN) {
         
@@ -328,6 +323,7 @@
             [cell setDesc:newDescription];
             [dataSaver editDataSetWithKey:cell.mKey andChangeDescription:newDescription];
         }
+
     } else if (alertView.tag == OPTION_APPLY_PROJ_AND_FIELDS) {
 
         if (buttonIndex != OPTION_CANCELED) {
@@ -343,12 +339,47 @@
                 }
             }
         }
+
+    } else if (alertView.tag == QUEUE_SELECT_USER_OR_KEY) {
+
+        if (buttonIndex == INDEX_LOGIN) {
+
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Login"
+                                                              message:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                                    otherButtonTitles:@"Okay", nil];
+            message.tag = QUEUE_LOGIN;
+            [message setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+            [message show];
+
+        } else if (buttonIndex == INDEX_CONTRIB_KEY) {
+
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Enter Contributor Key"
+                                                              message:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                                    otherButtonTitles:@"Okay", nil];
+            message.tag = QUEUE_CONTRIB_KEY;
+            [message setAlertViewStyle:UIAlertViewStylePlainTextInput];
+            [message show];
+
+        }
+
+    } else if (alertView.tag == QUEUE_CONTRIB_KEY) {
+
+        if (buttonIndex != OPTION_CANCELED) {
+
+            NSString *contribKey = [[alertView textFieldAtIndex:0] text];
+            NSLog(@"contribKey = %@", contribKey);
+            [self loginAndUploadWithContributorKey:contribKey];
+        }
     }
-    
+
     [self.mTableView reloadData];
 }
 
-- (void) didFinishChoosingProject:(ProjectBrowserViewController *)browser withID:(int)project_id {
+- (void)didFinishChoosingProject:(ProjectBrowserViewController *)browser withID:(int)project_id {
 
     projID = project_id;
     
@@ -421,7 +452,7 @@
 }
 
 // Log you into to iSENSE using the iSENSE API and uploads data
-- (void) loginAndUploadWithUsername:(NSString *)usernameInput withPassword:(NSString *)passwordInput {
+- (void)loginAndUploadWithUsername:(NSString *)usernameInput withPassword:(NSString *)passwordInput {
     
     UIAlertView *message = [self getDispatchDialogWithMessage:@"Logging in..."];
     [message show];
@@ -462,8 +493,53 @@
     });
 }
 
+// Logs into iSENSE with a contributor key and attempts to upload data
+- (void)loginAndUploadWithContributorKey:(NSString *)contribKey {
+
+    UIAlertView *message = [self getDispatchDialogWithMessage:@"Validating key..."];
+    [message show];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        QDataSet *firstDataSet = (QDataSet *) [dataSaver getDataSet];
+        int pid = [firstDataSet projID].intValue;
+
+        bool isKeyValid = [api validateKey:contribKey forProject:pid];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            if (isKeyValid) {
+
+                // upload data
+                [message setTitle:@"Uploading data sets..."];
+
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+                    QueueUploadStatus *uploadStatus = [dataSaver upload:parent];
+
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
+
+                        [message dismissWithClickedButtonIndex:0 animated:YES];
+                        [self.navigationController popViewControllerAnimated:YES];
+                    });
+
+                });
+
+            } else {
+                [self.view makeWaffle:[NSString stringWithFormat:@"Invalid contributor key for project %d", pid]
+                             duration:WAFFLE_LENGTH_SHORT
+                             position:WAFFLE_BOTTOM
+                                image:WAFFLE_RED_X];
+                [message dismissWithClickedButtonIndex:0 animated:YES];
+                return;
+            }
+        });
+    });
+}
+
 // This is for the loading spinner when the app starts automatic mode
-- (UIAlertView *) getDispatchDialogWithMessage:(NSString *)dString {
+- (UIAlertView *)getDispatchDialogWithMessage:(NSString *)dString {
 
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:dString
                                                       message:nil
@@ -515,13 +591,13 @@
     lastClickedCellIndex = indexPath;
 }
 
-- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
 
     [textField resignFirstResponder];
     return YES;
 }
 
-- (BOOL) containsAcceptedCharacters:(NSString *)mString {
+- (BOOL)containsAcceptedCharacters:(NSString *)mString {
 
     NSCharacterSet *unwantedCharacters =
     [[NSCharacterSet characterSetWithCharactersInString:kACCEPTED_CHARS] invertedSet];
@@ -529,7 +605,7 @@
     return ([mString rangeOfCharacterFromSet:unwantedCharacters].location == NSNotFound) ? YES : NO;
 }
 
-- (BOOL) containsAcceptedDigits:(NSString *)mString {
+- (BOOL)containsAcceptedDigits:(NSString *)mString {
 
     NSCharacterSet *unwantedCharacters =
     [[NSCharacterSet characterSetWithCharactersInString:kACCEPTED_DIGITS] invertedSet];
@@ -537,7 +613,7 @@
     return ([mString rangeOfCharacterFromSet:unwantedCharacters].location == NSNotFound) ? YES : NO;
 }
 
-- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     
@@ -569,7 +645,7 @@
     }
 }
 
-- (void) launchFieldMatchingViewControllerFromBrowse:(bool)fromBrowse {
+- (void)launchFieldMatchingViewControllerFromBrowse:(bool)fromBrowse {
 
     // get the fields to field match
     // an explicit new instance of the DataManager is used to avoid interfering with the singleton instance
@@ -607,7 +683,7 @@
     });
 }
 
-- (void) retrieveFieldMatchedArray:(NSNotification *)obj {
+- (void)retrieveFieldMatchedArray:(NSNotification *)obj {
 
     // reset the edit menu option
     [self setTableToEditMode:![self.mTableView isEditing]];
@@ -644,7 +720,7 @@
     // else user canceled
 }
 
-- (void) setCell:(QueueCell *)cell withProjectID:(int)projectID andFields:(NSMutableArray *)fields {
+- (void)setCell:(QueueCell *)cell withProjectID:(int)projectID andFields:(NSMutableArray *)fields {
 
     [cell setProjID:[NSString stringWithFormat:@"%d", projectID]];
     [cell.dataSet setProjID:[NSNumber numberWithInt:projectID]];
