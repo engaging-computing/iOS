@@ -77,9 +77,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="iS Dice Roller" id="KZd-zd-IEP">
-                        <barButtonItem key="rightBarButtonItem" title="Account" id="gGf-pE-Ev9"/>
+                        <barButtonItem key="rightBarButtonItem" title="Account" id="gGf-pE-Ev9">
+                            <connections>
+                                <action selector="credentialBarBtnOnClick:" destination="vXZ-lx-hvc" id="8tq-r0-8Cm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="credentialBarBtn" destination="gGf-pE-Ev9" id="phr-Hx-w9v"/>
                         <outlet property="exitButton" destination="tUj-Cm-IdV" id="E1r-F3-esH"/>
                         <outlet property="firstDieView" destination="oDq-J8-RBt" id="wCK-Ov-3d0"/>
                         <outlet property="rollButton" destination="bBH-zl-IQS" id="WzP-5f-HIT"/>

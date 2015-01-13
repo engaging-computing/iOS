@@ -12,4 +12,9 @@
 // Project constants
 #define kNO_PROJECT @"Not Set"
 
+// Dialog constants
+#define kLOGIN_DIALOG_TAG 500
+#define kLOGIN_USER_TEXT 501
+#define kLOGIN_PASS_TEXT 502
+
 #endif
