@@ -42,38 +42,49 @@ typedef enum {
 @interface API : NSObject {
 }
 
-/* getInstance */
-+(API *)getInstance;
+// instance initializer
++ (API *)getInstance;
 
-/* Checks for Connectivity */
-+(BOOL)hasConnectivity;
+// connectivity checker
++ (BOOL)hasConnectivity;
 
--(void)useDev:(BOOL)useDev;
+// dev and base URL
+- (void)useDev:(BOOL)useDev;
 - (BOOL)isUsingDev;
--(void)setBaseUrl:(NSURL *)newUrl;
+- (void)setBaseUrl:(NSURL *)newUrl;
 
--(RPerson *)createSessionWithEmail:(NSString *)p_email andPassword:(NSString *)p_password;
--(void)deleteSession;
--(bool)loadCurrentUserFromPrefs;
+// user
+- (RPerson *)createSessionWithEmail:(NSString *)p_email andPassword:(NSString *)p_password;
+- (void)deleteSession;
+- (bool)loadCurrentUserFromPrefs;
+- (RPerson *)getCurrentUser;
 
--(RProject *)   getProjectWithId:       (int)projectId;
--(RDataSet *)   getDataSetWithId:       (int)dataSetId;
--(NSArray *)    getProjectFieldsWithId: (int)projectId;
--(NSArray *)    getDataSetsWithId:      (int)projectId;
+// contributor keys
+- (bool) validateKey:(NSString *)conKey forProject:(int)projectID;
+- (NSString *)getCurrentContributorKey;
 
--(NSArray *)    getProjectsAtPage:  (int)page withPageLimit:(int)perPage withFilter:(SortType)descending andQuery:(NSString *)search;
+// project and data set GET
+- (RProject *)getProjectWithId:(int)projectId;
+- (RDataSet *)getDataSetWithId:(int)dataSetId;
+- (NSArray *)getProjectFieldsWithId:(int)projectId;
+- (NSArray *)getDataSetsWithId:(int)projectId;
+- (NSArray *)getProjectsAtPage:(int)page withPageLimit:(int)perPage withFilter:(SortType)descending andQuery:(NSString *)search;
 
--(RPerson *)    getCurrentUser;
--(int)          createProjectWithName:(NSString *)name  andFields:(NSArray *)fields;
--(bool)         appendDataSetDataWithId:(int)dataSetId  andData:(NSDictionary *)data;
--(bool)         appendDataSetDataWithId:(int)dataSetId  andData:(NSDictionary *)data withContributorKey:(NSString *)conKey;
+// project create
+- (int)createProjectWithName:(NSString *)name  andFields:(NSArray *)fields;
 
--(int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload andName:(NSString *)name;
--(int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload withContributorKey:(NSString *) conKey as:(NSString *) conName andName:(NSString *)name;
--(int) uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *) name withTarget: (TargetType) ttype;
--(int) uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *) name withTarget: (TargetType) ttype withContributorKey:(NSString *) conKey as:(NSString *) conName;
+// data set upload and append
+- (bool)appendDataSetDataWithId:(int)dataSetId  andData:(NSDictionary *)data;
+- (bool)appendDataSetDataWithId:(int)dataSetId  andData:(NSDictionary *)data withContributorKey:(NSString *)conKey;
+- (int)uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload andName:(NSString *)name;
+- (int)uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload withContributorKey:(NSString *)conKey as:(NSString *)conName andName:(NSString *)name;
 
--(NSString *) getVersion;
-+(NSString *) getTimeStamp;
+// media upload
+- (int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *) name withTarget: (TargetType) ttype;
+- (int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *) name withTarget: (TargetType) ttype withContributorKey:(NSString *)conKey as:(NSString *)conName;
+
+// etc
+- (NSString *)getVersion;
++ (NSString *)getTimeStamp;
 
 @end

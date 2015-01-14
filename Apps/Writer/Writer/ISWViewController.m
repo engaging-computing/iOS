@@ -100,12 +100,12 @@
     contentView.backgroundColor = [UIColor clearColor];
     contentView.backgroundView = nil;
 
+    // present dialog if location is not authorized yet
+    [self isLocationAuthorized];
+
     // add a footer view to the table to either display a warning that no project is selected or
     // a count of the number of data rows currently saved for this data set
     [self addFooterView];
-
-    // present dialog if location is not authorized yet
-    [self isLocationAuthorized];
 
     // Display one-time tutorial
     BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
@@ -115,6 +115,12 @@
         ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
         [self presentViewController:tutorialController animated:YES completion:nil];
     }
+
+    // add an observer for when the application is going to exit
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResign)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -172,6 +178,19 @@
 
     // unregister location updates
     [self unregisterLocationUpdates];
+}
+
+- (void) applicationWillResign {
+
+    // reset the keyboard shift
+    keyboardShift = 0;
+    isKeyboardDisplaying = false;
+
+    // reset the active TextField
+    if (activeTextField != nil) {
+        [activeTextField resignFirstResponder];
+    }
+    activeTextField = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -349,7 +368,6 @@
 
         // set numbers only for numeric fields
         cell.fieldDataTxt.keyboardType = UIKeyboardTypeNumberPad;
-
     }
 
     return cell;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,34 +12,63 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014 iSENSE. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Motion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-wl-KlH">
+                    <rect key="frame" x="8" y="120" width="464" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
-                    <variation key="widthClass=compact">
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    </variation>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iSENSE Motion" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="218" width="441" height="43"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_rsense_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="tK5-T1-ziq">
+                    <rect key="frame" x="110" y="50" width="260" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="260" id="SQG-kW-j3L"/>
+                        <constraint firstAttribute="width" secondItem="tK5-T1-ziq" secondAttribute="height" multiplier="130:31" id="g7o-52-WeS"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="machine_science.png" translatesAutoresizingMaskIntoConstraints="NO" id="cdx-SH-3le">
+                    <rect key="frame" x="114" y="433" width="253" height="39"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="253" id="6I5-ys-GvD"/>
+                        <constraint firstAttribute="width" secondItem="cdx-SH-3le" secondAttribute="height" multiplier="253:39" id="zp9-bz-F2G"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uml.png" translatesAutoresizingMaskIntoConstraints="NO" id="xXq-zU-MPT">
+                    <rect key="frame" x="168" y="238" width="145" height="165"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="xXq-zU-MPT" secondAttribute="height" multiplier="29:33" id="fPX-7u-WZI"/>
+                        <constraint firstAttribute="width" constant="145" id="q1d-tu-jCE"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isenseproject.org" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rao-ao-MLj">
+                    <rect key="frame" x="8" y="166" width="464" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.56408546350585731" green="0.22754734914444102" blue="0.76556581439393945" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="4nQ-cC-Nkc"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="8ie-xW-0ye" secondAttribute="leading" id="LZM-uW-Wgm"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Wz8-H3-JqW"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" id="eFM-4A-PHr"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="l2p-Rs-PSd"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="218" id="pxK-0Q-kYZ"/>
+                <constraint firstItem="rao-ao-MLj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="0fI-yk-Zbc"/>
+                <constraint firstAttribute="centerX" secondItem="cdx-SH-3le" secondAttribute="centerX" id="D5g-wc-UzY"/>
+                <constraint firstAttribute="trailing" secondItem="rao-ao-MLj" secondAttribute="trailing" constant="8" id="EKc-d9-NSH"/>
+                <constraint firstAttribute="bottom" secondItem="cdx-SH-3le" secondAttribute="bottom" constant="8" id="TGa-Dp-rq9"/>
+                <constraint firstAttribute="centerX" secondItem="xXq-zU-MPT" secondAttribute="centerX" id="VfO-5B-tfS"/>
+                <constraint firstItem="Cmi-wl-KlH" firstAttribute="top" secondItem="tK5-T1-ziq" secondAttribute="bottom" constant="8" id="XZY-pj-CLm"/>
+                <constraint firstItem="Cmi-wl-KlH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Ynu-q3-vbG"/>
+                <constraint firstItem="rao-ao-MLj" firstAttribute="top" secondItem="Cmi-wl-KlH" secondAttribute="bottom" constant="17" id="d4M-ou-RD7"/>
+                <constraint firstAttribute="trailing" secondItem="Cmi-wl-KlH" secondAttribute="trailing" constant="8" id="ep6-Sk-o82"/>
+                <constraint firstItem="tK5-T1-ziq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="oSI-5X-ieQ"/>
+                <constraint firstAttribute="centerX" secondItem="tK5-T1-ziq" secondAttribute="centerX" id="uf4-SQ-NUR"/>
+                <constraint firstItem="cdx-SH-3le" firstAttribute="top" secondItem="xXq-zU-MPT" secondAttribute="bottom" constant="30" id="wcy-aE-O3l"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="472" y="476"/>
+            <point key="canvasLocation" x="638" y="694"/>
         </view>
     </objects>
+    <resources>
+        <image name="machine_science.png" width="1235" height="164"/>
+        <image name="uml.png" width="193" height="236"/>
+        <image name="white_rsense_logo.png" width="777" height="189"/>
+    </resources>
 </document>
