@@ -47,7 +47,7 @@
 
     // Initialize API and start separate thread to reload any user that has been saved to preferences
     api = [API getInstance];
-    [api useDev:USE_DEV];
+    [api useDev:true];
     [self createDevUILabel];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [api loadCurrentUserFromPrefs];
@@ -100,6 +100,10 @@
     contentView.backgroundColor = [UIColor clearColor];
     contentView.backgroundView = nil;
 
+    // add a footer view to the table to either display a warning that no project is selected or
+    // a count of the number of data rows currently saved for this data set
+    [self addFooterView];
+
     // present dialog if location is not authorized yet
     [self isLocationAuthorized];
 
@@ -111,10 +115,6 @@
         ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
         [self presentViewController:tutorialController animated:YES completion:nil];
     }
-
-    // add a footer view to the table to either display a warning that no project is selected or
-    // a count of the number of data rows currently saved for this data set
-    [self addFooterView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -137,6 +137,7 @@
             FieldData *data = [[FieldData alloc] init];
             data.fieldName = field.name;
             data.fieldType = field.type;
+            data.fieldRestrictions = field.restrictions;
             [dataArr addObject:data];
         }
 
@@ -327,7 +328,7 @@
 
     FieldData *tmp = [dataArr objectAtIndex:indexPath.row];
 
-    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
+    [cell setupCellWithField:tmp.fieldName data:tmp.fieldData andRestrictions:tmp.fieldRestrictions];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     // tag the cell's UITextField with the indexPath of the cell
@@ -348,6 +349,13 @@
 
         // set numbers only for numeric fields
         cell.fieldDataTxt.keyboardType = UIKeyboardTypeNumberPad;
+
+    } else if (tmp.fieldRestrictions != (id)[NSNull null] && tmp.fieldRestrictions != nil && tmp.fieldRestrictions.count > 0) {
+
+        // this text field has restrictions: create an input view to display only these restricted values
+        UIPickerView *picker = [[UIPickerView alloc] init];
+        
+        cell.fieldDataTxt.inputView = picker;
     }
 
     return cell;
@@ -529,6 +537,18 @@
     if (!isKeyboardDisplaying) {
 
         activeTextField = textField;
+
+        // if this field has any restrictions, display the restrictions
+        if (textField.tag != kDATA_SET_NAME_TAG) {
+
+            FieldData *data = [dataArr objectAtIndex:textField.tag];
+            NSArray *res = data.fieldRestrictions;
+
+            if (res != (id)[NSNull null] && res != nil && res.count > 0) {
+
+                NSLog(@"RESTRICTED!");
+            }
+        }
     }
 }
 
