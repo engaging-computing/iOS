@@ -11,6 +11,9 @@
 		B7186A4719BF55D700F18847 /* ISMSampleRate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4619BF55D700F18847 /* ISMSampleRate.m */; };
 		B7186A4A19BF55FC00F18847 /* ISMRecordingLength.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4919BF55FC00F18847 /* ISMRecordingLength.m */; };
 		B7186A5019BF561C00F18847 /* ISMProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7186A4F19BF561C00F18847 /* ISMProjectManager.m */; };
+		B721C0C31A658FC6006B6BCA /* machine_science.png in Resources */ = {isa = PBXBuildFile; fileRef = B721C0C21A658FC6006B6BCA /* machine_science.png */; };
+		B721C0C61A658FCB006B6BCA /* uml.png in Resources */ = {isa = PBXBuildFile; fileRef = B721C0C51A658FCB006B6BCA /* uml.png */; };
+		B721C0C81A658FCF006B6BCA /* white_rsense_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B721C0C71A658FCF006B6BCA /* white_rsense_logo.png */; };
 		B7443EF21A4869B100609821 /* Preset.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7443EF11A4869B100609821 /* Preset.storyboard */; };
 		B7477A4A19D98858001C561F /* button-37.wav in Resources */ = {isa = PBXBuildFile; fileRef = B7477A4919D98858001C561F /* button-37.wav */; };
 		B7477A5919D9886C001C561F /* 29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7477A4B19D9886C001C561F /* 29@1x.png */; };
@@ -109,6 +112,9 @@
 		B7186A4919BF55FC00F18847 /* ISMRecordingLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMRecordingLength.m; sourceTree = "<group>"; };
 		B7186A4E19BF561C00F18847 /* ISMProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMProjectManager.h; sourceTree = "<group>"; };
 		B7186A4F19BF561C00F18847 /* ISMProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMProjectManager.m; sourceTree = "<group>"; };
+		B721C0C21A658FC6006B6BCA /* machine_science.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = machine_science.png; path = Resources/LaunchImages/machine_science.png; sourceTree = "<group>"; };
+		B721C0C51A658FCB006B6BCA /* uml.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uml.png; path = Resources/LaunchImages/uml.png; sourceTree = "<group>"; };
+		B721C0C71A658FCF006B6BCA /* white_rsense_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = white_rsense_logo.png; path = Resources/LaunchImages/white_rsense_logo.png; sourceTree = "<group>"; };
 		B72B23EE19C9EFF60000EE66 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		B7443EF11A4869B100609821 /* Preset.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preset.storyboard; sourceTree = "<group>"; };
 		B7477A4919D98858001C561F /* button-37.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "button-37.wav"; path = "Resources/button-37.wav"; sourceTree = "<group>"; };
@@ -346,6 +352,9 @@
 		B792913319E82CE40064E793 /* LaunchIcons */ = {
 			isa = PBXGroup;
 			children = (
+				B721C0C21A658FC6006B6BCA /* machine_science.png */,
+				B721C0C51A658FCB006B6BCA /* uml.png */,
+				B721C0C71A658FCF006B6BCA /* white_rsense_logo.png */,
 				B792914119E834260064E793 /* li320x480.png */,
 				B792914219E834260064E793 /* li640x960.png */,
 				B792914319E834260064E793 /* li640x1136.png */,
@@ -554,9 +563,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B721C0C61A658FCB006B6BCA /* uml.png in Resources */,
 				B7477A5D19D9886C001C561F /* 50@1x.png in Resources */,
 				B792915219E834260064E793 /* li2048x1536.png in Resources */,
 				B792915819E836840064E793 /* li1024x748.png in Resources */,
+				B721C0C81A658FCF006B6BCA /* white_rsense_logo.png in Resources */,
 				B792915419E834A00064E793 /* li1536x2008.png in Resources */,
 				B7477A5B19D9886C001C561F /* 40@1x.png in Resources */,
 				B792914B19E834260064E793 /* li640x960.png in Resources */,
@@ -582,6 +593,7 @@
 				B7D98CFC19BF34F800BB8994 /* Images.xcassets in Resources */,
 				B7477A6119D9886C001C561F /* 60@2x.png in Resources */,
 				B7477A5F19D9886C001C561F /* 57@1x.png in Resources */,
+				B721C0C31A658FC6006B6BCA /* machine_science.png in Resources */,
 				B792914A19E834260064E793 /* li320x480.png in Resources */,
 				B7CB709519F6940800D91C84 /* 60@3x.png in Resources */,
 				B792914C19E834260064E793 /* li640x1136.png in Resources */,

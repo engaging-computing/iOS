@@ -115,6 +115,12 @@
     // add a footer view to the table to either display a warning that no project is selected or
     // a count of the number of data rows currently saved for this data set
     [self addFooterView];
+
+    // add an observer for when the application is going to exit
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResign)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -171,6 +177,19 @@
 
     // unregister location updates
     [self unregisterLocationUpdates];
+}
+
+- (void) applicationWillResign {
+
+    // reset the keyboard shift
+    keyboardShift = 0;
+    isKeyboardDisplaying = false;
+
+    // reset the active TextField
+    if (activeTextField != nil) {
+        [activeTextField resignFirstResponder];
+    }
+    activeTextField = nil;
 }
 
 - (void)didReceiveMemoryWarning {

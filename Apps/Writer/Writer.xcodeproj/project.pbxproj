@@ -14,6 +14,9 @@
 		B75158C51A0A5C580039F76E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75158C41A0A5C580039F76E /* SystemConfiguration.framework */; };
 		B75158C71A0A5C6C0039F76E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75158C61A0A5C6C0039F76E /* MobileCoreServices.framework */; };
 		B75158CC1A0A9B830039F76E /* ISWProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = B75158CB1A0A9B830039F76E /* ISWProjectController.m */; };
+		B76631271A659E6B00F83497 /* machine_science.png in Resources */ = {isa = PBXBuildFile; fileRef = B76631261A659E6B00F83497 /* machine_science.png */; };
+		B766312A1A659E6F00F83497 /* uml.png in Resources */ = {isa = PBXBuildFile; fileRef = B76631291A659E6F00F83497 /* uml.png */; };
+		B766312C1A659E7400F83497 /* white_rsense_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B766312B1A659E7400F83497 /* white_rsense_logo.png */; };
 		B779507A1A093D1600C032EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B77950791A093D1600C032EF /* main.m */; };
 		B779507D1A093D1600C032EF /* ISWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B779507C1A093D1600C032EF /* ISWAppDelegate.m */; };
 		B77950801A093D1600C032EF /* ISWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B779507F1A093D1600C032EF /* ISWViewController.m */; };
@@ -103,6 +106,9 @@
 		B75158C61A0A5C6C0039F76E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B75158CA1A0A9B830039F76E /* ISWProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISWProjectController.h; sourceTree = "<group>"; };
 		B75158CB1A0A9B830039F76E /* ISWProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISWProjectController.m; sourceTree = "<group>"; };
+		B76631261A659E6B00F83497 /* machine_science.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = machine_science.png; path = Resources/LaunchImages/machine_science.png; sourceTree = "<group>"; };
+		B76631291A659E6F00F83497 /* uml.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uml.png; path = Resources/LaunchImages/uml.png; sourceTree = "<group>"; };
+		B766312B1A659E7400F83497 /* white_rsense_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = white_rsense_logo.png; path = Resources/LaunchImages/white_rsense_logo.png; sourceTree = "<group>"; };
 		B77950741A093D1600C032EF /* Writer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Writer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77950781A093D1600C032EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B77950791A093D1600C032EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -367,6 +373,9 @@
 		B77950A71A093E1A00C032EF /* LaunchIcons */ = {
 			isa = PBXGroup;
 			children = (
+				B76631261A659E6B00F83497 /* machine_science.png */,
+				B76631291A659E6F00F83497 /* uml.png */,
+				B766312B1A659E7400F83497 /* white_rsense_logo.png */,
 				B77950C61A09433F00C032EF /* li320x480.png */,
 				B77950C71A09433F00C032EF /* li640x960.png */,
 				B77950C81A09433F00C032EF /* li640x1136.png */,
@@ -524,6 +533,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B766312A1A659E6F00F83497 /* uml.png in Resources */,
 				B7BF1DE01A374FE80012821E /* tutorial4.png in Resources */,
 				B75158BB1A0A5B360039F76E /* iSENSE_API_Bundle.bundle in Resources */,
 				B77950D61A09433F00C032EF /* li1024x748.png in Resources */,
@@ -533,6 +543,7 @@
 				B77950B71A09407A00C032EF /* 29@1x.png in Resources */,
 				B7BF1DDD1A374FE80012821E /* tutorial1.png in Resources */,
 				B77950D81A09433F00C032EF /* li1536x2008.png in Resources */,
+				B76631271A659E6B00F83497 /* machine_science.png in Resources */,
 				B77950C31A09407A00C032EF /* 76@1x.png in Resources */,
 				B77950D91A09433F00C032EF /* li1536x2048.png in Resources */,
 				B77950C21A09407A00C032EF /* 72@2x.png in Resources */,
@@ -564,6 +575,7 @@
 				B7896FFE1A1E25520002151C /* FieldCell.xib in Resources */,
 				B7BF1DD31A374E930012821E /* Tutorial.storyboard in Resources */,
 				B77950BD1A09407A00C032EF /* 57@1x.png in Resources */,
+				B766312C1A659E7400F83497 /* white_rsense_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

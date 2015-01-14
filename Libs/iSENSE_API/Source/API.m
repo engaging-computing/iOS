@@ -17,12 +17,13 @@
 #define POST_REQUEST    @"POST"
 #define PUT_REQUEST     @"PUT"
 #define DELETE_REQUEST  @"DELETE"
-#define NONE    @""
+#define NONE            @""
 
 #define BOUNDARY @"*****"
 
 static NSString *baseUrl, *authenticityToken;
 static RPerson *currentUser;
+static NSString *currentContribKey;
 static NSString *email, *password;
 
 /**
@@ -30,7 +31,7 @@ static NSString *email, *password;
  *
  * @return An instance of the API object
  */
-+(id)getInstance {
++ (id)getInstance {
     static API *api = nil;
     static dispatch_once_t initApi;
     dispatch_once(&initApi, ^{
@@ -49,6 +50,7 @@ static NSString *email, *password;
         baseUrl = LIVE_URL;
         authenticityToken = nil;
         currentUser = nil;
+        currentContribKey = @"";
     }
     return self;
 }
@@ -58,7 +60,7 @@ static NSString *email, *password;
  *
  * @param newUrl NSString version of the URL you want to use.
  */
--(void)setBaseUrl:(NSString *)newUrl {
+- (void)setBaseUrl:(NSString *)newUrl {
     baseUrl = newUrl;
 }
 
@@ -87,7 +89,7 @@ static NSString *email, *password;
  *
  * @return YES if you have connectivity, NO if it does not
  */
-+(BOOL)hasConnectivity {
++ (BOOL)hasConnectivity {
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return !(networkStatus == NotReachable);
@@ -100,7 +102,7 @@ static NSString *email, *password;
  * @param password The password of the user to log in as
  * @return TRUE if login succeeds, FALSE if it does not
  */
--(RPerson *)createSessionWithEmail:(NSString *)p_email andPassword:(NSString *)p_password {
+- (RPerson *)createSessionWithEmail:(NSString *)p_email andPassword:(NSString *)p_password {
     
     NSString *parameters = [@"email=" stringByAppendingString:[p_email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     parameters = [parameters stringByAppendingString:[@"&password=" stringByAppendingString:[p_password stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
@@ -134,7 +136,7 @@ static NSString *email, *password;
 /**
  * Log out of iSENSE.
  */
--(void)deleteSession {
+- (void)deleteSession {
     
     email = @"";
     password = @"";
@@ -149,7 +151,7 @@ static NSString *email, *password;
  * @param projectId The ID of the project to retrieve
  * @return An RProject object
  */
--(RProject *)getProjectWithId:(int)projectId {
+- (RProject *)getProjectWithId:(int)projectId {
     
     RProject *proj = [[RProject alloc] init];
     
@@ -178,7 +180,7 @@ static NSString *email, *password;
  * @param dataSetId The unique ID of the data set to retrieve from iSENSE
  * @return An RDataSet object
  */
--(RDataSet *)getDataSetWithId:(int)dataSetId {
+- (RDataSet *)getDataSetWithId:(int)dataSetId {
     RDataSet *dataSet = [[RDataSet alloc] init];
     
     NSDictionary *results = [self makeRequestWithBaseUrl:baseUrl withPath:[NSString stringWithFormat:@"data_sets/%d", dataSetId] withParameters:@"recur=true" withRequestType:GET_REQUEST andPostData:nil];
@@ -206,7 +208,7 @@ static NSString *email, *password;
  * @param projectId The unique ID of the project whose fields you want to see
  * @return An ArrayList of RProjectField objects
  */
--(NSArray *)getProjectFieldsWithId:(int)projectId {
+- (NSArray *)getProjectFieldsWithId:(int)projectId {
     NSMutableArray *fields = [[NSMutableArray alloc] init];
     
     NSDictionary *requestResult = [self makeRequestWithBaseUrl:baseUrl withPath:[NSString stringWithFormat:@"projects/%d", projectId] withParameters:@"recur=false" withRequestType:GET_REQUEST andPostData:nil];
@@ -234,7 +236,7 @@ static NSString *email, *password;
  * @param projectId The project ID whose data sets you want
  * @return An ArrayList of RDataSet objects, with their data fields left null
  */
--(NSArray *)getDataSetsWithId:(int)projectId {
+- (NSArray *)getDataSetsWithId:(int)projectId {
     NSMutableArray *dataSets = [[NSMutableArray alloc] init];
     
     NSDictionary *results = [self makeRequestWithBaseUrl:baseUrl withPath:[NSString stringWithFormat:@"projects/%d", projectId] withParameters:@"recur=true" withRequestType:GET_REQUEST andPostData:nil];
@@ -266,7 +268,7 @@ static NSString *email, *password;
  * @param search A string to search all projects for
  * @return An ArrayList of RProject objects
  */
--(NSArray *)getProjectsAtPage:(int)page withPageLimit:(int)perPage withFilter:(SortType)sort andQuery:(NSString *)search {
+- (NSArray *)getProjectsAtPage:(int)page withPageLimit:(int)perPage withFilter:(SortType)sort andQuery:(NSString *)search {
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
     NSString *sortMode = [[NSString alloc] init];
@@ -325,7 +327,7 @@ static NSString *email, *password;
  *
  * @return An RPerson object that corresponds to the owner of the current session
  */
--(RPerson *)getCurrentUser {
+- (RPerson *)getCurrentUser {
     return currentUser;
 }
 
@@ -337,7 +339,7 @@ static NSString *email, *password;
  * @param fields An ArrayList of field objects that will become the fields on iSENSE.
  * @return The ID of the created project
  */
--(int)createProjectWithName:(NSString *)name andFields:(NSArray *)fields {
+- (int)createProjectWithName:(NSString *)name andFields:(NSArray *)fields {
     
     @try {
         NSMutableDictionary *postData = [[NSMutableDictionary alloc] init];
@@ -395,7 +397,7 @@ static NSString *email, *password;
  *
  * @return true on success, false on failure
  */
--(bool)appendDataSetDataWithId:(int)dataSetId andData:(NSDictionary *)data {
+- (bool)appendDataSetDataWithId:(int)dataSetId andData:(NSDictionary *)data {
 
     @try {
         NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
@@ -429,7 +431,7 @@ static NSString *email, *password;
  *
  * @return true on success, false on failure
  */
--(bool)appendDataSetDataWithId:(int)dataSetId andData:(NSDictionary *)data withContributorKey:(NSString *)conKey{
+- (bool)appendDataSetDataWithId:(int)dataSetId andData:(NSDictionary *)data withContributorKey:(NSString *)conKey{
     
     @try {
         NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
@@ -462,7 +464,7 @@ static NSString *email, *password;
  * @param name - The name of the dataset
  * @return The integer ID of the newly uploaded dataset, or 0 if upload fails
  */
--(int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload andName:(NSString *)name {
+- (int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload andName:(NSString *)name {
     
     // append a timestamp to the name of the data set
     name = [NSString stringWithFormat:@"%@ - %@", name, [API getTimeStamp]];
@@ -501,7 +503,7 @@ static NSString *email, *password;
  * @param conName - Name of contributor
  * @return The integer ID of the newly uploaded dataset, or 0 if upload fails
  */
--(int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload withContributorKey:(NSString *) conKey as:(NSString *) conName andName:(NSString *)name{
+- (int) uploadDataToProject:(int)projectId withData:(NSDictionary *)dataToUpload withContributorKey:(NSString *)conKey as:(NSString *)conName andName:(NSString *)name{
     
     NSMutableDictionary *requestData = [[NSMutableDictionary alloc] init];
     
@@ -534,7 +536,7 @@ static NSString *email, *password;
 /*
  * Gets the MIME time from a file path.
  */
--(NSString *)getMimeType:(NSString *)path{
+- (NSString *)getMimeType:(NSString *)path{
     
     CFStringRef pathExtension = (__bridge_retained CFStringRef)[path pathExtension];
     CFStringRef type = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension, NULL);
@@ -624,7 +626,7 @@ static NSString *email, *password;
  * @param ttype The upload target, PROJECT or DATASET
  * @return The media object ID for the media uploaded or -1 if upload fails
  */
--(int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype{
+- (int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype{
     
 //    AFHTTPRequestSerializer *ser = [AFHTTPRequestSerializer serializer];
 //    NSMutableURLRequest *request = [ser multipartFormRequestWithMethod:POST_REQUEST URLString:[baseUrl stringByAppendingString:@"/media_objects"] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -676,7 +678,7 @@ static NSString *email, *password;
  * @param conName the name of the contributor
  * @return The media object ID for the media uploaded or -1 if upload fails
  */
--(int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype withContributorKey:(NSString *)conKey as:(NSString *)conName{
+- (int)uploadMediaToProject:(int)projectId withFile:(NSData *)mediaToUpload andName:(NSString *)name withTarget:(TargetType)ttype withContributorKey:(NSString *)conKey as:(NSString *)conName{
     
 //    AFHTTPRequestSerializer *ser = [AFHTTPRequestSerializer serializer];
 //    NSMutableURLRequest *request = [ser multipartFormRequestWithMethod:POST_REQUEST URLString:[baseUrl stringByAppendingString:@"/media_objects"] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -724,7 +726,7 @@ static NSString *email, *password;
  * @param original The row-major formatted NSDictionary
  * @return A column-major reformatted version of the original NSDictionary
  */
--(NSDictionary *)rowsToCols:(NSDictionary *)original {
+- (NSDictionary *)rowsToCols:(NSDictionary *)original {
     NSMutableDictionary *reformatted = [[NSMutableDictionary alloc] init];
     NSArray *inner = [original objectForKey:@"data"];
     for(int i = 0; i < inner.count; i++) {
@@ -752,7 +754,7 @@ static NSString *email, *password;
  * @param postData The data to be given to iSENSE as NSData
  * @return An object dump of a JSONObject or JSONArray representing the requested data
  */
--(id)makeRequestWithBaseUrl:(NSString *)baseUrl withPath:(NSString *)path withParameters:(NSString *)parameters withRequestType:(NSString *)reqType andPostData:(NSData *)postData {
+- (id)makeRequestWithBaseUrl:(NSString *)baseUrl withPath:(NSString *)path withParameters:(NSString *)parameters withRequestType:(NSString *)reqType andPostData:(NSData *)postData {
     
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/%@?%@", baseUrl, path, parameters]];
     NSLog(@"Connect to: %@", url);
@@ -814,7 +816,7 @@ static NSString *email, *password;
  *
  * @return A pretty formatted date and timestamp
  */
-+(NSString *)getTimeStamp {
++ (NSString *)getTimeStamp {
     
     // get time and date
     NSDate *now = [NSDate date];
@@ -847,7 +849,7 @@ static NSString *email, *password;
  *
  * @return The version of iSENSE in MAJOR.MINOR version format
  */
--(NSString *) getVersion {
+- (NSString *)getVersion {
     return [NSString stringWithFormat:@"%@.%@", VERSION_MAJOR, VERSION_MINOR];
 }
 
@@ -855,7 +857,7 @@ static NSString *email, *password;
  * Saves the current user, if one is logged in, to the NSUserDefaults
  * preferences of the hosting application.
  */
--(void)saveCurrentUserToPrefs {
+- (void)saveCurrentUserToPrefs {
 
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:email forKey:KEY_USERNAME];
@@ -869,7 +871,7 @@ static NSString *email, *password;
  *
  * @return true if a user was saved and logged in successfully, false otherwise
  */
--(bool)loadCurrentUserFromPrefs {
+- (bool)loadCurrentUserFromPrefs {
 
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     if ([prefs objectForKey:KEY_USERNAME] && [prefs objectForKey:KEY_PASSWORD])
@@ -884,12 +886,35 @@ static NSString *email, *password;
  * Called internally via the deleteSession function in the API, this method will
  * clear the NSUserDefaults keys for the current username and password
  */
--(void)clearCurrentUserFromPrefs {
+- (void)clearCurrentUserFromPrefs {
 
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs removeObjectForKey:KEY_USERNAME];
     [prefs removeObjectForKey:KEY_PASSWORD];
     [prefs synchronize];
+}
+
+/**
+ * Verifies whether a given contributor key exists for a given project
+ *
+ * @param conKey - The contributor key for the project
+ * @param projectID - The project to test the contributor key with
+ *
+ * @return true if the contributor key is valid for the project, false otherwise
+ */
+- (bool) validateKey:(NSString *)conKey forProject:(int)projectID {
+
+    // TODO this must be implemented in the web API first.  Once implemented,
+    // the currentContribKey variable should only be set if it passes validation
+    currentContribKey = conKey;
+    return true;
+}
+
+/**
+ * Returns the last validated contributor key to use for uploading
+ */
+- (NSString *)getCurrentContributorKey {
+    return currentContribKey;
 }
 
 @end
