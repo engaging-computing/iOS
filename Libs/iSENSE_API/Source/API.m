@@ -904,8 +904,10 @@ static NSString *email, *password;
  */
 - (bool) validateKey:(NSString *)conKey forProject:(int)projectID {
 
-    currentContribKey = conKey; //TODO should only be set if validated
-    return true; // TODO needs to be implemented in web API
+    // TODO this must be implemented in the web API first.  Once implemented,
+    // the currentContribKey variable should only be set if it passes validation
+    currentContribKey = conKey;
+    return true;
 }
 
 /**

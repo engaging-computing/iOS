@@ -185,8 +185,10 @@
     keyboardShift = 0;
     isKeyboardDisplaying = false;
 
-    if (activeTextField != nil)
+    // reset the active TextField
+    if (activeTextField != nil) {
         [activeTextField resignFirstResponder];
+    }
     activeTextField = nil;
 }
 

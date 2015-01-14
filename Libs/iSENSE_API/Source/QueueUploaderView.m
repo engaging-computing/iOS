@@ -78,7 +78,6 @@
 
         if (user == nil || pass == nil) {
 
-
             UIAlertView *message = [[UIAlertView alloc] initWithTitle:nil
                                                               message:@"Would you like to use a contributor key or login with an account?"
                                                              delegate:self
@@ -508,25 +507,7 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
 
-            if (isKeyValid) {
-
-                // upload data
-                [message setTitle:@"Uploading data sets..."];
-
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-                    QueueUploadStatus *uploadStatus = [dataSaver upload:parent];
-
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
-
-                        [message dismissWithClickedButtonIndex:0 animated:YES];
-                        [self.navigationController popViewControllerAnimated:YES];
-                    });
-
-                });
-
-            } else {
+            if (!isKeyValid) {
                 [self.view makeWaffle:[NSString stringWithFormat:@"Invalid contributor key for project %d", pid]
                              duration:WAFFLE_LENGTH_SHORT
                              position:WAFFLE_BOTTOM
@@ -534,6 +515,21 @@
                 [message dismissWithClickedButtonIndex:0 animated:YES];
                 return;
             }
+
+            // upload data
+            [message setTitle:@"Uploading data sets..."];
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+                QueueUploadStatus *uploadStatus = [dataSaver upload:parent];
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate didFinishUploadingDataWithStatus:uploadStatus];
+
+                    [message dismissWithClickedButtonIndex:0 animated:YES];
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            });
         });
     });
 }
