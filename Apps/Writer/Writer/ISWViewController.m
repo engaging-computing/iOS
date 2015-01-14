@@ -350,12 +350,6 @@
         // set numbers only for numeric fields
         cell.fieldDataTxt.keyboardType = UIKeyboardTypeNumberPad;
 
-    } else if (tmp.fieldRestrictions != (id)[NSNull null] && tmp.fieldRestrictions != nil && tmp.fieldRestrictions.count > 0) {
-
-        // this text field has restrictions: create an input view to display only these restricted values
-        UIPickerView *picker = [[UIPickerView alloc] init];
-        
-        cell.fieldDataTxt.inputView = picker;
     }
 
     return cell;
@@ -531,24 +525,55 @@
 
 #pragma mark - UITextField code
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+
+    // check if the text field has any restrictions
+    if (textField.tag != kDATA_SET_NAME_TAG) {
+
+        FieldData *data = [dataArr objectAtIndex:textField.tag];
+        NSArray *res = data.fieldRestrictions;
+
+        if (res != (id)[NSNull null] && res != nil && res.count > 0) {
+
+            // this text field has restrictions: create an input view to display only these restricted values
+            pickerDataSource = [res copy];
+            [self trimDataSourceWhiteSpace];
+
+            UIPickerView *picker = [[UIPickerView alloc] init];
+            picker.dataSource = self;
+            picker.delegate = self;
+            picker.showsSelectionIndicator = true;
+
+            // return the picker to the last selection
+            int selectionRow = 0;
+            NSString *curValue = ((FieldData *)[dataArr objectAtIndex:textField.tag]).fieldData;
+
+            for (int i = 0; i < pickerDataSource.count; i++) {
+
+                if ([pickerDataSource[i] isEqualToString:curValue]) {
+
+                    selectionRow = i;
+                    break;
+                }
+            }
+
+            [picker selectRow:selectionRow inComponent:0 animated:NO];
+
+            // set the picker as the input view
+            textField.inputView = picker;
+        }
+    }
+
+    return YES;
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+
+    lastClickedTextField = textField;
 
     if (!isKeyboardDisplaying) {
 
         activeTextField = textField;
-
-        // if this field has any restrictions, display the restrictions
-        if (textField.tag != kDATA_SET_NAME_TAG) {
-
-            FieldData *data = [dataArr objectAtIndex:textField.tag];
-            NSArray *res = data.fieldRestrictions;
-
-            if (res != (id)[NSNull null] && res != nil && res.count > 0) {
-
-                NSLog(@"RESTRICTED!");
-            }
-        }
     }
 }
 
@@ -813,6 +838,53 @@
 }
 
 #pragma end - UIAlertView code
+
+#pragma mark - UIPickerView code
+
+- (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+
+    return pickerDataSource.count;
+}
+
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+
+    return 1;
+}
+
+- (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+
+    return pickerDataSource[row];
+}
+
+// removes leading and trailing whitespace from elements in the data source array
+- (void) trimDataSourceWhiteSpace {
+
+    NSMutableArray *mutableDataSource = [pickerDataSource mutableCopy];
+
+    if (pickerDataSource != (id)[NSNull null] && pickerDataSource != nil) {
+
+        for (int i = 0; i < mutableDataSource.count; i++) {
+
+            NSString *s = mutableDataSource[i];
+            s = [s stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            mutableDataSource[i] = s;
+        }
+    }
+
+    pickerDataSource = [mutableDataSource copy];
+}
+
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+
+    // display the selection the user made
+    lastClickedTextField.text = pickerDataSource[row];
+
+    // save the selection in the data array
+    FieldData *data = [dataArr objectAtIndex:lastClickedTextField.tag];
+    data.fieldData = pickerDataSource[row];
+}
+
+#pragma end - UIPickerView code
 
 #pragma mark - Location
 

@@ -24,7 +24,8 @@
 
 @interface ISWViewController : UIViewController
     <UIAlertViewDelegate, UITextFieldDelegate, CredentialManagerDelegate, QueueUploaderDelegate,
-    UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate> {
+    UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, UIPickerViewDelegate,
+    UIPickerViewDataSource> {
 
     // iSENSE API, DataManager, and dev switch
     API *api;
@@ -47,8 +48,14 @@
     // Dictionary of data to upload
     NSMutableDictionary *dataToUpload;
 
-    // Reference to the last clicked TextField and current keyboard display
+    // Current data source array for a restricted text field's picker view
+    NSArray *pickerDataSource;
+
+    // Reference to the active TextField, last clicked TextField, and current keyboard display
+    // The active TextField is the TextField used to display the keyboard/picker, whereas the
+    // last clicked TextField is always whatever was tapped last
     UITextField *activeTextField;
+    UITextField *lastClickedTextField;
     bool isKeyboardDisplaying;
 
     // Toolbar with a "Done" button to be attached to all textfield keyboards
