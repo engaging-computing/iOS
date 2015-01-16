@@ -116,11 +116,12 @@
         [self presentViewController:tutorialController animated:YES completion:nil];
     }
 
-    // add an observer for when the application is going to exit
+    // add an observer for when the application is going to enter foreground
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillResign)
-                                                 name:UIApplicationWillResignActiveNotification
+                                             selector:@selector(resetSuperviewPosition)
+                                                 name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -169,6 +170,9 @@
 
     // reset the footer view text
     [self setFooterViewText];
+
+    // ensure the superview is back in place, not shifted by a keyboard
+    [self resetSuperviewPosition];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -180,7 +184,7 @@
     [self unregisterLocationUpdates];
 }
 
-- (void) applicationWillResign {
+- (void) resetSuperviewPosition {
 
     // reset the keyboard shift
     keyboardShift = 0;
@@ -191,6 +195,8 @@
         [activeTextField resignFirstResponder];
     }
     activeTextField = nil;
+
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -308,9 +314,34 @@
 
 - (IBAction)uploadBtnOnClick:(id)sender {
 
-    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_WRITER andDelegate:self];
-    queueUploader.title = @"Upload";
-    [self.navigationController pushViewController:queueUploader animated:YES];
+    // check if the user has any data left unsaved first
+    if (dataArr != nil && dataArr.count > 0) {
+
+        for (FieldData *data in dataArr) {
+
+            if (data != nil) {
+
+                int type = data.fieldType.intValue;
+                NSString *dataStr = data.fieldData;
+
+                if ((type == TYPE_NUMBER || type == TYPE_TEXT) && dataStr.length > 0) {
+
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Data Not Saved"
+                                                                    message:@"You have left some data in the textfields that has not yet been saved.  Continuing to upload will make you lose this data.  If you meant to save it, select \"Back\" now and choose \"Save Row\" first, then \"Save Data Set\" when you are done entering rows of data.  If this was intentional, choose \"Continue\"."
+                                                                    delegate:self
+                                                          cancelButtonTitle:@"Back"
+                                                          otherButtonTitles:@"Continue", nil];
+                    [alert setAlertViewStyle:UIAlertViewStyleDefault];
+                    alert.tag = kUPLOAD_CONFIRMATION_DIALOG_TAG;
+                    [alert show];
+
+                    return;
+                }
+            }
+        }
+    }
+
+    [self launchDataSaverView];
 }
 
 - (void) setSaveButtonsEnabled:(bool)enabled {
@@ -771,6 +802,13 @@
     [credentialMngrAlert show];
 }
 
+- (void)launchDataSaverView {
+
+    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_WRITER andDelegate:self];
+    queueUploader.title = @"Upload";
+    [self.navigationController pushViewController:queueUploader animated:YES];
+}
+
 #pragma mark - iSENSE and API code
 
 #pragma mark - UIAlertView code
@@ -832,6 +870,12 @@
             }
 
             break;
+        }
+        case kUPLOAD_CONFIRMATION_DIALOG_TAG:
+        {
+            if (buttonIndex != OPTION_CANCELED) {
+                [self launchDataSaverView];
+            }
         }
         default:
         {
