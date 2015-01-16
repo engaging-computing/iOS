@@ -217,7 +217,7 @@
                     returnID = [api uploadDataToProject:currentDS.projID.intValue
                                                withData:jobj
                                      withContributorKey:[api getCurrentContributorKey]
-                                                     as:@"iOS Contributor"
+                                                     as:@"iOS App"
                                                 andName:currentDS.name];
                 } else {
 

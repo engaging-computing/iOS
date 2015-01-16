@@ -103,6 +103,10 @@
     // present dialog if location is not authorized yet
     [self isLocationAuthorized];
 
+    // add a footer view to the table to either display a warning that no project is selected or
+    // a count of the number of data rows currently saved for this data set
+    [self addFooterView];
+
     // Display one-time tutorial
     BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
     if (!tutorialShown) {
@@ -111,16 +115,6 @@
         ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
         [self presentViewController:tutorialController animated:YES completion:nil];
     }
-
-    // add a footer view to the table to either display a warning that no project is selected or
-    // a count of the number of data rows currently saved for this data set
-    [self addFooterView];
-
-    // add an observer for when the application is going to exit
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillResign)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -143,6 +137,7 @@
             FieldData *data = [[FieldData alloc] init];
             data.fieldName = field.name;
             data.fieldType = field.type;
+            data.fieldRestrictions = field.restrictions;
             [dataArr addObject:data];
         }
 
@@ -168,6 +163,9 @@
 
     // reset the footer view text
     [self setFooterViewText];
+
+    // ensure the superview is back in place, not shifted by a keyboard
+    [self resetSuperviewPosition];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -179,7 +177,7 @@
     [self unregisterLocationUpdates];
 }
 
-- (void) applicationWillResign {
+- (void) resetSuperviewPosition {
 
     // reset the keyboard shift
     keyboardShift = 0;
@@ -190,6 +188,8 @@
         [activeTextField resignFirstResponder];
     }
     activeTextField = nil;
+
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -307,9 +307,42 @@
 
 - (IBAction)uploadBtnOnClick:(id)sender {
 
-    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_WRITER andDelegate:self];
-    queueUploader.title = @"Upload";
-    [self.navigationController pushViewController:queueUploader animated:YES];
+    if (dataArr == nil || dataArr.count == 0) {
+
+        // no project is selected or project has no fields - let user navigate to the upload screen
+        [self launchDataSaverView];
+    }
+
+    for (FieldData *data in dataArr) {
+
+        if (data == nil) {
+            // continue if this data set is nil
+            continue;
+        }
+
+        int type = data.fieldType.intValue;
+        NSString *dataStr = data.fieldData;
+
+        if ((type != TYPE_NUMBER && type != TYPE_TEXT) || dataStr.length == 0) {
+            // continue since this is either a timestamp, latitude, longitude, or empty field
+            continue;
+        }
+
+        // user has a number or text field with data but has attempted to navigate to the upload
+        // screen before saving the data - display a warning
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Data Not Saved"
+                                                        message:@"You have left some data in the textfields that has not yet been saved.  Continuing to upload will make you lose this data.  If you meant to save it, select \"Back\" now and choose \"Save Row\" first, then \"Save Data Set\" when you are done entering rows of data.  If this was intentional, choose \"Continue\"."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Back"
+                                              otherButtonTitles:@"Continue", nil];
+        [alert setAlertViewStyle:UIAlertViewStyleDefault];
+        alert.tag = kUPLOAD_CONFIRMATION_DIALOG_TAG;
+        [alert show];
+
+        return;
+    }
+
+    [self launchDataSaverView];
 }
 
 - (void) setSaveButtonsEnabled:(bool)enabled {
@@ -346,7 +379,7 @@
 
     FieldData *tmp = [dataArr objectAtIndex:indexPath.row];
 
-    [cell setupCellWithField:tmp.fieldName andData:tmp.fieldData];
+    [cell setupCellWithField:tmp.fieldName data:tmp.fieldData andRestrictions:tmp.fieldRestrictions];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     // tag the cell's UITextField with the indexPath of the cell
@@ -464,6 +497,14 @@
         return;
     }
 
+    CGPoint origin = self.view.frame.origin;
+    if (!up && origin.x == 0 && origin.y == 0) {
+        // do not consider a keyboard shift if the superview is being asked to move
+        // back down despite already being in place - can occur if the user leaves the
+        // app via home/lock buttons with the keyboard open
+        return;
+    }
+
     // map the textfield's dimensions to the superview and get its Y coordinate
     CGPoint point = [activeTextField convertPoint:activeTextField.frame.origin toView:self.view];
     int textY = point.y;
@@ -483,7 +524,7 @@
     if (keyboardShift == 0)
         keyboardShift = movementValue;
 
-    // animate the keyboard
+    // prepare keyboard animation duration and direction
     const float movementDuration = 0.3f;
     int movementDirection = (up ? -movementValue : keyboardShift);
 
@@ -542,8 +583,58 @@
 
 #pragma mark - UITextField code
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+
+    // check if the text field has any restrictions
+
+    if (textField.tag == kDATA_SET_NAME_TAG) {
+
+        // no restrictions are in place for the data set name
+        return YES;
+    }
+
+    FieldData *data = [dataArr objectAtIndex:textField.tag];
+    NSArray *res = data.fieldRestrictions;
+
+    if (res == (id)[NSNull null] || res == nil || res.count == 0) {
+
+        // restrictions array is nil or empty, so no restrictions are in place
+        return YES;
+    }
+
+    // this text field has restrictions: create an input view to display only these restricted values
+    pickerDataSource = [res copy];
+    [self trimDataSourceWhiteSpace];
+
+    UIPickerView *picker = [[UIPickerView alloc] init];
+    picker.dataSource = self;
+    picker.delegate = self;
+    picker.showsSelectionIndicator = true;
+
+    // return the picker to the last selection
+    int selectionRow = 0;
+    NSString *curValue = ((FieldData *)[dataArr objectAtIndex:textField.tag]).fieldData;
+
+    for (int i = 0; i < pickerDataSource.count; i++) {
+
+        if ([pickerDataSource[i] isEqualToString:curValue]) {
+
+            selectionRow = i;
+            break;
+        }
+    }
+
+    [picker selectRow:selectionRow inComponent:0 animated:NO];
+
+    // set the picker as the input view
+    textField.inputView = picker;
+
+    return YES;
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+
+    lastClickedTextField = textField;
 
     if (!isKeyboardDisplaying) {
 
@@ -727,6 +818,13 @@
     [credentialMngrAlert show];
 }
 
+- (void)launchDataSaverView {
+
+    QueueUploaderView *queueUploader = [[QueueUploaderView alloc] initWithParentName:PARENT_WRITER andDelegate:self];
+    queueUploader.title = @"Upload";
+    [self.navigationController pushViewController:queueUploader animated:YES];
+}
+
 #pragma mark - iSENSE and API code
 
 #pragma mark - UIAlertView code
@@ -789,6 +887,12 @@
 
             break;
         }
+        case kUPLOAD_CONFIRMATION_DIALOG_TAG:
+        {
+            if (buttonIndex != OPTION_CANCELED) {
+                [self launchDataSaverView];
+            }
+        }
         default:
         {
             break;
@@ -812,6 +916,53 @@
 }
 
 #pragma end - UIAlertView code
+
+#pragma mark - UIPickerView code
+
+- (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+
+    return pickerDataSource.count;
+}
+
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+
+    return 1;
+}
+
+- (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+
+    return pickerDataSource[row];
+}
+
+// removes leading and trailing whitespace from elements in the data source array
+- (void) trimDataSourceWhiteSpace {
+
+    if (pickerDataSource == (id)[NSNull null] || pickerDataSource == nil) {
+        return;
+    }
+
+    NSMutableArray *mutableDataSource = [pickerDataSource mutableCopy];
+
+    for (int i = 0; i < mutableDataSource.count; i++) {
+
+        mutableDataSource[i] = [mutableDataSource[i] stringByTrimmingCharactersInSet:
+                                [NSCharacterSet whitespaceCharacterSet]];
+    }
+
+    pickerDataSource = [mutableDataSource copy];
+}
+
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+
+    // display the selection the user made
+    lastClickedTextField.text = pickerDataSource[row];
+
+    // save the selection in the data array
+    FieldData *data = [dataArr objectAtIndex:lastClickedTextField.tag];
+    data.fieldData = pickerDataSource[row];
+}
+
+#pragma end - UIPickerView code
 
 #pragma mark - Location
 

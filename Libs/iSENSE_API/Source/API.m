@@ -219,7 +219,8 @@ static NSString *email, *password;
         RProjectField *newProjField = [[RProjectField alloc]
                                        initWithName:[innermostField objectForKey:@"name"]
                                        type:[innermostField objectForKey:@"type"]
-                                       andUnit:[innermostField objectForKey:@"unit"]];
+                                       unit:[innermostField objectForKey:@"unit"]
+                                       andRestrictions:[innermostField objectForKey:@"restrictions"]];
         
         newProjField.field_id = [innermostField objectForKey:@"id"];
 

@@ -11,11 +11,13 @@
 
 @interface FieldCell : UITableViewCell
 
-- (FieldCell *) setupCellWithField:(NSString *)field andData:(NSString *)data;
+- (FieldCell *) setupCellWithField:(NSString *)field data:(NSString *)data andRestrictions:(NSArray *)restr;
+
 - (void) setFieldData:(NSString *)fieldData;
 - (NSString *) getData;
 
 @property (weak, nonatomic) IBOutlet UILabel *fieldNameLbl;
 @property (weak, nonatomic) IBOutlet UITextField *fieldDataTxt;
+@property (weak, nonatomic) NSArray *restrictions;
 
 @end

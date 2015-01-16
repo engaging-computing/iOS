@@ -16,7 +16,6 @@
 #define TYPE_LON 5
 
 @interface RProjectField : NSObject {
-    
 }
 
 @property (nonatomic, strong) NSNumber *field_id;
@@ -24,7 +23,9 @@
 @property (nonatomic, strong) NSString *recognized_name;
 @property (nonatomic, strong) NSNumber *type;
 @property (nonatomic, strong) NSString *unit;
+@property (nonatomic, strong) NSArray  *restrictions;
 
-- (id)initWithName:(NSString *)uname type:(NSNumber *)utype andUnit:(NSString *)uunit;
+- (id)initWithName:(NSString *)uname type:(NSNumber *)utype
+              unit:(NSString *)uunit andRestrictions:(NSArray *)urestrictions;
 
 @end

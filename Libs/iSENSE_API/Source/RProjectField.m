@@ -13,20 +13,25 @@
 @synthesize field_id = _field_id, name = _name, recognized_name = _recognized_name, type = _type, unit = _unit;
 
 - (id) init {
+
     if (self = [super init]) {
         self.type = [NSNumber numberWithInt:TYPE_TEXT];
         self.unit = @"";
         self.name = @"";
+        self.restrictions = [[NSArray alloc] init];
     }
     return self;
 }
 
-- (id)initWithName:(NSString *)uname type:(NSNumber *)utype andUnit:(NSString *)uunit {
+- (id) initWithName:(NSString *)uname type:(NSNumber *)utype unit:(NSString *)uunit andRestrictions:(NSArray *)urestrictions {
+
     self = [super init];
     if (self) {
+
         self.type = utype;
         self.unit = uunit;
         self.name = uname;
+        self.restrictions = urestrictions;
     }
     return self;
 }
@@ -37,9 +42,10 @@
     [self getRecognizedNameFromUserDefinedName];
 }
 
--(NSString *)description {
-    NSString *objString = [NSString stringWithFormat:@"RProjectField: {\n\tfield_id: %@\n\tname: %@\n\trecognized_name: %@\n\ttype: %@\n\tunit: %@\n}", _field_id, _name, _recognized_name, _type, _unit];
-    return objString;
+- (NSString *) description {
+
+    return [NSString stringWithFormat:@"RProjectField: {\n\tfield_id: %@\n\tname: %@\n\trecognized_name: %@\n\ttype: %@\n\tunit: %@\n}",
+            _field_id, _name, _recognized_name, _type, _unit];
 }
 
 // Parses the name field to attempt to obtain a recognized name for the field
