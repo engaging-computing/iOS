@@ -115,13 +115,6 @@
         ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
         [self presentViewController:tutorialController animated:YES completion:nil];
     }
-
-    // add an observer for when the application is going to enter foreground
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(resetSuperviewPosition)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -496,6 +489,14 @@
         return;
     }
 
+    CGPoint origin = self.view.frame.origin;
+    if (!up && origin.x == 0 && origin.y == 0) {
+        // do not consider a keyboard shift if the superview is being asked to move
+        // back down despite already being in place - can occur if the user leaves the
+        // app via home/lock buttons with the keyboard open
+        return;
+    }
+
     // map the textfield's dimensions to the superview and get its Y coordinate
     CGPoint point = [activeTextField convertPoint:activeTextField.frame.origin toView:self.view];
     int textY = point.y;
@@ -515,7 +516,7 @@
     if (keyboardShift == 0)
         keyboardShift = movementValue;
 
-    // animate the keyboard
+    // prepare keyboard animation duration and direction
     const float movementDuration = 0.3f;
     int movementDirection = (up ? -movementValue : keyboardShift);
 
