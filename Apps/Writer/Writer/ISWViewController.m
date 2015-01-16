@@ -307,31 +307,39 @@
 
 - (IBAction)uploadBtnOnClick:(id)sender {
 
-    // check if the user has any data left unsaved first
-    if (dataArr != nil && dataArr.count > 0) {
+    if (dataArr == nil || dataArr.count == 0) {
 
-        for (FieldData *data in dataArr) {
+        // no project is selected or project has no fields - let user navigate to the upload screen
+        [self launchDataSaverView];
+    }
 
-            if (data != nil) {
+    for (FieldData *data in dataArr) {
 
-                int type = data.fieldType.intValue;
-                NSString *dataStr = data.fieldData;
-
-                if ((type == TYPE_NUMBER || type == TYPE_TEXT) && dataStr.length > 0) {
-
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Data Not Saved"
-                                                                    message:@"You have left some data in the textfields that has not yet been saved.  Continuing to upload will make you lose this data.  If you meant to save it, select \"Back\" now and choose \"Save Row\" first, then \"Save Data Set\" when you are done entering rows of data.  If this was intentional, choose \"Continue\"."
-                                                                    delegate:self
-                                                          cancelButtonTitle:@"Back"
-                                                          otherButtonTitles:@"Continue", nil];
-                    [alert setAlertViewStyle:UIAlertViewStyleDefault];
-                    alert.tag = kUPLOAD_CONFIRMATION_DIALOG_TAG;
-                    [alert show];
-
-                    return;
-                }
-            }
+        if (data == nil) {
+            // continue if this data set is nil
+            continue;
         }
+
+        int type = data.fieldType.intValue;
+        NSString *dataStr = data.fieldData;
+
+        if ((type != TYPE_NUMBER && type != TYPE_TEXT) || dataStr.length == 0) {
+            // continue since this is either a timestamp, latitude, longitude, or empty field
+            continue;
+        }
+
+        // user has a number or text field with data but has attempted to navigate to the upload
+        // screen before saving the data - display a warning
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Data Not Saved"
+                                                        message:@"You have left some data in the textfields that has not yet been saved.  Continuing to upload will make you lose this data.  If you meant to save it, select \"Back\" now and choose \"Save Row\" first, then \"Save Data Set\" when you are done entering rows of data.  If this was intentional, choose \"Continue\"."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Back"
+                                              otherButtonTitles:@"Continue", nil];
+        [alert setAlertViewStyle:UIAlertViewStyleDefault];
+        alert.tag = kUPLOAD_CONFIRMATION_DIALOG_TAG;
+        [alert show];
+
+        return;
     }
 
     [self launchDataSaverView];
@@ -578,41 +586,48 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
 
     // check if the text field has any restrictions
-    if (textField.tag != kDATA_SET_NAME_TAG) {
 
-        FieldData *data = [dataArr objectAtIndex:textField.tag];
-        NSArray *res = data.fieldRestrictions;
+    if (textField.tag == kDATA_SET_NAME_TAG) {
 
-        if (res != (id)[NSNull null] && res != nil && res.count > 0) {
+        // no restrictions are in place for the data set name
+        return YES;
+    }
 
-            // this text field has restrictions: create an input view to display only these restricted values
-            pickerDataSource = [res copy];
-            [self trimDataSourceWhiteSpace];
+    FieldData *data = [dataArr objectAtIndex:textField.tag];
+    NSArray *res = data.fieldRestrictions;
 
-            UIPickerView *picker = [[UIPickerView alloc] init];
-            picker.dataSource = self;
-            picker.delegate = self;
-            picker.showsSelectionIndicator = true;
+    if (res == (id)[NSNull null] || res == nil || res.count == 0) {
 
-            // return the picker to the last selection
-            int selectionRow = 0;
-            NSString *curValue = ((FieldData *)[dataArr objectAtIndex:textField.tag]).fieldData;
+        // restrictions array is nil or empty, so no restrictions are in place
+        return YES;
+    }
 
-            for (int i = 0; i < pickerDataSource.count; i++) {
+    // this text field has restrictions: create an input view to display only these restricted values
+    pickerDataSource = [res copy];
+    [self trimDataSourceWhiteSpace];
 
-                if ([pickerDataSource[i] isEqualToString:curValue]) {
+    UIPickerView *picker = [[UIPickerView alloc] init];
+    picker.dataSource = self;
+    picker.delegate = self;
+    picker.showsSelectionIndicator = true;
 
-                    selectionRow = i;
-                    break;
-                }
-            }
+    // return the picker to the last selection
+    int selectionRow = 0;
+    NSString *curValue = ((FieldData *)[dataArr objectAtIndex:textField.tag]).fieldData;
 
-            [picker selectRow:selectionRow inComponent:0 animated:NO];
+    for (int i = 0; i < pickerDataSource.count; i++) {
 
-            // set the picker as the input view
-            textField.inputView = picker;
+        if ([pickerDataSource[i] isEqualToString:curValue]) {
+
+            selectionRow = i;
+            break;
         }
     }
+
+    [picker selectRow:selectionRow inComponent:0 animated:NO];
+
+    // set the picker as the input view
+    textField.inputView = picker;
 
     return YES;
 }
@@ -922,16 +937,16 @@
 // removes leading and trailing whitespace from elements in the data source array
 - (void) trimDataSourceWhiteSpace {
 
+    if (pickerDataSource == (id)[NSNull null] || pickerDataSource == nil) {
+        return;
+    }
+
     NSMutableArray *mutableDataSource = [pickerDataSource mutableCopy];
 
-    if (pickerDataSource != (id)[NSNull null] && pickerDataSource != nil) {
+    for (int i = 0; i < mutableDataSource.count; i++) {
 
-        for (int i = 0; i < mutableDataSource.count; i++) {
-
-            NSString *s = mutableDataSource[i];
-            s = [s stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            mutableDataSource[i] = s;
-        }
+        mutableDataSource[i] = [mutableDataSource[i] stringByTrimmingCharactersInSet:
+                                [NSCharacterSet whitespaceCharacterSet]];
     }
 
     pickerDataSource = [mutableDataSource copy];
