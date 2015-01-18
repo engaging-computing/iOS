@@ -10,10 +10,13 @@
 #define Data_Walk_QueueConstants_h
 
 // constants for QueueUploaderView's actionSheet
-#define QUEUE_RENAME        0
-#define QUEUE_CHANGE_DESC   1
-#define QUEUE_SELECT_PROJ   2
-#define QUEUE_LOGIN         500
+#define QUEUE_RENAME             0
+#define QUEUE_CHANGE_DESC        1
+#define QUEUE_SELECT_PROJ        2
+
+#define QUEUE_LOGIN              500
+#define QUEUE_SELECT_USER_OR_KEY 501
+#define QUEUE_CONTRIB_KEY        502
 
 // options for menu and action sheet
 #define OPTION_CANCELED              0
@@ -31,5 +34,9 @@
 #define TAG_AUTO_LOGIN      704
 #define TAG_MANUAL_LOGIN    705
 #define TAG_MANUAL_PROJ     706
+
+// indices for contributor key and login in the selection dialog
+#define INDEX_CONTRIB_KEY 1
+#define INDEX_LOGIN       2
 
 #endif

@@ -117,6 +117,9 @@
 		B71AD70B19C7119B006820A1 /* waffle_x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71AD6DF19C7119B006820A1 /* waffle_x.png */; };
 		B71B55AD19E566F500415DED /* FieldMatching.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71B55AC19E566F500415DED /* FieldMatching.xib */; };
 		B76C43C019C8706A00B0A19B /* QDataSetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B76C43BE19C8706A00B0A19B /* QDataSetModel.xcdatamodeld */; };
+		B7981EC71A6584AD002AC6B4 /* white_rsense_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B7981EC61A6584AD002AC6B4 /* white_rsense_logo.png */; };
+		B7981EC91A6584B9002AC6B4 /* uml.png in Resources */ = {isa = PBXBuildFile; fileRef = B7981EC81A6584B9002AC6B4 /* uml.png */; };
+		B7981ECB1A6584C4002AC6B4 /* machine_science.png in Resources */ = {isa = PBXBuildFile; fileRef = B7981ECA1A6584C4002AC6B4 /* machine_science.png */; };
 		B7D848C919CC8453006BE163 /* DataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D848C819CC8453006BE163 /* DataManager.h */; };
 		B7D848CB19CC8463006BE163 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D848CA19CC8463006BE163 /* DataManager.m */; };
 		B7DDB9EA1A14F1EB002CA14C /* QueueUploadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DDB9E91A14F1EB002CA14C /* QueueUploadStatus.m */; };
@@ -262,6 +265,9 @@
 		B71AD6DF19C7119B006820A1 /* waffle_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waffle_x.png; sourceTree = "<group>"; };
 		B71B55AC19E566F500415DED /* FieldMatching.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldMatching.xib; sourceTree = "<group>"; };
 		B76C43BF19C8706A00B0A19B /* QDataSetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QDataSetModel.xcdatamodel; sourceTree = "<group>"; };
+		B7981EC61A6584AD002AC6B4 /* white_rsense_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_rsense_logo.png; sourceTree = "<group>"; };
+		B7981EC81A6584B9002AC6B4 /* uml.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uml.png; sourceTree = "<group>"; };
+		B7981ECA1A6584C4002AC6B4 /* machine_science.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = machine_science.png; sourceTree = "<group>"; };
 		B7D848C819CC8453006BE163 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = headers/DataManager.h; sourceTree = "<group>"; };
 		B7D848CA19CC8463006BE163 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = source/DataManager.m; sourceTree = "<group>"; };
 		B7DDB9E91A14F1EB002CA14C /* QueueUploadStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QueueUploadStatus.m; path = Source/QueueUploadStatus.m; sourceTree = "<group>"; };
@@ -598,6 +604,7 @@
 				B71AD6C219C7119B006820A1 /* info.png */,
 				B71AD6C319C7119B006820A1 /* launchImage-iPad.png */,
 				B71AD6C419C7119B006820A1 /* launchImage-iPad~retina.png */,
+				B7981ECA1A6584C4002AC6B4 /* machine_science.png */,
 				B71AD6C519C7119B006820A1 /* menu-button.png */,
 				B71AD6C619C7119B006820A1 /* menu-button@2x.png */,
 				B71AD6C719C7119B006820A1 /* menuIcon.png */,
@@ -615,6 +622,7 @@
 				B71AD6D619C7119B006820A1 /* settings.png */,
 				B71AD6D719C7119B006820A1 /* spacer.png */,
 				B71AD6D819C7119B006820A1 /* Strings.strings */,
+				B7981EC81A6584B9002AC6B4 /* uml.png */,
 				B71AD6D919C7119B006820A1 /* unchecked.png */,
 				B71AD6DA19C7119B006820A1 /* unchecked@2x.png */,
 				B71AD6DB19C7119B006820A1 /* upload2.png */,
@@ -622,6 +630,7 @@
 				B71AD6DD19C7119B006820A1 /* waffle_check.png */,
 				B71AD6DE19C7119B006820A1 /* waffle_warn.png */,
 				B71AD6DF19C7119B006820A1 /* waffle_x.png */,
+				B7981EC61A6584AD002AC6B4 /* white_rsense_logo.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -747,11 +756,13 @@
 				B71AD6F119C7119B006820A1 /* menu-button.png in Resources */,
 				B71AD6F819C7119B006820A1 /* ProjectBrowserViewController_iPad.xib in Resources */,
 				B71AD6E119C7119B006820A1 /* checked.png in Resources */,
+				B7981EC91A6584B9002AC6B4 /* uml.png in Resources */,
 				B71AD70919C7119B006820A1 /* waffle_check.png in Resources */,
 				B71AD6E019C7119B006820A1 /* barcode.png in Resources */,
 				B71AD70519C7119B006820A1 /* unchecked.png in Resources */,
 				B71AD6F719C7119B006820A1 /* projectblock_dark.png in Resources */,
 				B71AD70619C7119B006820A1 /* unchecked@2x.png in Resources */,
+				B7981EC71A6584AD002AC6B4 /* white_rsense_logo.png in Resources */,
 				B71AD6F319C7119B006820A1 /* menuIcon.png in Resources */,
 				B71AD6FA19C7119B006820A1 /* ProjectBrowserViewController~landscape_iPhone.xib in Resources */,
 				B71AD70719C7119B006820A1 /* upload2.png in Resources */,
@@ -770,6 +781,7 @@
 				B71AD6F619C7119B006820A1 /* projectblock_clean.png in Resources */,
 				B71AD6F919C7119B006820A1 /* ProjectBrowserViewController_iPhone.xib in Resources */,
 				B71AD70119C7119B006820A1 /* reset.png in Resources */,
+				B7981ECB1A6584C4002AC6B4 /* machine_science.png in Resources */,
 				B71AD70019C7119B006820A1 /* QueueCell.xib in Resources */,
 				B71AD70A19C7119B006820A1 /* waffle_warn.png in Resources */,
 				B71AD6FC19C7119B006820A1 /* QueueLayout-landscape.xib in Resources */,

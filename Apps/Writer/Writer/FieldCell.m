@@ -10,6 +10,7 @@
 
 @implementation FieldCell
 
+@synthesize restrictions;
 
 - (void) awakeFromNib {
 }
@@ -19,12 +20,14 @@
     [super setSelected:selected animated:animated];
 }
 
-- (FieldCell *) setupCellWithField:(NSString *)field andData:(NSString *)data {
+- (FieldCell *) setupCellWithField:(NSString *)field data:(NSString *)data andRestrictions:(NSArray *)restr {
 
     self.fieldNameLbl.text = field;
     self.fieldNameLbl.backgroundColor = [UIColor clearColor];
 
     self.fieldDataTxt.text = data;
+
+    self.restrictions = restr;
     
     self.backgroundColor = [UIColor clearColor];
 

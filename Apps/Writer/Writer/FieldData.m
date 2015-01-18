@@ -13,5 +13,6 @@
 @synthesize fieldName;
 @synthesize fieldData;
 @synthesize fieldType;
+@synthesize fieldRestrictions;
 
 @end
