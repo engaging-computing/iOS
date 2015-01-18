@@ -19,6 +19,7 @@
     DataManager *dm;
     ISDRProjectManager *pm;
     API *api;
+    UIViewController *vc; 
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *projectLbl;

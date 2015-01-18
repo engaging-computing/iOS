@@ -32,6 +32,9 @@
     dm = [DataManager getInstance];
     
     pm = [[ISDRProjectManager alloc] init];
+
+    //Rajia: Is there a better way of doing this?
+    vc = [[UIViewController alloc] init];
     
     bool projectValid = [pm projectHasValidFields];
     
@@ -40,8 +43,9 @@
         int curProjID = [dm getProjectID];
         NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
         [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
-        
-    } else {
+        //rajia ToDo: how do you make projNumLbl be recognized if it's only defined in ViewController
+        //[projNumLbl setText:[NSString stringWithFormat:@"%d",curProjID]];
+        } else {
         
         // If we are in here it means that the project selected does not have properly formatted fields.
         // Present an error message to the user and set project back to default project.
@@ -51,6 +55,8 @@
         [dm setProjectID:curProjID];
         NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
         [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+        //rajia ToDo: how do you make projNumLbl be recognized if it's only defined in ViewController
+        //[projNumLbl setText:[NSString stringWithFormat:@"%d",curProjID]];
 
     }
 }
@@ -184,6 +190,8 @@
     
     NSString *curProjIDStr = (project_id > 0) ? [NSString stringWithFormat:@"%d", project_id] : kNO_PROJECT;
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
+    //rajia ToDo: how do you make projNumLbl be recognized if it's only defined in ViewController
+    //[projNumLbl setText: curProjIDStr];
     
 }
 
