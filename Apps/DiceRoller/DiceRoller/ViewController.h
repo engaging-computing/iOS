@@ -41,5 +41,7 @@ CredentialManagerDelegate>
 - (IBAction)credentialBarBtnOnClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *nameBtn;
 - (IBAction)nameBtnOnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *projNumLbl;
+@property (weak, nonatomic) IBOutlet UILabel *nameLbl;
 
 @end

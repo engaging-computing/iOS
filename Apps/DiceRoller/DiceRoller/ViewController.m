@@ -19,7 +19,7 @@
 
 @implementation ViewController
 //UI
-@synthesize credentialBarBtn, nameBtn;
+@synthesize credentialBarBtn, nameBtn, nameLbl, projNumLbl;
 
 int numTest = 0;
 
@@ -36,6 +36,7 @@ int numTest = 0;
     int projectID = 876;
     DataManager *dm = [DataManager getInstance];
     [dm setProjectID:projectID];
+    [projNumLbl setText:[NSString stringWithFormat:@"%d",projectID]];
 }
 
 - (void)didReceiveMemoryWarning{
@@ -63,7 +64,7 @@ int numTest = 0;
             
             if (name && [name length] > 0) {
                 dataSetName = name;
-                [nameBtn setTitle:dataSetName forState:UIControlStateNormal];
+                [nameLbl setText:dataSetName];
             }
             
             break;
@@ -225,7 +226,6 @@ replacementString:(NSString *)string {
                                                    otherButtonTitles:@"OK", nil];
     [enterNameAlart setAlertViewStyle:UIAlertViewStylePlainTextInput];
     enterNameAlart.tag = kNAME_DIALOG_TAG;
-    
     [enterNameAlart textFieldAtIndex:0].delegate = self;
     [[enterNameAlart textFieldAtIndex:0] becomeFirstResponder];
     [enterNameAlart textFieldAtIndex:0].placeholder = @"data set name";
