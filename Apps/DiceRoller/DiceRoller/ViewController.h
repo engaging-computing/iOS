@@ -29,6 +29,7 @@ CredentialManagerDelegate>
     // Credential Manager
     CredentialManager *credentialMgr;
     DLAVAlertView *credentialMgrAlert;
+    NSString *dataSetName;
 }
 @property (weak, nonatomic) IBOutlet UIButton *rollButton;
 @property (weak, nonatomic) IBOutlet UILabel *sumLabel;
@@ -38,5 +39,7 @@ CredentialManagerDelegate>
 - (IBAction)closeBtnOnClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *credentialBarBtn;
 - (IBAction)credentialBarBtnOnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *nameBtn;
+- (IBAction)nameBtnOnClick:(id)sender;
 
 @end

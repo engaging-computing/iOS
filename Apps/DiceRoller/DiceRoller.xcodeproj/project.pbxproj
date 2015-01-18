@@ -169,11 +169,11 @@
 				31739DE619DB3A7C00CF2DFB /* Main.storyboard */,
 				31739DE919DB3A7C00CF2DFB /* ViewController.h */,
 				31739DEA19DB3A7C00CF2DFB /* ViewController.m */,
+				31E5C9C819DF11A200A5E448 /* DiceDataController.h */,
+				31E5C9C919DF11A200A5E448 /* DiceDataController.m */,
 				31739DDB19DB3A7C00CF2DFB /* Supporting Files */,
 				31739E0919DB3BC400CF2DFB /* DieView.h */,
 				31739E0A19DB3BC400CF2DFB /* DieView.m */,
-				31E5C9C819DF11A200A5E448 /* DiceDataController.h */,
-				31E5C9C919DF11A200A5E448 /* DiceDataController.m */,
 			);
 			path = DiceRoller;
 			sourceTree = "<group>";

@@ -19,7 +19,7 @@
 
 @implementation ViewController
 //UI
-@synthesize credentialBarBtn;
+@synthesize credentialBarBtn, nameBtn;
 
 int numTest = 0;
 
@@ -30,6 +30,8 @@ int numTest = 0;
     [self reInstateCredentialManagerDialog];
 
 	api = [API getInstance];
+    dataSetName = kDEFAULT_DATA_SET_NAME;
+
     diceController = [[DiceDataController alloc] init];
     int projectID = 876;
     DataManager *dm = [DataManager getInstance];
@@ -41,6 +43,46 @@ int numTest = 0;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    switch (alertView.tag) {
+        case kLOGIN_DIALOG_TAG:
+        {
+            NSString *user = [alertView textFieldAtIndex:0].text;
+            NSString *pass = [alertView textFieldAtIndex:1].text;
+            
+            if ([user length] != 0 && [pass length] !=0)
+                [self login:user withPassword:pass];
+            
+            break;
+        }
+        case kNAME_DIALOG_TAG:
+        {
+            NSString *name = [alertView textFieldAtIndex:0].text;
+            
+            if (name && [name length] > 0) {
+                dataSetName = name;
+                [nameBtn setTitle:dataSetName forState:UIControlStateNormal];
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+// restrict length of text entered in the data set name AlertView
+// 90 is chosen because 128 is the limit on iSENSE, and theapp will eventually append
+// a ~20 character timestamp to the data set name
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
+    
+    NSUInteger newLength = [textField.text length] + [string
+                                                      length] - range.length;
+    return (newLength <= 90);
+}
 - (IBAction)rollClicked:(id)sender {
     int firstNum = [diceController getDieNumber];
     int secondNum = [diceController getDieNumber];
@@ -171,5 +213,27 @@ int numTest = 0;
 }
 
 #pragma end - Credentials
+
+#pragma mark - Name
+
+- (IBAction)nameBtnOnClick:(id)sender {
+    
+    UIAlertView *enterNameAlart = [[UIAlertView alloc] initWithTitle:@"Enter a Data Set Name"
+                                                             message:@""
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                                   otherButtonTitles:@"OK", nil];
+    [enterNameAlart setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    enterNameAlart.tag = kNAME_DIALOG_TAG;
+    
+    [enterNameAlart textFieldAtIndex:0].delegate = self;
+    [[enterNameAlart textFieldAtIndex:0] becomeFirstResponder];
+    [enterNameAlart textFieldAtIndex:0].placeholder = @"data set name";
+    
+    [enterNameAlart show];
+}
+
+#pragma end - Name
+
 
 @end
