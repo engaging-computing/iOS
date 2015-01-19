@@ -3,19 +3,19 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "ISDR_Logo29.png",
+      "filename" : "isdr_appicon29.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "ISDR_Logo60.png",
+      "filename" : "isdr_appicon60.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "120x120.png",
+      "filename" : "isdr_appicon.png",
       "scale" : "2x"
     },
     {
