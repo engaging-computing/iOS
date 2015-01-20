@@ -29,6 +29,15 @@
 		31A8D9FD19E864540042CF02 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A8D9F719E863EE0042CF02 /* libiSENSE_API.a */; };
 		31B62A671A645E5F00B988CD /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B62A661A645E5F00B988CD /* Launch Screen.xib */; };
 		31CB51211A6EB56F0038B084 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51201A6EB56F0038B084 /* Tutorial.storyboard */; };
+		31CB51241A6EB7DB0038B084 /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB51231A6EB7DB0038B084 /* PageContentViewController.m */; };
+		31CB512B1A6EBAAF0038B084 /* ISDRTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB512A1A6EBAAF0038B084 /* ISDRTutorialViewController.m */; };
+		31CB51491A6ECEFF0038B084 /* tutorial_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51481A6ECEFF0038B084 /* tutorial_7.png */; };
+		31CB514B1A6ECF080038B084 /* tutorial_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB514A1A6ECF080038B084 /* tutorial_6.png */; };
+		31CB514D1A6ECF0D0038B084 /* tutorial_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB514C1A6ECF0D0038B084 /* tutorial_5.png */; };
+		31CB514F1A6ECF130038B084 /* tutorial_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB514E1A6ECF130038B084 /* tutorial_4.png */; };
+		31CB51511A6ECF180038B084 /* tutorial_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51501A6ECF180038B084 /* tutorial_3.png */; };
+		31CB51531A6ECF1F0038B084 /* tutorial_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51521A6ECF1F0038B084 /* tutorial_2.png */; };
+		31CB51551A6ECF250038B084 /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51541A6ECF250038B084 /* tutorial_1.png */; };
 		31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9C919DF11A200A5E448 /* DiceDataController.m */; };
 		31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E8DA511A2A53410049502B /* ISDRProjectManager.m */; };
 /* End PBXBuildFile section */
@@ -93,6 +102,17 @@
 		31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
 		31B62A661A645E5F00B988CD /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		31CB51201A6EB56F0038B084 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		31CB51221A6EB7DB0038B084 /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentViewController.h; sourceTree = "<group>"; };
+		31CB51231A6EB7DB0038B084 /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
+		31CB51291A6EBAAF0038B084 /* ISDRTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISDRTutorialViewController.h; sourceTree = "<group>"; };
+		31CB512A1A6EBAAF0038B084 /* ISDRTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISDRTutorialViewController.m; sourceTree = "<group>"; };
+		31CB51481A6ECEFF0038B084 /* tutorial_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_7.png; path = ../../../tutorial_7.png; sourceTree = "<group>"; };
+		31CB514A1A6ECF080038B084 /* tutorial_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_6.png; path = ../../../tutorial_6.png; sourceTree = "<group>"; };
+		31CB514C1A6ECF0D0038B084 /* tutorial_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_5.png; path = ../../../tutorial_5.png; sourceTree = "<group>"; };
+		31CB514E1A6ECF130038B084 /* tutorial_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_4.png; path = ../../../tutorial_4.png; sourceTree = "<group>"; };
+		31CB51501A6ECF180038B084 /* tutorial_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_3.png; path = ../../../tutorial_3.png; sourceTree = "<group>"; };
+		31CB51521A6ECF1F0038B084 /* tutorial_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_2.png; path = ../../../tutorial_2.png; sourceTree = "<group>"; };
+		31CB51541A6ECF250038B084 /* tutorial_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_1.png; path = ../../../tutorial_1.png; sourceTree = "<group>"; };
 		31E5C9C819DF11A200A5E448 /* DiceDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceDataController.h; sourceTree = "<group>"; };
 		31E5C9C919DF11A200A5E448 /* DiceDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceDataController.m; sourceTree = "<group>"; };
 		31E8DA4E1A2A53050049502B /* ISDRProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISDRProjectManager.h; sourceTree = "<group>"; };
@@ -130,6 +150,7 @@
 		31739DC819DB3A7C00CF2DFB = {
 			isa = PBXGroup;
 			children = (
+				31CB51271A6EB9A30038B084 /* Tutorials */,
 				31739E1619DB428E00CF2DFB /* iSENSE API */,
 				31739DDA19DB3A7C00CF2DFB /* DiceRoller */,
 				31739DF919DB3A7C00CF2DFB /* DiceRollerTests */,
@@ -176,6 +197,7 @@
 				31739DDB19DB3A7C00CF2DFB /* Supporting Files */,
 				31739E0919DB3BC400CF2DFB /* DieView.h */,
 				31739E0A19DB3BC400CF2DFB /* DieView.m */,
+				31CB512E1A6EC0780038B084 /* Resources */,
 			);
 			path = DiceRoller;
 			sourceTree = "<group>";
@@ -260,6 +282,40 @@
 			);
 			name = UI;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		31CB51271A6EB9A30038B084 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				31CB51221A6EB7DB0038B084 /* PageContentViewController.h */,
+				31CB51231A6EB7DB0038B084 /* PageContentViewController.m */,
+				31CB51291A6EBAAF0038B084 /* ISDRTutorialViewController.h */,
+				31CB512A1A6EBAAF0038B084 /* ISDRTutorialViewController.m */,
+			);
+			name = Tutorials;
+			sourceTree = "<group>";
+		};
+		31CB512E1A6EC0780038B084 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				31CB51301A6EC08A0038B084 /* Tutorials */,
+			);
+			name = Resources;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		31CB51301A6EC08A0038B084 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				31CB51541A6ECF250038B084 /* tutorial_1.png */,
+				31CB51521A6ECF1F0038B084 /* tutorial_2.png */,
+				31CB51501A6ECF180038B084 /* tutorial_3.png */,
+				31CB514E1A6ECF130038B084 /* tutorial_4.png */,
+				31CB514C1A6ECF0D0038B084 /* tutorial_5.png */,
+				31CB514A1A6ECF080038B084 /* tutorial_6.png */,
+				31CB51481A6ECEFF0038B084 /* tutorial_7.png */,
+			);
+			name = Tutorials;
 			sourceTree = "<group>";
 		};
 		31E8DA4C1A2A528A0049502B /* Project */ = {
@@ -373,9 +429,16 @@
 			files = (
 				31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */,
 				31739DED19DB3A7C00CF2DFB /* Images.xcassets in Resources */,
+				31CB514B1A6ECF080038B084 /* tutorial_6.png in Resources */,
 				31739DDF19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */,
+				31CB514F1A6ECF130038B084 /* tutorial_4.png in Resources */,
+				31CB514D1A6ECF0D0038B084 /* tutorial_5.png in Resources */,
 				31739DE819DB3A7C00CF2DFB /* Main.storyboard in Resources */,
+				31CB51511A6ECF180038B084 /* tutorial_3.png in Resources */,
+				31CB51491A6ECEFF0038B084 /* tutorial_7.png in Resources */,
 				31B62A671A645E5F00B988CD /* Launch Screen.xib in Resources */,
+				31CB51531A6ECF1F0038B084 /* tutorial_2.png in Resources */,
+				31CB51551A6ECF250038B084 /* tutorial_1.png in Resources */,
 				31CB51211A6EB56F0038B084 /* Tutorial.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,7 +460,9 @@
 			files = (
 				31739DEB19DB3A7C00CF2DFB /* ViewController.m in Sources */,
 				31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */,
+				31CB51241A6EB7DB0038B084 /* PageContentViewController.m in Sources */,
 				31739E0B19DB3BC400CF2DFB /* DieView.m in Sources */,
+				31CB512B1A6EBAAF0038B084 /* ISDRTutorialViewController.m in Sources */,
 				31739DE519DB3A7C00CF2DFB /* AppDelegate.m in Sources */,
 				31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */,
 				31739DE119DB3A7C00CF2DFB /* main.m in Sources */,
