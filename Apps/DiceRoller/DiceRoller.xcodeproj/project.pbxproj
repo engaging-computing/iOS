@@ -28,6 +28,7 @@
 		31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */; };
 		31A8D9FD19E864540042CF02 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A8D9F719E863EE0042CF02 /* libiSENSE_API.a */; };
 		31B62A671A645E5F00B988CD /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B62A661A645E5F00B988CD /* Launch Screen.xib */; };
+		31CB51211A6EB56F0038B084 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51201A6EB56F0038B084 /* Tutorial.storyboard */; };
 		31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9C919DF11A200A5E448 /* DiceDataController.m */; };
 		31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E8DA511A2A53410049502B /* ISDRProjectManager.m */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		3181CF541A2CD49B008F8C37 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
 		31B62A661A645E5F00B988CD /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		31CB51201A6EB56F0038B084 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		31E5C9C819DF11A200A5E448 /* DiceDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceDataController.h; sourceTree = "<group>"; };
 		31E5C9C919DF11A200A5E448 /* DiceDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceDataController.m; sourceTree = "<group>"; };
 		31E8DA4E1A2A53050049502B /* ISDRProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISDRProjectManager.h; sourceTree = "<group>"; };
@@ -166,11 +168,11 @@
 				3181CF521A2CD45E008F8C37 /* Constants */,
 				31C05B581A658493002D348A /* Delegates */,
 				31E8DA4C1A2A528A0049502B /* Project */,
-				31739DE619DB3A7C00CF2DFB /* Main.storyboard */,
 				31739DE919DB3A7C00CF2DFB /* ViewController.h */,
 				31739DEA19DB3A7C00CF2DFB /* ViewController.m */,
 				31E5C9C819DF11A200A5E448 /* DiceDataController.h */,
 				31E5C9C919DF11A200A5E448 /* DiceDataController.m */,
+				31CB511E1A6EB55A0038B084 /* UI */,
 				31739DDB19DB3A7C00CF2DFB /* Supporting Files */,
 				31739E0919DB3BC400CF2DFB /* DieView.h */,
 				31739E0A19DB3BC400CF2DFB /* DieView.m */,
@@ -248,6 +250,16 @@
 				31739DE419DB3A7C00CF2DFB /* AppDelegate.m */,
 			);
 			name = Delegates;
+			sourceTree = "<group>";
+		};
+		31CB511E1A6EB55A0038B084 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				31739DE619DB3A7C00CF2DFB /* Main.storyboard */,
+				31CB51201A6EB56F0038B084 /* Tutorial.storyboard */,
+			);
+			name = UI;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		31E8DA4C1A2A528A0049502B /* Project */ = {
@@ -364,6 +376,7 @@
 				31739DDF19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */,
 				31739DE819DB3A7C00CF2DFB /* Main.storyboard in Resources */,
 				31B62A671A645E5F00B988CD /* Launch Screen.xib in Resources */,
+				31CB51211A6EB56F0038B084 /* Tutorial.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +442,7 @@
 				31739DE719DB3A7C00CF2DFB /* Base */,
 			);
 			name = Main.storyboard;
+			path = DiceRoller;
 			sourceTree = "<group>";
 		};
 		31739DFC19DB3A7C00CF2DFB /* InfoPlist.strings */ = {
