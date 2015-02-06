@@ -69,7 +69,8 @@
         UIStoryboard *presetStoryboard = [UIStoryboard storyboardWithName:@"Preset" bundle:nil];
         ISMPresets *presetController = [presetStoryboard instantiateViewControllerWithIdentifier:@"PresetStartController"];
         [presetController setDelegate:delegate];
-        [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:presetController animated:NO completion:nil];
+        [[[[[UIApplication sharedApplication] delegate] window]
+          rootViewController] presentViewController:presetController animated:NO completion:nil];
     }];
 }
 

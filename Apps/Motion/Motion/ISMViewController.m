@@ -250,13 +250,23 @@
             switch (buttonIndex) {
                 case kBTN_SPLASH:
                 {
-                    // get the splash view from the LaunchScreen xib
-                    NSArray *bundle = [[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil];
-                    for (id obj in bundle) {
-                        if ([obj isKindOfClass:[UIView class]]) {
-                            splashView = (UIView *) obj;
-                            break;
+                    if (!splashView) {
+                        // get the splash view from the LaunchScreen xib
+                        NSArray *bundle = [[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil];
+                        for (id obj in bundle) {
+                            if ([obj isKindOfClass:[UIView class]]) {
+                                splashView = (UIView *) obj;
+                                break;
+                            }
                         }
+                    }
+
+                    if (!splashView) {
+                        [self.view makeWaffle:@"Error loading splash screen"
+                                     duration:WAFFLE_LENGTH_LONG
+                                     position:WAFFLE_BOTTOM
+                                        image:WAFFLE_RED_X];
+                        return;
                     }
 
                     // resize the splash screen to fit the bound of the window
@@ -274,12 +284,22 @@
                 }
                 case kBTN_TUTORIALS:
                 {
-                    NSLog(@"TUTORIALS!");
+                    // transition to the tutorial storyboard
+                    UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+                    ISMTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+                    [tutorialController setDelegate:self];
+                    [self.parentViewController presentViewController:tutorialController animated:YES completion:nil];
+
                     return;
                 }
                 case kBTN_PRESETS:
                 {
-                    NSLog(@"PRESETS!");
+                    UIStoryboard *presetStoryboard = [UIStoryboard storyboardWithName:@"Preset" bundle:nil];
+                    ISMPresets *presetController = [presetStoryboard
+                        instantiateViewControllerWithIdentifier:@"PresetStartController"];
+                    [presetController setDelegate:self];
+                    [self.parentViewController presentViewController:presetController animated:YES completion:nil];
+
                     return;
                 }
                 default:
@@ -324,9 +344,7 @@
 
     } else /* presetID == kPRESET_DEFAULT */ {
 
-        projID = dev ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION;
-        sampleRate = kS_RATE_FIFTY_MS;
-        recordingLength = kREC_LENGTH_PUSH_TO_STOP;
+        return;
     }
 
     [self setupAppWithProject:projID sampleRate:sampleRate andRecordingLength:recordingLength];
@@ -820,7 +838,7 @@
                                            message:nil
                                           delegate:self
                                  cancelButtonTitle:@"Cancel"
-                                 otherButtonTitles:@"Splash", @"Tutorials", @"Presets", nil];
+                                 otherButtonTitles:@"Credits", @"Tutorials", @"Presets", nil];
     alertView.tag = kMENU_DIALOG_TAG;
     [alertView show];
 
