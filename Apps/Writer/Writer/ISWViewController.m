@@ -26,7 +26,7 @@
 // Queue Saver Properties
 @synthesize dataSaver, managedObjectContext;
 // UI
-@synthesize credentialBarBtn, dataSetNameLbl, dataSetNameTxt, projectBtn, saveRowBtn, saveDataSetBtn, contentView, uploadBtn;
+@synthesize credentialBarBtn, menuBarBtn, dataSetNameLbl, dataSetNameTxt, projectBtn, saveRowBtn, saveDataSetBtn, contentView, uploadBtn;
 
 
 #pragma mark - View and UI code
@@ -352,6 +352,36 @@
 }
 
 #pragma end - View and UI code
+
+#pragma mark - Menu
+
+- (IBAction)menuBarBtnOnClick:(id)sender {
+
+    if (isSplashDisplaying) {
+
+        // bring back the left menu item
+        self.navigationItem.leftBarButtonItem.title = @"Review";
+        self.navigationItem.rightBarButtonItem.enabled = true;
+
+        // remove the splash screen
+        [splashView removeFromSuperview];
+        isSplashDisplaying = false;
+
+        return;
+    }
+
+    // display user review menu options
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Which screen would you like to review?"
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Credits", @"Tutorials", nil];
+    alertView.tag = kMENU_DIALOG_TAG;
+    [alertView show];
+    
+}
+
+#pragma end - Menu
 
 #pragma mark - TableView code
 
@@ -891,6 +921,56 @@
         {
             if (buttonIndex != OPTION_CANCELED) {
                 [self launchDataSaverView];
+            }
+        }
+        case kMENU_DIALOG_TAG:
+        {
+            switch (buttonIndex) {
+                case kBTN_SPLASH:
+                {
+                    if (!splashView) {
+                        // get the splash view from the LaunchScreen xib
+                        NSArray *bundle = [[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil];
+                        for (id obj in bundle) {
+                            if ([obj isKindOfClass:[UIView class]]) {
+                                splashView = (UIView *) obj;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!splashView) {
+                        [self.view makeWaffle:@"Error loading splash screen"
+                                     duration:WAFFLE_LENGTH_LONG
+                                     position:WAFFLE_BOTTOM
+                                        image:WAFFLE_RED_X];
+                        return;
+                    }
+
+                    // resize the splash screen to fit the bound of the window
+                    splashView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+
+                    // replace the current left menu button with a back button
+                    self.navigationItem.leftBarButtonItem.title = @"Back";
+                    self.navigationItem.rightBarButtonItem.enabled = false;
+
+                    // display the splash screen
+                    [self.view addSubview:splashView];
+                    isSplashDisplaying = true;
+
+                    return;
+                }
+                case kBTN_TUTORIALS:
+                {
+                    // transition to the tutorial storyboard
+                    UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+                    ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+                    [self.parentViewController presentViewController:tutorialController animated:YES completion:nil];
+
+                    return;
+                }
+                default:
+                    return;
             }
         }
         default:

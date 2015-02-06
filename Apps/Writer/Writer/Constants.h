@@ -11,10 +11,17 @@
 
 // dialog constants
 #define kLOGIN_DIALOG_TAG 100
+
 #define kVISUALIZE_DIALOG_TAG 200
+
 #define kLOCATION_DIALOG_IOS_8_AND_LATER_TAG 301
 #define kLOCATION_DIALOG_IOS_7_AND_EARLIER_TAG 302
+
 #define kUPLOAD_CONFIRMATION_DIALOG_TAG 400
+
+#define kMENU_DIALOG_TAG 500
+#define kBTN_SPLASH 1
+#define kBTN_TUTORIALS 2
 
 // project constants
 #define kNO_PROJECT @"Not Set"

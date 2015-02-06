@@ -66,6 +66,10 @@
 
     // Footer view for the table view
     UILabel *tableFooter;
+
+    // UIView to display the splash screen and a boolean to track if it is displaying
+    UIView *splashView;
+    bool isSplashDisplaying;
 }
 
 // Queue Saver properties
@@ -75,6 +79,9 @@
 // UI properties
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *credentialBarBtn;
 - (IBAction)credentialBarBtnOnClick:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarBtn;
+- (IBAction)menuBarBtnOnClick:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *dataSetNameLbl;
 @property (weak, nonatomic) IBOutlet UITextField *dataSetNameTxt;
