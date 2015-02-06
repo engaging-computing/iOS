@@ -70,6 +70,10 @@
     // and value is the respective sample rate/recording length as a string
     NSDictionary *sampleRateStrings;
     NSDictionary *recLengthStrings;
+
+    // UIView to display the splash screen and a boolean to track if it is displaying
+    UIView *splashView;
+    bool isSplashDisplaying;
 }
 
 // Queue Saver Properties
@@ -77,6 +81,9 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 // UI elements and click methods
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarBtn;
+- (IBAction)menuBarBtnOnClick:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *credentialBarBtn;
 - (IBAction)credentialBarBtnOnClick:(id)sender;
 

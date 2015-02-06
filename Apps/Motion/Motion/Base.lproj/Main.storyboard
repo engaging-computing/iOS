@@ -194,6 +194,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="iS Motion" id="d6B-Tu-Otv">
+                        <barButtonItem key="leftBarButtonItem" title="Review" id="1g5-YL-olo">
+                            <connections>
+                                <action selector="menuBarBtnOnClick:" destination="vXZ-lx-hvc" id="NTR-KW-q73"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Account" id="YgZ-s9-4Sq">
                             <connections>
                                 <action selector="credentialBarBtnOnClick:" destination="vXZ-lx-hvc" id="NMf-fA-kYZ"/>
@@ -202,6 +207,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="credentialBarBtn" destination="YgZ-s9-4Sq" id="Uyv-Ku-Itv"/>
+                        <outlet property="menuBarBtn" destination="1g5-YL-olo" id="ohh-rq-Ot4"/>
                         <outlet property="nameBtn" destination="0MA-CP-WU0" id="TLh-l3-ieQ"/>
                         <outlet property="projectBtn" destination="43J-wk-nCk" id="7Ac-Af-eev"/>
                         <outlet property="recordingLengthBtn" destination="sUa-1z-o5u" id="IWI-bE-3LV"/>

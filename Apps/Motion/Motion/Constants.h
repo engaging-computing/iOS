@@ -26,6 +26,11 @@
 
 #define kVISUALIZE_DIALOG_TAG 700
 
+#define kMENU_DIALOG_TAG 800
+#define kBTN_SPLASH 1
+#define kBTN_TUTORIALS 2
+#define kBTN_PRESETS 3
+
 // Earth's gravity constant
 #define kGRAVITY 9.80665
 
