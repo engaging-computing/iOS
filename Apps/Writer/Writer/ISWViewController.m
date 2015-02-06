@@ -922,6 +922,7 @@
             if (buttonIndex != OPTION_CANCELED) {
                 [self launchDataSaverView];
             }
+            break;
         }
         case kMENU_DIALOG_TAG:
         {
