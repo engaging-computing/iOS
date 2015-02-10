@@ -13,13 +13,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Writer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxY-0F-EQp">
-                    <rect key="frame" x="8" y="105" width="464" height="29"/>
+                    <rect key="frame" x="8" y="77" width="464" height="29"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isenseproject.org" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPa-w0-6mg">
-                    <rect key="frame" x="8" y="152" width="464" height="29"/>
+                    <rect key="frame" x="8" y="109" width="464" height="29"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -27,40 +27,40 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="machine_science.png" translatesAutoresizingMaskIntoConstraints="NO" id="p7N-GG-Sd4">
                     <rect key="frame" x="114" y="433" width="253" height="39"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="253" id="cel-if-82G"/>
-                        <constraint firstAttribute="width" secondItem="p7N-GG-Sd4" secondAttribute="height" multiplier="253:39" id="dAd-yc-gO8"/>
+                        <constraint firstAttribute="height" constant="39" id="eNg-B9-ecq"/>
+                        <constraint firstAttribute="width" secondItem="p7N-GG-Sd4" secondAttribute="height" multiplier="253:39" id="x5T-eU-vkQ"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_rsense_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="oyp-06-rW8">
-                    <rect key="frame" x="112" y="36" width="257" height="61"/>
+                    <rect key="frame" x="112" y="8" width="257" height="61"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="257" id="S85-7R-PIg"/>
-                        <constraint firstAttribute="width" secondItem="oyp-06-rW8" secondAttribute="height" multiplier="257:61" id="dk6-dZ-oER"/>
+                        <constraint firstAttribute="width" secondItem="oyp-06-rW8" secondAttribute="height" multiplier="257:61" id="hv8-xz-0ac"/>
+                        <constraint firstAttribute="height" constant="61" id="ips-fz-1BR"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uml.png" translatesAutoresizingMaskIntoConstraints="NO" id="dCH-Pv-91J">
-                    <rect key="frame" x="168" y="243" width="145" height="165"/>
+                    <rect key="frame" x="184" y="296" width="113" height="129"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="145" id="hMB-59-2XU"/>
-                        <constraint firstAttribute="width" secondItem="dCH-Pv-91J" secondAttribute="height" multiplier="29:33" id="rBq-CV-EzA"/>
+                        <constraint firstAttribute="width" constant="113" id="Pti-cA-VBI"/>
+                        <constraint firstAttribute="width" secondItem="dCH-Pv-91J" secondAttribute="height" multiplier="113:129" id="eLl-Is-ekC"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.55051685292275998" green="0.91708096590909094" blue="0.50638223403994675" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="CxY-0F-EQp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="J6L-Zr-qdF"/>
-                <constraint firstItem="p7N-GG-Sd4" firstAttribute="top" secondItem="dCH-Pv-91J" secondAttribute="bottom" constant="25" id="PEq-mB-zMF"/>
-                <constraint firstAttribute="centerX" secondItem="oyp-06-rW8" secondAttribute="centerX" id="WC1-Vg-H5M"/>
-                <constraint firstAttribute="centerX" secondItem="dCH-Pv-91J" secondAttribute="centerX" id="XA3-rs-dyo"/>
-                <constraint firstItem="oyp-06-rW8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="36" id="bZV-Ui-vud"/>
-                <constraint firstAttribute="trailing" secondItem="TPa-w0-6mg" secondAttribute="trailing" constant="8" id="hD5-ew-qUV"/>
-                <constraint firstAttribute="trailing" secondItem="CxY-0F-EQp" secondAttribute="trailing" constant="8" id="la5-h5-ogW"/>
-                <constraint firstAttribute="bottom" secondItem="p7N-GG-Sd4" secondAttribute="bottom" constant="8" id="nrt-MJ-k7L"/>
+                <constraint firstAttribute="trailing" secondItem="TPa-w0-6mg" secondAttribute="trailing" constant="8" id="3VC-bw-KPW"/>
+                <constraint firstAttribute="centerX" secondItem="p7N-GG-Sd4" secondAttribute="centerX" id="B52-m5-hHb"/>
+                <constraint firstItem="p7N-GG-Sd4" firstAttribute="top" secondItem="dCH-Pv-91J" secondAttribute="bottom" constant="8" id="Jcw-wi-s6H"/>
+                <constraint firstItem="TPa-w0-6mg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Rmm-SF-Dcw"/>
+                <constraint firstAttribute="trailing" secondItem="CxY-0F-EQp" secondAttribute="trailing" constant="8" id="U0T-MP-RqO"/>
+                <constraint firstItem="TPa-w0-6mg" firstAttribute="top" secondItem="CxY-0F-EQp" secondAttribute="bottom" constant="3" id="cfw-jg-GqW"/>
+                <constraint firstItem="oyp-06-rW8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="dru-es-lFW"/>
+                <constraint firstItem="CxY-0F-EQp" firstAttribute="top" secondItem="oyp-06-rW8" secondAttribute="bottom" constant="8" id="gVn-nA-D2L"/>
+                <constraint firstAttribute="bottom" secondItem="p7N-GG-Sd4" secondAttribute="bottom" constant="8" id="lvO-Ib-7Aj"/>
                 <constraint firstAttribute="centerX" secondItem="CxY-0F-EQp" secondAttribute="centerX" id="pEl-J9-cbb"/>
-                <constraint firstItem="CxY-0F-EQp" firstAttribute="top" secondItem="oyp-06-rW8" secondAttribute="bottom" constant="8" id="uhT-rb-3qh"/>
-                <constraint firstItem="TPa-w0-6mg" firstAttribute="top" secondItem="CxY-0F-EQp" secondAttribute="bottom" constant="18" id="v7x-O0-ZW4"/>
-                <constraint firstAttribute="centerX" secondItem="p7N-GG-Sd4" secondAttribute="centerX" id="vkT-ce-SrN"/>
-                <constraint firstItem="TPa-w0-6mg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="zcF-FD-Aak"/>
+                <constraint firstItem="CxY-0F-EQp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="qWu-h1-OSw"/>
+                <constraint firstAttribute="centerX" secondItem="oyp-06-rW8" secondAttribute="centerX" id="ynL-kd-tGm"/>
+                <constraint firstAttribute="centerX" secondItem="dCH-Pv-91J" secondAttribute="centerX" id="z8x-EF-Clu"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -69,7 +69,7 @@
                     <exclude reference="pEl-J9-cbb"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="276" y="494"/>
+            <point key="canvasLocation" x="233" y="362"/>
         </view>
     </objects>
     <resources>

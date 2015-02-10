@@ -24,7 +24,8 @@
 // Queue Saver Properties
 @synthesize dataSaver, managedObjectContext;
 // UI
-@synthesize credentialBarBtn, xLbl, yLbl, zLbl, sampleRateBtn, recordingLengthBtn, startStopBtn, nameBtn, uploadBtn, projectBtn;
+@synthesize menuBarBtn, credentialBarBtn, xLbl, yLbl, zLbl, sampleRateBtn;
+@synthesize recordingLengthBtn, startStopBtn, nameBtn, uploadBtn, projectBtn;
 
 
 #pragma mark - View and overriden methods
@@ -244,6 +245,67 @@
             
             break;
         }
+        case kMENU_DIALOG_TAG:
+        {
+            switch (buttonIndex) {
+                case kBTN_SPLASH:
+                {
+                    if (!splashView) {
+                        // get the splash view from the LaunchScreen xib
+                        NSArray *bundle = [[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil];
+                        for (id obj in bundle) {
+                            if ([obj isKindOfClass:[UIView class]]) {
+                                splashView = (UIView *) obj;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!splashView) {
+                        [self.view makeWaffle:@"Error loading splash screen"
+                                     duration:WAFFLE_LENGTH_LONG
+                                     position:WAFFLE_BOTTOM
+                                        image:WAFFLE_RED_X];
+                        return;
+                    }
+
+                    // resize the splash screen to fit the bound of the window
+                    splashView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+
+                    // replace the current left menu button with a back button
+                    self.navigationItem.leftBarButtonItem.title = @"Back";
+                    self.navigationItem.rightBarButtonItem.enabled = false;
+
+                    // display the splash screen
+                    [self.view addSubview:splashView];
+                    isSplashDisplaying = true;
+
+                    return;
+                }
+                case kBTN_TUTORIALS:
+                {
+                    // transition to the tutorial storyboard
+                    UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+                    ISMTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+                    [tutorialController setDelegate:self];
+                    [self.parentViewController presentViewController:tutorialController animated:YES completion:nil];
+
+                    return;
+                }
+                case kBTN_PRESETS:
+                {
+                    UIStoryboard *presetStoryboard = [UIStoryboard storyboardWithName:@"Preset" bundle:nil];
+                    ISMPresets *presetController = [presetStoryboard
+                        instantiateViewControllerWithIdentifier:@"PresetStartController"];
+                    [presetController setDelegate:self];
+                    [self.parentViewController presentViewController:presetController animated:YES completion:nil];
+
+                    return;
+                }
+                default:
+                    return;
+            }
+        }
         default:
             break;
     }
@@ -282,9 +344,7 @@
 
     } else /* presetID == kPRESET_DEFAULT */ {
 
-        projID = dev ? kDEFAULT_PROJ_DEV : kDEFAULT_PROJ_PRODUCTION;
-        sampleRate = kS_RATE_FIFTY_MS;
-        recordingLength = kREC_LENGTH_PUSH_TO_STOP;
+        return;
     }
 
     [self setupAppWithProject:projID sampleRate:sampleRate andRecordingLength:recordingLength];
@@ -755,6 +815,36 @@
 }
 
 #pragma end - Name
+
+#pragma mark - Menu
+
+- (IBAction)menuBarBtnOnClick:(id)sender {
+
+    if (isSplashDisplaying) {
+
+        // bring back the left menu item
+        self.navigationItem.leftBarButtonItem.title = @"Review";
+        self.navigationItem.rightBarButtonItem.enabled = true;
+
+        // remove the splash screen
+        [splashView removeFromSuperview];
+        isSplashDisplaying = false;
+
+        return;
+    }
+
+    // display user review menu options
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Which screen would you like to review?"
+                                           message:nil
+                                          delegate:self
+                                 cancelButtonTitle:@"Cancel"
+                                 otherButtonTitles:@"Credits", @"Tutorials", @"Presets", nil];
+    alertView.tag = kMENU_DIALOG_TAG;
+    [alertView show];
+
+}
+
+#pragma end - Menu
 
 #pragma mark - Credentials
 

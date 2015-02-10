@@ -115,6 +115,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="iS Writer" id="kmv-hw-1QN">
+                        <barButtonItem key="leftBarButtonItem" title="Review" id="FcC-ri-760">
+                            <connections>
+                                <action selector="menuBarBtnOnClick:" destination="BYZ-38-t0r" id="F78-hC-G6A"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Account" id="PDD-qH-Xe2">
                             <connections>
                                 <action selector="credentialBarBtnOnClick:" destination="BYZ-38-t0r" id="PJk-2g-qsm"/>
@@ -126,6 +131,7 @@
                         <outlet property="credentialBarBtn" destination="PDD-qH-Xe2" id="3zz-BS-9Wq"/>
                         <outlet property="dataSetNameLbl" destination="Y7S-FE-Ls6" id="TdC-tJ-cVF"/>
                         <outlet property="dataSetNameTxt" destination="54V-NH-Tzx" id="Vza-Yp-RsC"/>
+                        <outlet property="menuBarBtn" destination="FcC-ri-760" id="IwE-98-uf9"/>
                         <outlet property="projectBtn" destination="bQf-e3-Lo2" id="bTw-pW-TSV"/>
                         <outlet property="saveDataSetBtn" destination="lhp-lV-Nqi" id="plM-Uq-9OD"/>
                         <outlet property="saveRowBtn" destination="rCY-xT-VVx" id="NdN-ny-ffO"/>
