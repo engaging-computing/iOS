@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -45,14 +45,39 @@
                         <constraint firstAttribute="width" secondItem="xXq-zU-MPT" secondAttribute="height" multiplier="26:31" id="kcb-Dc-bjK"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reserved" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEL-DO-xFG">
+                    <rect key="frame" x="300" y="410" width="172" height="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(c) 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkw-Z7-r9e">
+                    <rect key="frame" x="300" y="365" width="172" height="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Rights" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Rq-TA-gUJ">
+                    <rect key="frame" x="300" y="388" width="172" height="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.56408546350585731" green="0.22754734914444102" blue="0.76556581439393945" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Cmi-wl-KlH" firstAttribute="top" secondItem="tK5-T1-ziq" secondAttribute="bottom" constant="8" id="0xO-a9-cYW"/>
+                <constraint firstAttribute="trailing" secondItem="eEL-DO-xFG" secondAttribute="trailing" constant="8" id="2dg-RM-Upw"/>
                 <constraint firstAttribute="trailing" secondItem="Cmi-wl-KlH" secondAttribute="trailing" constant="8" id="2lj-mi-oTG"/>
                 <constraint firstAttribute="centerX" secondItem="xXq-zU-MPT" secondAttribute="centerX" id="G4E-D8-6dS"/>
+                <constraint firstItem="eEL-DO-xFG" firstAttribute="leading" secondItem="xXq-zU-MPT" secondAttribute="trailing" constant="8" id="Gup-sT-jQQ"/>
+                <constraint firstItem="eEL-DO-xFG" firstAttribute="top" secondItem="8Rq-TA-gUJ" secondAttribute="bottom" constant="7" id="IWc-71-Qaz"/>
                 <constraint firstAttribute="bottom" secondItem="cdx-SH-3le" secondAttribute="bottom" constant="8" id="MBz-sN-PJS"/>
+                <constraint firstAttribute="trailing" secondItem="lkw-Z7-r9e" secondAttribute="trailing" constant="8" id="Nl6-O0-2dJ"/>
+                <constraint firstItem="eEL-DO-xFG" firstAttribute="bottom" secondItem="xXq-zU-MPT" secondAttribute="bottom" id="Psl-hD-dD2"/>
+                <constraint firstItem="8Rq-TA-gUJ" firstAttribute="top" secondItem="lkw-Z7-r9e" secondAttribute="bottom" constant="8" id="R0n-h8-HVF"/>
                 <constraint firstItem="rao-ao-MLj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="U7m-Ya-viQ"/>
+                <constraint firstAttribute="trailing" secondItem="8Rq-TA-gUJ" secondAttribute="trailing" constant="8" id="UhD-aR-Rtn"/>
                 <constraint firstItem="Cmi-wl-KlH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="aYP-Ce-qNI"/>
                 <constraint firstAttribute="centerX" secondItem="tK5-T1-ziq" secondAttribute="centerX" id="bAq-Jx-d3m"/>
                 <constraint firstItem="rao-ao-MLj" firstAttribute="top" secondItem="Cmi-wl-KlH" secondAttribute="bottom" constant="8" id="cS2-sj-2ul"/>
@@ -60,10 +85,12 @@
                 <constraint firstItem="tK5-T1-ziq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="h6N-T2-8v3"/>
                 <constraint firstAttribute="trailing" secondItem="rao-ao-MLj" secondAttribute="trailing" constant="8" id="hDB-yT-i4c"/>
                 <constraint firstItem="cdx-SH-3le" firstAttribute="top" secondItem="xXq-zU-MPT" secondAttribute="bottom" constant="8" id="mCD-ED-C7a"/>
+                <constraint firstItem="lkw-Z7-r9e" firstAttribute="leading" secondItem="xXq-zU-MPT" secondAttribute="trailing" constant="8" id="pAo-8e-AcG"/>
+                <constraint firstItem="8Rq-TA-gUJ" firstAttribute="leading" secondItem="xXq-zU-MPT" secondAttribute="trailing" constant="8" id="sYu-9R-RkD"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="723" y="795"/>
+            <point key="canvasLocation" x="658" y="733"/>
         </view>
     </objects>
     <resources>

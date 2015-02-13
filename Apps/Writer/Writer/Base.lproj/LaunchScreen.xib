@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -45,21 +45,48 @@
                         <constraint firstAttribute="width" secondItem="dCH-Pv-91J" secondAttribute="height" multiplier="113:129" id="eLl-Is-ekC"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Rights" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crs-lh-qgV">
+                    <rect key="frame" x="305" y="387" width="167" height="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reserved" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSY-5r-K08">
+                    <rect key="frame" x="305" y="410" width="167" height="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(c) 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HjZ-vK-8RX">
+                    <rect key="frame" x="305" y="364" width="167" height="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.55051685292275998" green="0.91708096590909094" blue="0.50638223403994675" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="TPa-w0-6mg" secondAttribute="trailing" constant="8" id="3VC-bw-KPW"/>
+                <constraint firstAttribute="trailing" secondItem="HjZ-vK-8RX" secondAttribute="trailing" constant="8" id="9Gd-cS-C0h"/>
                 <constraint firstAttribute="centerX" secondItem="p7N-GG-Sd4" secondAttribute="centerX" id="B52-m5-hHb"/>
                 <constraint firstItem="p7N-GG-Sd4" firstAttribute="top" secondItem="dCH-Pv-91J" secondAttribute="bottom" constant="8" id="Jcw-wi-s6H"/>
+                <constraint firstItem="Crs-lh-qgV" firstAttribute="leading" secondItem="dCH-Pv-91J" secondAttribute="trailing" constant="8" id="KOA-wI-Gzb"/>
+                <constraint firstItem="Crs-lh-qgV" firstAttribute="top" secondItem="HjZ-vK-8RX" secondAttribute="bottom" constant="8" id="NQb-OJ-i4l"/>
                 <constraint firstItem="TPa-w0-6mg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Rmm-SF-Dcw"/>
                 <constraint firstAttribute="trailing" secondItem="CxY-0F-EQp" secondAttribute="trailing" constant="8" id="U0T-MP-RqO"/>
+                <constraint firstAttribute="trailing" secondItem="Crs-lh-qgV" secondAttribute="trailing" constant="8" id="bu5-2e-3wf"/>
                 <constraint firstItem="TPa-w0-6mg" firstAttribute="top" secondItem="CxY-0F-EQp" secondAttribute="bottom" constant="3" id="cfw-jg-GqW"/>
                 <constraint firstItem="oyp-06-rW8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="dru-es-lFW"/>
                 <constraint firstItem="CxY-0F-EQp" firstAttribute="top" secondItem="oyp-06-rW8" secondAttribute="bottom" constant="8" id="gVn-nA-D2L"/>
                 <constraint firstAttribute="bottom" secondItem="p7N-GG-Sd4" secondAttribute="bottom" constant="8" id="lvO-Ib-7Aj"/>
+                <constraint firstAttribute="trailing" secondItem="QSY-5r-K08" secondAttribute="trailing" constant="8" id="mZ4-YH-3JB"/>
                 <constraint firstAttribute="centerX" secondItem="CxY-0F-EQp" secondAttribute="centerX" id="pEl-J9-cbb"/>
+                <constraint firstItem="QSY-5r-K08" firstAttribute="top" secondItem="Crs-lh-qgV" secondAttribute="bottom" constant="8" id="pfg-jB-1p2"/>
                 <constraint firstItem="CxY-0F-EQp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="qWu-h1-OSw"/>
+                <constraint firstItem="QSY-5r-K08" firstAttribute="leading" secondItem="dCH-Pv-91J" secondAttribute="trailing" constant="8" id="qur-7z-Ih6"/>
+                <constraint firstItem="HjZ-vK-8RX" firstAttribute="leading" secondItem="dCH-Pv-91J" secondAttribute="trailing" constant="8" id="wfg-vC-0bu"/>
                 <constraint firstAttribute="centerX" secondItem="oyp-06-rW8" secondAttribute="centerX" id="ynL-kd-tGm"/>
+                <constraint firstItem="dCH-Pv-91J" firstAttribute="bottom" secondItem="QSY-5r-K08" secondAttribute="bottom" id="z2o-s7-LIM"/>
                 <constraint firstAttribute="centerX" secondItem="dCH-Pv-91J" secondAttribute="centerX" id="z8x-EF-Clu"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
