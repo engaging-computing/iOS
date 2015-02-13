@@ -1,9 +1,12 @@
 //
-//  QueueConstants.h
-//  Data_Walk
+// QueueConstants.h
+// iSENSE_API
 //
-//  Created by Michael Stowell on 9/6/13.
-//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Michael Stowell on 9/6/13.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #ifndef Data_Walk_QueueConstants_h

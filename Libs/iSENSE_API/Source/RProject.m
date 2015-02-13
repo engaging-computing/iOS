@@ -1,9 +1,12 @@
 //
-//  RProject.m
-//  iSENSE_API
+// RProject.m
+// iSENSE_API
 //
-//  Created by Michael Stowell on 8/21/13.
-//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Michael Stowell on 8/21/13.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import "RProject.h"

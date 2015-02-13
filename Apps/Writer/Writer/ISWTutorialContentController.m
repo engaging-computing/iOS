@@ -1,9 +1,12 @@
 //
-//  ISWTutorialContentController.m
-//  Writer
+// ISWTutorialContentController.m
+// Writer
 //
-//  Created by Mike Stowell on 12/09/14.
-//  Copyright (c) 2014 iSENSE. All rights reserved.
+// Created by Mike Stowell on 12/09/14.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import "ISWTutorialContentController.h"

@@ -1,6 +1,10 @@
 //
 // Prefix header for all source files of the 'iSENSE_API' target in the 'iSENSE_API' project
 //
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
+//
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>

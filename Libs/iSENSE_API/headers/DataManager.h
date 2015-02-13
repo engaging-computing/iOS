@@ -1,9 +1,12 @@
 //
-//  DataManager.h
-//  iSENSE_API
+// DataManager.h
+// iSENSE_API
 //
-//  Created by Mike Stowell on 9/19/14.
-//  Copyright (c) 2014 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Mike Stowell on 9/19/14.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import <Foundation/Foundation.h>

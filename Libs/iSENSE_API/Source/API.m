@@ -1,9 +1,12 @@
 //
-//  API.m
-//  iSENSE_API
+// API.m
+// iSENSE_API
 //
-//  Created by Jeremy Poulin on 8/21/13.
-//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Jeremy Poulin on 8/21/13.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import "API.h"

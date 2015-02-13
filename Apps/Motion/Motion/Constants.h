@@ -1,9 +1,12 @@
 //
-//  Constants.h
-//  Motion
+// Constants.h
+// Motion
 //
-//  Created by Mike Stowell on 9/17/14.
-//  Copyright (c) 2014 iSENSE. All rights reserved.
+// Created by Mike Stowell on 9/17/14.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #ifndef Motion_Constants_h

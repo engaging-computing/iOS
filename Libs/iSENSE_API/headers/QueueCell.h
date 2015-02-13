@@ -1,10 +1,13 @@
 //
-//  QueueCell.h
-//  Data_Collector
+// QueueCell.h
+// iSENSE_API
 //
-//  Created by Jeremy Poulin on 7/2/13.
-//  Modified by Mike Stowell
-//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved
+// Created by Jeremy Poulin on 7/2/13.
+// Modified by Mike Stowell
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import <UIKit/UIKit.h>

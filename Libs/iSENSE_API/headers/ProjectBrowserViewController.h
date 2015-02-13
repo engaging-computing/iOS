@@ -1,9 +1,12 @@
 //
-//  ProjectBrowserViewController.h
-//  iSENSE_API
+// ProjectBrowserViewController.h
+// iSENSE_API
 //
-//  Created by Jeremy Poulin on 1/31/14.
-//  Copyright (c) 2014 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Jeremy Poulin on 1/31/14.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import <UIKit/UIKit.h>

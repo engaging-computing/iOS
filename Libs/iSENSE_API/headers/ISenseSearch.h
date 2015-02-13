@@ -1,9 +1,12 @@
 //
-//  ISenseSearch.h
-//  iOS Data Collector
+// ISenseSearch.h
+// iSENSE_API
 //
-//  Created by Jeremy Poulin on 2/5/13.
-//  Copyright 2013 iSENSE Project, UMass Lowell All rights reserved.
+// Created by Jeremy Poulin on 2/5/13.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import <Foundation/Foundation.h>

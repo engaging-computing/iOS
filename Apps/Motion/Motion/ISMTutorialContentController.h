@@ -1,9 +1,12 @@
 //
-//  ISMTutorialContentController.h
-//  Motion
+// ISMTutorialContentController.h
+// Motion
 //
-//  Created by Mike Stowell on 11/18/14.
-//  Copyright (c) 2014 iSENSE. All rights reserved.
+// Created by Mike Stowell on 11/18/14.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import <UIKit/UIKit.h>

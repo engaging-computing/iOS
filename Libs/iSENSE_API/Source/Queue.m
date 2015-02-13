@@ -1,9 +1,12 @@
 //
-//  Queue.m
-//  iSENSE API
+// Queue.m
+// iSENSE API
 //
-//  Created by Jeremy Poulin on 4/26/13.
-//  Copyright 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Jeremy Poulin on 4/26/13.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #include "Queue.h"

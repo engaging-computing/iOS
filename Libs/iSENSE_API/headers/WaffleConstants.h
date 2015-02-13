@@ -1,9 +1,12 @@
 //
-//  WaffleConstants.h
-//  iSENSE API
+// WaffleConstants.h
+// iSENSE API
 //
-//  Created by Mike Stowell on 7/15/13.
-//  Copyright 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Mike Stowell on 7/15/13.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #ifndef iSENSE_API_WaffleConstants_h

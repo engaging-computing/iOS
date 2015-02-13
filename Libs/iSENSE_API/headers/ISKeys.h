@@ -1,9 +1,12 @@
 //
-//  ISKeys.h
-//  iSENSE_API
+// ISKeys.h
+// iSENSE_API
 //
-//  Created by Michael Stowell on 10/24/13.
-//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Michael Stowell on 10/24/13.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #ifndef iSENSE_API_ISKeys_h

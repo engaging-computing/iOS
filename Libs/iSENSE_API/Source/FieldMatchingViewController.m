@@ -1,9 +1,12 @@
 //
-//  FieldMatchingViewController.m
-//  iSENSE_API
+// FieldMatchingViewController.m
+// iSENSE_API
 //
-//  Created by Michael Stowell on 11/14/13.
-//  Copyright (c) 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Michael Stowell on 11/14/13.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import "FieldMatchingViewController.h"

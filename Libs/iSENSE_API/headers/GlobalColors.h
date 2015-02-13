@@ -1,9 +1,12 @@
 //
-//  GlobalColors.h
-//  iSENSE_API
+// GlobalColors.h
+// iSENSE_API
 //
-//  Created by Mike Stowell on 12/1/14.
-//  Copyright (c) 2014 iSENSE Project at UMass Lowell. All rights reserved.
+// Created by Mike Stowell on 12/1/14.
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #ifndef iSENSE_API_GlobalColors_h

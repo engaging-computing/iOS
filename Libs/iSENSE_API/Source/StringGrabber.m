@@ -1,11 +1,13 @@
 //
-//  StringGrabber.m
-//  Data_Collector
+// StringGrabber.m
+// iSENSE_API
 //
-//  Created by Mike Stowell on 12/28/12.
-//  Copyright 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Mike Stowell on 12/28/12.
 //
-
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
+//
 
 #import "StringGrabber.h"
 
@@ -20,6 +22,7 @@
 }
 
 + (NSString *) grabField:(NSString *)label {
+
     NSString *fname = [[NSBundle mainBundle] pathForResource:@"Fields" ofType:@"strings"];
 	NSDictionary *d = [NSDictionary dictionaryWithContentsOfFile:fname];
 	NSString *loc = [d objectForKey:label];

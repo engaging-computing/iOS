@@ -1,9 +1,12 @@
 //
-//  QDataSet.h
-//  iSENSE API
+// QDataSet.h
+// iSENSE API
 //
-//  Created by Jeremy Poulin on 7/16/13, modified by Mike Stowell 9/6/13
-//  Copyright 2013 iSENSE Project, UMass Lowell. All rights reserved.
+// Created by Jeremy Poulin on 7/16/13, modified by Mike Stowell 9/6/13
+//
+// (c) 2015
+// University of Massachusetts
+// All Rights Reserved
 //
 
 #import <Foundation/Foundation.h>
