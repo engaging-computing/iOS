@@ -143,15 +143,6 @@
     // add a footer view to the table to either display a warning that no project is selected or
     // a count of the number of data rows currently saved for this data set
     [self addFooterView];
-
-    // Display one-time tutorial
-    BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
-    if (!tutorialShown) {
-
-        UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
-        ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
-        [self presentViewController:tutorialController animated:YES completion:nil];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -212,6 +203,22 @@
 
     // unregister location updates
     [self unregisterLocationUpdates];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+
+    [super viewDidAppear:animated];
+
+    // Display one-time tutorial
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
+    
+    if (!tutorialShown) {
+
+        UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+        ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+        [self.parentViewController presentViewController:tutorialController animated:YES completion:nil];
+    }
 }
 
 - (void) resetSuperviewPosition {
@@ -281,7 +288,7 @@
         [arr addObject:data];
 
         // keep a count of how many items are in the array currently to report to the user
-        rowsTotal = arr.count;
+        rowsTotal = (int) arr.count;
     }
 
     // reset the timestamps and geospatial data
@@ -505,8 +512,8 @@
             dataRow = [[NSArray alloc] init];
         }
 
-        tableFooter.text = [NSString stringWithFormat:@"%d %@ saved for this data set",
-                            dataRow.count, (dataRow.count == 1 ? @"row" : @"rows")];
+        tableFooter.text = [NSString stringWithFormat:@"%lu %@ saved for this data set",
+                            (unsigned long)dataRow.count, (dataRow.count == 1 ? @"row" : @"rows")];
         tableFooter.textColor = UIColorFromHex(cNAV_WRITER_GREEN_TINT);
     }
 }
