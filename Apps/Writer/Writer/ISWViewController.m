@@ -1,9 +1,46 @@
+/*
+ * iSENSE Project - isenseproject.org
+ * This file is part of the iSENSE iOS API and applications.
+ *
+ * Copyright (c) 2015, University of Massachusetts Lowell. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer. Redistributions in binary
+ * form must reproduce the above copyright notice, this list of conditions and
+ * the following disclaimer in the documentation and/or other materials
+ * provided with the distribution. Neither the name of the University of
+ * Massachusetts Lowell nor the names of its contributors may be used to
+ * endorse or promote products derived from this software without specific
+ * prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ * DAMAGE.
+ *
+ * BSD 3-Clause License
+ * http://opensource.org/licenses/BSD-3-Clause
+ *
+ * Our work is supported by grants DRL-0735597, DRL-0735592, DRL-0546513, IIS-1123998,
+ * and IIS-1123972 from the National Science Foundation and a gift from Google Inc.
+ *
+ */
+
 //
-//  ISWViewController.m
-//  Writer
+// ISWViewController.m
+// Writer
 //
-//  Created by Mike Stowell on 11/4/14.
-//  Copyright (c) 2014 iSENSE. All rights reserved.
+// Created by Mike Stowell on 11/4/14.
 //
 
 #import "ISWViewController.h"
@@ -26,7 +63,7 @@
 // Queue Saver Properties
 @synthesize dataSaver, managedObjectContext;
 // UI
-@synthesize credentialBarBtn, dataSetNameLbl, dataSetNameTxt, projectBtn, saveRowBtn, saveDataSetBtn, contentView, uploadBtn;
+@synthesize credentialBarBtn, menuBarBtn, dataSetNameLbl, dataSetNameTxt, projectBtn, saveRowBtn, saveDataSetBtn, contentView, uploadBtn;
 
 
 #pragma mark - View and UI code
@@ -106,15 +143,6 @@
     // add a footer view to the table to either display a warning that no project is selected or
     // a count of the number of data rows currently saved for this data set
     [self addFooterView];
-
-    // Display one-time tutorial
-    BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
-    if (!tutorialShown) {
-
-        UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
-        ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
-        [self presentViewController:tutorialController animated:YES completion:nil];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -175,6 +203,22 @@
 
     // unregister location updates
     [self unregisterLocationUpdates];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+
+    [super viewDidAppear:animated];
+
+    // Display one-time tutorial
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    BOOL tutorialShown = [prefs boolForKey:kDISPLAYED_TUTORIAL];
+    
+    if (!tutorialShown) {
+
+        UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+        ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+        [self.parentViewController presentViewController:tutorialController animated:YES completion:nil];
+    }
 }
 
 - (void) resetSuperviewPosition {
@@ -244,7 +288,7 @@
         [arr addObject:data];
 
         // keep a count of how many items are in the array currently to report to the user
-        rowsTotal = arr.count;
+        rowsTotal = (int) arr.count;
     }
 
     // reset the timestamps and geospatial data
@@ -353,6 +397,36 @@
 
 #pragma end - View and UI code
 
+#pragma mark - Menu
+
+- (IBAction)menuBarBtnOnClick:(id)sender {
+
+    if (isSplashDisplaying) {
+
+        // bring back the left menu item
+        self.navigationItem.leftBarButtonItem.title = @"Review";
+        self.navigationItem.rightBarButtonItem.enabled = true;
+
+        // remove the splash screen
+        [splashView removeFromSuperview];
+        isSplashDisplaying = false;
+
+        return;
+    }
+
+    // display user review menu options
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Which screen would you like to review?"
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Credits", @"Tutorials", nil];
+    alertView.tag = kMENU_DIALOG_TAG;
+    [alertView show];
+    
+}
+
+#pragma end - Menu
+
 #pragma mark - TableView code
 
 // There is a single column in this table
@@ -438,8 +512,8 @@
             dataRow = [[NSArray alloc] init];
         }
 
-        tableFooter.text = [NSString stringWithFormat:@"%d %@ saved for this data set",
-                            dataRow.count, (dataRow.count == 1 ? @"row" : @"rows")];
+        tableFooter.text = [NSString stringWithFormat:@"%lu %@ saved for this data set",
+                            (unsigned long)dataRow.count, (dataRow.count == 1 ? @"row" : @"rows")];
         tableFooter.textColor = UIColorFromHex(cNAV_WRITER_GREEN_TINT);
     }
 }
@@ -891,6 +965,57 @@
         {
             if (buttonIndex != OPTION_CANCELED) {
                 [self launchDataSaverView];
+            }
+            break;
+        }
+        case kMENU_DIALOG_TAG:
+        {
+            switch (buttonIndex) {
+                case kBTN_SPLASH:
+                {
+                    if (!splashView) {
+                        // get the splash view from the LaunchScreen xib
+                        NSArray *bundle = [[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil];
+                        for (id obj in bundle) {
+                            if ([obj isKindOfClass:[UIView class]]) {
+                                splashView = (UIView *) obj;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!splashView) {
+                        [self.view makeWaffle:@"Error loading splash screen"
+                                     duration:WAFFLE_LENGTH_LONG
+                                     position:WAFFLE_BOTTOM
+                                        image:WAFFLE_RED_X];
+                        return;
+                    }
+
+                    // resize the splash screen to fit the bound of the window
+                    splashView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+
+                    // replace the current left menu button with a back button
+                    self.navigationItem.leftBarButtonItem.title = @"Back";
+                    self.navigationItem.rightBarButtonItem.enabled = false;
+
+                    // display the splash screen
+                    [self.view addSubview:splashView];
+                    isSplashDisplaying = true;
+
+                    return;
+                }
+                case kBTN_TUTORIALS:
+                {
+                    // transition to the tutorial storyboard
+                    UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+                    ISWTutorialViewController *tutorialController = [tutorialStoryboard instantiateViewControllerWithIdentifier:@"TutorialStartController"];
+                    [self.parentViewController presentViewController:tutorialController animated:YES completion:nil];
+
+                    return;
+                }
+                default:
+                    return;
             }
         }
         default:
