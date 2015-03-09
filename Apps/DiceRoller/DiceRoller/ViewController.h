@@ -44,4 +44,8 @@ CredentialManagerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *projNumLbl;
 @property (weak, nonatomic) IBOutlet UILabel *nameLbl;
 
+-(int)getDieNumber;
+-(void) uploadDatadie1:(int)num1 die2: (int)num2 sumOfDies: (int)sumNum numOfTests: (int)numTest;
+
+
 @end
