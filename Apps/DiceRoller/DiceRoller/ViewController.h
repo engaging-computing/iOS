@@ -30,6 +30,8 @@ CredentialManagerDelegate>
     CredentialManager *credentialMgr;
     DLAVAlertView *credentialMgrAlert;
     NSString *dataSetName;
+    NSString *userEmail;
+    NSString *password;
 }
 @property (weak, nonatomic) IBOutlet UIButton *rollButton;
 @property (weak, nonatomic) IBOutlet UILabel *sumLabel;

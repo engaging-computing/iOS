@@ -37,6 +37,8 @@ int numTest = 0;
     DataManager *dm = [DataManager getInstance];
     [dm setProjectID:projectID];
     [projNumLbl setText:[NSString stringWithFormat:@"%d",projectID]];
+    userEmail = @"mobile.fake@example.com";
+    password = @"mobile";
 }
 
 - (void)didReceiveMemoryWarning{
@@ -192,6 +194,8 @@ replacementString:(NSString *)string {
                              duration:WAFFLE_LENGTH_SHORT
                              position:WAFFLE_BOTTOM
                                 image:WAFFLE_CHECKMARK];
+                userEmail = email;
+                password = pass;
             } else {
                 
                 [self.view makeWaffle:@"Login failed"
@@ -266,8 +270,8 @@ replacementString:(NSString *)string {
         // declare a project to upload to, username, and password.
         // this example assumes the project has the fields "white dice", "yellow dice", and "sum"
         
-        NSString *userEmail = @"mobile.fake@example.com";
-        NSString *password = @"mobile";
+        //NSString *userEmail = @"mobile.fake@example.com";
+        //NSString *password = @"mobile";
         
         // login to the iSENSE site
         [api createSessionWithEmail:userEmail andPassword:password];
