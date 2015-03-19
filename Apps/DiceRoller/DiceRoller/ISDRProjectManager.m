@@ -101,7 +101,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    // set an observer for the field matched array caught from FieldMatching.  start by removing the observer
+    // to reset any other potential observers registered
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveFieldMatchedArray:) name:kFIELD_MATCHED_ARRAY object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -148,6 +152,8 @@
                 if(projectisValid){
                     
                     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
+                    
+                    [self launchFieldMatchingViewControllerFromBrowse:FALSE];
                     break;
                     
                 }
@@ -192,7 +198,62 @@
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
     //rajia ToDo: how do you make projNumLbl be recognized if it's only defined in ViewController
     //[projNumLbl setText: curProjIDStr];
+    [self launchFieldMatchingViewControllerFromBrowse:TRUE];
+}
+
+// Each call to set a new project ID requires the user to explicitly field match
+- (void) launchFieldMatchingViewControllerFromBrowse:(bool)fromBrowse {
     
+    UIAlertView *message = [self getDispatchDialogWithMessage:@"Loading fields..."];
+    [message show];
+     NSLog(@"Rajia we are in launchFieldMatchingViewControllerFromBrowse");
+    dispatch_queue_t queue = dispatch_queue_create("loading_project_fields", NULL);
+    dispatch_async(queue, ^{
+        
+        [dm retrieveProjectFields];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Rajia we are in dispatch async");
+            // launch the field matching dialog
+            FieldMatchingViewController *fmvc = [[FieldMatchingViewController alloc] initWithMatchedFields:[dm getRecognizedFields] andProjectFields:[dm getUserDefinedFields]];
+            fmvc.title = @"Field Matching";
+            
+            [message dismissWithClickedButtonIndex:0 animated:NO];
+            
+            if (fromBrowse) {
+                double delayInSeconds = 0.5;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [self.navigationController pushViewController:fmvc animated:YES];
+                     NSLog(@"Rajia we are in if");
+                    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                });
+            } else
+                //[self.navigationController pushViewController:fmvc animated:YES];
+             NSLog(@"Rajia we are NOT in if");
+        });
+    });
+}
+
+// Retrieve the field-matched array and update DM
+- (void) retrieveFieldMatchedArray:(NSNotification *)obj {
+    
+    NSMutableArray *fieldMatch =  (NSMutableArray *)[obj object];
+    
+    if (fieldMatch) {
+        // user pressed okay button, so update the DM's fields with field-matched equivalents
+        NSMutableArray *updatedProjectFields = [[NSMutableArray alloc] init];
+        
+        int index = 0;
+        for (RProjectField *field in [dm getProjectFields]) {
+            field.recognized_name = [fieldMatch objectAtIndex:index++];
+            [updatedProjectFields addObject:field];
+        }
+        
+        [dm setProjectFields:updatedProjectFields];
+        
+    }
+    // else user canceled
 }
 
 
