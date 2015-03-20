@@ -39,6 +39,8 @@ int numTest = 0;
     [projNumLbl setText:[NSString stringWithFormat:@"%d",projectID]];
     userEmail = @"mobile.fake@example.com";
     password = @"mobile";
+    [self uploadDatadie1:0 die2:0 sumOfDies:0 numOfTests:numTest++];
+
 }
 
 - (void)didReceiveMemoryWarning{

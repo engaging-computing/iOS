@@ -16,21 +16,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _pageTitles = @[@"Welcome to iSENSE Dice Roller",
-                    @"Login to your isenseproject.org account",
-                    @"Select a project to contribute to",
-                    @"Customize data set options",
-                    @"Press Roll to record data",
-                    @"View your data sets ready to upload",
-                    @"Edit and upload data sets"];
+    _pageTitles = @[@"Welcome to iSENSE Dice Roller!",
+                    @"Login to Your iSENSE Account:",
+                    @"Select a Project to Contribute to:",
+                    @"Press Roll to Record Data",
+                    @"Data will automatically upload!"];
     
     _pageImages = @[@"tutorial_1.png",
                     @"tutorial_2.png",
                     @"tutorial_3.png",
                     @"tutorial_4.png",
-                    @"tutorial_5.png",
-                    @"tutorial_6.png",
-                    @"tutorial_7.png"];
+                    @"tutorial_5.png"];
 
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
