@@ -36,6 +36,8 @@
     //Rajia: Is there a better way of doing this?
     vc = [[UIViewController alloc] init];
     
+    isdrVC = [[ViewController alloc] init];
+    
     bool projectValid = [pm projectHasValidFields];
     
     if (projectValid) {
@@ -45,6 +47,7 @@
         [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
         //rajia ToDo: how do you make projNumLbl be recognized if it's only defined in ViewController
         //[projNumLbl setText:[NSString stringWithFormat:@"%d",curProjID]];
+        [isdrVC updateProjectNum:[dm getProjectID]];
         } else {
         
         // If we are in here it means that the project selected does not have properly formatted fields.
@@ -57,7 +60,7 @@
         [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
         //rajia ToDo: how do you make projNumLbl be recognized if it's only defined in ViewController
         //[projNumLbl setText:[NSString stringWithFormat:@"%d",curProjID]];
-
+        [isdrVC updateProjectNum:[dm getProjectID]];
     }
 }
 
@@ -152,7 +155,7 @@
                 if(projectisValid){
                     
                     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", projAsString]];
-                    
+                    [isdrVC updateProjectNum:[dm getProjectID]];
                     [self launchFieldMatchingViewControllerFromBrowse:FALSE];
                     break;
                     
@@ -166,7 +169,7 @@
                 [dm setProjectID:curProjID];
                 NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
                 [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
-                
+                [isdrVC updateProjectNum:[dm getProjectID]];
                 break;
         }
             break;
@@ -198,6 +201,7 @@
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
     //rajia ToDo: how do you make projNumLbl be recognized if it's only defined in ViewController
     //[projNumLbl setText: curProjIDStr];
+    [isdrVC updateProjectNum:[dm getProjectID]];
     [self launchFieldMatchingViewControllerFromBrowse:TRUE];
 }
 
@@ -226,6 +230,7 @@
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [self.navigationController pushViewController:fmvc animated:YES];
                      NSLog(@"Rajia we are in if");
+                    [isdrVC updateProjectNum:[dm getProjectID]];
                     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
                 });
             } else
@@ -251,7 +256,7 @@
         }
         
         [dm setProjectFields:updatedProjectFields];
-        
+        [isdrVC updateProjectNum:[dm getProjectID]];
     }
     // else user canceled
 }

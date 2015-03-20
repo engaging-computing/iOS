@@ -44,17 +44,6 @@
                                     <action selector="rollClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="lUL-Sj-qKW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh0-7Y-hWY">
-                                <rect key="frame" x="-14" y="430" width="180" height="30"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Upload to Project:">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="857-Fg-prl" kind="modal" id="YH0-ym-HCu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sat-KG-MbZ">
                                 <rect key="frame" x="228" y="518" width="46" height="30"/>
                                 <state key="normal">
@@ -63,9 +52,9 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UI-KI-smt">
-                                <rect key="frame" x="10" y="392" width="106" height="30"/>
+                                <rect key="frame" x="0.0" y="392" width="222" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="DataSet Name:">
+                                <state key="normal" title="DataSet Name: My DataSet">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -73,18 +62,17 @@
                                     <action selector="nameBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Xpm-4E-Juc"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="876" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hN6-qJ-8ia">
-                                <rect key="frame" x="275" y="436" width="29" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh0-7Y-hWY">
+                                <rect key="frame" x="4" y="430" width="180" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Data Set" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lY8-Rk-oux">
-                                <rect key="frame" x="213" y="395" width="163" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal" title="Upload to Project: 5">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="857-Fg-prl" kind="modal" id="YH0-ym-HCu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -99,8 +87,7 @@
                         <outlet property="credentialBarBtn" destination="gGf-pE-Ev9" id="phr-Hx-w9v"/>
                         <outlet property="firstDieView" destination="oDq-J8-RBt" id="wCK-Ov-3d0"/>
                         <outlet property="nameBtn" destination="1UI-KI-smt" id="lW1-uY-9Ts"/>
-                        <outlet property="nameLbl" destination="lY8-Rk-oux" id="lSl-B3-zJD"/>
-                        <outlet property="projNumLbl" destination="hN6-qJ-8ia" id="775-Ha-WYK"/>
+                        <outlet property="projectBtn" destination="gh0-7Y-hWY" id="Xah-jn-6OA"/>
                         <outlet property="rollButton" destination="bBH-zl-IQS" id="WzP-5f-HIT"/>
                         <outlet property="secondDieView" destination="s1n-g2-Erx" id="kZa-FP-YOu"/>
                         <outlet property="sumLabel" destination="OzP-6D-Gph" id="j3i-FJ-M5J"/>

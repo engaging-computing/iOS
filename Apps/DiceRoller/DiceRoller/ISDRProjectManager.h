@@ -12,12 +12,14 @@
 #import "DataManager.h"
 #import "Constants.h"
 #import "Waffle.h"
+#import "ViewController.h"
 
 #define kPROJ_MANUAL_ENTRY_DIALOG 100
 
 @interface ISDRProjectManager : UIViewController <ProjectBrowserDelegate, UIAlertViewDelegate> {
     DataManager *dm;
     ISDRProjectManager *pm;
+    ViewController *isdrVC;
     API *api;
     UIViewController *vc; 
 }
@@ -32,6 +34,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 - (IBAction)closeBtnOnClick:(id)sender;
+
 
 -(bool)projectHasValidFields;
 

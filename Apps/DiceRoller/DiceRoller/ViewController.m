@@ -19,7 +19,7 @@
 
 @implementation ViewController
 //UI
-@synthesize credentialBarBtn, nameBtn, nameLbl, projNumLbl;
+@synthesize credentialBarBtn, nameBtn, projectBtn;
 
 int numTest = 0;
 
@@ -31,18 +31,21 @@ int numTest = 0;
 
 	api = [API getInstance];
     dataSetName = kDEFAULT_DATA_SET_NAME;
-
-    diceController = [[DiceDataController alloc] init];
+    [nameBtn setTitle:[NSString stringWithFormat:@"DataSet Name: %@", dataSetName] forState:UIControlStateNormal];
+    //diceController = [[DiceDataController alloc] init];
     int projectID = 876;
     DataManager *dm = [DataManager getInstance];
     [dm setProjectID:projectID];
-    [projNumLbl setText:[NSString stringWithFormat:@"%d",projectID]];
     userEmail = @"mobile.fake@example.com";
     password = @"mobile";
     [self uploadDatadie1:0 die2:0 sumOfDies:0 numOfTests:numTest++];
-
+    [self updateProjectNum:projectID];
+    
 }
 
+- (void) updateProjectNum:(int)projNumber{
+    [projectBtn setTitle:[NSString stringWithFormat:@"Upload to Project: %d", projNumber] forState:UIControlStateNormal];
+}
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -74,7 +77,8 @@ int numTest = 0;
             
             if (name && [name length] > 0) {
                 dataSetName = name;
-                [nameLbl setText:dataSetName];
+                [nameBtn setTitle:[NSString stringWithFormat:@"DataSet Name: %@", dataSetName] forState:UIControlStateNormal];
+
             }
             
             break;
@@ -340,6 +344,9 @@ replacementString:(NSString *)string {
         // this dataSetID variable will now contain either a positive integer if the data uploaded
         // successfully (namely the ID of your new data set), or -1 if the upload failed.  if your upload failed,
         // you may have misformatted the data
+        
+        //Upload
+        [self updateProjectNum:[dm getProjectID]];
     });
 }
 
