@@ -44,6 +44,5 @@ CredentialManagerDelegate>
 - (IBAction)nameBtnOnClick:(id)sender;
 -(int)getDieNumber;
 -(void) uploadDatadie1:(int)num1 die2: (int)num2 sumOfDies: (int)sumNum numOfTests: (int)numTest;
--(void)updateProjectNum:(int)projNumber;
 
 @end

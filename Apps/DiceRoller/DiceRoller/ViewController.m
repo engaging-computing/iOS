@@ -23,6 +23,12 @@
 
 int numTest = 0;
 
+- (void)viewDidAppear:(BOOL)animated{
+    //Called anytime we go to the screen
+    [super viewDidAppear:animated];
+    [projectBtn setTitle:[NSString stringWithFormat:@"Upload to Project: %d", [dm getProjectID]] forState:UIControlStateNormal];
+    
+}
 - (void)viewDidLoad{
     [super viewDidLoad];
 
@@ -31,21 +37,17 @@ int numTest = 0;
 
 	api = [API getInstance];
     dataSetName = kDEFAULT_DATA_SET_NAME;
-    [nameBtn setTitle:[NSString stringWithFormat:@"DataSet Name: %@", dataSetName] forState:UIControlStateNormal];
+    [nameBtn setTitle:[NSString stringWithFormat:@"Data Set Name: %@", dataSetName] forState:UIControlStateNormal];
     //diceController = [[DiceDataController alloc] init];
     int projectID = 876;
-    DataManager *dm = [DataManager getInstance];
+    dm = [DataManager getInstance];
     [dm setProjectID:projectID];
     userEmail = @"mobile.fake@example.com";
     password = @"mobile";
-    [self uploadDatadie1:0 die2:0 sumOfDies:0 numOfTests:numTest++];
-    [self updateProjectNum:projectID];
+    //[self uploadDatadie1:0 die2:0 sumOfDies:0 numOfTests:numTest++];
     
 }
 
-- (void) updateProjectNum:(int)projNumber{
-    [projectBtn setTitle:[NSString stringWithFormat:@"Upload to Project: %d", projNumber] forState:UIControlStateNormal];
-}
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -77,7 +79,7 @@ int numTest = 0;
             
             if (name && [name length] > 0) {
                 dataSetName = name;
-                [nameBtn setTitle:[NSString stringWithFormat:@"DataSet Name: %@", dataSetName] forState:UIControlStateNormal];
+                [nameBtn setTitle:[NSString stringWithFormat:@"Data Set Name: %@", dataSetName] forState:UIControlStateNormal];
 
             }
             
@@ -283,7 +285,7 @@ replacementString:(NSString *)string {
         [api createSessionWithEmail:userEmail andPassword:password];
         
         // pull down fields for the iSENSE project as an array of RProjectField objects
-        DataManager *dm = [DataManager getInstance];
+        dm = [DataManager getInstance];
         NSArray *projectFields = [api getProjectFieldsWithId:[dm getProjectID]];
         
         // initialize an array to store your data
@@ -345,8 +347,6 @@ replacementString:(NSString *)string {
         // successfully (namely the ID of your new data set), or -1 if the upload failed.  if your upload failed,
         // you may have misformatted the data
         
-        //Upload
-        [self updateProjectNum:[dm getProjectID]];
     });
 }
 
