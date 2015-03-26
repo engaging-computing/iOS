@@ -40,14 +40,11 @@ int numTest = 0;
     // if using the development iSENSE site, turn on development mode
     [api useDev:true];
     [nameBtn setTitle:[NSString stringWithFormat:@"Data Set Name: %@", dataSetName] forState:UIControlStateNormal];
-    //diceController = [[DiceDataController alloc] init];
     int projectID = 876;
     dm = [DataManager getInstance];
     [dm setProjectID:projectID];
     userEmail = @"mobile.fake@example.com";
     password = @"mobile";
-    //[self uploadDatadie1:0 die2:0 sumOfDies:0 numOfTests:numTest++];
-    
 }
 
 - (void)didReceiveMemoryWarning{
@@ -111,14 +108,8 @@ replacementString:(NSString *)string {
     [self.secondDieView showDieNumber:secondNum colorOfDie:YELLOW_DICE];
     
     self.sumLabel.text = [NSString stringWithFormat:@"The sum is %d", sum];
-    //Call uploadData to upload the data set.
     [self uploadDatadie1:firstNum die2:secondNum sumOfDies:sum numOfTests:numTest++];
 
-}
-//This is for making testing easier, however will be removed in the futer when the app is ready to be pushed to the app store. 
-- (IBAction)closeBtnOnClick:(id)sender{
-    [self.view makeWaffle:@"Exiting App." duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM];
-    exit(0);
 }
 
 #pragma mark - Credentials

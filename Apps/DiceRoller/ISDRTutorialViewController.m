@@ -109,7 +109,6 @@
 }
 
 - (IBAction)goToDiceBtnOnClick:(id)sender {
-    NSLog(@"Here");
     
     UIStoryboard *board = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *vc = [board instantiateInitialViewController];

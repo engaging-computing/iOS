@@ -83,7 +83,6 @@
             
         }
     }
-
     
     //Check to see if all three booleans are true. If they are, the project is valid! If not the project is invalid.
     return (hasWhiteDieField && hasYellowDieField && hasSumField);
@@ -180,7 +179,6 @@
     
     NSString *curProjIDStr = (project_id > 0) ? [NSString stringWithFormat:@"%d", project_id] : kNO_PROJECT;
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
-    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
