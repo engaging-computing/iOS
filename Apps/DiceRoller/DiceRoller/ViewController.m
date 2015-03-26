@@ -37,6 +37,8 @@ int numTest = 0;
 
 	api = [API getInstance];
     dataSetName = kDEFAULT_DATA_SET_NAME;
+    // if using the development iSENSE site, turn on development mode
+    [api useDev:true];
     [nameBtn setTitle:[NSString stringWithFormat:@"Data Set Name: %@", dataSetName] forState:UIControlStateNormal];
     //diceController = [[DiceDataController alloc] init];
     int projectID = 876;
@@ -268,12 +270,6 @@ replacementString:(NSString *)string {
         int whiteDiceValue = num1;
         int yellowDiceValue = num2;
         int diceRollSum = sumNum;
-        
-        // declare an instance of the singleton API object
-        api = [API getInstance];
-        
-        // if using the development iSENSE site, turn on development mode
-        [api useDev:true];
         
         // declare a project to upload to, username, and password.
         // this example assumes the project has the fields "white dice", "yellow dice", and "sum"

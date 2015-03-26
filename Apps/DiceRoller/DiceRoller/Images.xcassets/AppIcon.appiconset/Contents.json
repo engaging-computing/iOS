@@ -3,19 +3,19 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "isdr_appicon29.png",
+      "filename" : "appIcon29.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "isdr_appicon60.png",
+      "filename" : "appIcon40.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "isdr_appicon.png",
+      "filename" : "appIcon60.png",
       "scale" : "2x"
     },
     {
