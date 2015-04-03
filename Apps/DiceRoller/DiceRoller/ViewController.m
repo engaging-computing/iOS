@@ -40,7 +40,7 @@ int numTest = 0;
     // if using the development iSENSE site, turn on development mode
     [api useDev:true];
     [nameBtn setTitle:[NSString stringWithFormat:@"Data Set Name: %@", dataSetName] forState:UIControlStateNormal];
-    int projectID = 876;
+    int projectID = kDEFAULT_PROJ;
     dm = [DataManager getInstance];
     [dm setProjectID:projectID];
     userEmail = @"mobile.fake@example.com";
@@ -111,8 +111,6 @@ replacementString:(NSString *)string {
     [self uploadDatadie1:firstNum die2:secondNum sumOfDies:sum numOfTests:numTest++];
 
 }
-
-#pragma mark - Credentials
 
 - (void) reInstateCredentialManagerDialog {
     // If Credential Manager is called and it’s not shown, we start to display it!
@@ -224,10 +222,6 @@ replacementString:(NSString *)string {
     return message;
 }
 
-#pragma end - Credentials
-
-#pragma mark - Name
-
 - (IBAction)nameBtnOnClick:(id)sender {
     
     UIAlertView *enterNameAlart = [[UIAlertView alloc] initWithTitle:@"Enter a Data Set Name"
@@ -244,9 +238,7 @@ replacementString:(NSString *)string {
     [enterNameAlart show];
 }
 
-#pragma end - Name
-
--(void) uploadDatadie1:(int)num1 die2: (int)num2 sumOfDies: (int)sumNum numOfTests: (int)numTest{
+-(void) uploadDatadie1:(int)num1 die2:(int)num2 sumOfDies:(int)sumNum numOfTests:(int)numTest{
     
     
     // operations performed that involve querying the iSENSE website should always be done in a background
@@ -256,18 +248,10 @@ replacementString:(NSString *)string {
     dispatch_queue_t queue = dispatch_queue_create("upload_data_to_isense", NULL);
     dispatch_async(queue, ^{
         
-        // normally, data would be passed into a method that makes this upload call.
-        // we will declare an arbitrary dice-roll and name for the data set
         int whiteDiceValue = num1;
         int yellowDiceValue = num2;
         int diceRollSum = sumNum;
-        
-        // declare a project to upload to, username, and password.
-        // this example assumes the project has the fields "white dice", "yellow dice", and "sum"
-        
-        //NSString *userEmail = @"mobile.fake@example.com";
-        //NSString *password = @"mobile";
-        
+       
         // login to the iSENSE site
         [api createSessionWithEmail:userEmail andPassword:password];
         
@@ -315,10 +299,6 @@ replacementString:(NSString *)string {
         // add this data row to our data array
         [rowMajorData addObject:dataRow];
         
-        // at this point, feel free to add more data points to the rowMajorData array!
-        // to prevent the need for parsing the project's fields and logging in multiple times,
-        // make sure you only make these API calls once though.
-        
         // when storing data, we typically follow the format we did above.  this style is called row-major
         // because we stored one data row in our array at a time.  iSENSE, however, expects data in
         // column-major format.  that is, our data object needs to be a dictionary where the keys are
@@ -332,8 +312,7 @@ replacementString:(NSString *)string {
         // you're done! this uploadDataToProject method returns a data set ID number that you can store or check.
         // this dataSetID variable will now contain either a positive integer if the data uploaded
         // successfully (namely the ID of your new data set), or -1 if the upload failed.  if your upload failed,
-        // you may have misformatted the data
-        
+        // you may have misformatted the data.
     });
 }
 

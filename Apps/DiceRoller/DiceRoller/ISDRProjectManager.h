@@ -12,7 +12,6 @@
 #import "DataManager.h"
 #import "Constants.h"
 #import "Waffle.h"
-#import "ViewController.h"
 
 #define kPROJ_MANUAL_ENTRY_DIALOG 100
 
@@ -31,7 +30,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 - (IBAction)closeBtnOnClick:(id)sender;
-
 
 -(bool)projectHasValidFields;
 

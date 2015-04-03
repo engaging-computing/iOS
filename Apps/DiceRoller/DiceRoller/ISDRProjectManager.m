@@ -36,15 +36,15 @@
     if (projectValid) {
         
         int curProjID = [dm getProjectID];
-        NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+        NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
         [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
         [dm setProjectID:curProjID];
-        } else {
+    } else {
         
         // If we are in here it means that the project selected does not have properly formatted fields.
         // Present an error message to the user and set project back to default project.
         [self.view makeWaffle:@"Error: Selected Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-        int curProjID = 876;
+        int curProjID = kDEFAULT_PROJ;
         [dm setProjectID:curProjID];
         NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
         [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
@@ -146,9 +146,9 @@
                 //Present an error message informing the user and set project back to default.
                 
                 [self.view makeWaffle:@"Error: Entered Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-                int curProjID = 876;
+                int curProjID = kDEFAULT_PROJ;
                 [dm setProjectID:curProjID];
-                NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+                NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
                 [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
                 break;
         }

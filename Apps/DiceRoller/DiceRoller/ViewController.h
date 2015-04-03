@@ -23,7 +23,6 @@ CredentialManagerDelegate>
 {
     //API, DataManager and DiceDataController
     API *api;
-    //DiceDataController *diceController;
     DataManager *dm;
     
     // Credential Manager

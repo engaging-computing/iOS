@@ -12,8 +12,5 @@
 @interface DiceDataController : UIView{
     API *api;
 }
-//-(int)getDieNumber;
-//-(void) uploadDatadie1:(int)num1 die2: (int)num2 sumOfDies: (int)sumNum numOfTests: (int)numTest;
-
 
 @end
