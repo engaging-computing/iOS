@@ -307,12 +307,19 @@ replacementString:(NSString *)string {
         NSDictionary *columnMajorData = [DataManager convertDataToColumnMajor:rowMajorData forProjectID:[dm getProjectID]];
         
         // upload the data to iSENSE
-        [api uploadDataToProject:[dm getProjectID] withData:columnMajorData andName:dataSetName];
-        
+        int dataSetID = [api uploadDataToProject:[dm getProjectID] withData:columnMajorData andName:dataSetName];
         // you're done! this uploadDataToProject method returns a data set ID number that you can store or check.
         // this dataSetID variable will now contain either a positive integer if the data uploaded
         // successfully (namely the ID of your new data set), or -1 if the upload failed.  if your upload failed,
         // you may have misformatted the data.
+        if (dataSetID > 0){
+            //Most likely the upload was successful, we should inform the user
+            [self.view makeWaffle:@"Upload Successful!" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_CHECKMARK];
+        } else {
+            //Upload probably failed
+            [self.view makeWaffle:@"Upload Failed" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        }
+        
     });
 }
 
