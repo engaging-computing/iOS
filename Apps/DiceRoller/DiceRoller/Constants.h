@@ -17,9 +17,9 @@
 #define kLOGIN_DIALOG_TAG 500
 #define kLOGIN_USER_TEXT 501
 #define kLOGIN_PASS_TEXT 502
+#define kNAME_DIALOG_TAG 600
 
 // Data set constants
-#define kNAME_DIALOG_TAG 600
 #define kDEFAULT_DATA_SET_NAME @"My Data Set"
 
 // Default projects for production and dev
