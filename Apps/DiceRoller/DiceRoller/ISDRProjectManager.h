@@ -17,7 +17,6 @@
 
 @interface ISDRProjectManager : UIViewController <ProjectBrowserDelegate, UIAlertViewDelegate> {
     DataManager *dm;
-    ISDRProjectManager *pm;
     API *api;
 }
 

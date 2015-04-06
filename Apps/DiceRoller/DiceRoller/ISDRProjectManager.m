@@ -31,27 +31,24 @@
     
     dm = [DataManager getInstance];
     
-    pm = [[ISDRProjectManager alloc] init];
-    
-    bool projectValid = [pm projectHasValidFields];
+    bool projectValid = [self projectHasValidFields];
     
     if (projectValid) {
         
         int curProjID = [dm getProjectID];
-        NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+        NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
         [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
-        
+        [dm setProjectID:curProjID];
     } else {
         
         // If we are in here it means that the project selected does not have properly formatted fields.
         // Present an error message to the user and set project back to default project.
-        
         [self.view makeWaffle:@"Error: Selected Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-        int curProjID = 876;
+        int curProjID = kDEFAULT_PROJ;
         [dm setProjectID:curProjID];
         NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
         [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
-
+        [dm setProjectID:curProjID];
     }
 }
 
@@ -86,7 +83,6 @@
             
         }
     }
-
     
     //Check to see if all three booleans are true. If they are, the project is valid! If not the project is invalid.
     return (hasWhiteDieField && hasYellowDieField && hasSumField);
@@ -95,7 +91,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,7 +133,7 @@
             if (buttonIndex != 0) {
                 NSString *projAsString = [[alertView textFieldAtIndex:0] text];
                 [dm setProjectID:[projAsString intValue]];
-                bool projectisValid = [pm projectHasValidFields];
+                bool projectisValid = [self projectHasValidFields];
 
                 if(projectisValid){
                     
@@ -150,11 +146,10 @@
                 //Present an error message informing the user and set project back to default.
                 
                 [self.view makeWaffle:@"Error: Entered Project did not have properly formatted fields. " duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
-                int curProjID = 876;
+                int curProjID = kDEFAULT_PROJ;
                 [dm setProjectID:curProjID];
-                NSString *curProjIDStr = (curProjID > 100) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
+                NSString *curProjIDStr = (curProjID > 0) ? [NSString stringWithFormat:@"%d", curProjID] : kNO_PROJECT;
                 [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
-                
                 break;
         }
             break;
@@ -184,9 +179,8 @@
     
     NSString *curProjIDStr = (project_id > 0) ? [NSString stringWithFormat:@"%d", project_id] : kNO_PROJECT;
     [projectLbl setText:[NSString stringWithFormat:@"Uploading to Project: %@", curProjIDStr]];
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 // Default dispatch_async dialog with custom spinner
 - (UIAlertView *) getDispatchDialogWithMessage:(NSString *)dString {

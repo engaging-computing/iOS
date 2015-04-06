@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3134E6731AC47D620091E646 /* machine_science.png in Resources */ = {isa = PBXBuildFile; fileRef = 3134E6721AC47D620091E646 /* machine_science.png */; };
+		3134E6751AC47D6C0091E646 /* white_rsense_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3134E6741AC47D6C0091E646 /* white_rsense_logo.png */; };
+		3134E6771AC47D7D0091E646 /* uml.png in Resources */ = {isa = PBXBuildFile; fileRef = 3134E6761AC47D7D0091E646 /* uml.png */; };
+		316A952A1AD0BBCD007DA37D /* appIcon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 316A95291AD0BBCD007DA37D /* appIcon1024.png */; };
 		31739DD519DB3A7C00CF2DFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739DD419DB3A7C00CF2DFB /* Foundation.framework */; };
 		31739DD719DB3A7C00CF2DFB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739DD619DB3A7C00CF2DFB /* CoreGraphics.framework */; };
 		31739DD919DB3A7C00CF2DFB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739DD819DB3A7C00CF2DFB /* UIKit.framework */; };
@@ -27,6 +31,17 @@
 		31739E1F19DB44B600CF2DFB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31739E1E19DB44B600CF2DFB /* CoreData.framework */; };
 		31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */; };
 		31A8D9FD19E864540042CF02 /* libiSENSE_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A8D9F719E863EE0042CF02 /* libiSENSE_API.a */; };
+		31B62A671A645E5F00B988CD /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B62A661A645E5F00B988CD /* Launch Screen.xib */; };
+		31CB51211A6EB56F0038B084 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51201A6EB56F0038B084 /* Tutorial.storyboard */; };
+		31CB51241A6EB7DB0038B084 /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB51231A6EB7DB0038B084 /* PageContentViewController.m */; };
+		31CB512B1A6EBAAF0038B084 /* ISDRTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CB512A1A6EBAAF0038B084 /* ISDRTutorialViewController.m */; };
+		31CB51491A6ECEFF0038B084 /* tutorial_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51481A6ECEFF0038B084 /* tutorial_7.png */; };
+		31CB514B1A6ECF080038B084 /* tutorial_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB514A1A6ECF080038B084 /* tutorial_6.png */; };
+		31CB514D1A6ECF0D0038B084 /* tutorial_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB514C1A6ECF0D0038B084 /* tutorial_5.png */; };
+		31CB514F1A6ECF130038B084 /* tutorial_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB514E1A6ECF130038B084 /* tutorial_4.png */; };
+		31CB51511A6ECF180038B084 /* tutorial_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51501A6ECF180038B084 /* tutorial_3.png */; };
+		31CB51531A6ECF1F0038B084 /* tutorial_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51521A6ECF1F0038B084 /* tutorial_2.png */; };
+		31CB51551A6ECF250038B084 /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51541A6ECF250038B084 /* tutorial_1.png */; };
 		31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9C919DF11A200A5E448 /* DiceDataController.m */; };
 		31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E8DA511A2A53410049502B /* ISDRProjectManager.m */; };
 /* End PBXBuildFile section */
@@ -63,6 +78,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3134E6721AC47D620091E646 /* machine_science.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = machine_science.png; path = ../../../machine_science.png; sourceTree = "<group>"; };
+		3134E6741AC47D6C0091E646 /* white_rsense_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = white_rsense_logo.png; path = ../../../white_rsense_logo.png; sourceTree = "<group>"; };
+		3134E6761AC47D7D0091E646 /* uml.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uml.png; path = ../../../uml.png; sourceTree = "<group>"; };
+		316A95291AD0BBCD007DA37D /* appIcon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appIcon1024.png; path = ../../../appIcon1024.png; sourceTree = "<group>"; };
 		31739DD119DB3A7C00CF2DFB /* DiceRoller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiceRoller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31739DD419DB3A7C00CF2DFB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		31739DD619DB3A7C00CF2DFB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -89,6 +108,19 @@
 		31739E1E19DB44B600CF2DFB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3181CF541A2CD49B008F8C37 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		31A8D9F119E863ED0042CF02 /* iSENSE_API.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iSENSE_API.xcodeproj; path = ../../Libs/iSENSE_API/iSENSE_API.xcodeproj; sourceTree = "<group>"; };
+		31B62A661A645E5F00B988CD /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		31CB51201A6EB56F0038B084 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		31CB51221A6EB7DB0038B084 /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentViewController.h; sourceTree = "<group>"; };
+		31CB51231A6EB7DB0038B084 /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
+		31CB51291A6EBAAF0038B084 /* ISDRTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISDRTutorialViewController.h; sourceTree = "<group>"; };
+		31CB512A1A6EBAAF0038B084 /* ISDRTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISDRTutorialViewController.m; sourceTree = "<group>"; };
+		31CB51481A6ECEFF0038B084 /* tutorial_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_7.png; path = ../../../tutorial_7.png; sourceTree = "<group>"; };
+		31CB514A1A6ECF080038B084 /* tutorial_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_6.png; path = ../../../tutorial_6.png; sourceTree = "<group>"; };
+		31CB514C1A6ECF0D0038B084 /* tutorial_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_5.png; path = ../../../tutorial_5.png; sourceTree = "<group>"; };
+		31CB514E1A6ECF130038B084 /* tutorial_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_4.png; path = ../../../tutorial_4.png; sourceTree = "<group>"; };
+		31CB51501A6ECF180038B084 /* tutorial_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_3.png; path = ../../../tutorial_3.png; sourceTree = "<group>"; };
+		31CB51521A6ECF1F0038B084 /* tutorial_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_2.png; path = ../../../tutorial_2.png; sourceTree = "<group>"; };
+		31CB51541A6ECF250038B084 /* tutorial_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_1.png; path = ../../../tutorial_1.png; sourceTree = "<group>"; };
 		31E5C9C819DF11A200A5E448 /* DiceDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceDataController.h; sourceTree = "<group>"; };
 		31E5C9C919DF11A200A5E448 /* DiceDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceDataController.m; sourceTree = "<group>"; };
 		31E8DA4E1A2A53050049502B /* ISDRProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISDRProjectManager.h; sourceTree = "<group>"; };
@@ -123,9 +155,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3134E6701AC47D460091E646 /* LaunchImages */ = {
+			isa = PBXGroup;
+			children = (
+				3134E6761AC47D7D0091E646 /* uml.png */,
+				3134E6741AC47D6C0091E646 /* white_rsense_logo.png */,
+				3134E6721AC47D620091E646 /* machine_science.png */,
+			);
+			name = LaunchImages;
+			sourceTree = "<group>";
+		};
 		31739DC819DB3A7C00CF2DFB = {
 			isa = PBXGroup;
 			children = (
+				31CB51271A6EB9A30038B084 /* Tutorials */,
 				31739E1619DB428E00CF2DFB /* iSENSE API */,
 				31739DDA19DB3A7C00CF2DFB /* DiceRoller */,
 				31739DF919DB3A7C00CF2DFB /* DiceRollerTests */,
@@ -160,19 +203,19 @@
 		31739DDA19DB3A7C00CF2DFB /* DiceRoller */ = {
 			isa = PBXGroup;
 			children = (
+				31C05B561A65847A002D348A /* Assetts */,
 				3181CF521A2CD45E008F8C37 /* Constants */,
+				31C05B581A658493002D348A /* Delegates */,
 				31E8DA4C1A2A528A0049502B /* Project */,
-				31739DE319DB3A7C00CF2DFB /* AppDelegate.h */,
-				31739DE419DB3A7C00CF2DFB /* AppDelegate.m */,
-				31739DE619DB3A7C00CF2DFB /* Main.storyboard */,
 				31739DE919DB3A7C00CF2DFB /* ViewController.h */,
 				31739DEA19DB3A7C00CF2DFB /* ViewController.m */,
-				31739DEC19DB3A7C00CF2DFB /* Images.xcassets */,
+				31E5C9C819DF11A200A5E448 /* DiceDataController.h */,
+				31E5C9C919DF11A200A5E448 /* DiceDataController.m */,
+				31CB511E1A6EB55A0038B084 /* UI */,
 				31739DDB19DB3A7C00CF2DFB /* Supporting Files */,
 				31739E0919DB3BC400CF2DFB /* DieView.h */,
 				31739E0A19DB3BC400CF2DFB /* DieView.m */,
-				31E5C9C819DF11A200A5E448 /* DiceDataController.h */,
-				31E5C9C919DF11A200A5E448 /* DiceDataController.m */,
+				31CB512E1A6EC0780038B084 /* Resources */,
 			);
 			path = DiceRoller;
 			sourceTree = "<group>";
@@ -229,6 +272,70 @@
 				31A8D9F919E863EE0042CF02 /* iSENSE_API_Bundle.bundle */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		31C05B561A65847A002D348A /* Assetts */ = {
+			isa = PBXGroup;
+			children = (
+				31B62A661A645E5F00B988CD /* Launch Screen.xib */,
+				31739DEC19DB3A7C00CF2DFB /* Images.xcassets */,
+			);
+			name = Assetts;
+			sourceTree = "<group>";
+		};
+		31C05B581A658493002D348A /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				31739DE319DB3A7C00CF2DFB /* AppDelegate.h */,
+				31739DE419DB3A7C00CF2DFB /* AppDelegate.m */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		31CB511E1A6EB55A0038B084 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				31739DE619DB3A7C00CF2DFB /* Main.storyboard */,
+				31CB51201A6EB56F0038B084 /* Tutorial.storyboard */,
+			);
+			name = UI;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		31CB51271A6EB9A30038B084 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				31CB51221A6EB7DB0038B084 /* PageContentViewController.h */,
+				31CB51231A6EB7DB0038B084 /* PageContentViewController.m */,
+				31CB51291A6EBAAF0038B084 /* ISDRTutorialViewController.h */,
+				31CB512A1A6EBAAF0038B084 /* ISDRTutorialViewController.m */,
+			);
+			name = Tutorials;
+			sourceTree = "<group>";
+		};
+		31CB512E1A6EC0780038B084 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				316A95291AD0BBCD007DA37D /* appIcon1024.png */,
+				3134E6701AC47D460091E646 /* LaunchImages */,
+				31CB51301A6EC08A0038B084 /* Tutorials */,
+			);
+			name = Resources;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		31CB51301A6EC08A0038B084 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				31CB51541A6ECF250038B084 /* tutorial_1.png */,
+				31CB51521A6ECF1F0038B084 /* tutorial_2.png */,
+				31CB51501A6ECF180038B084 /* tutorial_3.png */,
+				31CB514E1A6ECF130038B084 /* tutorial_4.png */,
+				31CB514C1A6ECF0D0038B084 /* tutorial_5.png */,
+				31CB514A1A6ECF080038B084 /* tutorial_6.png */,
+				31CB51481A6ECEFF0038B084 /* tutorial_7.png */,
+			);
+			name = Tutorials;
 			sourceTree = "<group>";
 		};
 		31E8DA4C1A2A528A0049502B /* Project */ = {
@@ -340,10 +447,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3134E6731AC47D620091E646 /* machine_science.png in Resources */,
 				31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */,
 				31739DED19DB3A7C00CF2DFB /* Images.xcassets in Resources */,
+				31CB514B1A6ECF080038B084 /* tutorial_6.png in Resources */,
 				31739DDF19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */,
+				31CB514F1A6ECF130038B084 /* tutorial_4.png in Resources */,
+				31CB514D1A6ECF0D0038B084 /* tutorial_5.png in Resources */,
 				31739DE819DB3A7C00CF2DFB /* Main.storyboard in Resources */,
+				3134E6771AC47D7D0091E646 /* uml.png in Resources */,
+				3134E6751AC47D6C0091E646 /* white_rsense_logo.png in Resources */,
+				31CB51511A6ECF180038B084 /* tutorial_3.png in Resources */,
+				31CB51491A6ECEFF0038B084 /* tutorial_7.png in Resources */,
+				31B62A671A645E5F00B988CD /* Launch Screen.xib in Resources */,
+				31CB51531A6ECF1F0038B084 /* tutorial_2.png in Resources */,
+				31CB51551A6ECF250038B084 /* tutorial_1.png in Resources */,
+				316A952A1AD0BBCD007DA37D /* appIcon1024.png in Resources */,
+				31CB51211A6EB56F0038B084 /* Tutorial.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +484,9 @@
 			files = (
 				31739DEB19DB3A7C00CF2DFB /* ViewController.m in Sources */,
 				31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */,
+				31CB51241A6EB7DB0038B084 /* PageContentViewController.m in Sources */,
 				31739E0B19DB3BC400CF2DFB /* DieView.m in Sources */,
+				31CB512B1A6EBAAF0038B084 /* ISDRTutorialViewController.m in Sources */,
 				31739DE519DB3A7C00CF2DFB /* AppDelegate.m in Sources */,
 				31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */,
 				31739DE119DB3A7C00CF2DFB /* main.m in Sources */,
@@ -409,6 +531,7 @@
 				31739DE719DB3A7C00CF2DFB /* Base */,
 			);
 			name = Main.storyboard;
+			path = DiceRoller;
 			sourceTree = "<group>";
 		};
 		31739DFC19DB3A7C00CF2DFB /* InfoPlist.strings */ = {
