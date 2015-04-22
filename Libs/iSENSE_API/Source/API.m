@@ -140,19 +140,33 @@ static NSString *email, *password;
  * @return TRUE if login succeeds, FALSE if it does not
  */
 - (RPerson *)createSessionWithEmail:(NSString *)p_email andPassword:(NSString *)p_password {
-    
-    NSString *parameters = [@"email=" stringByAppendingString:[p_email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    parameters = [parameters stringByAppendingString:[@"&password=" stringByAppendingString:[p_password stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-    
+
+    if (p_email == nil || p_password == nil || ![p_email length] || ![p_password length]) {
+        return nil;
+    }
+
+    // if coming from the Keychain, the password may be of NSData type instead of NSString -
+    // if so, convert it
+    NSString *decode_pass = p_password;
+    if ([p_password isKindOfClass:[NSData class]]) {
+        decode_pass = [[NSString alloc] initWithData:((NSData *)p_password) encoding:NSUTF8StringEncoding];
+    }
+
+    NSString *parameters = [@"email=" stringByAppendingString:
+                            [p_email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    parameters = [parameters stringByAppendingString:
+                  [@"&password=" stringByAppendingString:
+                   [decode_pass stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+
     NSDictionary *result = [self makeRequestWithBaseUrl:baseUrl withPath:@"users/myInfo" withParameters:parameters withRequestType:GET_REQUEST andPostData:nil];
 
     email = p_email;
-    password = p_password;
+    password = decode_pass;
     
     if ([result objectForKey:@"name"] != nil) {
 
         email = p_email;
-        password = p_password;
+        password = decode_pass;
         RPerson *you = [[RPerson alloc] init];
         you.name = [result objectForKey:@"name"];
         you.gravatar = [result objectForKey:@"gravatar"];
@@ -161,7 +175,7 @@ static NSString *email, *password;
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         you.gravatarImage = [UIImage imageWithData:imageData];
 
-        [self saveCurrentUserToPrefs];
+        [self saveCurrentUserToKeychain];
 
         currentUser = you;
         return you;
@@ -179,7 +193,7 @@ static NSString *email, *password;
     password = @"";
     currentUser = nil;
 
-    [self clearCurrentUserFromPrefs];
+    [self clearCurrentUserFromKeychain];
 }
 
 /**
@@ -795,8 +809,6 @@ static NSString *email, *password;
 - (id)makeRequestWithBaseUrl:(NSString *)baseUrl withPath:(NSString *)path withParameters:(NSString *)parameters withRequestType:(NSString *)reqType andPostData:(NSData *)postData {
     
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/%@?%@", baseUrl, path, parameters]];
-    NSLog(@"Connect to: %@", url);
-    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
@@ -892,44 +904,45 @@ static NSString *email, *password;
 }
 
 /**
- * Saves the current user, if one is logged in, to the NSUserDefaults
- * preferences of the hosting application.
+ * Saves the current user, if one is logged in, to the Keychain
+ * of the hosting application.
  */
-- (void)saveCurrentUserToPrefs {
+- (void)saveCurrentUserToKeychain {
 
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:email forKey:KEY_USERNAME];
-    [prefs setObject:password forKey:KEY_PASSWORD];
-    [prefs synchronize];
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:KEYCHAIN_ID accessGroup:nil];
+    [keychainItem setObject:password forKey:(__bridge id)(kSecValueData)];
+    [keychainItem setObject:email forKey:(__bridge id)(kSecAttrAccount)];
 }
 
 /**
- * Retrieves the user saved in the NSUserDefaults preferences, and if such a user
+ * Retrieves the user saved in the Keychain, and if such a user
  * exists, attempts to login that user.
  *
  * @return true if a user was saved and logged in successfully, false otherwise
  */
-- (bool)loadCurrentUserFromPrefs {
+- (bool)loadCurrentUserFromKeychain {
 
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    if ([prefs objectForKey:KEY_USERNAME] && [prefs objectForKey:KEY_PASSWORD])
-        if ([self createSessionWithEmail:[prefs objectForKey:KEY_USERNAME]
-                             andPassword:[prefs objectForKey:KEY_PASSWORD]])
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:KEYCHAIN_ID accessGroup:nil];
+    NSString *key_pass = [keychainItem objectForKey:(__bridge id)(kSecValueData)];
+    NSString *key_user = [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
+
+    if (key_pass && key_user) {
+        if ([self createSessionWithEmail:key_user andPassword:key_pass]) {
             return true;
+        }
+    }
 
     return false;
 }
 
 /**
  * Called internally via the deleteSession function in the API, this method will
- * clear the NSUserDefaults keys for the current username and password
+ * clear the Keychain for the current username and password
  */
-- (void)clearCurrentUserFromPrefs {
+- (void)clearCurrentUserFromKeychain {
 
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs removeObjectForKey:KEY_USERNAME];
-    [prefs removeObjectForKey:KEY_PASSWORD];
-    [prefs synchronize];
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:KEYCHAIN_ID accessGroup:nil];
+    [keychainItem resetKeychainItem];
 }
 
 /**
