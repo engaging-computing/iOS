@@ -52,6 +52,7 @@
 #import "RProjectField.h"
 #import "Reachability.h"
 #import "ISKeys.h"
+#import "KeychainItemWrapper.h"
 #import <MobileCoreServices/UTType.h>
 #import <sys/time.h>
 
@@ -63,6 +64,9 @@
 // Base URLs for use by any caller
 #define BASE_LIVE_URL @"http://isenseproject.org"
 #define BASE_DEV_URL @"http://rsense-dev.cs.uml.edu"
+
+// Keychain password identifier
+#define KEYCHAIN_ID @"ISENSE_API_KEYCHAIN"
 
 typedef enum {
     CREATED_AT_DESC,
@@ -93,7 +97,7 @@ typedef enum {
 // user
 - (RPerson *)createSessionWithEmail:(NSString *)p_email andPassword:(NSString *)p_password;
 - (void)deleteSession;
-- (bool)loadCurrentUserFromPrefs;
+- (bool)loadCurrentUserFromKeychain;
 - (RPerson *)getCurrentUser;
 
 // contributor keys

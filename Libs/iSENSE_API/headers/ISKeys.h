@@ -57,12 +57,8 @@
 #define kACCEPTED_NUMBERS @"1234567890.-"
 #define kACCEPTED_CHARS   @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -_.,:01234567879()[]@"
 
-// login fields
-#define KEY_USERNAME            @"key_username"
-#define KEY_PASSWORD            @"key_password"
-
 // project identifier
-#define KEY_PROJECT_ID          @"project_id"
+#define KEY_PROJECT_ID    @"project_id"
 
 
 #endif

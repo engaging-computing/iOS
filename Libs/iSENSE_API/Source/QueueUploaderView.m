@@ -108,12 +108,11 @@
 
     } else {
 
-        NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
-        NSString *user = [prefs objectForKey:KEY_USERNAME];
-        NSString *pass = [prefs objectForKey:KEY_PASSWORD];
+        KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:KEYCHAIN_ID accessGroup:nil];
+        NSString *pass = [keychainItem objectForKey:(__bridge id)(kSecValueData)];
+        NSString *user = [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
         
-
-        if (user == nil || pass == nil) {
+        if (user == nil || pass == nil || ![user length] || ![pass length]) {
 
             UIAlertView *message = [[UIAlertView alloc] initWithTitle:nil
                                                               message:@"Would you like to use a contributor key or login with an account?"

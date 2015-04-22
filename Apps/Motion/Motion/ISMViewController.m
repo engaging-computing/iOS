@@ -88,7 +88,7 @@
     api = [API getInstance];
     [api useDev:USE_DEV];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [api loadCurrentUserFromPrefs];
+        [api loadCurrentUserFromKeychain];
     });
 
     // Set the Z: label to be our secret dev/non-dev switch

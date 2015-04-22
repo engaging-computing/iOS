@@ -125,6 +125,8 @@
 		B7DDB9EA1A14F1EB002CA14C /* QueueUploadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DDB9E91A14F1EB002CA14C /* QueueUploadStatus.m */; };
 		B7DDB9EC1A14F1F8002CA14C /* QueueUploadStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = B7DDB9EB1A14F1F8002CA14C /* QueueUploadStatus.h */; };
 		B7EBFDC217A0186A006B90A8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7EBFDC117A0186A006B90A8 /* SystemConfiguration.framework */; };
+		B7FBA1BB1AE7D77800233A09 /* KeychainItemWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B7FBA1BA1AE7D77800233A09 /* KeychainItemWrapper.h */; };
+		B7FBA1BD1AE7D78100233A09 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FBA1BC1AE7D78100233A09 /* KeychainItemWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +275,8 @@
 		B7DDB9E91A14F1EB002CA14C /* QueueUploadStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QueueUploadStatus.m; path = Source/QueueUploadStatus.m; sourceTree = "<group>"; };
 		B7DDB9EB1A14F1F8002CA14C /* QueueUploadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QueueUploadStatus.h; path = headers/QueueUploadStatus.h; sourceTree = "<group>"; };
 		B7EBFDC117A0186A006B90A8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B7FBA1BA1AE7D77800233A09 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		B7FBA1BC1AE7D78100233A09 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				B70E7C1F19C0BB8300C2B042 /* CredentialManager.h */,
+				B7FBA1BA1AE7D77800233A09 /* KeychainItemWrapper.h */,
 			);
 			name = Credentials;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				B70E7CA319C0BBA700C2B042 /* CredentialManager.m */,
+				B7FBA1BC1AE7D78100233A09 /* KeychainItemWrapper.m */,
 			);
 			name = Credentials;
 			sourceTree = "<group>";
@@ -659,6 +665,7 @@
 				B70E7C8A19C0BB8300C2B042 /* RTutorial.h in Headers */,
 				B7D848C919CC8453006BE163 /* DataManager.h in Headers */,
 				B70E7C8519C0BB8300C2B042 /* RNews.h in Headers */,
+				B7FBA1BB1AE7D77800233A09 /* KeychainItemWrapper.h in Headers */,
 				B70E7C7C19C0BB8300C2B042 /* QDataSet.h in Headers */,
 				B70E7C8919C0BB8300C2B042 /* RProjectField.h in Headers */,
 				B70E7C8119C0BB8300C2B042 /* QueueUploaderView.h in Headers */,
@@ -822,6 +829,7 @@
 				B70E7CFE19C0BBA700C2B042 /* RProjectField.m in Sources */,
 				B70E7CE119C0BBA700C2B042 /* DLAVAlertViewController.m in Sources */,
 				B70E7CE219C0BBA700C2B042 /* DLAVAlertViewTextControlTheme.m in Sources */,
+				B7FBA1BD1AE7D78100233A09 /* KeychainItemWrapper.m in Sources */,
 				B70E7CDF19C0BBA700C2B042 /* DLAVAlertView.m in Sources */,
 				B70E7CFD19C0BBA700C2B042 /* RProject.m in Sources */,
 				B70E7CF119C0BBA700C2B042 /* ProjectBrowserViewController.m in Sources */,
