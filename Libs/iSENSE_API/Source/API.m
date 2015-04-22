@@ -322,7 +322,7 @@ static NSString *email, *password;
  */
 - (NSArray *)getProjectsAtPage:(int)page withPageLimit:(int)perPage withFilter:(SortType)sort andQuery:(NSString *)search {
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    
+
     NSString *sortMode = [[NSString alloc] init];
     NSString *order = [[NSString alloc] init];
     switch (sort) {
@@ -343,9 +343,10 @@ static NSString *email, *password;
             order = @"ASC";
             break;
     }
-    
+
     NSString *parameters = [NSString stringWithFormat:@"page=%d&per_page=%d&sort=%s&order=%s&search=%s",
                             page, perPage, sortMode.UTF8String, order.UTF8String, search.UTF8String];
+
     NSArray *reqResult = [self makeRequestWithBaseUrl:baseUrl withPath:@"projects" withParameters:parameters withRequestType:GET_REQUEST andPostData:nil];
 
     // if no projects come back, return an empty array
@@ -807,8 +808,11 @@ static NSString *email, *password;
  * @return An object dump of a JSONObject or JSONArray representing the requested data
  */
 - (id)makeRequestWithBaseUrl:(NSString *)baseUrl withPath:(NSString *)path withParameters:(NSString *)parameters withRequestType:(NSString *)reqType andPostData:(NSData *)postData {
+
+    parameters = [parameters stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/%@?%@", baseUrl, path, parameters]];
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];

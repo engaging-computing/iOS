@@ -87,7 +87,7 @@
     [api useDev:USE_DEV];
     [self createDevUILabel];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [api loadCurrentUserFromPrefs];
+        [api loadCurrentUserFromKeychain];
     });
 
     // Load the last used project from prefs, if available
