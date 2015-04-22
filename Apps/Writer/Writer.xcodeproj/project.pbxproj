@@ -23,7 +23,6 @@
 		B77950831A093D1600C032EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B77950811A093D1600C032EF /* Main.storyboard */; };
 		B77950851A093D1600C032EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B77950841A093D1600C032EF /* Images.xcassets */; };
 		B77950881A093D1600C032EF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B77950861A093D1600C032EF /* LaunchScreen.xib */; };
-		B77950941A093D1600C032EF /* WriterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B77950931A093D1600C032EF /* WriterTests.m */; };
 		B77950B71A09407A00C032EF /* 29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B77950A81A09407A00C032EF /* 29@1x.png */; };
 		B77950B81A09407A00C032EF /* 29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B77950A91A09407A00C032EF /* 29@2x.png */; };
 		B77950B91A09407A00C032EF /* 40@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B77950AA1A09407A00C032EF /* 40@1x.png */; };
@@ -88,13 +87,6 @@
 			remoteGlobalIDString = 39FF25DF16DFA28A0062C3DC;
 			remoteInfo = iSENSE_API;
 		};
-		B779508E1A093D1600C032EF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B779506C1A093D1600C032EF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B77950731A093D1600C032EF;
-			remoteInfo = Writer;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -119,9 +111,6 @@
 		B77950821A093D1600C032EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B77950841A093D1600C032EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B77950871A093D1600C032EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B779508D1A093D1600C032EF /* WriterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B77950921A093D1600C032EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B77950931A093D1600C032EF /* WriterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriterTests.m; sourceTree = "<group>"; };
 		B77950A81A09407A00C032EF /* 29@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "29@1x.png"; path = "Resources/Icons/29@1x.png"; sourceTree = "<group>"; };
 		B77950A91A09407A00C032EF /* 29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "29@2x.png"; path = "Resources/Icons/29@2x.png"; sourceTree = "<group>"; };
 		B77950AA1A09407A00C032EF /* 40@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "40@1x.png"; path = "Resources/Icons/40@1x.png"; sourceTree = "<group>"; };
@@ -182,13 +171,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B779508A1A093D1600C032EF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -216,7 +198,6 @@
 				B779509E1A093D4100C032EF /* API */,
 				B77950761A093D1600C032EF /* Writer */,
 				B779509F1A093D4F00C032EF /* Resources */,
-				B77950901A093D1600C032EF /* WriterTests */,
 				B77950A01A093D5A00C032EF /* Frameworks */,
 				B77950751A093D1600C032EF /* Products */,
 			);
@@ -226,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				B77950741A093D1600C032EF /* Writer.app */,
-				B779508D1A093D1600C032EF /* WriterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -252,23 +232,6 @@
 			children = (
 				B77950781A093D1600C032EF /* Info.plist */,
 				B77950791A093D1600C032EF /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B77950901A093D1600C032EF /* WriterTests */ = {
-			isa = PBXGroup;
-			children = (
-				B77950931A093D1600C032EF /* WriterTests.m */,
-				B77950911A093D1600C032EF /* Supporting Files */,
-			);
-			path = WriterTests;
-			sourceTree = "<group>";
-		};
-		B77950911A093D1600C032EF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B77950921A093D1600C032EF /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -449,24 +412,6 @@
 			productReference = B77950741A093D1600C032EF /* Writer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B779508C1A093D1600C032EF /* WriterTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B779509A1A093D1600C032EF /* Build configuration list for PBXNativeTarget "WriterTests" */;
-			buildPhases = (
-				B77950891A093D1600C032EF /* Sources */,
-				B779508A1A093D1600C032EF /* Frameworks */,
-				B779508B1A093D1600C032EF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B779508F1A093D1600C032EF /* PBXTargetDependency */,
-			);
-			name = WriterTests;
-			productName = WriterTests;
-			productReference = B779508D1A093D1600C032EF /* WriterTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -479,10 +424,6 @@
 					B77950731A093D1600C032EF = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 9Y27428UZP;
-					};
-					B779508C1A093D1600C032EF = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = B77950731A093D1600C032EF;
 					};
 				};
 			};
@@ -506,7 +447,6 @@
 			projectRoot = "";
 			targets = (
 				B77950731A093D1600C032EF /* Writer */,
-				B779508C1A093D1600C032EF /* WriterTests */,
 			);
 		};
 /* End PBXProject section */
@@ -579,13 +519,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B779508B1A093D1600C032EF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -604,14 +537,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B77950891A093D1600C032EF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B77950941A093D1600C032EF /* WriterTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -619,11 +544,6 @@
 			isa = PBXTargetDependency;
 			name = iSENSE_API;
 			targetProxy = B75158B81A0A5B170039F76E /* PBXContainerItemProxy */;
-		};
-		B779508F1A093D1600C032EF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B77950731A093D1600C032EF /* Writer */;
-			targetProxy = B779508E1A093D1600C032EF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -775,40 +695,6 @@
 			};
 			name = Release;
 		};
-		B779509B1A093D1600C032EF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WriterTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Writer.app/Writer";
-			};
-			name = Debug;
-		};
-		B779509C1A093D1600C032EF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WriterTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Writer.app/Writer";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -826,15 +712,6 @@
 			buildConfigurations = (
 				B77950981A093D1600C032EF /* Debug */,
 				B77950991A093D1600C032EF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B779509A1A093D1600C032EF /* Build configuration list for PBXNativeTarget "WriterTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B779509B1A093D1600C032EF /* Debug */,
-				B779509C1A093D1600C032EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
