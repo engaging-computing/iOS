@@ -23,7 +23,6 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oDq-J8-RBt" customClass="DieView">
                                 <rect key="frame" x="45" y="166" width="90" height="90"/>
-                                <color key="backgroundColor" red="0.080651495690000005" green="0.43919403699999998" blue="0.20742996250000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="65x-Qn-DTq"/>
                                     <constraint firstAttribute="width" constant="90" id="zN8-yw-KLs"/>
@@ -31,7 +30,6 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1n-g2-Erx" customClass="DieView">
                                 <rect key="frame" x="181" y="166" width="90" height="90"/>
-                                <color key="backgroundColor" red="0.080651495690000005" green="0.43919403699999998" blue="0.20742996250000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="0rb-dN-OaQ"/>
                                     <constraint firstAttribute="height" constant="90" id="K2r-qv-1FZ"/>
@@ -180,8 +178,14 @@
                                     <action selector="browseProjBtnOnClick:" destination="857-Fg-prl" eventType="touchUpInside" id="XR6-fw-mQa"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUj-J8-ngQ">
+                                <rect key="frame" x="0.0" y="52" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Project" id="0t9-RC-0cq"/>
+                                </items>
+                            </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKN-kW-ZHn">
-                                <rect key="frame" x="140" y="393" width="40" height="30"/>
+                                <rect key="frame" x="125" y="394" width="70" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Close">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -191,12 +195,6 @@
                                     <action selector="closeBtnOnClick:" destination="857-Fg-prl" eventType="touchUpInside" id="JYz-Ht-Pwy"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUj-J8-ngQ">
-                                <rect key="frame" x="0.0" y="52" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Project" id="0t9-RC-0cq"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration">
@@ -214,7 +212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0nd-3X-cle" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1617" y="347"/>
+            <point key="canvasLocation" x="1600" y="347"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uc8-vm-I5d">

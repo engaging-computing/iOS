@@ -61,6 +61,6 @@
 #define kDEFAULT_DATA_SET_NAME @"My Data Set"
 
 // Default projects for production and dev
-#define kDEFAULT_PROJ 876
+#define kDEFAULT_PROJ 987
 
 #endif
