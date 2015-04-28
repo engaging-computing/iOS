@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--iS Dice Roller-->
@@ -17,20 +18,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="felt" translatesAutoresizingMaskIntoConstraints="NO" id="n46-wr-ryr">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feltimage.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="n46-wr-ryr">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oDq-J8-RBt" customClass="DieView">
-                                <rect key="frame" x="32" y="166" width="100" height="100"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oDq-J8-RBt" customClass="DieView">
+                                <rect key="frame" x="45" y="166" width="90" height="90"/>
+                                <color key="backgroundColor" red="0.080651495690000005" green="0.43919403699999998" blue="0.20742996250000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="65x-Qn-DTq"/>
+                                    <constraint firstAttribute="width" constant="90" id="zN8-yw-KLs"/>
+                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s1n-g2-Erx" customClass="DieView">
-                                <rect key="frame" x="181" y="166" width="100" height="100"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1n-g2-Erx" customClass="DieView">
+                                <rect key="frame" x="181" y="166" width="90" height="90"/>
+                                <color key="backgroundColor" red="0.080651495690000005" green="0.43919403699999998" blue="0.20742996250000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="0rb-dN-OaQ"/>
+                                    <constraint firstAttribute="height" constant="90" id="K2r-qv-1FZ"/>
+                                </constraints>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Click to Roll!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OzP-6D-Gph">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click to Roll!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OzP-6D-Gph">
                                 <rect key="frame" x="33" y="110" width="254" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="iNe-Vs-SRz"/>
+                                    <constraint firstAttribute="width" constant="254" id="wSY-Ec-amh"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sat-KG-MbZ">
@@ -40,41 +54,70 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UI-KI-smt">
-                                <rect key="frame" x="0.0" y="392" width="222" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1UI-KI-smt">
+                                <rect key="frame" x="0.0" y="377" width="222" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Data Set Name: My Data Set">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="nameBtnOnClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Xpm-4E-Juc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh0-7Y-hWY">
-                                <rect key="frame" x="0.0" y="430" width="180" height="30"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Upload to Project: ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="857-Fg-prl" kind="modal" id="YH0-ym-HCu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBH-zl-IQS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBH-zl-IQS">
                                 <rect key="frame" x="137" y="332" width="46" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="O9l-im-F86"/>
+                                </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Roll">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="rollClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="lUL-Sj-qKW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh0-7Y-hWY">
+                                <rect key="frame" x="3" y="409" width="180" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="SZS-6r-UoU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Upload to Project: ">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="857-Fg-prl" kind="modal" id="YH0-ym-HCu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="s1n-g2-Erx" firstAttribute="top" secondItem="OzP-6D-Gph" secondAttribute="bottom" constant="37" id="0YV-E4-rXu"/>
+                            <constraint firstItem="n46-wr-ryr" firstAttribute="centerX" secondItem="bBH-zl-IQS" secondAttribute="centerX" id="5gU-Xg-k94"/>
+                            <constraint firstItem="n46-wr-ryr" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="8Jw-6y-dTW"/>
+                            <constraint firstItem="bBH-zl-IQS" firstAttribute="top" secondItem="OzP-6D-Gph" secondAttribute="bottom" constant="203" id="Bnx-bg-CAo"/>
+                            <constraint firstItem="gh0-7Y-hWY" firstAttribute="top" secondItem="1UI-KI-smt" secondAttribute="bottom" constant="2" id="Hlx-qO-ggt"/>
+                            <constraint firstItem="1UI-KI-smt" firstAttribute="leading" secondItem="n46-wr-ryr" secondAttribute="leading" id="Lfy-Ya-MNB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1UI-KI-smt" secondAttribute="trailing" constant="82" id="PpV-jZ-6ds"/>
+                            <constraint firstItem="1UI-KI-smt" firstAttribute="top" secondItem="bBH-zl-IQS" secondAttribute="bottom" constant="15" id="Q5w-Jr-VQO"/>
+                            <constraint firstItem="n46-wr-ryr" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="TLY-24-JGR"/>
+                            <constraint firstItem="bBH-zl-IQS" firstAttribute="top" secondItem="oDq-J8-RBt" secondAttribute="bottom" constant="76" id="Tuq-PO-SOf"/>
+                            <constraint firstItem="OzP-6D-Gph" firstAttribute="centerX" secondItem="bBH-zl-IQS" secondAttribute="centerX" id="Up8-oi-eeO"/>
+                            <constraint firstItem="OzP-6D-Gph" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="46" id="gH5-La-wt5"/>
+                            <constraint firstItem="s1n-g2-Erx" firstAttribute="centerY" secondItem="oDq-J8-RBt" secondAttribute="centerY" id="go0-8Q-Km7"/>
+                            <constraint firstItem="OzP-6D-Gph" firstAttribute="centerX" secondItem="s1n-g2-Erx" secondAttribute="centerX" constant="-66" id="idM-9X-nK1"/>
+                            <constraint firstItem="oDq-J8-RBt" firstAttribute="top" secondItem="OzP-6D-Gph" secondAttribute="bottom" constant="37" id="k7a-7J-7Kj"/>
+                            <constraint firstItem="gh0-7Y-hWY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-13" id="kW5-hx-I5W"/>
+                            <constraint firstItem="OzP-6D-Gph" firstAttribute="centerX" secondItem="oDq-J8-RBt" secondAttribute="centerX" constant="70" id="lbt-ca-5Pe"/>
+                            <constraint firstItem="gh0-7Y-hWY" firstAttribute="trailing" secondItem="bBH-zl-IQS" secondAttribute="trailing" id="pYk-2r-o35"/>
+                            <constraint firstItem="n46-wr-ryr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="q8G-fj-JkO"/>
+                            <constraint firstAttribute="centerX" secondItem="OzP-6D-Gph" secondAttribute="centerX" id="tGY-lW-0Rg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="iS Dice Roller" id="KZd-zd-IEP">
                         <barButtonItem key="rightBarButtonItem" title="Account" id="gGf-pE-Ev9">
@@ -95,7 +138,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1187" y="338"/>
+            <point key="canvasLocation" x="1207" y="338"/>
         </scene>
         <!--Project-->
         <scene sceneID="4oD-0b-XbQ">
@@ -193,7 +236,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="felt" width="604" height="600"/>
+        <image name="feltimage.jpeg" width="604" height="600"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
