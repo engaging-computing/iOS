@@ -65,11 +65,6 @@
 		B7D98CF119BF34F800BB8994 /* ISMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D98CF019BF34F800BB8994 /* ISMAppDelegate.m */; };
 		B7D98CFA19BF34F800BB8994 /* ISMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D98CF919BF34F800BB8994 /* ISMViewController.m */; };
 		B7D98CFC19BF34F800BB8994 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7D98CFB19BF34F800BB8994 /* Images.xcassets */; };
-		B7D98D0319BF34F800BB8994 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98D0219BF34F800BB8994 /* XCTest.framework */; };
-		B7D98D0419BF34F800BB8994 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE019BF34F800BB8994 /* Foundation.framework */; };
-		B7D98D0519BF34F800BB8994 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D98CE419BF34F800BB8994 /* UIKit.framework */; };
-		B7D98D0D19BF34F800BB8994 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7D98D0B19BF34F800BB8994 /* InfoPlist.strings */; };
-		B7D98D0F19BF34F800BB8994 /* MotionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D98D0E19BF34F800BB8994 /* MotionTests.m */; };
 		B7FC2F5B19F5740400D84EBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7FC2F5A19F5740400D84EBF /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
@@ -94,13 +89,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 39FF25DF16DFA28A0062C3DC;
 			remoteInfo = iSENSE_API;
-		};
-		B7D98D0619BF34F800BB8994 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7D98CD519BF34F800BB8994 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B7D98CDC19BF34F800BB8994;
-			remoteInfo = Motion;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -174,11 +162,6 @@
 		B7D98CF819BF34F800BB8994 /* ISMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISMViewController.h; sourceTree = "<group>"; };
 		B7D98CF919BF34F800BB8994 /* ISMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISMViewController.m; sourceTree = "<group>"; };
 		B7D98CFB19BF34F800BB8994 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B7D98D0119BF34F800BB8994 /* MotionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7D98D0219BF34F800BB8994 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		B7D98D0A19BF34F800BB8994 /* MotionTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MotionTests-Info.plist"; sourceTree = "<group>"; };
-		B7D98D0C19BF34F800BB8994 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B7D98D0E19BF34F800BB8994 /* MotionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MotionTests.m; sourceTree = "<group>"; };
 		B7FC2F5A19F5740400D84EBF /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,16 +176,6 @@
 				B7D98CE319BF34F800BB8994 /* CoreGraphics.framework in Frameworks */,
 				B7D98CE519BF34F800BB8994 /* UIKit.framework in Frameworks */,
 				B7D98CE119BF34F800BB8994 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B7D98CFE19BF34F800BB8994 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B7D98D0319BF34F800BB8994 /* XCTest.framework in Frameworks */,
-				B7D98D0519BF34F800BB8994 /* UIKit.framework in Frameworks */,
-				B7D98D0419BF34F800BB8994 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,7 +349,6 @@
 				B7186A3119BF368000F18847 /* API */,
 				B7D98CE619BF34F800BB8994 /* Motion */,
 				B7186A3E19BF414100F18847 /* Resources */,
-				B7D98D0819BF34F800BB8994 /* MotionTests */,
 				B7D98CDF19BF34F800BB8994 /* Frameworks */,
 				B7D98CDE19BF34F800BB8994 /* Products */,
 			);
@@ -386,7 +358,6 @@
 			isa = PBXGroup;
 			children = (
 				B7D98CDD19BF34F800BB8994 /* Motion.app */,
-				B7D98D0119BF34F800BB8994 /* MotionTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -399,7 +370,6 @@
 				B7D98CE019BF34F800BB8994 /* Foundation.framework */,
 				B7D98CE219BF34F800BB8994 /* CoreGraphics.framework */,
 				B7D98CE419BF34F800BB8994 /* UIKit.framework */,
-				B7D98D0219BF34F800BB8994 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -428,24 +398,6 @@
 				B7D98CE919BF34F800BB8994 /* InfoPlist.strings */,
 				B7D98CEC19BF34F800BB8994 /* main.m */,
 				B7D98CEE19BF34F800BB8994 /* Motion-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B7D98D0819BF34F800BB8994 /* MotionTests */ = {
-			isa = PBXGroup;
-			children = (
-				B7D98D0E19BF34F800BB8994 /* MotionTests.m */,
-				B7D98D0919BF34F800BB8994 /* Supporting Files */,
-			);
-			path = MotionTests;
-			sourceTree = "<group>";
-		};
-		B7D98D0919BF34F800BB8994 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B7D98D0A19BF34F800BB8994 /* MotionTests-Info.plist */,
-				B7D98D0B19BF34F800BB8994 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -480,24 +432,6 @@
 			productReference = B7D98CDD19BF34F800BB8994 /* Motion.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B7D98D0019BF34F800BB8994 /* MotionTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B7D98D1519BF34F800BB8994 /* Build configuration list for PBXNativeTarget "MotionTests" */;
-			buildPhases = (
-				B7D98CFD19BF34F800BB8994 /* Sources */,
-				B7D98CFE19BF34F800BB8994 /* Frameworks */,
-				B7D98CFF19BF34F800BB8994 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B7D98D0719BF34F800BB8994 /* PBXTargetDependency */,
-			);
-			name = MotionTests;
-			productName = MotionTests;
-			productReference = B7D98D0119BF34F800BB8994 /* MotionTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -510,9 +444,6 @@
 				TargetAttributes = {
 					B7D98CDC19BF34F800BB8994 = {
 						DevelopmentTeam = 9Y27428UZP;
-					};
-					B7D98D0019BF34F800BB8994 = {
-						TestTargetID = B7D98CDC19BF34F800BB8994;
 					};
 				};
 			};
@@ -536,7 +467,6 @@
 			projectRoot = "";
 			targets = (
 				B7D98CDC19BF34F800BB8994 /* Motion */,
-				B7D98D0019BF34F800BB8994 /* MotionTests */,
 			);
 		};
 /* End PBXProject section */
@@ -610,14 +540,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B7D98CFF19BF34F800BB8994 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B7D98D0D19BF34F800BB8994 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -637,14 +559,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B7D98CFD19BF34F800BB8994 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B7D98D0F19BF34F800BB8994 /* MotionTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -652,11 +566,6 @@
 			isa = PBXTargetDependency;
 			name = iSENSE_API;
 			targetProxy = B76AFED019C74EA20005685B /* PBXContainerItemProxy */;
-		};
-		B7D98D0719BF34F800BB8994 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B7D98CDC19BF34F800BB8994 /* Motion */;
-			targetProxy = B7D98D0619BF34F800BB8994 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -675,14 +584,6 @@
 				B7D98CF319BF34F800BB8994 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B7D98D0B19BF34F800BB8994 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B7D98D0C19BF34F800BB8994 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -826,46 +727,6 @@
 			};
 			name = Release;
 		};
-		B7D98D1619BF34F800BB8994 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Motion.app/Motion";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Motion/Motion-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "MotionTests/MotionTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		B7D98D1719BF34F800BB8994 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Motion.app/Motion";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Motion/Motion-Prefix.pch";
-				INFOPLIST_FILE = "MotionTests/MotionTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -883,15 +744,6 @@
 			buildConfigurations = (
 				B7D98D1319BF34F800BB8994 /* Debug */,
 				B7D98D1419BF34F800BB8994 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B7D98D1519BF34F800BB8994 /* Build configuration list for PBXNativeTarget "MotionTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B7D98D1619BF34F800BB8994 /* Debug */,
-				B7D98D1719BF34F800BB8994 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
