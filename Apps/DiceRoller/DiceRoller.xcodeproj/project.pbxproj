@@ -17,7 +17,6 @@
 		31739DDF19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 31739DDD19DB3A7C00CF2DFB /* InfoPlist.strings */; };
 		31739DE119DB3A7C00CF2DFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 31739DE019DB3A7C00CF2DFB /* main.m */; };
 		31739DE519DB3A7C00CF2DFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 31739DE419DB3A7C00CF2DFB /* AppDelegate.m */; };
-		31739DE819DB3A7C00CF2DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31739DE619DB3A7C00CF2DFB /* Main.storyboard */; };
 		31739DEB19DB3A7C00CF2DFB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31739DEA19DB3A7C00CF2DFB /* ViewController.m */; };
 		31739DED19DB3A7C00CF2DFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31739DEC19DB3A7C00CF2DFB /* Images.xcassets */; };
 		31739E0B19DB3BC400CF2DFB /* DieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31739E0A19DB3BC400CF2DFB /* DieView.m */; };
@@ -39,6 +38,8 @@
 		31CB51551A6ECF250038B084 /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CB51541A6ECF250038B084 /* tutorial_1.png */; };
 		31E5C9CA19DF11A200A5E448 /* DiceDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9C919DF11A200A5E448 /* DiceDataController.m */; };
 		31E8DA531A2A53410049502B /* ISDRProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E8DA511A2A53410049502B /* ISDRProjectManager.m */; };
+		31EA91581AF007A300A4EAC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31739DE619DB3A7C00CF2DFB /* Main.storyboard */; };
+		31EA915B1AF0088900A4EAC2 /* feltimage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 31EA915A1AF0088900A4EAC2 /* feltimage.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		31E5C9C919DF11A200A5E448 /* DiceDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiceDataController.m; sourceTree = "<group>"; };
 		31E8DA4E1A2A53050049502B /* ISDRProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISDRProjectManager.h; sourceTree = "<group>"; };
 		31E8DA511A2A53410049502B /* ISDRProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISDRProjectManager.m; sourceTree = "<group>"; };
+		31EA915A1AF0088900A4EAC2 /* feltimage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = feltimage.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 		31C05B561A65847A002D348A /* Assetts */ = {
 			isa = PBXGroup;
 			children = (
+				31EA915A1AF0088900A4EAC2 /* feltimage.jpeg */,
 				31B62A661A645E5F00B988CD /* Launch Screen.xib */,
 				31739DEC19DB3A7C00CF2DFB /* Images.xcassets */,
 			);
@@ -380,10 +383,11 @@
 				31A8D9FC19E864200042CF02 /* iSENSE_API_Bundle.bundle in Resources */,
 				31739DED19DB3A7C00CF2DFB /* Images.xcassets in Resources */,
 				31CB514B1A6ECF080038B084 /* tutorial_6.png in Resources */,
+				31EA915B1AF0088900A4EAC2 /* feltimage.jpeg in Resources */,
 				31739DDF19DB3A7C00CF2DFB /* InfoPlist.strings in Resources */,
 				31CB514F1A6ECF130038B084 /* tutorial_4.png in Resources */,
 				31CB514D1A6ECF0D0038B084 /* tutorial_5.png in Resources */,
-				31739DE819DB3A7C00CF2DFB /* Main.storyboard in Resources */,
+				31EA91581AF007A300A4EAC2 /* Main.storyboard in Resources */,
 				3134E6771AC47D7D0091E646 /* uml.png in Resources */,
 				3134E6751AC47D6C0091E646 /* white_rsense_logo.png in Resources */,
 				31CB51511A6ECF180038B084 /* tutorial_3.png in Resources */,
@@ -529,11 +533,13 @@
 					"$(PROJECT_DIR)/../../Libs/iSENSE_API/headers",
 				);
 				INFOPLIST_FILE = "DiceRoller/DiceRoller-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(PROJECT_DIR)/../../Libs/iSENSE_API $(BUILD_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -553,11 +559,13 @@
 					"$(PROJECT_DIR)/../../Libs/iSENSE_API/headers",
 				);
 				INFOPLIST_FILE = "DiceRoller/DiceRoller-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(PROJECT_DIR)/../../Libs/iSENSE_API $(BUILD_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
