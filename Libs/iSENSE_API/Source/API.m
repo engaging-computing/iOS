@@ -47,7 +47,7 @@
 
 @implementation API
 
-#define LIVE_URL @"http://isenseproject.org/api/v1"
+#define LIVE_URL @"https://isenseproject.org/api/v1"
 #define DEV_URL  @"http://rsense-dev.cs.uml.edu/api/v1"
 
 #define GET_REQUEST     @"GET"
