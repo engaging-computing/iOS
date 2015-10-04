@@ -62,7 +62,7 @@
 #define VERSION_MINOR @"1"
 
 // Base URLs for use by any caller
-#define BASE_LIVE_URL @"http://isenseproject.org"
+#define BASE_LIVE_URL @"https://isenseproject.org"
 #define BASE_DEV_URL @"http://rsense-dev.cs.uml.edu"
 
 // Keychain password identifier
