@@ -178,7 +178,7 @@
     return [UIApplication sharedApplication].statusBarStyle;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
 	return UIInterfaceOrientationMaskAll;
 }
 

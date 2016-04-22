@@ -452,7 +452,7 @@
 }
 
 // iOS6 enable rotation
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
 
     return UIInterfaceOrientationMaskAll;
 }
