@@ -177,7 +177,7 @@
 		B70E7C3119C0BB8300C2B042 /* iSENSE_API-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iSENSE_API-Prefix.pch"; path = "headers/iSENSE_API-Prefix.pch"; sourceTree = "<group>"; };
 		B70E7C3319C0BB8300C2B042 /* ISenseSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISenseSearch.h; path = headers/ISenseSearch.h; sourceTree = "<group>"; };
 		B70E7C3419C0BB8300C2B042 /* ISKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISKeys.h; path = headers/ISKeys.h; sourceTree = "<group>"; };
-		B70E7C3719C0BB8300C2B042 /* ProjectBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectBrowserViewController.h; path = headers/ProjectBrowserViewController.h; sourceTree = "<group>"; };
+		B70E7C3719C0BB8300C2B042 /* ProjectBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ProjectBrowserViewController.h; path = headers/ProjectBrowserViewController.h; sourceTree = "<group>"; };
 		B70E7C3819C0BB8300C2B042 /* ProjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectCell.h; path = headers/ProjectCell.h; sourceTree = "<group>"; };
 		B70E7C3919C0BB8300C2B042 /* QDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QDataSet.h; path = headers/QDataSet.h; sourceTree = "<group>"; };
 		B70E7C3C19C0BB8300C2B042 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Queue.h; path = headers/Queue.h; sourceTree = "<group>"; };

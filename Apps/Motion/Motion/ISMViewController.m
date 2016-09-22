@@ -257,7 +257,7 @@
                 @try {
 
                     NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                    [[UIApplication sharedApplication] openURL:settingsURL];
+                    [[UIApplication sharedApplication] openURL:settingsURL options:@{} completionHandler:nil];
 
                 } @catch (NSException *e) {
 
@@ -277,7 +277,7 @@
         case kVISUALIZE_DIALOG_TAG:
         {
             if (buttonIndex != 0) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:visURL]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:visURL] options:@{} completionHandler:nil];
             }
             
             break;
