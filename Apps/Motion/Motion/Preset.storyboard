@@ -19,18 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dve-mL-l2b">
-                                <frame key="frameInset" minX="244" minY="268" width="112" height="30"/>
-                                <state key="normal" title="Acceleration">
-                                    <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="accelPresetBtnOnClick:" destination="hEn-Hx-Teq" eventType="touchUpInside" id="BQj-6T-1pI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yH1-lL-kOZ">
-                                <frame key="frameInset" minX="244" minY="217" width="112" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yH1-lL-kOZ">
                                 <state key="normal" title="GPS">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,8 +28,7 @@
                                     <action selector="gpsPresetBtnOnClick:" destination="hEn-Hx-Teq" eventType="touchUpInside" id="DJp-F4-MrI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zep-4s-8RD">
-                                <frame key="frameInset" minX="244" minY="319" width="112" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zep-4s-8RD">
                                 <state key="normal" title="Default">
                                     <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,8 +37,7 @@
                                     <action selector="defaultPresetBtnOnClick:" destination="hEn-Hx-Teq" eventType="touchUpInside" id="OrV-Ei-oUG"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="How would you like to use this application?  Choose default to setup the application settings yourself." translatesAutoresizingMaskIntoConstraints="NO" id="AS3-RW-h9D">
-                                <frame key="frameInset" minX="16" minY="28" width="568" height="80"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="How would you like to use this application?  Choose default to setup the application settings yourself." translatesAutoresizingMaskIntoConstraints="NO" id="AS3-RW-h9D">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="xOm-sM-l6a"/>
@@ -58,20 +45,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dve-mL-l2b">
+                                <state key="normal" title="Acceleration">
+                                    <color key="titleColor" red="0.5640854635" green="0.22754734909999999" blue="0.76556581440000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="accelPresetBtnOnClick:" destination="hEn-Hx-Teq" eventType="touchUpInside" id="BQj-6T-1pI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AS3-RW-h9D" firstAttribute="trailing" secondItem="iTP-tU-IX4" secondAttribute="trailingMargin" id="22f-gJ-wta"/>
-                            <constraint firstItem="zep-4s-8RD" firstAttribute="trailing" secondItem="dve-mL-l2b" secondAttribute="trailing" id="AvK-Er-Dfb"/>
-                            <constraint firstItem="yH1-lL-kOZ" firstAttribute="leading" secondItem="dve-mL-l2b" secondAttribute="leading" id="Bkq-rB-qDW"/>
+                            <constraint firstItem="zep-4s-8RD" firstAttribute="top" secondItem="dve-mL-l2b" secondAttribute="bottom" constant="8" id="4iL-SA-MZh"/>
+                            <constraint firstItem="yH1-lL-kOZ" firstAttribute="centerX" secondItem="iTP-tU-IX4" secondAttribute="centerX" id="9ti-rU-8nk"/>
+                            <constraint firstItem="zep-4s-8RD" firstAttribute="centerX" secondItem="iTP-tU-IX4" secondAttribute="centerX" id="HV6-9r-A3Q"/>
                             <constraint firstItem="AS3-RW-h9D" firstAttribute="top" secondItem="OCM-R7-lyC" secondAttribute="bottom" constant="8" id="IoS-0U-qHz"/>
-                            <constraint firstItem="zep-4s-8RD" firstAttribute="top" secondItem="dve-mL-l2b" secondAttribute="bottom" constant="8" symbolic="YES" id="KCY-3V-xFx"/>
-                            <constraint firstItem="dve-mL-l2b" firstAttribute="centerX" secondItem="iTP-tU-IX4" secondAttribute="centerX" id="ibT-FV-rwa"/>
+                            <constraint firstItem="dve-mL-l2b" firstAttribute="centerX" secondItem="iTP-tU-IX4" secondAttribute="centerX" id="JpK-2a-b6t"/>
+                            <constraint firstItem="dve-mL-l2b" firstAttribute="top" secondItem="yH1-lL-kOZ" secondAttribute="bottom" constant="8" id="Tbd-SR-1Fo"/>
                             <constraint firstItem="AS3-RW-h9D" firstAttribute="leading" secondItem="iTP-tU-IX4" secondAttribute="leadingMargin" id="khI-IT-VGN"/>
-                            <constraint firstItem="dve-mL-l2b" firstAttribute="top" secondItem="yH1-lL-kOZ" secondAttribute="bottom" constant="8" symbolic="YES" id="leb-rm-W6F"/>
-                            <constraint firstAttribute="centerY" secondItem="dve-mL-l2b" secondAttribute="centerY" id="mvk-a2-erT"/>
-                            <constraint firstItem="yH1-lL-kOZ" firstAttribute="trailing" secondItem="dve-mL-l2b" secondAttribute="trailing" id="tyz-A0-0xr"/>
-                            <constraint firstItem="dve-mL-l2b" firstAttribute="leading" secondItem="zep-4s-8RD" secondAttribute="leading" id="yy1-mh-9hQ"/>
+                            <constraint firstItem="dve-mL-l2b" firstAttribute="centerY" secondItem="iTP-tU-IX4" secondAttribute="centerY" id="xaK-A1-8af"/>
                         </constraints>
                     </view>
                     <connections>
@@ -82,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ws5-Wg-Tds" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="85" y="506"/>
+            <point key="canvasLocation" x="84.5" y="505.5"/>
         </scene>
     </scenes>
 </document>

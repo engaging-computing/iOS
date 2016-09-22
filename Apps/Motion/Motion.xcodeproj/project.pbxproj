@@ -631,7 +631,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -673,7 +673,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -696,7 +696,7 @@
 					"$(PROJECT_DIR)/../../Libs/iSENSE_API/headers",
 				);
 				INFOPLIST_FILE = "Motion/Motion-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -705,6 +705,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.uml.cs.isense.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API $(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(BUILT_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -726,7 +727,7 @@
 					"$(PROJECT_DIR)/../../Libs/iSENSE_API/headers",
 				);
 				INFOPLIST_FILE = "Motion/Motion-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -735,6 +736,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.uml.cs.isense.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../Libs/iSENSE_API $(PROJECT_DIR)/../../Libs/iSENSE_API/headers $(BUILT_PRODUCTS_DIR)";
 				WRAPPER_EXTENSION = app;
 			};
