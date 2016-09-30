@@ -80,7 +80,7 @@
     [super viewDidAppear:YES];
     
     // Autorotate
-    [self willRotateToInterfaceOrientation:(self.interfaceOrientation) duration:0];
+    [self willRotateToInterfaceOrientation:([[UIApplication sharedApplication] statusBarOrientation]) duration:0];
 }
 
 - (id) initWithMatchedFields:(NSArray *)mf andProjectFields:(NSArray *)pf {

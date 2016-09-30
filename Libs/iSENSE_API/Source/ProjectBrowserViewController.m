@@ -112,7 +112,7 @@
 - (void) viewDidAppear:(BOOL)animated {
 
     [super viewDidAppear:animated];
-    [self willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
+    [self willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0];
 
     ISenseSearch *search = [[ISenseSearch alloc] init];
     self.tableView.tableHeaderView = bar;
