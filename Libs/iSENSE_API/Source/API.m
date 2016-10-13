@@ -170,6 +170,9 @@ static NSString *email, *password;
         RPerson *you = [[RPerson alloc] init];
         you.name = [result objectForKey:@"name"];
         you.gravatar = [result objectForKey:@"gravatar"];
+        /* iSENSE doesn't use HTTPS for Gravatar; we ought to use it here... */
+        you.gravatar = [you.gravatar stringByReplacingOccurrencesOfString:@"http"
+                                             withString:@"https"];
         
         NSURL *imageURL = [NSURL URLWithString:[you gravatar]];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
