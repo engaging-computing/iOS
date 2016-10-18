@@ -202,6 +202,7 @@
 				B77950751A093D1600C032EF /* Products */,
 			);
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		B77950751A093D1600C032EF /* Products */ = {
 			isa = PBXGroup;
