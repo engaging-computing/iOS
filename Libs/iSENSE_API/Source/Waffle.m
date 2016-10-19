@@ -303,8 +303,8 @@ static NSString *kDurationKey = @"CSToastDurationKey";
 #endif
         [titleLabel setNumberOfLines:kMaxTitleLines];
         [titleLabel setFont:[UIFont boldSystemFontOfSize:kFontSize]];
-        [titleLabel setTextAlignment:UITextAlignmentLeft];
-        [titleLabel setLineBreakMode:UILineBreakModeWordWrap];
+        [titleLabel setTextAlignment:NSTextAlignmentLeft];
+        [titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [titleLabel setTextColor:[UIColor whiteColor]];
         [titleLabel setBackgroundColor:[UIColor clearColor]];
         [titleLabel setAlpha:1.0];
@@ -312,7 +312,13 @@ static NSString *kDurationKey = @"CSToastDurationKey";
         
         // size the title label according to the length of the text
         CGSize maxSizeTitle = CGSizeMake((self.bounds.size.width * kMaxWidth) - imageWidth, self.bounds.size.height * kMaxHeight);
-        CGSize expectedSizeTitle = [title sizeWithFont:titleLabel.font constrainedToSize:maxSizeTitle lineBreakMode:titleLabel.lineBreakMode];
+        
+        // Up-to-Date version
+        NSAttributedString *title_attributes = [[NSAttributedString alloc] initWithString:title attributes:@{NSFontAttributeName: titleLabel.font }];
+        CGSize expectedSizeTitle = [title_attributes boundingRectWithSize:maxSizeTitle options: NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+        // Deprecated version
+        // CGSize expectedSizeTitle = [title sizeWithFont:titleLabel.font constrainedToSize:maxSizeTitle lineBreakMode:titleLabel.lineBreakMode];
+        
         [titleLabel setFrame:CGRectMake(0.0, 0.0, expectedSizeTitle.width, expectedSizeTitle.height)];
     }
     
@@ -323,7 +329,7 @@ static NSString *kDurationKey = @"CSToastDurationKey";
 #endif
         [messageLabel setNumberOfLines:kMaxMessageLines];
         [messageLabel setFont:[UIFont systemFontOfSize:kFontSize]];
-        [messageLabel setLineBreakMode:UILineBreakModeWordWrap];
+        [messageLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [messageLabel setTextColor:[UIColor whiteColor]];
         [messageLabel setBackgroundColor:[UIColor clearColor]];
         [messageLabel setAlpha:1.0];
@@ -331,7 +337,13 @@ static NSString *kDurationKey = @"CSToastDurationKey";
         
         // size the message label according to the length of the text
         CGSize maxSizeMessage = CGSizeMake((self.bounds.size.width * kMaxWidth) - imageWidth, self.bounds.size.height * kMaxHeight);
-        CGSize expectedSizeMessage = [message sizeWithFont:messageLabel.font constrainedToSize:maxSizeMessage lineBreakMode:messageLabel.lineBreakMode];
+        
+        // Up-to-Date version
+        NSAttributedString *message_attributes = [[NSAttributedString alloc] initWithString:message attributes:@{NSFontAttributeName: messageLabel.font }];
+        CGSize expectedSizeMessage = [message_attributes boundingRectWithSize:maxSizeMessage options: NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+        // Deprecated version
+        //CGSize expectedSizeMessage = [message sizeWithFont:messageLabel.font constrainedToSize:maxSizeMessage lineBreakMode:messageLabel.lineBreakMode];
+        
         [messageLabel setFrame:CGRectMake(0.0, 0.0, expectedSizeMessage.width, expectedSizeMessage.height)];
     }
     

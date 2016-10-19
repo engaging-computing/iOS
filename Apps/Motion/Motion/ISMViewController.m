@@ -257,7 +257,7 @@
                 @try {
 
                     NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                    [[UIApplication sharedApplication] openURL:settingsURL];
+                    [[UIApplication sharedApplication] openURL:settingsURL options:@{} completionHandler:nil];
 
                 } @catch (NSException *e) {
 
@@ -277,7 +277,7 @@
         case kVISUALIZE_DIALOG_TAG:
         {
             if (buttonIndex != 0) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:visURL]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:visURL] options:@{} completionHandler:nil];
             }
             
             break;
@@ -804,14 +804,14 @@
 
     } else if (uploadStatus == DATA_UPLOAD_FAILED && project <= 0) {
 
-        [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        [self.view makeWaffle:@"All data set(s) failed to upload. Data sets may be too large." duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
         return;
 
     }
 
     NSString *prependMessage;
     if (uploadStatus == DATA_UPLOAD_FAILED)
-        prependMessage = @"Some data set(s) failed to upload, but at least one succeeded.";
+        prependMessage = @"Some data set(s) failed to upload, but at least one succeeded.  Some sets may be too large.";
     else /* uploadedStatus == DATA_UPLOAD_SUCCESS */
         prependMessage = @"All data set(s) uploaded successfully.";
 
