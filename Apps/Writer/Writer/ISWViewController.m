@@ -850,7 +850,7 @@
 
     } else if (uploadStatus == DATA_UPLOAD_FAILED && project <= 0) {
 
-        [self.view makeWaffle:@"All data set(s) failed to upload" duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
+        [self.view makeWaffle:@"All data set(s) failed to upload." duration:WAFFLE_LENGTH_LONG position:WAFFLE_BOTTOM image:WAFFLE_RED_X];
         return;
     }
 
